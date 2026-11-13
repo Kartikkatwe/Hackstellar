@@ -126,35 +126,39 @@ def _apply(con: sqlite3.Connection, change: dict) -> None:
 
 
 def pull(db: Path) -> bool:
-    """Apply other instances' writes not seen yet. Returns True when anything was applied."""
+    """Apply other instances' writes not seen yet. Returns True when anything was applied.
+    Why the timestamp is set after the pull: a request that arrives during a pull waits for
+    it and then answers with the new rows, instead of skipping ahead with stale ones."""
     global _last
     if not TOKEN or time.time() - _last < EVERY_S:
         return False
     with _lock:
         if time.time() - _last < EVERY_S:
             return False
-        _last = time.time()
-        blobs, cursor = [], None
-        while True:
-            q = {"prefix": PREFIX, "limit": "1000", **({"cursor": cursor} if cursor else {})}
-            page = _request("GET", f"{API}?{urllib.parse.urlencode(q)}")
-            blobs += page.get("blobs", [])
-            if not page.get("hasMore"):
-                break
-            cursor = page.get("cursor")
-        todo = sorted((b for b in blobs if b["pathname"] not in _applied), key=lambda b: b["pathname"])
-        if not todo:
-            return False
-        con = sqlite3.connect(db)
         try:
-            for b in todo:
-                with urllib.request.urlopen(b["url"], timeout=8) as r:
-                    _apply(con, json.loads(r.read()))
-                _applied.add(b["pathname"])
-            con.commit()
+            blobs, cursor = [], None
+            while True:
+                q = {"prefix": PREFIX, "limit": "1000", **({"cursor": cursor} if cursor else {})}
+                page = _request("GET", f"{API}?{urllib.parse.urlencode(q)}")
+                blobs += page.get("blobs", [])
+                if not page.get("hasMore"):
+                    break
+                cursor = page.get("cursor")
+            todo = sorted((b for b in blobs if b["pathname"] not in _applied), key=lambda b: b["pathname"])
+            if not todo:
+                return False
+            con = sqlite3.connect(db)
+            try:
+                for b in todo:
+                    with urllib.request.urlopen(b["url"], timeout=8) as r:
+                        _apply(con, json.loads(r.read()))
+                    _applied.add(b["pathname"])
+                con.commit()
+            finally:
+                con.close()
+            return True
         finally:
-            con.close()
-        return True
+            _last = time.time()
 
 
 # ---------------------------------------------------------------- the app
