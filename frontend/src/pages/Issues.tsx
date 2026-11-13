@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react'
 import { ArrowUpRight } from 'lucide-react'
 import { useApi } from '../lib/api'
@@ -14,7 +13,10 @@ import './Issues.css'
 export default function Issues() {
   const reduce = useReducedMotion()
   const { query, filters } = useFilters()
-  const [n, setN] = useState<10 | 50>(10)
+  // "Every issue" lives in the URL (?all=1), so the view survives a reload or a shared link.
+  const [params, setParams] = useSearchParams()
+  const n: 10 | 50 = params.get('all') ? 50 : 10
+  const setN = (v: 10 | 50) => setParams(v === 50 ? { all: '1' } : {}, { replace: true })
   const path = `/issues/top?${n === 50 ? 'n=50' : ''}${query ? `${n === 50 ? '&' : ''}${query}` : ''}`.replace(/\?$/, '')
   const { data, error } = useApi<TopResponse>(path, 4000)
   const group = Object.values(filters).map(segmentValue).join(' · ')

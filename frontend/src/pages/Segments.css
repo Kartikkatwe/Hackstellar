@@ -55,7 +55,7 @@
   vertical-align: middle !important;
   padding-right: 12px !important;
 }
-.heat__rank {
+.heat .heat__issue .heat__rank {
   display: inline-block;
   width: 26px;
   color: var(--muted);

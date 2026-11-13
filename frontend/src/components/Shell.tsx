@@ -1,7 +1,8 @@
 import { useEffect, useState, type ReactNode } from 'react'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
-import { Compass, ListOrdered, Radio, Filter, Grid3x3, Hourglass, Target, Search, Plus, Smartphone, Menu, X } from 'lucide-react'
+import { Compass, ListOrdered, Radio, Filter, Grid3x3, Hourglass, Target, Search, Plus, Smartphone, Menu, X, Pause, Play } from 'lucide-react'
+import { setMotionPaused, useMotionPaused } from '../lib/motion'
 import { Logo } from './Logo'
 import { LiveDot } from './ui'
 import { useApi, useConnection } from '../lib/api'
@@ -33,6 +34,7 @@ export function Shell({ children }: { children: ReactNode }) {
   const [menu, setMenu] = useState(false)
   const [qr, setQr] = useState(false)
   const [palette, setPalette] = useState(false)
+  const motionPaused = useMotionPaused()
 
   useEffect(() => setMenu(false), [loc.pathname])
   useEffect(() => {
@@ -118,6 +120,11 @@ export function Shell({ children }: { children: ReactNode }) {
           </span>
           {funnel && <span className="side__total num">{funnel.total.toLocaleString('en-IN')} complaints</span>}
         </div>
+
+        <button className="side__motion" onClick={() => setMotionPaused(!motionPaused)} aria-pressed={motionPaused}>
+          {motionPaused ? <Play size={14} aria-hidden="true" /> : <Pause size={14} aria-hidden="true" />}
+          {motionPaused ? 'Resume animation' : 'Pause animation'}
+        </button>
       </aside>
 
       <div className="main">

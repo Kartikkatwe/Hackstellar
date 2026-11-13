@@ -19,6 +19,9 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
   overflow: hidden;
 }
+.palette__search:focus-within {
+  box-shadow: inset 0 -2px 0 var(--brass);
+}
 .palette__search {
   display: flex;
   align-items: center;
@@ -50,6 +53,7 @@
 .palette__list {
   max-height: min(56vh, 520px);
   overflow-y: auto;
+  overscroll-behavior: contain;
   padding: 8px;
 }
 .palette__group {

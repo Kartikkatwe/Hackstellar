@@ -195,7 +195,22 @@
 }
 .side__total {
   grid-column: 2;
-  color: var(--faint);
+  color: var(--muted);
+}
+.side__motion {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 32px;
+  margin: -10px 12px 0;
+  font-size: 13px;
+  color: var(--muted);
+  justify-self: start;
+  border-radius: var(--r-1);
+  transition: color var(--t-fast);
+}
+.side__motion:hover {
+  color: var(--ink);
 }
 
 /* ---------- main column ---------- */
@@ -310,6 +325,7 @@
     transform: translateX(-104%);
     transition: transform var(--t-med) var(--ease-out);
     overflow-y: auto;
+    overscroll-behavior: contain;
   }
   .side.is-open {
     transform: none;
@@ -335,4 +351,21 @@
   .top__search kbd {
     display: none;
   }
+}
+
+/* Page roots are single-column grids; minmax(0, 1fr) stops a wide table or chart from setting the
+   page's minimum width, so its own scroll container takes the overflow instead of the page. */
+.ov,
+.fc,
+.accp,
+.idet,
+.live,
+.segs,
+.issues,
+.wait {
+  grid-template-columns: minmax(0, 1fr);
+}
+.issues,
+.wait {
+  display: grid;
 }

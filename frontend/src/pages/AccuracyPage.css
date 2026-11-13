@@ -112,3 +112,15 @@
     align-items: center;
   }
 }
+.accp .panel__body {
+  overflow-x: auto;
+}
+.accp__key {
+  word-break: break-all;
+}
+@media (max-width: 560px) {
+  .accp .table th:nth-child(2),
+  .accp .table td:nth-child(2) {
+    display: none;
+  }
+}

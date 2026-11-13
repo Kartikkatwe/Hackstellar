@@ -58,7 +58,7 @@ export function Logo({ size = 28, animate = false, wordmark = true, className = 
     <span className={`cc-logo ${className}`}>
       <LogoMark size={size} animate={animate} />
       {wordmark && (
-        <span className="cc-logo__word" style={{ fontSize: Math.round(size * 0.54) }}>
+        <span className="cc-logo__word" translate="no" style={{ fontSize: Math.round(size * 0.54) }}>
           Complaint Compass
         </span>
       )}

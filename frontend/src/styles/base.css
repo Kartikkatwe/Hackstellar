@@ -11,6 +11,29 @@ body {
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+/* no double-tap zoom delay on controls; our own :active states replace the tap flash */
+a,
+button,
+input,
+select,
+textarea,
+label,
+[role='button'],
+[role='link'] {
+  touch-action: manipulation;
+}
+/* Windows renders native options light unless told otherwise */
+option {
+  background-color: #131316;
+  color: #f2efe8;
+}
+/* the pause switch (lib/motion.ts): every CSS loop rests while it is on */
+html[data-motion-paused] *,
+html[data-motion-paused] *::before,
+html[data-motion-paused] *::after {
+  animation-play-state: paused !important;
 }
 body {
   background: var(--bg);

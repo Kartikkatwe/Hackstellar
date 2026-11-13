@@ -13,6 +13,7 @@
   width: min(760px, 100%);
   max-height: calc(100dvh - 32px);
   overflow: auto;
+  overscroll-behavior: contain;
   border-radius: var(--r-4);
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0) 160px), #141417;
   border: 1px solid var(--line-2);

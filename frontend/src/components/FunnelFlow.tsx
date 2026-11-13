@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef } from 'react'
 import { useReducedMotion } from 'motion/react'
+import { isMotionPaused, useMotionPaused } from '../lib/motion'
 import type { Funnel } from '../lib/types'
 import { int, pct } from '../lib/format'
 import './FunnelFlow.css'
@@ -96,6 +97,7 @@ export function buildFlow(f: Funnel) {
 
 export function FunnelFlow({ funnel, compact = false }: { funnel: Funnel; compact?: boolean }) {
   const reduce = useReducedMotion()
+  const paused = useMotionPaused()
   const flow = useMemo(() => buildFlow(funnel), [funnel])
   const canvas = useRef<HTMLCanvasElement>(null)
   const flowRef = useRef(flow)
@@ -151,7 +153,7 @@ export function FunnelFlow({ funnel, compact = false }: { funnel: Funnel; compac
       raf = requestAnimationFrame(frame)
       const dt = Math.min(0.05, (now - last) / 1000)
       last = now
-      if (!visible || document.hidden) return
+      if (!visible || document.hidden || isMotionPaused()) return
       acc += dt * 70
       while (acc > 1 && parts.length < 520) {
         acc -= 1
@@ -309,7 +311,7 @@ export function FunnelFlow({ funnel, compact = false }: { funnel: Funnel; compac
             </text>
           </g>
         </svg>
-        {!reduce && <canvas ref={canvas} className="ff__canvas" aria-hidden="true" />}
+        {!reduce && <canvas ref={canvas} className="ff__canvas" aria-hidden="true" style={paused ? { opacity: 0.35 } : undefined} />}
       </div>
 
       {/* Table twin of the chart (dataviz rule: every chart has a table view), shown on small screens. */}

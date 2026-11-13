@@ -20,7 +20,11 @@ The console for the Complaint Compass engine in `../backend`. React 19, Vite 6 a
    npm run dev
    ```
 
-   Open http://localhost:5173. The console is at `/console`, and the phone form is at `/submit`.
+   Open http://localhost:5173. The product page is at `/`, the console at `/console` and the phone form at `/submit`.
+
+3. For a production build, run `npm run build`, then `npm run preview` (port 4173). It serves the same three addresses, with the same `/api` proxy.
+
+The sidebar has a "Pause animation" switch that stops every looping animation: the funnel particles, the compass sweep and the live rings.
 
 ## How it talks to the backend
 
@@ -43,3 +47,5 @@ The "Complain from a phone" card in the sidebar shows a QR code for `http://<lap
 | `src/components/FunnelFlow.tsx` | The funnel as a Sankey with particles, computed from `GET /funnel` |
 | `src/components/Trail.tsx` | One complaint's path, replayed from what the backend recorded |
 | `src/pages/` | Overview, Top issues, Issue detail, Live intake, Funnel and cost, Customer groups, Unconfirmed, Accuracy, Phone form |
+| `landing/` | The product page: static HTML built on the taste-skill kit (`public/kit`), with live numbers from the API (`landing.ts`) |
+| `public/console-poster*.jpg` | Stills of the console, shown in the product page's app window until the live console loads |

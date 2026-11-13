@@ -96,6 +96,8 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
               <Search size={18} aria-hidden="true" />
               <input
                 ref={input}
+                name="search"
+                autoComplete="off"
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
                 onKeyDown={onKey}

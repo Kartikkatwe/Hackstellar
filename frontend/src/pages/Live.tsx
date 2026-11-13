@@ -5,7 +5,7 @@ import { Send, Loader2, Smartphone, RotateCcw } from 'lucide-react'
 import { getTrail, postComplaint, useApi, useConnection } from '../lib/api'
 import type { Channel, LiveResult, NewComplaint, Trail, TopResponse } from '../lib/types'
 import { CHANNEL, CHANNELS, STAGE } from '../lib/meta'
-import { ChannelIcon, Empty } from '../components/ui'
+import { ChannelIcon } from '../components/ui'
 import { TrailView } from '../components/Trail'
 import { QRSvg, phoneUrl } from '../components/PhoneQR'
 import './Live.css'
@@ -21,10 +21,10 @@ const SAMPLES = [
 ]
 
 const ID_FIELD: Record<Channel, { key: keyof NewComplaint; label: string; placeholder: string; type: string }> = {
-  chat: { key: 'user_id', label: 'Chat login', placeholder: 'u_10224', type: 'text' },
-  email: { key: 'email', label: 'Sender email', placeholder: 'name@example.com', type: 'email' },
-  social: { key: 'handle', label: 'Social handle', placeholder: '@handle', type: 'text' },
-  call: { key: 'phone', label: 'Caller number', placeholder: '+91 98xxx xxxxx', type: 'tel' },
+  chat: { key: 'user_id', label: 'Chat login', placeholder: 'u_10224…', type: 'text' },
+  email: { key: 'email', label: 'Sender email', placeholder: 'name@example.com…', type: 'email' },
+  social: { key: 'handle', label: 'Social handle', placeholder: '@handle…', type: 'text' },
+  call: { key: 'phone', label: 'Caller number', placeholder: '+91 98xxx xxxxx…', type: 'tel' },
 }
 
 type Sent = { id: string; text: string; channel: Channel; settled: string; title: string | null; mode: string; at: number }
@@ -126,11 +126,12 @@ export default function Live() {
             <label className="field">
               <span>Complaint</span>
               <textarea
+                name="complaint"
                 className="textarea live__text"
                 rows={5}
                 value={text}
                 onChange={(e) => setText(e.target.value)}
-                placeholder="Write it the way a customer would. Any language mix works."
+                placeholder="paise kat gaye lekin order nahi bana…"
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) send()
                 }}
@@ -157,11 +158,11 @@ export default function Live() {
             <div className="live__ids">
               <label className="field">
                 <span>{field.label} (optional)</span>
-                <input className="input" type={field.type} value={ident} onChange={(e) => setIdent(e.target.value)} placeholder={field.placeholder} autoComplete="off" />
+                <input className="input" name={field.key} type={field.type} inputMode={field.type === 'tel' ? 'tel' : field.type === 'email' ? 'email' : 'text'} value={ident} onChange={(e) => setIdent(e.target.value)} placeholder={field.placeholder} autoComplete="off" spellCheck={false} />
               </label>
               <label className="field">
                 <span>Order ID (optional)</span>
-                <input className="input mono" value={orderId} onChange={(e) => setOrderId(e.target.value)} placeholder="BN-123456-7" autoComplete="off" spellCheck={false} />
+                <input className="input mono" name="order_id" value={orderId} onChange={(e) => setOrderId(e.target.value)} placeholder="BN-123456-7…" autoComplete="off" spellCheck={false} />
               </label>
             </div>
 
@@ -172,7 +173,7 @@ export default function Live() {
             )}
 
             <div className="live__send">
-              <button className="btn btn--primary btn--lg" type="submit" disabled={busy || !text.trim()}>
+              <button className="btn btn--primary btn--lg" type="submit" disabled={busy}>
                 {busy ? <Loader2 size={17} className="spin" /> : <Send size={17} />}
                 {busy ? 'Going through the funnel…' : 'Send through the funnel'}
               </button>
@@ -217,8 +218,25 @@ export default function Live() {
                   )}
                 </motion.div>
               ) : (
-                <motion.div key="idle" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                  <Empty title="Nothing sent yet">Pick a sample or write your own. The path appears here, step by step.</Empty>
+                <motion.div key="idle" className="live__idle" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                  <p className="live__idle-lead">Send one and watch it go through these checks, cheapest first. Each one settles what it can.</p>
+                  <ol className="live__idle-steps">
+                    {[
+                      ['Who sent this', 'Sender email, caller number, chat login or a verified order ID'],
+                      ['Gate', 'Jev: is it a complaint, which area, how bad, money or safety at risk'],
+                      ['Similarity', 'Free and local: close to a known issue?'],
+                      ['Verify', 'Jev: same problem as issue X? yes or no'],
+                      ['LLM', 'Claude Haiku, only for what is still unsure'],
+                    ].map(([name, what], i) => (
+                      <li key={name} style={{ animationDelay: `${i * 0.18}s` }}>
+                        <span className="live__idle-n mono">{i + 1}</span>
+                        <span>
+                          <strong>{name}</strong>
+                          {what}
+                        </span>
+                      </li>
+                    ))}
+                  </ol>
                 </motion.div>
               )}
             </AnimatePresence>

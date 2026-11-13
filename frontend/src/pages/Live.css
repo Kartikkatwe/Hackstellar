@@ -229,3 +229,74 @@
     text-align: center;
   }
 }
+
+.live__idle {
+  display: grid;
+  gap: 20px;
+  padding: 8px 0;
+}
+.live__idle-lead {
+  font-size: 16px;
+  color: var(--ink-2);
+}
+.live__idle-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+  position: relative;
+}
+.live__idle-steps::before {
+  content: '';
+  position: absolute;
+  left: 19px;
+  top: 20px;
+  bottom: 20px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--brass-line), var(--line));
+}
+.live__idle-steps li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 14px;
+  align-items: center;
+  animation: idle-step 3.6s var(--ease-in-out) infinite;
+}
+.live__idle-steps strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 560;
+  color: var(--ink);
+}
+.live__idle-steps li > span:last-child {
+  font-size: 14px;
+  color: var(--muted);
+}
+.live__idle-n {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  font-size: 14px;
+  color: var(--ink-2);
+  background: var(--surface-2);
+  box-shadow: inset 0 0 0 1px var(--line-2);
+}
+/* a packet of light runs down the checks, so the empty panel already says what will happen */
+@keyframes idle-step {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  12% {
+    opacity: 1;
+  }
+  30% {
+    opacity: 0.55;
+  }
+}

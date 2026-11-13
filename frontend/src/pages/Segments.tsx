@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { motion, useReducedMotion } from 'motion/react'
 import { useApi } from '../lib/api'
 import { useFilters } from '../lib/filters'
@@ -32,7 +32,10 @@ export default function Segments() {
   const { set } = useFilters()
   const { data: config } = useApi<Config>('/config')
   const dims = config?.segments ?? []
-  const [dim, setDim] = useState<string>('state')
+  // The dimension lives in the URL, so a link opens the same view.
+  const [params, setParams] = useSearchParams()
+  const dim = params.get('dim') ?? 'state'
+  const setDim = (k: string) => setParams({ dim: k }, { replace: true })
   const seg = dims.find((d) => d.key === dim) ?? dims[0]
   const { data: heat } = useApi<Heatmap>(seg ? `/segments/heatmap?dim=${seg.key}` : null, 10000)
   const [tip, setTip] = useState<{ x: number; y: number; text: string } | null>(null)
@@ -155,7 +158,7 @@ export default function Segments() {
             <p className="segs__sub">Each line follows one issue from its rank in one group to its rank in the other.</p>
           </div>
           <div className="segs__pick">
-            <select className="select" value={a} onChange={(e) => setA(e.target.value)} aria-label="First group">
+            <select className="select" name="group-a" value={a} onChange={(e) => setA(e.target.value)} aria-label="First group">
               {values.map((v) => (
                 <option key={v} value={v}>
                   {segmentValue(v)}
@@ -163,7 +166,7 @@ export default function Segments() {
               ))}
             </select>
             <span className="muted">vs</span>
-            <select className="select" value={b} onChange={(e) => setB(e.target.value)} aria-label="Second group">
+            <select className="select" name="group-b" value={b} onChange={(e) => setB(e.target.value)} aria-label="Second group">
               {values.map((v) => (
                 <option key={v} value={v}>
                   {segmentValue(v)}

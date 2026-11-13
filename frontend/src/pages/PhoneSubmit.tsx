@@ -79,7 +79,7 @@ export default function PhoneSubmit() {
 
             <label className="field">
               <span>Your complaint</span>
-              <textarea className="textarea" rows={6} value={text} onChange={(e) => setText(e.target.value)} placeholder="Money was taken but my order never came…" required />
+              <textarea name="complaint" className="textarea" rows={6} value={text} onChange={(e) => setText(e.target.value)} placeholder="Money was taken but my order never came…" required />
             </label>
 
             <div className="phone__quick">
@@ -92,7 +92,16 @@ export default function PhoneSubmit() {
 
             <label className="field">
               <span>{channel === 'email' ? 'Your email' : channel === 'social' ? 'Your handle' : channel === 'call' ? 'Your number' : 'Your login'} (optional)</span>
-              <input className="input" value={handle} onChange={(e) => setHandle(e.target.value)} autoComplete="off" />
+              <input
+                className="input"
+                name="contact"
+                type={channel === 'email' ? 'email' : channel === 'call' ? 'tel' : 'text'}
+                inputMode={channel === 'email' ? 'email' : channel === 'call' ? 'tel' : 'text'}
+                value={handle}
+                onChange={(e) => setHandle(e.target.value)}
+                autoComplete="off"
+                spellCheck={false}
+              />
             </label>
 
             {error && (
@@ -101,7 +110,7 @@ export default function PhoneSubmit() {
               </p>
             )}
 
-            <button className="btn btn--primary btn--lg phone__send" disabled={busy || !text.trim()}>
+            <button className="btn btn--primary btn--lg phone__send" disabled={busy}>
               {busy ? <Loader2 size={18} className="spin" /> : <Send size={18} />}
               {busy ? 'Sending…' : 'Send complaint'}
             </button>
