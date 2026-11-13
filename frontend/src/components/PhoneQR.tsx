@@ -33,7 +33,9 @@ export function PhoneQR({ open, onClose }: { open: boolean; onClose: () => void 
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [open, onClose])
-  const local = typeof window !== 'undefined' && url.includes('localhost')
+  const local = url.includes('localhost')
+  // A private address means the laptop serves it on the venue Wi-Fi; anything else is public.
+  const lan = /\/\/(10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.)/.test(url)
   return (
     <AnimatePresence>
       {open && (

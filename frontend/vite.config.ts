@@ -2,6 +2,7 @@ import { defineConfig, loadEnv, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 import os from 'node:os'
 import { resolve } from 'node:path'
+import { copyFileSync, existsSync, renameSync } from 'node:fs'
 
 // Why: the phone page is opened from a QR code, so it needs the laptop's LAN address.
 //      A browser cannot read its own LAN IP, so the dev server bakes it in at start.
@@ -22,10 +23,23 @@ function landingAtRoot(): Plugin {
     if (path === '/' || path === '/index.html') req.url = '/landing/' + (req.url ?? '').slice(path.length)
     next()
   }
+  // In the build, the product page becomes dist/index.html and the console dist/app.html, so any
+  // static host serves "/" without a rewrite (Vercel serves a real file before any rewrite rule).
+  const consoleRewrite = (req: { url?: string }, _res: unknown, next: () => void) => {
+    const path = (req.url ?? '').split('?')[0]
+    if (/^\/(console(\/.*)?|submit)$/.test(path)) req.url = '/app.html'
+    next()
+  }
   return {
     name: 'landing-at-root',
     configureServer: (server) => void server.middlewares.use(rewrite),
-    configurePreviewServer: (server) => void server.middlewares.use(rewrite),
+    configurePreviewServer: (server) => void server.middlewares.use(consoleRewrite),
+    closeBundle() {
+      const dist = resolve(__dirname, 'dist')
+      if (!existsSync(resolve(dist, 'landing/index.html'))) return
+      renameSync(resolve(dist, 'index.html'), resolve(dist, 'app.html'))
+      copyFileSync(resolve(dist, 'landing/index.html'), resolve(dist, 'index.html'))
+    },
   }
 }
 
