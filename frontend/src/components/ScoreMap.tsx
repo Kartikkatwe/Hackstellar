@@ -9,14 +9,12 @@ import './ScoreMap.css'
    The exact numbers stay one hover away and on the issue page (transparency is the pitch).
    Palette: five categorical slots validated for colour-blind separation on the dark card. */
 
-const FACTORS: Record<string, { name: string; color: string }> = {
-  // Why these hues (13 Nov): Top issues shows this bar beside the channel bar, whose colours are
-  // green, orange, blue and pink. Score factors use none of those, so no colour means two things.
-  customers: { name: 'Customers', color: '#9b87f5' },
-  impact: { name: 'Impact', color: '#e3c04a' },
-  money: { name: 'Money lost', color: '#36c2cf' },
-  anger: { name: 'Anger', color: '#a3d13b' },
-  trend: { name: 'Trend', color: '#b8bcc4' },
+export const FACTORS: Record<string, { name: string; color: string }> = {
+  customers: { name: 'Customers', color: '#3987e5' },
+  impact: { name: 'Impact', color: '#d95926' },
+  money: { name: 'Money lost', color: '#199e70' },
+  anger: { name: 'Anger', color: '#c98500' },
+  trend: { name: 'Trend', color: '#d55181' },
 }
 
 /** The factor colours as one key, for lists that show many compact bars (Top issues). */

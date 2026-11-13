@@ -1,4 +1,4 @@
-import { ScoreMap } from './ScoreMap'
+import { ScoreMap, FACTORS } from './ScoreMap'
 import './ScoreWhy.css'
 
 /* Why an issue ranks where it does, in plain words for people who have never seen the formula.
@@ -26,11 +26,11 @@ const share = (x: number) => {
 export function ScoreWhy({ s, impactNames }: { s: Summary; impactNames: string[] }) {
   const level = impactNames[Math.min(impactNames.length - 1, Math.max(0, Math.round(s.avg_impact) - 1))] ?? ''
   const items = [
-    { key: 'customers', color: '#9b87f5', big: `${s.unique_customers}`, text: 'customers affected, each counted once' },
-    { key: 'impact', color: '#e3c04a', big: level, text: 'how badly a typical customer is hit' },
-    { key: 'money', color: '#36c2cf', big: share(s.money_share), text: 'of complaints report money lost' },
-    { key: 'anger', color: '#a3d13b', big: share(s.angry_share), text: 'sound angry (counts only a little)' },
-    { key: 'trend', color: '#b8bcc4', big: s.trend > 1 ? 'Rising' : 'Steady', text: s.trend > 1 ? 'more customers this week than last' : 'no jump this week' },
+    { key: 'customers', color: FACTORS.customers.color, big: `${s.unique_customers}`, text: 'customers affected, each counted once' },
+    { key: 'impact', color: FACTORS.impact.color, big: level, text: 'how badly a typical customer is hit' },
+    { key: 'money', color: FACTORS.money.color, big: share(s.money_share), text: 'of complaints report money lost' },
+    { key: 'anger', color: FACTORS.anger.color, big: share(s.angry_share), text: 'sound angry (counts only a little)' },
+    { key: 'trend', color: FACTORS.trend.color, big: s.trend > 1 ? 'Rising' : 'Steady', text: s.trend > 1 ? 'more customers this week than last' : 'no jump this week' },
   ]
   return (
     <div className="swhy">
