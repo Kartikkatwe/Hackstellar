@@ -88,7 +88,7 @@
     <text x="1400" y="754" font-size="21" font-weight="700" fill="#B45309">Curator · after each batch</text>
     <text x="1400" y="781">compares each new issue with its 4 nearest</text>
     <text x="1400" y="805">same root cause → merge and rename</text>
-    <text x="1400" y="852" font-weight="700">6 calls · $0.0010 · 5 of 5 hidden problems found</text>
+    <text x="1400" y="852" font-weight="700">6 calls · $0.0010</text>
   </g>
 
   <!-- how PS-19 is solved -->

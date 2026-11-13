@@ -152,12 +152,12 @@
     <text x="64" y="696" font-size="32" font-weight="700">98.4%</text><text x="214" y="694" font-size="19" fill="#3B4552">filed under the right issue</text>
     <text x="64" y="746" font-size="32" font-weight="700">$0.065</text><text x="214" y="744" font-size="19" fill="#3B4552">in total · $4.33 per 100,000</text>
     <text x="64" y="796" font-size="32" font-weight="700">0.55 s</text><text x="214" y="794" font-size="19" fill="#3B4552">median time per complaint</text>
-    <text x="64" y="846" font-size="32" font-weight="700">5 of 5</text><text x="214" y="844" font-size="19" fill="#3B4552">hidden issues discovered</text>
+    <text x="64" y="846" font-size="32" font-weight="700">99.6%</text><text x="214" y="844" font-size="19" fill="#3B4552">sent to the right area</text>
   </g>
 
   <!-- comparison -->
   <rect x="40" y="900" width="1840" height="120" rx="16" fill="#F4F6F9"/>
   <text x="72" y="942" font-size="22" font-weight="700" fill="#1B2330">The same 1,500 complaints if an LLM reads every one</text>
   <text x="72" y="976" font-size="19" fill="#3B4552">Claude Haiku 5.5: $0.45, or $0.18 to $0.23 with prompt caching (we save 65% to 71%)   ·   Claude Sonnet 5.5: $8.91 (we save 98%)</text>
-  <text x="72" y="1004" font-size="19" fill="#3B4552">At least 1.9 s per complaint, and nothing gets filed when the LLM provider is down.</text>
+  <text x="72" y="1004" font-size="19" fill="#3B4552">At least 1.9 s per complaint, and about 200 output tokens written for every one.</text>
 </svg>

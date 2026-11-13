@@ -48,23 +48,20 @@ HackStellar PS-19, "Complaint Compass": a business gets complaints across email,
 
 **Why it is hard:**
 - The same problem is written a hundred ways, in English, Hindi and Hinglish ("paise kat gaye lekin order nahi bana").
-- New problems appear that nobody has named yet (a bad app update starts double-charging people).
 - Each channel has its own format and its own way of identifying the customer.
-- Reading every complaint with an LLM works, but is slow, costs money at scale, and stops completely when the LLM provider has an outage.
+- Reading every complaint with an LLM works, but is slow, and costs money at scale, mostly in output tokens it writes for every complaint.
 
 ---
 
 ## 3. Why this product is good
 
-1. **Fast.** Half of all complaints are filed in 0.55 s or less. An LLM reading every complaint takes at least 1.9 s each. The real speed win is **time to discovery**: a new problem becomes a ranked issue as soon as 3 different customers report it, and a single report of lost money or a safety risk is flagged urgent immediately.
-2. **Keeps working when the LLM does not.** 96% of complaints never touch the LLM. If the LLM provider is slow, rate-limited or down, almost everything still gets filed.
-3. **Cheap.** $4.33 per 100,000 complaints. An LLM reading every one costs $29.70 (Haiku), $12.32 with the best prompt caching, or about $594 (Sonnet).
-4. **Explainable.** Every complaint stores which step filed it, why, how sure it was, and what it cost. Every ranking score is a written formula a judge can check with a calculator.
-5. **Counts people, not messages.** Identity resolution links each complaint to a customer, so repeat contacts are counted once.
-6. **Finds new problems by itself.** It discovered all 5 problems we hid in the data, without being told they existed.
-7. **Works in Hinglish.** The multilingual model plus word matching handles mixed-language complaints.
-8. **Any business.** Everything about groceries lives in one settings file (the domain pack). A telecom or a bank writes its own file; the engine does not change. Jev needs no training for new labels.
-9. **Gets cheaper over time.** When Jev or the LLM confirms a tricky wording, it becomes an example, so the next complaint written that way is matched for free.
+1. **Fast.** Half of all complaints are filed in 0.55 s or less. An LLM reading every complaint takes at least 1.9 s each. A single report of lost money or a safety risk is flagged urgent immediately.
+2. **Cheap.** $4.33 per 100,000 complaints. An LLM reading every one costs $29.70 (Haiku), $12.32 with the best prompt caching, or about $594 (Sonnet).
+3. **Explainable.** Every complaint stores which step filed it, why, how sure it was, and what it cost. Every ranking score is a written formula a judge can check with a calculator.
+4. **Counts people, not messages.** Identity resolution links each complaint to a customer, so repeat contacts are counted once.
+5. **Works in Hinglish.** The multilingual model plus word matching handles mixed-language complaints.
+6. **Any business.** Everything about groceries lives in one settings file (the domain pack). A telecom or a bank writes its own file; the engine does not change. Jev needs no training for new labels.
+7. **Gets cheaper over time.** When Jev or the LLM confirms a tricky wording, it becomes an example, so the next complaint written that way is matched for free.
 
 ---
 
@@ -522,7 +519,6 @@ Helpers:
 | Gate | 99.9% of real complaints kept, 100% of non-complaints removed |
 | Component routing | 99.6% |
 | Identity | 100% of 1,215 links correct, 0 wrong, 285 unlinked |
-| Hidden issues found | 5 of 5 (as 6 issues, all 100% pure) |
 | Cost | $0.065 total, $4.33 per 100,000 |
 | Time per complaint | 0.55 s median, 0.83 s average |
 
@@ -535,7 +531,7 @@ Cost per step: gate $0.0464 (1,500 calls), verify $0.0096 (595), LLM adjudicate 
 ## 11. Questions judges may ask
 
 **"Why not just use an LLM for everything?"**
-It is slower (at least 1.9 s per complaint against 0.55 s), stops when the provider is down, hits rate limits during complaint spikes, and costs 7× (Haiku) to 140× (Sonnet) more. Our funnel uses the LLM only where it adds value: the 4% that cheaper steps cannot decide, naming new issues, and merging duplicates.
+It is slower (at least 1.9 s per complaint against 0.55 s), writes about 200 output tokens for every complaint, and costs 7× (Haiku) to 140× (Sonnet) more. Our funnel uses the LLM only where it adds value: the 4% that cheaper steps cannot decide, naming new issues, and merging duplicates.
 
 **"Why is Jev better than an LLM for the gate?"**
 Every gate answer is a choice, not writing. Jev returns calibrated probabilities, so unsure answers can be passed on, and it can only answer from the given options. It costs $0.00003 per complaint.

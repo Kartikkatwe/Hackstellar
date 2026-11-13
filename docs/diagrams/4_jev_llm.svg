@@ -103,7 +103,7 @@
     <text x="1402" y="738">Same root cause → merge and rename</text>
     <text x="1402" y="764">Merges are kept and traceable</text>
     <text x="1402" y="804" font-weight="700">6 calls · $0.0010</text>
-    <text x="1402" y="832" fill="#5B6676">5 of 5 hidden problems found</text>
+    <text x="1402" y="832" fill="#5B6676">keeps the issue list free of repeats</text>
   </g>
 
   <!-- solution space -->
