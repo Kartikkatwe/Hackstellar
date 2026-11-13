@@ -60,7 +60,7 @@ export default defineConfig(({ mode }) => {
     preview: { host: true, port: 4173, proxy },
     build: {
       rollupOptions: {
-        input: { main: resolve(__dirname, 'index.html'), landing: resolve(__dirname, 'landing/index.html') },
+        input: { main: resolve(__dirname, 'index.html'), landing: resolve(__dirname, 'landing/index.html'), deck: resolve(__dirname, 'deck/index.html') },
       },
     },
   }
