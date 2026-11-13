@@ -1,0 +1,78 @@
+.ff {
+  position: relative;
+}
+.ff__stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1200 / 470;
+}
+.ff__svg,
+.ff__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.ff__canvas {
+  pointer-events: none;
+}
+.ff__band {
+  transition: d 600ms var(--ease-out);
+}
+.ff__rule line {
+  stroke: #1f1f23;
+  stroke-width: 1;
+}
+.ff__rule.is-llm line {
+  stroke: rgba(217, 178, 107, 0.35);
+}
+.ff__rule-name {
+  font-size: 15px;
+  font-weight: 560;
+  fill: var(--ink);
+}
+.ff__rule-who {
+  font-size: 13px;
+  fill: var(--muted);
+}
+.ff__rule.is-llm .ff__rule-name {
+  fill: var(--brass-hi);
+}
+.ff__big {
+  font-size: 40px;
+  font-weight: 560;
+  letter-spacing: -0.04em;
+  fill: var(--ink);
+}
+.ff__val {
+  font-size: 22px;
+  font-weight: 560;
+  letter-spacing: -0.02em;
+  fill: var(--ink);
+}
+.ff__val--llm {
+  fill: var(--brass-hi);
+}
+.ff__pct {
+  font-size: 14px;
+  font-weight: 500;
+  fill: var(--muted);
+  font-family: var(--mono);
+  letter-spacing: 0;
+}
+.ff__sub {
+  font-size: 14px;
+  fill: var(--ink-2);
+}
+.ff__table {
+  display: none;
+  margin-top: 8px;
+}
+@media (max-width: 760px) {
+  .ff__stage {
+    display: none;
+  }
+  .ff__table {
+    display: table;
+  }
+}

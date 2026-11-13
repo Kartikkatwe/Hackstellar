@@ -1,0 +1,216 @@
+.ov {
+  display: grid;
+  gap: 24px;
+}
+
+/* ---------- hero ---------- */
+.ov__hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.02fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: center;
+  min-height: min(680px, calc(100dvh - var(--top) - 72px));
+  padding: 8px 0 12px;
+}
+.ov__lede {
+  display: grid;
+  align-content: center;
+  gap: 28px;
+  min-width: 0;
+}
+.ov__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+}
+.ov__group {
+  padding: 2px 10px;
+  border-radius: 99px;
+  color: var(--brass-hi);
+  background: var(--brass-wash);
+  box-shadow: inset 0 0 0 1px var(--brass-line);
+}
+.ov__title {
+  display: grid;
+  font-size: clamp(40px, 3.4vw + 8px, 68px);
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+  font-weight: 540;
+}
+.ov__line {
+  display: block;
+}
+.ov__line--2 {
+  color: var(--ink-2);
+}
+.ov__line--3 {
+  background: linear-gradient(100deg, #f6e3b8 0%, #d9b26b 45%, #b08443 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding-bottom: 0.06em;
+}
+.ov__focus {
+  min-height: 176px;
+  padding: 20px 22px;
+  border-radius: var(--r-3);
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(120deg, rgba(217, 178, 107, 0.06), transparent 50%),
+    var(--bg-raised);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+.ov__focus-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+.ov__rank {
+  font-family: var(--mono);
+  font-weight: 600;
+  color: var(--brass-hi);
+}
+.ov__focus-title {
+  margin: 10px 0 16px;
+  font-size: clamp(22px, 1vw + 14px, 28px);
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  font-weight: 540;
+}
+.ov__focus-skel {
+  display: grid;
+  gap: 14px;
+}
+.ov__cta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.ov__dial {
+  position: relative;
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+}
+.ov__dial > .dial {
+  max-width: 640px;
+}
+.ov__dial-skel {
+  width: 100%;
+  max-width: 560px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: radial-gradient(circle, #141417, #0c0c0e);
+}
+.ov__dial-note {
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* ---------- tiles ---------- */
+.ov__tiles {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+.tile {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+  padding: 20px 20px 18px;
+  border-radius: var(--r-3);
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 80px), var(--surface);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+  transition:
+    transform var(--t-fast) var(--ease-out),
+    border-color var(--t-fast);
+}
+.tile:hover {
+  transform: translateY(-2px);
+  border-color: var(--line-2);
+}
+.tile__value {
+  font-size: clamp(34px, 1.6vw + 16px, 46px);
+  line-height: 1;
+  font-weight: 540;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+}
+.tile__sub {
+  font-size: 13.5px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+.tile__bars {
+  display: grid;
+  gap: 4px;
+}
+.tile__bars span {
+  display: block;
+  height: 6px;
+  border-radius: 99px;
+  background: var(--surface-3);
+  transition: width 900ms var(--ease-out);
+}
+.tile__bars span.is-us {
+  min-width: 6px;
+  background: linear-gradient(90deg, var(--brass-lo), var(--brass-hi));
+}
+
+/* ---------- panels ---------- */
+.ov__panel-sub {
+  margin-top: 4px;
+  font-size: 14px;
+  color: var(--muted);
+}
+.ov__split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+.ov__toplist {
+  padding: 8px 12px 12px;
+}
+.ov__feed-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+@media (max-width: 1280px) {
+  .ov__split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 1100px) {
+  .ov__hero {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
+  }
+  .ov__dial > .dial {
+    max-width: 560px;
+  }
+  .ov__tiles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 560px) {
+  .ov__tiles {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ov__focus {
+    padding: 16px;
+  }
+}

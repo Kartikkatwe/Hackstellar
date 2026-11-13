@@ -29,6 +29,8 @@ Everything a new session needs to continue. Read this first, then `HOW_IT_WORKS.
 | `FOR_JNANOTTAM.md` | Frontend handoff: screens, API, setup, measured results |
 | `docs/diagrams/` | `1_gate`, `2_funnel`, `3_domain_packs` as SVG (editable) + 4K PNG; `render.ps1` renders SVG→PNG with Edge headless (Windows) |
 | `docs/deck/project/` | Source of the pitch deck (section 5) |
+| `docs/diagrams/4_jev_llm`, `5_jev_llm_tree` | Who does what (Jev / local / LLM), grid and tree, with live-run figures |
+| `docs/diagrams/6_complaint_flow_tree` | Judge-facing step-by-step flow (plain words, no run data; "buffer" is called "waiting list"). Also published as an artifact: https://claude.ai/artifact/FRkkEQgRBMbXcMqcYM16L8 (source `docs/diagrams/complaint_flow.html`) |
 | `backend/` | The backend (FastAPI + SQLite + providers); `runs/grocery_live_backup.db` is the live run, committed |
 
 Windows machine details (Kartik's laptop): Python venv `backend\.venv\Scripts\python.exe`; Git at `C:\Program Files\Git\cmd\git.exe`; PyTorch needs the `msvc-runtime` pip package. In PowerShell 5.1, a double quote inside a `git commit -m @'…'@` here-string breaks argument passing (use single quotes), and `python -c` with `count(*)` gets mangled (write a script file instead).

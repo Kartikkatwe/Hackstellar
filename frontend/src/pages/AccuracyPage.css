@@ -1,0 +1,126 @@
+.accp {
+  display: grid;
+  gap: 24px;
+}
+.accp__grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+}
+.accp__card {
+  display: grid;
+  gap: 16px;
+  align-content: start;
+  padding: 22px 20px;
+  border-radius: var(--r-3);
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+.accp__card h2 {
+  font-size: 15px;
+  font-weight: 540;
+  letter-spacing: -0.01em;
+}
+.accp__card p {
+  margin-top: 4px;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+.accp__ring {
+  position: relative;
+  width: 132px;
+  height: 132px;
+}
+.accp__ring strong {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 26px;
+  font-weight: 560;
+  letter-spacing: -0.03em;
+}
+.ring {
+  width: 132px;
+  height: 132px;
+  transform: rotate(-90deg);
+}
+.ring__track {
+  fill: none;
+  stroke: var(--surface-3);
+  stroke-width: 6;
+}
+.ring__fill {
+  fill: none;
+  stroke: var(--n-right);
+  stroke-width: 6;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1400ms var(--ease-out);
+  animation: ring-in 1600ms var(--ease-out);
+}
+@keyframes ring-in {
+  from {
+    stroke-dashoffset: 327;
+  }
+}
+.accp__sub {
+  margin-top: 4px;
+  font-size: 14px;
+  color: var(--muted);
+}
+.accp__title {
+  color: var(--ink) !important;
+}
+.accp__title svg {
+  display: inline;
+  vertical-align: -2px;
+  margin-right: 6px;
+  color: var(--good);
+}
+.accp__key {
+  font-size: 13px;
+  color: var(--muted) !important;
+}
+.accp__caveat {
+  padding: 22px 24px;
+  border-radius: var(--r-3);
+  border: 1px dashed var(--line-3);
+}
+.accp__caveat h2 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+.accp__caveat ul {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 6px;
+  color: var(--ink-2);
+  font-size: 15px;
+}
+@media (max-width: 1280px) {
+  .accp__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 760px) {
+  .accp__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .accp__card {
+    grid-template-columns: auto 1fr;
+    align-items: center;
+  }
+}
+.accp .panel__body {
+  overflow-x: auto;
+}
+.accp__key {
+  word-break: break-all;
+}
+@media (max-width: 560px) {
+  .accp .table th:nth-child(2),
+  .accp .table td:nth-child(2) {
+    display: none;
+  }
+}

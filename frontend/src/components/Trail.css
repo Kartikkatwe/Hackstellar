@@ -1,0 +1,286 @@
+.trail {
+  display: grid;
+  gap: 18px;
+}
+.trail__mode {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+  padding: 10px 14px;
+  border-radius: var(--r-2);
+  font-size: 14px;
+  font-weight: 500;
+}
+.trail__mode--live {
+  color: #c9f0d0;
+  background: rgba(63, 185, 80, 0.1);
+  box-shadow: inset 0 0 0 1px rgba(63, 185, 80, 0.3);
+}
+.trail__mode--offline {
+  color: #fde3a6;
+  background: rgba(250, 178, 25, 0.1);
+  box-shadow: inset 0 0 0 1px rgba(250, 178, 25, 0.35);
+}
+.trail__mode-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--good);
+  box-shadow: 0 0 10px var(--good);
+}
+.trail__warn {
+  flex-basis: 100%;
+  font-size: 13px;
+  font-weight: 400;
+  opacity: 0.85;
+}
+.trail__quote {
+  margin: 0;
+  padding: 16px 18px;
+  border-radius: var(--r-3);
+  background: var(--bg-raised);
+  border: 1px solid var(--line);
+}
+.trail__quote p {
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.trail__quote footer {
+  margin-top: 8px;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.trail__steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  display: grid;
+  gap: 4px;
+}
+/* the track the complaint travels down */
+.trail__steps::before {
+  content: '';
+  position: absolute;
+  left: 19px;
+  top: 20px;
+  bottom: 20px;
+  width: 2px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, var(--line-3), var(--line));
+}
+.trail__step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: start;
+  padding: 10px 0;
+}
+.trail__node {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  color: var(--muted);
+  background: var(--surface-2);
+  box-shadow: inset 0 0 0 1px var(--line-2);
+  transition:
+    color var(--t-med),
+    background var(--t-med),
+    box-shadow var(--t-med);
+}
+.trail__step.is-in.is-pass .trail__node {
+  color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--line-3);
+}
+.trail__step.is-in.is-settled .trail__node {
+  color: var(--brass-ink);
+  background: linear-gradient(180deg, #ecd197, var(--brass));
+  box-shadow:
+    0 0 0 4px rgba(217, 178, 107, 0.16),
+    0 0 28px rgba(217, 178, 107, 0.45);
+}
+.trail__body {
+  min-width: 0;
+  padding-top: 2px;
+}
+.trail__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+}
+.trail__head strong {
+  font-size: 15px;
+  font-weight: 560;
+}
+.trail__who {
+  font-size: 13px;
+  color: var(--muted);
+}
+.trail__cost {
+  margin-left: auto;
+  font-size: 12.5px;
+  color: var(--ink-2);
+}
+.trail__verdict {
+  margin-top: 2px;
+  font-size: 14.5px;
+  color: var(--ink-2);
+}
+.trail__step.is-settled .trail__verdict {
+  color: var(--ink);
+}
+.trail__settled {
+  align-self: center;
+  font-size: 12.5px;
+  font-weight: 560;
+  color: var(--brass-hi);
+  padding: 3px 9px;
+  border-radius: 99px;
+  background: var(--brass-wash);
+  box-shadow: inset 0 0 0 1px var(--brass-line);
+  white-space: nowrap;
+}
+.trail__detail {
+  margin-top: 10px;
+}
+.trail__gate {
+  display: grid;
+  gap: 10px;
+}
+.trail__probs {
+  display: grid;
+  gap: 6px;
+}
+.trail__prob {
+  display: grid;
+  grid-template-columns: 120px 1fr 40px;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+.trail__prob .mono {
+  text-align: right;
+  color: var(--muted);
+}
+.trail__prob-bar {
+  height: 4px;
+  border-radius: 4px;
+  background: var(--surface-3);
+  overflow: hidden;
+}
+.trail__prob-bar span {
+  display: block;
+  height: 100%;
+  border-radius: 4px;
+  background: var(--brass);
+}
+.trail__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.trail__chips span {
+  font-size: 12.5px;
+  padding: 3px 9px;
+  border-radius: 99px;
+  color: var(--ink-2);
+  background: var(--surface-2);
+  box-shadow: inset 0 0 0 1px var(--line-2);
+}
+.trail__chips span.is-hot {
+  color: #ffd2cc;
+  background: rgba(229, 83, 75, 0.12);
+  box-shadow: inset 0 0 0 1px rgba(229, 83, 75, 0.4);
+}
+
+.trail__out {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+  padding: 16px 18px;
+  border-radius: var(--r-3);
+  border: 1px solid var(--line-2);
+  background: var(--bg-raised);
+}
+.trail__out > div {
+  display: grid;
+  gap: 2px;
+}
+.trail__out-title {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 500;
+}
+.trail__out-text {
+  font-size: 17px;
+  font-weight: 540;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.trail__out--brass {
+  border-color: var(--brass-line);
+  background:
+    radial-gradient(120% 160% at 0% 0%, rgba(217, 178, 107, 0.16), transparent 55%),
+    var(--bg-raised);
+  color: var(--brass-hi);
+}
+.trail__out--urgent {
+  border-color: rgba(229, 83, 75, 0.45);
+  background:
+    radial-gradient(120% 160% at 0% 0%, rgba(229, 83, 75, 0.14), transparent 55%),
+    var(--bg-raised);
+  color: var(--critical);
+}
+.trail__out--muted {
+  color: var(--muted);
+}
+.trail__totals {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+}
+.trail__totals div {
+  padding: 10px 12px;
+  border-radius: var(--r-2);
+  background: var(--bg-raised);
+  border: 1px solid var(--line);
+}
+.trail__totals dt {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.trail__totals dd {
+  margin: 2px 0 0;
+  font-size: 15px;
+  color: var(--ink);
+}
+@media (max-width: 520px) {
+  .trail__step {
+    grid-template-columns: 40px minmax(0, 1fr);
+  }
+  .trail__settled {
+    grid-column: 2;
+    justify-self: start;
+  }
+  .trail__prob {
+    grid-template-columns: 96px 1fr 36px;
+  }
+  .trail__out {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+  .trail__out .btn {
+    grid-column: 1 / -1;
+  }
+}
