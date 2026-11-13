@@ -1,0 +1,231 @@
+.live {
+  display: grid;
+  gap: 24px;
+}
+.live__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  gap: 24px;
+  align-items: start;
+}
+.live__form {
+  display: grid;
+}
+.live__form-body {
+  display: grid;
+  gap: 18px;
+  padding-top: 24px;
+}
+.live__channels {
+  width: 100%;
+}
+.live__channels button {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 38px;
+}
+.live__text {
+  font-size: 16px;
+  min-height: 140px;
+}
+.live__samples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: -6px;
+}
+.live__ids {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.live__error {
+  padding: 10px 14px;
+  border-radius: var(--r-2);
+  font-size: 14px;
+  color: #ffd2cc;
+  background: rgba(229, 83, 75, 0.1);
+  box-shadow: inset 0 0 0 1px rgba(229, 83, 75, 0.35);
+}
+.live__send {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.live__hint {
+  font-size: 13px;
+  color: var(--muted);
+}
+.spin {
+  animation: spin 0.9s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.live__phone {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+  align-items: center;
+  margin: 0 24px 24px;
+  padding: 14px;
+  border-radius: var(--r-3);
+  border: 1px dashed var(--line-3);
+}
+.live__phone .qr {
+  padding: 8px;
+  border-radius: 10px;
+}
+.live__phone strong {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 560;
+}
+.live__phone p {
+  margin-top: 4px;
+  font-size: 14px;
+  color: var(--muted);
+}
+.live__out {
+  min-height: 520px;
+}
+.live__busy {
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+  padding: 120px 0;
+  color: var(--muted);
+}
+.live__pulse {
+  display: flex;
+  gap: 8px;
+}
+.live__pulse span {
+  padding: 8px 14px;
+  border-radius: 99px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-2);
+  background: var(--surface-2);
+  box-shadow: inset 0 0 0 1px var(--line-2);
+  animation: pulse-step 1.2s var(--ease-in-out) infinite;
+}
+@keyframes pulse-step {
+  0%,
+  100% {
+    box-shadow: inset 0 0 0 1px var(--line-2);
+    color: var(--ink-2);
+  }
+  40% {
+    box-shadow:
+      inset 0 0 0 1px var(--brass-line),
+      0 0 18px rgba(217, 178, 107, 0.35);
+    color: var(--brass-hi);
+  }
+}
+.live__now {
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: var(--r-2);
+  font-size: 15px;
+  color: var(--ink-2);
+  background: var(--brass-wash);
+  box-shadow: inset 0 0 0 1px var(--brass-line);
+}
+.live__now strong {
+  color: var(--brass-hi);
+  font-weight: 600;
+}
+.live__hist-list {
+  list-style: none;
+  margin: 0;
+  display: grid;
+  gap: 4px;
+}
+.live__hist-list button {
+  display: grid;
+  grid-template-columns: 80px minmax(0, 1fr) minmax(0, 260px) 64px;
+  gap: 14px;
+  align-items: center;
+  width: 100%;
+  min-height: 44px;
+  padding: 8px 10px;
+  border-radius: var(--r-2);
+  text-align: left;
+  font-size: 14px;
+}
+.live__hist-list button:hover {
+  background: var(--surface-2);
+}
+.live__hist-id {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.live__hist-text {
+  color: var(--ink-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.live__hist-stage {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.live__hist-stage .feed__pip {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+}
+.live__hist-mode {
+  font-size: 12.5px;
+  text-align: right;
+}
+.live__hist-mode.is-live {
+  color: var(--good);
+}
+.live__hist-mode.is-offline {
+  color: var(--warning);
+}
+@media (max-width: 1100px) {
+  .live__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .live__out {
+    min-height: 0;
+  }
+}
+@media (max-width: 560px) {
+  .live__ids {
+    grid-template-columns: 1fr;
+  }
+  .live__channels button {
+    padding: 0 6px;
+    font-size: 12.5px;
+  }
+  .live__hist-list button {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .live__hist-id,
+  .live__hist-text {
+    display: none;
+  }
+  .live__phone {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+}
