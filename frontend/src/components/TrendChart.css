@@ -1,0 +1,55 @@
+.trend {
+  position: relative;
+}
+.trend__svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  touch-action: none;
+}
+.trend__grid {
+  stroke: #232327;
+  stroke-width: 1;
+}
+.trend__tick {
+  font-family: var(--mono);
+  font-size: 12px;
+  fill: var(--muted);
+}
+.trend__line {
+  fill: none;
+  stroke: var(--brass);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.trend__dot {
+  fill: var(--brass-hi);
+  stroke: var(--surface);
+  stroke-width: 2;
+}
+.trend__cross {
+  stroke: var(--line-3);
+  stroke-width: 1;
+}
+.trend__end {
+  font-family: var(--mono);
+  font-size: 13px;
+  fill: var(--ink);
+}
+.trend__tip {
+  position: absolute;
+  top: -6px;
+  transform: translateX(-50%);
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  white-space: nowrap;
+  color: var(--ink-2);
+  background: rgba(24, 24, 28, 0.96);
+  border: 1px solid var(--line-3);
+  pointer-events: none;
+}
+.trend__tip strong {
+  color: var(--ink);
+}

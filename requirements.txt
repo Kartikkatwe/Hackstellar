@@ -1,0 +1,4 @@
+# The Vercel function in api/ (the backend without the local sentence model; see api/index.py).
+fastapi
+pyyaml
+numpy
