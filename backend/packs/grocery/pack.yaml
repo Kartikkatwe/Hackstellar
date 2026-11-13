@@ -1,0 +1,138 @@
+# Domain pack: everything the engine knows about one business lives here.
+name: BasketNow
+domain: Quick-commerce grocery delivery
+data_dir: data/grocery
+order_id: { prefix: BN, digits: 6 }   # BN-NNNNNN-C, C = Luhn check digit
+
+components:   # order is fixed: Jev's probabilities shift if options are reordered
+  payments: "Paying for an order: UPI, cards, wallets, failed or stuck payments, money debited, double charges, promo codes at checkout"
+  delivery: "Getting the order to the door: late delivery, order marked delivered but not received, delivery partner behaviour"
+  order_accuracy: "What arrived versus what was ordered: missing items, wrong items, wrong quantity"
+  product_quality: "Condition of the items: expired, stale, rotten, damaged, leaking or spilled products"
+  refunds: "Getting money back after a cancellation or return: refund not received, refund delayed, refund amount wrong"
+  account_app: "Using the app and account: login OTP, app crashes, bugs, saving addresses, profile"
+  support: "Customer support itself: chatbot loops, cannot reach a human, no callback, unhelpful agents"
+
+seed_issues:   # issues the company already knows about; others are discovered by the buffer
+  - key: pay_debited_no_order
+    component: payments
+    title: Money debited but order not placed
+    description: Payment was taken from the customer's account but the app shows no order.
+    examples: ["Amount got deducted from my bank but no order was created.", "Paid for my groceries, money gone, order not showing anywhere.", "paise kat gaye lekin order place nahi hua"]
+  - key: pay_upi_timeout
+    component: payments
+    title: UPI payment times out at checkout
+    description: Checkout hangs or expires when paying by UPI; no money is taken and the order cannot be placed.
+    examples: ["UPI payment keeps timing out at checkout.", "Checkout gets stuck after selecting UPI and then says session expired.", "UPI se payment hi nahi ho raha, bar bar fail"]
+  - key: del_marked_not_received
+    component: delivery
+    title: Marked delivered but not received
+    description: The app shows the order as delivered but the customer never got it.
+    examples: ["Order status says delivered but nothing came to my door.", "App shows delivered, I received nothing.", "delivered dikha raha hai par order mila hi nahi"]
+  - key: del_late
+    component: delivery
+    title: Delivery much later than promised
+    description: The order arrived far beyond the promised delivery time.
+    examples: ["Promised 10 minutes, arrived after more than an hour.", "My order was very late.", "order bahut late aaya"]
+  - key: ord_missing_items
+    component: order_accuracy
+    title: Items missing from the order
+    description: One or more paid items were not in the delivered bag.
+    examples: ["Two items were missing from my order.", "I paid for the milk but it wasn't in the bag.", "order me saman kam aaya"]
+  - key: ord_wrong_item
+    component: order_accuracy
+    title: Wrong item delivered
+    description: A different product, brand or size from what was ordered was delivered.
+    examples: ["Received the wrong product.", "I ordered one brand and got a different one.", "galat item bhej diya"]
+  - key: qual_expired
+    component: product_quality
+    title: Expired or spoiled product delivered
+    description: Food items were past their expiry date, stale, rotten or unsafe to eat.
+    examples: ["The bread was past its expiry date.", "Vegetables were rotten.", "expired saman bhej diya"]
+  - key: qual_damaged
+    component: product_quality
+    title: Damaged or leaking packaging
+    description: Items arrived broken, crushed, leaking or spilled.
+    examples: ["The packet was torn and leaking.", "Eggs arrived broken.", "packet phata hua tha"]
+  - key: ref_not_received
+    component: refunds
+    title: Refund not received
+    description: A promised refund for a cancelled or returned order has not reached the customer.
+    examples: ["Still waiting for my refund after a week.", "Cancelled order refund has not come.", "refund abhi tak nahi aaya"]
+  - key: app_otp_delayed
+    component: account_app
+    title: Login OTP arrives late
+    description: The login OTP takes a long time or needs several retries before it arrives.
+    examples: ["OTP takes forever to arrive.", "Had to request the login OTP several times.", "OTP bahut der se aata hai"]
+  - key: app_address_not_saving
+    component: account_app
+    title: Address not saving
+    description: New or edited delivery addresses are not saved in the app.
+    examples: ["The app won't save my new address.", "Address keeps resetting.", "address save nahi ho raha"]
+  - key: sup_bot_loop
+    component: support
+    title: Chatbot loops, no human agent
+    description: The support chatbot repeats the same options and the customer cannot reach a person.
+    examples: ["The chatbot keeps repeating itself, I can't reach an agent.", "No way to talk to a human.", "chatbot se kuch nahi hota, koi insaan se baat karao"]
+  - key: sup_no_callback
+    component: support
+    title: Promised callback never came
+    description: Support promised to call back and did not.
+    examples: ["Was promised a callback, nobody called.", "Support never called back.", "callback bola tha, kisi ne call nahi kiya"]
+
+gate:
+  impact_levels: ["Annoyed: minor irritation", "Inconvenienced: wasted time or effort", "Blocked: could not use the service or get the order", "Harmed: lost money, health or safety at risk"]
+  emotion_levels: ["Calm", "Frustrated", "Angry", "Furious or threatening"]
+  flags:
+    money_lost: "Did the customer lose money or get charged wrongly?"
+    legal_risk: "Does the complaint mention legal action, consumer court, fraud, police, food safety or a health problem?"
+
+thresholds:
+  is_complaint: 0.5
+  component_margin: 0.15     # search top-2 components when they score this close
+  verify_yes: 0.80
+  verify_no: 0.20
+  verify_candidates: 3
+  new_issue_customers: 3
+  urgent_flag: 0.5           # money_lost or legal_risk above this makes an unmatched complaint urgent
+  # similarity cut-offs depend on the embedding model
+  # hybrid: only a very close match is filed unasked; the wide middle band goes to Jev's
+  # yes/no check, which costs about $0.00002 a call (measured), far less than a wrong grouping.
+  hybrid: { match_hi: 0.65, match_lo: 0.18, cluster: 0.50 }
+  st:   { match_hi: 0.72, match_lo: 0.45, cluster: 0.62 }
+  hash: { match_hi: 0.60, match_lo: 0.30, cluster: 0.45 }
+
+ranking:
+  angry_weight: 0.25         # score x (1 + angry_weight x share of angry complaints)
+  trend_multiplier: 1.25     # applied when customers in last 7 days >= 2x the 7 days before
+  critical_money_share: 0.5
+  critical_legal_share: 0.05 # not "any legal mention": one stray threat should not make an issue Critical
+  top_n: 10
+
+segments:   # dimensions the company can filter and compare by (customer fields)
+  country: Country
+  state: State
+  age_group: Age group
+  is_student: Student status
+
+models:
+  gate: typesafe/jev-1.14
+  adjudicator: anthropic/claude-haiku-5.5
+  embedder: paraphrase-multilingual-MiniLM-L12-v2
+
+prices_usd_per_million:   # OpenRouter list prices, read 13 Nov 2026
+  typesafe/jev-1.14:            { input: 0.042, output: 0.0 }
+  anthropic/claude-haiku-5.5:   { input: 0.10,  output: 0.50, cache_read: 0.01 }
+  anthropic/claude-sonnet-5.5:  { input: 2.00,  output: 10.00, cache_read: 0.20 }
+
+baseline_models: [anthropic/claude-haiku-5.5, anthropic/claude-sonnet-5.5]
+
+# Mock mode only. AI/ML API's docs example bills 406 input tokens for a request of about
+# 475 characters (chars/4 would say ~120), so estimates are scaled up to avoid flattering Jev.
+jev_token_factor: 3.4
+
+assumed_latency_s:   # used only in mock mode; live runs record real times
+  gate: 0.15
+  verify: 0.15
+  embed: 0.02
+  llm: 2.0

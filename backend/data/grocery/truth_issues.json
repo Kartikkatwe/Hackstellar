@@ -1,0 +1,110 @@
+[
+ {
+  "key": "pay_debited_no_order",
+  "component": "payments",
+  "seed": true,
+  "impact": 3
+ },
+ {
+  "key": "pay_upi_timeout",
+  "component": "payments",
+  "seed": true,
+  "impact": 2
+ },
+ {
+  "key": "pay_double_charge",
+  "component": "payments",
+  "seed": false,
+  "impact": 3
+ },
+ {
+  "key": "pay_promo_not_applied",
+  "component": "payments",
+  "seed": false,
+  "impact": 1
+ },
+ {
+  "key": "del_marked_not_received",
+  "component": "delivery",
+  "seed": true,
+  "impact": 3
+ },
+ {
+  "key": "del_late",
+  "component": "delivery",
+  "seed": true,
+  "impact": 1
+ },
+ {
+  "key": "del_rude_partner",
+  "component": "delivery",
+  "seed": false,
+  "impact": 1
+ },
+ {
+  "key": "ord_missing_items",
+  "component": "order_accuracy",
+  "seed": true,
+  "impact": 2
+ },
+ {
+  "key": "ord_wrong_item",
+  "component": "order_accuracy",
+  "seed": true,
+  "impact": 2
+ },
+ {
+  "key": "qual_expired",
+  "component": "product_quality",
+  "seed": true,
+  "impact": 3
+ },
+ {
+  "key": "qual_damaged",
+  "component": "product_quality",
+  "seed": true,
+  "impact": 1
+ },
+ {
+  "key": "ref_not_received",
+  "component": "refunds",
+  "seed": true,
+  "impact": 2
+ },
+ {
+  "key": "ref_partial",
+  "component": "refunds",
+  "seed": false,
+  "impact": 2
+ },
+ {
+  "key": "app_otp_delayed",
+  "component": "account_app",
+  "seed": true,
+  "impact": 0
+ },
+ {
+  "key": "app_crash_android",
+  "component": "account_app",
+  "seed": false,
+  "impact": 2
+ },
+ {
+  "key": "app_address_not_saving",
+  "component": "account_app",
+  "seed": true,
+  "impact": 1
+ },
+ {
+  "key": "sup_bot_loop",
+  "component": "support",
+  "seed": true,
+  "impact": 1
+ },
+ {
+  "key": "sup_no_callback",
+  "component": "support",
+  "seed": true,
+  "impact": 1
+ }
+]

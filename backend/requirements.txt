@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+pyyaml
+numpy
+sentence-transformers
+# torch: install the CPU build first to avoid a multi-GB GPU download:
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu
+# Windows without the Visual C++ runtime also needs:
+msvc-runtime; sys_platform == "win32"
