@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" font-family="Segoe UI, Inter, Arial, sans-serif">
+  <!-- Slide-sized (16:9). Colours: indigo = Jev decision model, green = goes on, grey = dropped. -->
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#6B74B8"/></marker>
+  </defs>
+  <rect width="1920" height="1080" fill="#FFFFFF"/>
+
+  <text x="80" y="90" font-size="46" font-weight="700" fill="#1B2330">The gate: one call, six questions</text>
+  <text x="80" y="130" font-size="22" fill="#5B6676">Every complaint from every channel meets Jev first. It answers only from the options it is given, so nothing after it has to parse free text.</text>
+
+  <!-- input -->
+  <rect x="660" y="162" width="600" height="46" rx="23" fill="#F4F6F9" stroke="#C9D1DC" stroke-width="2"/>
+  <text x="960" y="192" font-size="20" fill="#1B2330" text-anchor="middle">Complaint arrives  ·  email · call · chat · social</text>
+  <line x1="960" y1="208" x2="960" y2="243" stroke="#6B74B8" stroke-width="3" marker-end="url(#ah)"/>
+
+  <!-- gate -->
+  <rect x="600" y="245" width="720" height="100" rx="16" fill="#4338CA"/>
+  <text x="960" y="288" font-size="32" font-weight="700" fill="#FFFFFF" text-anchor="middle">GATE  ·  Jev decision model</text>
+  <text x="960" y="324" font-size="20" fill="#E0E3FF" text-anchor="middle">1 request  ·  6 typed questions  ·  0.53 s  ·  $0.00003 per complaint</text>
+
+  <!-- branches -->
+  <path d="M960 345 V395 M330 395 H1590 M330 395 V438 M960 395 V438 M1590 395 V438" fill="none" stroke="#6B74B8" stroke-width="3"/>
+
+  <!-- A: complaint? -->
+  <rect x="90" y="440" width="480" height="90" rx="14" fill="#EEF0FF" stroke="#4338CA" stroke-width="2"/>
+  <text x="330" y="478" font-size="26" font-weight="700" fill="#1B2330" text-anchor="middle">Is this a complaint?</text>
+  <text x="330" y="509" font-size="18" fill="#5B6676" text-anchor="middle">1 question  ·  yes / no with a probability</text>
+  <path d="M330 530 L220 582 M330 530 L440 582" fill="none" stroke="#6B74B8" stroke-width="3"/>
+  <circle cx="220" cy="620" r="38" fill="#E8F5EC" stroke="#15803D" stroke-width="2.5"/>
+  <text x="220" y="628" font-size="22" font-weight="700" fill="#166534" text-anchor="middle">Yes</text>
+  <circle cx="440" cy="620" r="38" fill="#F1F2F4" stroke="#8A94A3" stroke-width="2.5"/>
+  <text x="440" y="628" font-size="22" font-weight="700" fill="#4B5563" text-anchor="middle">No</text>
+  <line x1="220" y1="658" x2="220" y2="698" stroke="#15803D" stroke-width="3"/>
+  <line x1="440" y1="658" x2="440" y2="698" stroke="#8A94A3" stroke-width="3"/>
+  <rect x="100" y="700" width="240" height="76" rx="12" fill="#E8F5EC" stroke="#15803D" stroke-width="2"/>
+  <text x="220" y="732" font-size="19" font-weight="700" fill="#166534" text-anchor="middle">Next step:</text>
+  <text x="220" y="760" font-size="19" fill="#166534" text-anchor="middle">similarity match</text>
+  <rect x="360" y="700" width="200" height="76" rx="12" fill="#F1F2F4" stroke="#8A94A3" stroke-width="2"/>
+  <text x="460" y="732" font-size="19" font-weight="700" fill="#4B5563" text-anchor="middle">Dropped</text>
+  <text x="460" y="760" font-size="17" fill="#4B5563" text-anchor="middle">praise, spam, queries</text>
+  <text x="100" y="830" font-size="19" fill="#1B2330"><tspan font-weight="700">151 of 1,500</tspan> dropped (10.1%)</text>
+  <text x="100" y="860" font-size="19" fill="#1B2330"><tspan font-weight="700">99.9%</tspan> of real complaints kept</text>
+  <text x="100" y="890" font-size="19" fill="#1B2330"><tspan font-weight="700">100%</tspan> of non-complaints removed</text>
+
+  <!-- B: component -->
+  <rect x="720" y="440" width="480" height="90" rx="14" fill="#EEF0FF" stroke="#4338CA" stroke-width="2"/>
+  <text x="960" y="478" font-size="26" font-weight="700" fill="#1B2330" text-anchor="middle">Which part of the business?</text>
+  <text x="960" y="509" font-size="18" fill="#5B6676" text-anchor="middle">1 question  ·  pick 1 of 7, with probabilities</text>
+  <path d="M960 530 V553 M850 553 H1070 M850 553 V576 M1070 553 V576" fill="none" stroke="#6B74B8" stroke-width="3"/>
+  <g font-size="19" fill="#1B2330" text-anchor="middle">
+    <rect x="750" y="576" width="200" height="44" rx="22" fill="#FFFFFF" stroke="#4338CA" stroke-width="2"/><text x="850" y="604">Payments</text>
+    <rect x="970" y="576" width="200" height="44" rx="22" fill="#FFFFFF" stroke="#4338CA" stroke-width="2"/><text x="1070" y="604">Delivery</text>
+    <rect x="750" y="632" width="200" height="44" rx="22" fill="#FFFFFF" stroke="#4338CA" stroke-width="2"/><text x="850" y="660">Order accuracy</text>
+    <rect x="970" y="632" width="200" height="44" rx="22" fill="#FFFFFF" stroke="#4338CA" stroke-width="2"/><text x="1070" y="660">Product quality</text>
+    <rect x="750" y="688" width="200" height="44" rx="22" fill="#FFFFFF" stroke="#4338CA" stroke-width="2"/><text x="850" y="716">Refunds</text>
+    <rect x="970" y="688" width="200" height="44" rx="22" fill="#FFFFFF" stroke="#4338CA" stroke-width="2"/><text x="1070" y="716">Account &amp; app</text>
+    <rect x="860" y="744" width="200" height="44" rx="22" fill="#FFFFFF" stroke="#4338CA" stroke-width="2"/><text x="960" y="772">Support</text>
+  </g>
+  <text x="960" y="830" font-size="19" fill="#1B2330" text-anchor="middle"><tspan font-weight="700">99.6%</tspan> sent to the right part</text>
+  <text x="960" y="860" font-size="18" fill="#5B6676" text-anchor="middle">The next steps search only that part's issues.</text>
+  <text x="960" y="888" font-size="18" fill="#5B6676" text-anchor="middle">Top two within 0.15 of each other: both are searched.</text>
+
+  <!-- C: severity -->
+  <rect x="1350" y="440" width="480" height="90" rx="14" fill="#EEF0FF" stroke="#4338CA" stroke-width="2"/>
+  <text x="1590" y="478" font-size="26" font-weight="700" fill="#1B2330" text-anchor="middle">How serious is it?</text>
+  <text x="1590" y="509" font-size="18" fill="#5B6676" text-anchor="middle">4 questions  ·  2 scores and 2 yes / no</text>
+  <line x1="1590" y1="530" x2="1590" y2="574" stroke="#6B74B8" stroke-width="3"/>
+  <g>
+    <rect x="1370" y="576" width="440" height="60" rx="10" fill="#FFFFFF" stroke="#4338CA" stroke-width="2"/>
+    <text x="1390" y="601" font-size="19" font-weight="700" fill="#1B2330">Impact <tspan font-weight="400" font-size="16" fill="#5B6676">score 1 to 4</tspan></text>
+    <text x="1390" y="625" font-size="16" fill="#5B6676">Annoyed → Inconvenienced → Blocked → Harmed</text>
+    <rect x="1370" y="644" width="440" height="60" rx="10" fill="#FFFFFF" stroke="#4338CA" stroke-width="2"/>
+    <text x="1390" y="669" font-size="19" font-weight="700" fill="#1B2330">Emotion <tspan font-weight="400" font-size="16" fill="#5B6676">score 1 to 4</tspan></text>
+    <text x="1390" y="693" font-size="16" fill="#5B6676">Calm → Frustrated → Angry → Furious</text>
+    <rect x="1370" y="712" width="440" height="60" rx="10" fill="#FFFFFF" stroke="#4338CA" stroke-width="2"/>
+    <text x="1390" y="737" font-size="19" font-weight="700" fill="#1B2330">Money lost? <tspan font-weight="400" font-size="16" fill="#5B6676">yes / no</tspan></text>
+    <text x="1390" y="761" font-size="16" fill="#5B6676">charged wrongly, or paid with no order</text>
+    <rect x="1370" y="780" width="440" height="60" rx="10" fill="#FFFFFF" stroke="#4338CA" stroke-width="2"/>
+    <text x="1390" y="805" font-size="19" font-weight="700" fill="#1B2330">Legal or safety risk? <tspan font-weight="400" font-size="16" fill="#5B6676">yes / no</tspan></text>
+    <text x="1390" y="829" font-size="16" fill="#5B6676">court, fraud, police, food safety, health</text>
+  </g>
+  <text x="1590" y="880" font-size="18" fill="#5B6676" text-anchor="middle">Feeds the ranking score, the badges and the urgent flag.</text>
+
+  <!-- why -->
+  <rect x="80" y="920" width="1760" height="120" rx="16" fill="#F4F6F9"/>
+  <text x="112" y="960" font-size="22" font-weight="700" fill="#1B2330">Why a decision model here, not an LLM</text>
+  <text x="112" y="992" font-size="19" fill="#3B4552">It returns probabilities, so an unsure answer is passed on instead of guessed. It can only answer from the options given. It reads but never writes.</text>
+  <text x="112" y="1021" font-size="19" fill="#3B4552">The questions and options come from the business's domain pack, so a new business needs no training.</text>
+</svg>

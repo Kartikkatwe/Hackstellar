@@ -1,0 +1,163 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" font-family="Segoe UI, Inter, Arial, sans-serif">
+  <!-- Slide-sized (16:9). Box colour = engine: indigo Jev, teal local (free), amber Claude Haiku, slate rules and arithmetic.
+       Figures are the 13 Nov live run on 1,500 complaints (backend/runs/grocery_live_backup.db). -->
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#64748B"/></marker>
+    <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#15803D"/></marker>
+    <marker id="at" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0F766E"/></marker>
+  </defs>
+  <rect width="1920" height="1080" fill="#FFFFFF"/>
+
+  <text x="40" y="84" font-size="46" font-weight="700" fill="#1B2330">Complete architecture: the funnel</text>
+  <text x="40" y="122" font-size="22" fill="#5B6676">Each complaint stops at the cheapest step that can file it. Figures from a live run on 1,500 complaints.</text>
+
+  <!-- legend -->
+  <g font-size="18" fill="#1B2330">
+    <rect x="1330" y="50" width="20" height="20" rx="5" fill="#4338CA"/><text x="1360" y="67">Jev decision model</text>
+    <rect x="1620" y="50" width="20" height="20" rx="5" fill="#0F766E"/><text x="1650" y="67">Local, free</text>
+    <rect x="1330" y="90" width="20" height="20" rx="5" fill="#B45309"/><text x="1360" y="107">Claude Haiku 5.5</text>
+    <rect x="1620" y="90" width="20" height="20" rx="5" fill="#334155"/><text x="1650" y="107">Rules and arithmetic</text>
+  </g>
+
+  <!-- ROW 1: the stages -->
+  <g font-size="17" fill="#2B3440">
+    <!-- 1 intake -->
+    <rect x="40" y="170" width="270" height="240" rx="14" fill="#EEF1F5" stroke="#334155" stroke-width="2"/>
+    <text x="60" y="204" font-size="21" font-weight="700" fill="#334155">1 · Intake</text>
+    <text x="60" y="236">4 channels, one format:</text>
+    <text x="60" y="261">email, call, chat, social</text>
+    <text x="60" y="294" font-weight="700">Who is the customer?</text>
+    <text x="60" y="319">login, phone, email, or an</text>
+    <text x="60" y="344">order ID with a check digit</text>
+    <text x="60" y="369">(BN-375660-8)</text>
+
+    <!-- 2 gate -->
+    <rect x="354" y="170" width="270" height="240" rx="14" fill="#EEF0FF" stroke="#4338CA" stroke-width="2"/>
+    <text x="374" y="204" font-size="21" font-weight="700" fill="#4338CA">2 · Gate</text>
+    <text x="374" y="236">Is it a complaint?</text>
+    <text x="374" y="261">Which of 7 areas?</text>
+    <text x="374" y="286">Impact and emotion</text>
+    <text x="374" y="311">Money lost? Legal risk?</text>
+    <text x="374" y="344" font-weight="700">1 call · 0.53 s</text>
+    <text x="374" y="369">$0.00003 per complaint</text>
+
+    <!-- 3 match -->
+    <rect x="668" y="170" width="270" height="240" rx="14" fill="#E6F4F2" stroke="#0F766E" stroke-width="2"/>
+    <text x="688" y="204" font-size="21" font-weight="700" fill="#0F766E">3 · Similarity match</text>
+    <text x="688" y="236">Compare with known issues</text>
+    <text x="688" y="261">in that area only</text>
+    <text x="688" y="286">Multilingual model + word</text>
+    <text x="688" y="311">and character matching</text>
+    <text x="688" y="344" font-weight="700">≥ 0.65 → file it, free</text>
+    <text x="688" y="369">&lt; 0.18 → buffer</text>
+
+    <!-- 4 verify -->
+    <rect x="982" y="170" width="270" height="240" rx="14" fill="#EEF0FF" stroke="#4338CA" stroke-width="2"/>
+    <text x="1002" y="204" font-size="21" font-weight="700" fill="#4338CA">4 · Verify</text>
+    <text x="1002" y="236">Score 0.18 to 0.65:</text>
+    <text x="1002" y="261">Jev yes / no against</text>
+    <text x="1002" y="286">the top 3 candidates</text>
+    <text x="1002" y="319" font-weight="700">Yes ≥ 0.80 → file it</text>
+    <text x="1002" y="344">All no → buffer</text>
+    <text x="1002" y="369">Else → adjudicate</text>
+
+    <!-- 5 adjudicate -->
+    <rect x="1296" y="170" width="270" height="240" rx="14" fill="#FDF3E3" stroke="#B45309" stroke-width="2"/>
+    <text x="1316" y="204" font-size="21" font-weight="700" fill="#B45309">5 · Adjudicate</text>
+    <text x="1316" y="236">Only the unsure few</text>
+    <text x="1316" y="261">Claude reads that area's</text>
+    <text x="1316" y="286">issue list and picks one,</text>
+    <text x="1316" y="311">or says it is new</text>
+    <text x="1316" y="344" font-weight="700">1.9 s · $0.00013 a call</text>
+    <text x="1316" y="369">New → buffer</text>
+
+    <!-- 6 buffer -->
+    <rect x="1610" y="170" width="270" height="240" rx="14" fill="#EEF1F5" stroke="#334155" stroke-width="2"/>
+    <text x="1630" y="204" font-size="21" font-weight="700" fill="#334155">6 · Buffer → new issue</text>
+    <text x="1630" y="236">Holds unmatched reports</text>
+    <text x="1630" y="261">At 3 different customers:</text>
+    <text x="1630" y="286"><tspan fill="#4338CA" font-weight="700">Jev:</tspan> a known issue</text>
+    <text x="1630" y="311">in new words?</text>
+    <text x="1630" y="336"><tspan fill="#B45309" font-weight="700">Claude:</tspan> names it if new</text>
+    <text x="1630" y="369" font-weight="700">Money or legal → urgent</text>
+  </g>
+
+  <!-- arrows between stages -->
+  <g stroke="#64748B" stroke-width="3" marker-end="url(#ah)">
+    <line x1="312" y1="290" x2="350" y2="290"/>
+    <line x1="626" y1="290" x2="664" y2="290"/>
+    <line x1="940" y1="290" x2="978" y2="290"/>
+    <line x1="1254" y1="290" x2="1292" y2="290"/>
+    <line x1="1568" y1="290" x2="1606" y2="290"/>
+  </g>
+
+  <!-- outcomes -->
+  <g font-size="18" font-weight="700" text-anchor="middle">
+    <rect x="60" y="436" width="230" height="40" rx="20" fill="#EEF1F5" stroke="#334155" stroke-width="2"/><text x="175" y="462" fill="#334155">1,500 complaints in</text>
+    <rect x="374" y="436" width="230" height="40" rx="20" fill="#F1F2F4" stroke="#8A94A3" stroke-width="2"/><text x="489" y="462" fill="#4B5563">Dropped 151 · 10.1%</text>
+    <rect x="688" y="436" width="230" height="40" rx="20" fill="#E8F5EC" stroke="#15803D" stroke-width="2"/><text x="803" y="462" fill="#166534">Filed 754 · 50.3%</text>
+    <rect x="1002" y="436" width="230" height="40" rx="20" fill="#E8F5EC" stroke="#15803D" stroke-width="2"/><text x="1117" y="462" fill="#166534">Filed 520 · 34.7%</text>
+    <rect x="1316" y="436" width="230" height="40" rx="20" fill="#E8F5EC" stroke="#15803D" stroke-width="2"/><text x="1431" y="462" fill="#166534">Filed 26 · 1.7%</text>
+    <rect x="1630" y="436" width="230" height="40" rx="20" fill="#E8F5EC" stroke="#15803D" stroke-width="2"/><text x="1745" y="462" fill="#166534">New issues 25 · 1.7%</text>
+  </g>
+  <text x="1770" y="502" font-size="16" fill="#5B6676" text-anchor="middle">24 still waiting (1.6%)</text>
+  <g stroke="#15803D" stroke-width="3" marker-end="url(#ag)">
+    <line x1="803" y1="478" x2="803" y2="556"/>
+    <line x1="1117" y1="478" x2="1117" y2="556"/>
+    <line x1="1431" y1="478" x2="1431" y2="556"/>
+    <line x1="1650" y1="478" x2="1650" y2="556"/>
+  </g>
+
+  <!-- ROW 2: registry -->
+  <rect x="668" y="560" width="1212" height="84" rx="14" fill="#F4F6F9" stroke="#334155" stroke-width="2"/>
+  <text x="690" y="594" font-size="21" font-weight="700" fill="#1B2330">Issue registry: 13 known issues + 6 discovered, each with example complaints</text>
+  <text x="690" y="624" font-size="17" fill="#3B4552">Every confirmed verdict adds an example, so the next complaint worded that way is matched for free.</text>
+  <path d="M668 620 H648 V392 H664" fill="none" stroke="#0F766E" stroke-width="3" stroke-dasharray="8 6" marker-end="url(#at)"/>
+  <text x="640" y="520" font-size="15" font-weight="700" fill="#0F766E" text-anchor="end">learns</text>
+
+  <!-- ROW 3: curator, rank, output -->
+  <line x1="868" y1="644" x2="868" y2="696" stroke="#64748B" stroke-width="3" marker-end="url(#ah)"/>
+  <g font-size="17" fill="#2B3440">
+    <rect x="668" y="700" width="400" height="160" rx="14" fill="#FDF3E3" stroke="#B45309" stroke-width="2"/>
+    <text x="688" y="732" font-size="21" font-weight="700" fill="#B45309">7 · Curator, after each batch</text>
+    <text x="688" y="762">Claude checks each new issue against</text>
+    <text x="688" y="786">its 4 nearest in the same area.</text>
+    <text x="688" y="810">Same problem → merge and rename.</text>
+    <text x="688" y="834">About $0.0002 per issue.</text>
+
+    <rect x="1110" y="700" width="380" height="160" rx="14" fill="#EEF1F5" stroke="#334155" stroke-width="2"/>
+    <text x="1130" y="732" font-size="21" font-weight="700" fill="#334155">8 · Rank</text>
+    <text x="1130" y="762" font-size="16">customers × impact × (1 + money share)</text>
+    <text x="1130" y="786" font-size="16">× (1 + 0.25 × angry share) × trend</text>
+    <text x="1130" y="810" font-size="16">Trend ×1.25 when a week doubles</text>
+    <text x="1130" y="834" font-size="16">Critical: legal ≥ 5% or money ≥ 50%</text>
+
+    <rect x="1532" y="700" width="348" height="160" rx="14" fill="#EEF1F5" stroke="#334155" stroke-width="2"/>
+    <text x="1552" y="732" font-size="21" font-weight="700" fill="#334155">9 · Top 10 for the team</text>
+    <text x="1552" y="762">Badge and score breakdown</text>
+    <text x="1552" y="786">Heatmap by state, age, student</text>
+    <text x="1552" y="810">Path and cost of each complaint</text>
+    <text x="1552" y="834">Unconfirmed and urgent reports</text>
+  </g>
+  <g stroke="#64748B" stroke-width="3" marker-end="url(#ah)">
+    <line x1="1070" y1="780" x2="1106" y2="780"/>
+    <line x1="1492" y1="780" x2="1528" y2="780"/>
+  </g>
+
+  <!-- results panel -->
+  <rect x="40" y="560" width="584" height="300" rx="14" fill="#FFFFFF" stroke="#C9D1DC" stroke-width="2"/>
+  <text x="64" y="596" font-size="19" font-weight="700" fill="#5B6676" letter-spacing="1">LIVE RUN · 1,500 COMPLAINTS</text>
+  <g fill="#1B2330">
+    <text x="64" y="646" font-size="32" font-weight="700">96.1%</text><text x="214" y="644" font-size="19" fill="#3B4552">never reached an LLM</text>
+    <text x="64" y="696" font-size="32" font-weight="700">98.4%</text><text x="214" y="694" font-size="19" fill="#3B4552">filed under the right issue</text>
+    <text x="64" y="746" font-size="32" font-weight="700">$0.065</text><text x="214" y="744" font-size="19" fill="#3B4552">in total · $4.33 per 100,000</text>
+    <text x="64" y="796" font-size="32" font-weight="700">0.55 s</text><text x="214" y="794" font-size="19" fill="#3B4552">median time per complaint</text>
+    <text x="64" y="846" font-size="32" font-weight="700">5 of 5</text><text x="214" y="844" font-size="19" fill="#3B4552">hidden issues discovered</text>
+  </g>
+
+  <!-- comparison -->
+  <rect x="40" y="900" width="1840" height="120" rx="16" fill="#F4F6F9"/>
+  <text x="72" y="942" font-size="22" font-weight="700" fill="#1B2330">The same 1,500 complaints if an LLM reads every one</text>
+  <text x="72" y="976" font-size="19" fill="#3B4552">Claude Haiku 5.5: $0.45, or $0.18 to $0.23 with prompt caching (we save 65% to 71%)   ·   Claude Sonnet 5.5: $8.91 (we save 98%)</text>
+  <text x="72" y="1004" font-size="19" fill="#3B4552">At least 1.9 s per complaint, and nothing gets filed when the LLM provider is down.</text>
+</svg>
