@@ -2544,52 +2544,6 @@ p {
   <aside>Top row left to right, bottom row back. 1 intake: four channels into one shape, find the customer; order IDs have a check digit. 2 the gate: six questions, one call. 3 similarity: free, files most complaints. 4 verify: Jev's yes or no for unsure matches. 5 the LLM only if still unsure. 6 waiting list until 3 different customers; money or safety is urgent at once. 7 group check. 8 the LLM names the new problem. 9 after each batch it merges duplicates. 10 the Top 10 with a score anyone can check. Every confirmed wording becomes an example, so it gets cheaper the longer it runs.</aside>
 </section>
 
-<!-- 13 tested live: live-test accuracy -->
-<section class="slide" id="tested">
-  <p class="kicker in" style="--d:0">Tested live · real models · an answer key</p>
-  <h2 class="title in" style="--d:1">300 new complaints. <span class="soft">One mistake.</span></h2>
-  <div class="batches">
-    <div class="batch in" style="--d:2">
-      <div class="batch__head"><span>Batch 1 · 50 complaints</span><b class="n-right">49<small>/50</small></b><em>right · 1 missed</em></div>
-      <div class="waffle" data-waffle="g44 d5 x1" role="img" aria-label="50 complaints: 44 filed under the right problem, 5 set aside correctly as not complaints, 1 real complaint missed"></div>
-    </div>
-    <div class="batch in" style="--d:3">
-      <div class="batch__head"><span>Batch 2 · 100 complaints</span><b class="n-right">99<small>/100</small></b><em>right · 1 waiting · 0 wrong</em></div>
-      <div class="waffle" data-waffle="g89 d10 w1" role="img" aria-label="100 complaints: 89 filed under the right problem, 10 set aside correctly, 1 waiting for staff"></div>
-    </div>
-    <div class="batch in" style="--d:4">
-      <div class="batch__head"><span>Batch 3 · 150 complaints</span><b class="n-right">149<small>/150</small></b><em>right · 1 waiting · 0 wrong</em></div>
-      <div class="waffle" data-waffle="g134 d15 w1" role="img" aria-label="150 complaints: 134 filed under the right problem, 15 set aside correctly, 1 waiting for staff"></div>
-    </div>
-  </div>
-  <div class="wkey in" style="--d:5">
-    <span><i class="c-g"></i><b>267</b> filed under the right problem</span>
-    <span><i class="c-d"></i><b>30</b> set aside: not complaints</span>
-    <span><i class="c-w"></i><b>2</b> waiting: not guessed</span>
-    <span><i class="c-x"></i><b>1</b> real complaint missed</span>
-  </div>
-  <p class="foot">Sent one by one to the live site. Complaints the system had never seen, scored against a hidden answer key. Made from the same templates as the data, so real complaints will be harder.</p>
-  <aside>We generated 300 complaints the system had never seen, from our real customer list, each with a hidden right answer, and sent them one by one to the live site with the real models, in batches of 50, 100 and 150, each on a clean copy of the data. One square per complaint. Green: filed under the right problem, 267 of 267. Grey: praise and spam correctly set aside, 30 of 30. Gold: 2 the LLM was not sure about, so they wait for staff instead of being guessed. Red: one real complaint missed, a short Hinglish call ending in thanks. Backup slides show every step and every miss.</aside>
-</section>
-
-<!-- 16 accuracy, step by step (live test) -->
-<section class="slide" id="accuracy">
-  <span class="backup-tag">Backup</span>
-  <p class="kicker in" style="--d:0">Accuracy, step by step</p>
-  <h2 class="title in" style="--d:1">Right at <span class="soft">every step.</span></h2>
-  <div class="steps">
-    <div class="steps__head in" style="--d:2"><span>Step</span><span>Done by</span><span>Live test</span><span class="r">Right</span></div>
-    <div class="srow in" style="--d:3; --k:var(--w-jev); --n:100%"><b>Complaint or not?</b><span>Jev</span><i><em>300</em></i><strong class="n-right">99.7%</strong></div>
-    <div class="srow in" style="--d:4; --k:var(--w-jev); --n:89.7%"><b>Which area?</b><span>Jev</span><i><em>269</em></i><strong class="n-right">99.6%</strong></div>
-    <div class="srow in" style="--d:5; --k:var(--w-free); --n:33.3%"><b>Filed by similarity</b><span>Free</span><i><em>100</em></i><strong class="n-right">100%</strong></div>
-    <div class="srow in" style="--d:6; --k:var(--w-jev); --n:54%"><b>Verified by Jev</b><span>Jev</span><i><em>162</em></i><strong class="n-right">100%</strong></div>
-    <div class="srow in" style="--d:7; --k:var(--w-llm); --n:2.3%"><b>Settled by the LLM</b><span>Claude Haiku</span><i><em>5 + 2 waiting</em></i><strong class="n-right">100%</strong></div>
-    <div class="srow in" style="--d:8; --k:var(--w-free); --n:40.3%"><b>Customer found</b><span>Free</span><i><em>121 · batch 3</em></i><strong class="n-right">100%</strong></div>
-  </div>
-  <p class="foot">Bars: complaints that reached each step in the live test. 251 of the 300 are worded unlike anything the engine had seen. The engine never sees the answers.</p>
-  <aside>Every step has its own score. The gate kept 269 of 270 real complaints and set aside all 30 non-complaints. The area was right 268 of 269 times. Similarity filed 100, all right; Jev's yes or no filed 162, all right; the LLM settled 5, all right, and sent 2 it was unsure about to the waiting list. Customer linking was checked on batch 3: 121 found, none wrong; 29 unknown senders were left unlinked rather than guessed.</aside>
-</section>
-
 <!-- 18 where the money goes -->
 <section class="slide" id="money">
   <span class="backup-tag">Backup</span>
@@ -2628,19 +2582,6 @@ p {
     <div class="factor in" style="--d:6; --k:#d55181"><span class="blk">1–1.25</span><b>Trend</b><span>boost when rising</span></div>
   </div>
   <aside>The ranking is a written formula. Customers, not messages, times average impact from 1 to 4, times one plus the money-lost share, times a small anger factor so a loud customer never outranks a quiet one who lost money, times 1.25 if rising: at least 5 customers this week and double the week before. Every issue in the console shows this breakdown.</aside>
-</section>
-
-<!-- 20 segments -->
-<section class="slide" id="segments">
-  <span class="backup-tag">Backup</span>
-  <p class="kicker in" style="--d:0">Customer groups</p>
-  <h2 class="title in" style="--d:1">It shows <span class="soft">who is hit hardest.</span></h2>
-  <div class="segs">
-    <div class="seg in" style="--d:2"><h3>Students</h3><p>hit UPI payment timeouts far more often than everyone else</p></div>
-    <div class="seg in" style="--d:3"><h3>Maharashtra</h3><p>reports “delivered but not received” more than anywhere else</p></div>
-  </div>
-  <p class="foot">Rate = customers affected ÷ size of the group, so a big group never looks worst just for being big. Both patterns were planted in the test data, and both show up in the heatmap.</p>
-  <aside>Every customer has a state, an age group and student status. For each issue we compare a group's rate with everyone's. Students hit UPI timeouts far more often; Maharashtra reports delivered-but-not-received more than elsewhere. Both were planted in the mock data, and both show up in the heatmap.</aside>
 </section>
 
 <!-- 21 packs -->
