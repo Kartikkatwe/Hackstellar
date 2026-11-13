@@ -57,3 +57,11 @@ Settled by the team after the 12 Nov handoff. Newest at the bottom.
 - **Confident "no" to every verify candidate:** goes to the buffer, not the LLM (was open decision 7).
 - **Critical badge:** legal/safety share of 5% or more, or money-loss share of 50% or more.
 - **Baseline for the cost claim:** costed for Claude Haiku 5.5 and Claude Sonnet 5.5, each with and without prompt caching. The baseline is projected from token counts, not run.
+- **Realistic caching:** baseline sizes calibrated on 12 real calls (prompt 1.42x the estimate, reply about 197 tokens). Caching is replayed against arrival gaps and the cache expiry in `cache_analysis.py`. Quote 65% to 71% saving against cached Haiku, about 98% against Sonnet (second live run; the baseline prompt shrinks too when fewer duplicate issues are discovered).
+
+## Settled 13 Nov (after the first full live run)
+- **Naming and merging are always the LLM's job.** No rules or regex on complaint text for business judgements. If the LLM reply is unreadable after one retry, the issue gets a neutral placeholder ("Unnamed payments issue (5 reports)"), never complaint text.
+- **LLM settings:** Claude Haiku 5.5 with reasoning effort `low` and `max_tokens` 1024. The first run used a 120-token cap, and Haiku's thinking consumed it: 59 of 66 verdicts were cut off and treated as "new".
+- **Check before creating:** when 3 customers' reports group together, Jev is asked whether the group is a known issue in new words before a new issue is created.
+- **Curator:** after each batch, every discovered issue is reviewed by the LLM against the 4 closest issues in its component and merged if it is the same problem. The merged issue is renamed by the LLM unless the target is a seeded issue (the company's own name is kept). Merged issues stay as rows with `origin='merged'` and a `merges` record.
+- **Live demo:** the API uses real Jev and the LLM for typed complaints whenever the OpenRouter key is present, capped by `MAX_SPEND_USD` (default $0.50). If the network or the cap fails, the complaint is processed offline and the response carries `"mode": "offline"` and a warning. `PROVIDERS=mock` forces offline.

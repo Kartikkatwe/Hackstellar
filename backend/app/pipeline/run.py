@@ -11,7 +11,7 @@ from pathlib import Path
 
 from .. import db, ingest, providers
 from ..config import ROOT
-from .engine import Engine
+from .engine import BudgetExceeded, Engine
 from .identity import Identity
 
 
@@ -54,13 +54,22 @@ def run_batch(pack: dict, mode: str = "mock", embedder_choice: str | None = None
     engine.embedder.encode([c["text"] for c in complaints])   # one batched pass; the funnel then reads the cache
     if mode == "live":
         engine.prefetch_gate(complaints)
-    for n, c in enumerate(complaints, 1):
-        engine.process(c)
-        if n % 100 == 0:
-            con.commit()
-            if progress:
-                progress(n, len(complaints))
-    meta = dict(pack=pack["id"], mode=mode, gate=engine.gate.name, llm=engine.llm.name, embedder=engine.embedder.name,
+    stopped = None
+    try:
+        for n, c in enumerate(complaints, 1):
+            engine.process(c)
+            if n % 100 == 0:
+                con.commit()
+                if progress:
+                    progress(n, len(complaints))
+        merges = engine.curate()
+    except BudgetExceeded as e:
+        # Keep what was processed; the report then covers a partial run, and says so.
+        con.rollback()
+        stopped, merges = str(e), []
+        print(f"\n[run] {stopped}")
+    meta_extra = dict(stopped=stopped)
+    meta = dict(pack=pack["id"], mode=mode, merges=merges, **meta_extra, gate=engine.gate.name, llm=engine.llm.name, embedder=engine.embedder.name,
                 n=len(complaints), started=started.isoformat(timespec="seconds"),
                 wall_seconds=round((dt.datetime.now() - started).total_seconds(), 1), thresholds=engine.t)
     con.executemany("INSERT OR REPLACE INTO run VALUES(?,?)", [(k, json.dumps(v)) for k, v in meta.items()])

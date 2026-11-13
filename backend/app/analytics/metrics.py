@@ -34,7 +34,9 @@ def funnel(con) -> dict:
         llm_naming_calls=calls.get("llm_name", 0),
         share_without_llm=round(1 - reached_llm / total, 4) if total else 0,
         issues_seeded=con.execute("SELECT COUNT(*) FROM issues WHERE origin='seed'").fetchone()[0],
-        issues_discovered=con.execute("SELECT COUNT(*) FROM issues WHERE origin='discovered'").fetchone()[0])
+        issues_discovered=con.execute("SELECT COUNT(*) FROM issues WHERE origin='discovered'").fetchone()[0],
+        issues_merged=con.execute("SELECT COUNT(*) FROM issues WHERE origin='merged'").fetchone()[0],
+        group_checks=calls.get("verify_group", 0), curator_calls=calls.get("llm_curate", 0))
 
 
 def cost(con, pack: dict) -> dict:

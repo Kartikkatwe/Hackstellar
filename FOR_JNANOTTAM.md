@@ -69,7 +69,7 @@ Priority order for 11 AM. The first four carry the demo.
 | # | Screen | What it shows | Endpoints |
 |---|---|---|---|
 | 1 | **Top 10 issues** | Ranked list. Per issue: title, badge (Critical/High/Medium/Low), flags (money, legal, angry, rising), unique customers, and the `formula` string as the score breakdown | `/issues/top` |
-| 2 | **Funnel and cost** | Count and share per stage; "95.6% never reached an LLM"; funnel cost beside the LLM-for-everything baselines | `/funnel`, `/cost` |
+| 2 | **Funnel and cost** | Count and share per stage; "96.1% never reached an LLM"; funnel cost beside the LLM-for-everything baselines | `/funnel`, `/cost` |
 | 3 | **Issue detail** | The differently worded complaints grouped under one issue, by channel; customers who complained on several channels and were counted once; daily trend | `/issues/{id}` |
 | 4 | **Segment filter** | Dropdowns built from `/config` segments; re-query the top 10 with the filter | `/issues/top?state=…` |
 | 5 | Segment heatmap | Issues by segment values, coloured by `lift` | `/segments/heatmap` |
@@ -85,10 +85,10 @@ Ideas discussed but not built in the backend: a severity-by-reach scatter plot (
 | Baseline | Funnel saving |
 |---|---|
 | Claude Sonnet 5.5, with or without prompt caching | about 98% |
-| Claude Haiku 5.5, no caching | 87.6% |
-| Claude Haiku 5.5, realistic caching | 67% to 74% (depends on volume) |
+| Claude Haiku 5.5, no caching | 85.4% |
+| Claude Haiku 5.5, realistic caching | 65% to 71% (depends on volume) |
 
-`/cost` returns the uncached figure (`saving_pct`) and the every-call-a-cache-hit ceiling (`saving_vs_cached_pct`, 65.9% for Haiku). Show the ceiling as the honest worst case.
+`/cost` returns the uncached figure (`saving_pct`) and the every-call-a-cache-hit ceiling (`saving_vs_cached_pct`, 64.4% for Haiku). Show the ceiling as the honest worst case.
 
 ## 6. The API
 
@@ -108,7 +108,7 @@ Base URL `http://localhost:8000`. Interactive docs with full response shapes: `h
 | GET | `/pending` | Unconfirmed reports: `[{id, channel, text, created_at, urgent, component, …}]` |
 | GET | `/complaints?linked=false&settled=…&limit=…` | Complaint list for staff |
 | GET | `/complaints/{id}` | `{complaint, gate, filed_under, events}`: one complaint's path and cost |
-| POST | `/complaints` | Body `{channel, text, email?, phone?, user_id?, handle?, order_id?}`; returns `{result, complaint, gate, filed_under, events}` |
+| POST | `/complaints` | Body `{channel, text, email?, phone?, user_id?, handle?, order_id?}`; returns `{mode, warning, result, complaint, gate, filed_under, events}`; `mode` is `live` or `offline` |
 | POST | `/webhooks/call` | Voice agent payload, same shape as a line of `backend/data/grocery/calls.jsonl` |
 | POST | `/complaints/{id}/link` | Body `{customer_id}`: staff link a complaint by hand |
 | POST | `/runs` | Body `{mode:"mock", limit?}`: reprocess the dataset in the background |
@@ -117,16 +117,16 @@ One item of `/issues/top`:
 
 ```json
 {
-  "rank": 1, "issue_id": 21, "key": "new_8", "component": "payments",
-  "title": "Duplicate payment debits for single order after app update",
+  "rank": 2, "issue_id": 17, "key": "new_4", "component": "payments",
+  "title": "Duplicate payment debits for a single order after app update",
   "description": "...", "origin": "discovered",
-  "score": 546.7, "badge": "Critical", "flags": ["money", "angry", "rising"],
+  "score": 547.3, "badge": "Critical", "flags": ["money", "angry", "rising"],
   "unique_customers": 52, "complaints": 73, "unlinked_mentions": 7,
   "avg_impact": 3.69, "money_share": 1.0, "legal_share": 0.03, "angry_share": 0.56,
   "trend": 1.25, "customers_last_7d": 52, "customers_prior_7d": 0,
   "channels": {"email": 25, "call": 20, "chat": 16, "social": 12},
-  "settled_at": {"match": 42, "verify": 27, "new_issue": 4},
-  "formula": "52 customers x 3.69 impact x 2.00 money x 1.14 anger x 1.25 trend = 546.7"
+  "settled_at": {"match": 43, "verify": 25, "llm": 1, "new_issue": 4},
+  "formula": "52 customers x 3.69 impact x 2.00 money x 1.14 anger x 1.25 trend = 547.3"
 }
 ```
 
@@ -145,28 +145,30 @@ copy runs\grocery_live_backup.db runs\grocery.db
 ```
 
 - `runs/grocery_live_backup.db` is the finished live run on 1,500 complaints. With it copied to `runs/grocery.db`, every GET endpoint works with real results and **no API key or credit**.
-- `POST /complaints` uses offline stand-in models by default. They are weak, especially on Hinglish. For a convincing live demo the server needs Kartik's OpenRouter key in `backend/.env` and `PROVIDERS=live`. Ask Kartik for the key; it is not in the repo. Credit is limited to $5, so don't trigger live batch runs.
+- `POST /complaints` uses the real models when Kartik's OpenRouter key is in `backend/.env` (ask him; it is not in the repo), capped at $0.50 per server session. Without the key, or if the network fails, it falls back to weak offline stand-ins. **The response then has `"mode": "offline"` and a `warning`: show that in the UI** so nobody mistakes offline results for real ones. Credit is limited, so don't trigger live batch runs.
 - The first `POST /complaints` loads a 470 MB sentence model, so it is slow once.
 
 ## 8. What the live run measured (1,500 mock complaints, real Jev and Claude Haiku 5.5)
 
 | Measure | Result |
 |---|---|
-| Filed under the right issue | 99.1% of 1,318 filed |
-| Never reached an LLM | 95.6% |
+| Filed under the right issue | 98.4% of 1,325 filed (LLM-settled ones: 96.2%) |
+| Never reached an LLM | 96.1% |
+| Gate | kept 99.9% of real complaints, removed 100% of non-complaints |
 | Routed to the right component | 99.6% |
 | Customer links correct | 100% of 1,215; 285 unlinked |
-| Hidden issues discovered | 5 of 5 |
-| Funnel cost | $0.065 ($4.32 per 100,000 complaints) |
+| Hidden issues discovered | 5 of 5, as 6 issues, all 100% pure, none duplicating a known issue |
+| Funnel cost | $0.065 ($4.33 per 100,000 complaints), of which naming and Curator $0.0014 |
 
-Settled at: gate 10.1%, similarity match 50.3%, Jev verify 33.9%, LLM 0.1%, became a new issue 3.5%, still waiting 2.1%.
+Settled at: gate 10.1%, similarity match 50.3%, Jev verify 34.7%, LLM 1.7%, became a new issue 1.7%, still waiting 1.6%.
+
+Run of 13 Nov after the fixes in `DECISIONS.md` ("after the first full live run"). The first run had split the 5 hidden problems into 15 issues and given one a title made of complaint text; both are fixed. Every discovered issue now has an LLM-written title.
 
 ## 9. Known problems
 
-- **Discovered issues are split.** The 5 hidden problems came out as 15 issues (the Android crash is 5 of them), and 3 duplicate the known UPI timeout issue. The top 10 therefore undercounts them. A merge step is the next backend task.
-- **One discovered issue has a poor title** (it starts "This is unacceptable. I was refunded only part…").
+- **One hidden problem is split in two.** "Delivery executive rude to customer" (34 reports) and "Delivery rider demands extra payment before handing over order" (8). The data generator counts both as rude behaviour; the Curator judged them different problems and did not merge. Defensible, but it is a split.
 - **Accuracy is on template-generated data.** Real complaints will be messier.
-- **Not built:** telecom pack, voice agent simulator, merge step, plain-language insights.
+- **Not built:** telecom pack, voice agent simulator, plain-language insights.
 
 ## 10. Decisions already made
 

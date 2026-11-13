@@ -115,6 +115,15 @@ class MockLLM:
     def name_issue(self, component: str, texts: list[str]) -> tuple[dict, dict]:
         usage = dict(in_tokens=est_tokens(prompts.naming_prompt(self.pack, component, texts)), out_tokens=prompts.NAME_OUT_TOKENS,
                      latency_s=self.latency, estimated=True)
-        words = texts[0].split()
-        # Not a real title: a placeholder made from the most central complaint until a live LLM names it.
-        return dict(title=" ".join(words[:9]).rstrip(".,") + ("..." if len(words) > 9 else ""), description=texts[0][:200]), usage
+        # Not a title made from complaint text: naming is the LLM's job (decided 13 Nov).
+        return dict(title=f"Unnamed {component.replace('_', ' ')} issue ({len(texts)} reports)",
+                    description="Offline mode: named when a live LLM is available.", named=False), usage
+
+    def curate(self, component: str, issue: dict, others: list[dict], sims: dict | None = None, threshold: float = 0.7) -> tuple[dict, dict]:
+        """Simulated: merge into the nearest other issue if their centres are close."""
+        usage = dict(in_tokens=est_tokens(prompts.curator_prompt(self.pack, component, issue, others)),
+                     out_tokens=prompts.CURATE_OUT_TOKENS, latency_s=self.latency, estimated=True)
+        best = max(others, key=lambda o: (sims or {}).get(o["key"], 0), default=None)
+        if best and (sims or {}).get(best["key"], 0) >= threshold:
+            return dict(same_as=best["key"], title="", description="", reason="close centres (simulated verdict)"), usage
+        return dict(same_as=None, title="", description="", reason="no close issue (simulated verdict)"), usage

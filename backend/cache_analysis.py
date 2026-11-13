@@ -90,7 +90,11 @@ def main():
     print("\n" + "=" * 100, "\nFUNNEL ADJUDICATOR PROMPT (payments; sent only for the unsure few)\n")
     print(llm.adjudicator_prefix(pack, "payments", pay) + "\n\n--- dynamic part ---\nComplaint: <the complaint text>")
 
-    scale, out_tokens, note = 1.0, llm.BASELINE_OUT_TOKENS, "estimated (chars/4, 90-token reply)"
+    # Why default to the pack's stored calibration: the 12 real calls are already measured, so
+    # re-reading them costs nothing. Not the raw chars/4 estimate: it undercounts the baseline.
+    cal = pack.get("baseline_calibration", {})
+    scale, out_tokens = cal.get("token_scale", 1.0), cal.get("out_tokens", llm.BASELINE_OUT_TOKENS)
+    note = "calibrated (stored in pack.yaml)" if cal else "estimated (chars/4, 90-token reply)"
     if args.measure:
         model, usage = measure(pack, prefix, [r["text"] for r in rows[-args.measure:]], args.measure)
         print("\n" + "=" * 100, f"\nREAL MEASUREMENT: {args.measure} back-to-back calls on {model}\n")

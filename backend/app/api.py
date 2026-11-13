@@ -4,8 +4,11 @@
 
 Why read endpoints open a fresh connection per request: SQLite readers then never wait on
      a batch or a live complaint being written.
-Why live complaints default to mock providers: a demo button must not be able to spend
-     credit unless PROVIDERS=live was set on purpose (and then MAX_SPEND_USD caps it).
+Why live complaints use real Jev + LLM by default (decided 13 Nov): the offline stand-ins
+     are weak, especially on Hinglish, and each live complaint costs a fraction of a cent.
+     MAX_SPEND_USD caps the session. If the network or the cap fails, the complaint is
+     processed offline and the response says so ("mode": "offline") - never silently.
+     PROVIDERS=mock forces offline.
 Not a websocket for the live funnel counter: polling /funnel once a second is simpler for
      the frontend and enough for a demo.
 """
@@ -25,6 +28,7 @@ from .config import load_pack
 from .pipeline.engine import BudgetExceeded
 from .pipeline.run import build_engine, db_path, run_batch
 from .providers.http import ProviderError
+from .providers.mock import MockGate, MockLLM
 
 pack = load_pack()
 app = FastAPI(title=f"Complaint Compass - {pack['name']}")
@@ -47,16 +51,21 @@ def _filters(request: Request) -> dict:
     return {k: v for k, v in request.query_params.items() if k in pack["segments"]}
 
 
+def _providers() -> str:
+    return os.environ.get("PROVIDERS") or ("live" if os.environ.get("OPENROUTER_API_KEY") else "mock")
+
+
 def _live_engine():
     """Engine for single live complaints, restored from the last run on first use."""
     global _engine
     if _engine is None:
         con = _read()
         texts = [r[0] for r in con.execute("SELECT text FROM complaints")]
-        _engine = build_engine(pack, con, os.environ.get("PROVIDERS", "mock"), None, texts)
+        _engine = build_engine(pack, con, _providers(), None, texts)
         _engine.restore()
+        _engine.offline = MockGate(pack, _engine.embedder), MockLLM(pack)
         if _engine.gate.name != "mock":
-            _engine.budget_usd = float(os.environ.get("MAX_SPEND_USD", "0.05"))
+            _engine.budget_usd = float(os.environ.get("MAX_SPEND_USD", "0.50"))
     return _engine
 
 
@@ -64,8 +73,7 @@ def _live_engine():
 @app.get("/health")
 def health():
     path = db_path(pack)
-    return dict(pack=pack["id"], business=pack["name"], has_run=path.exists(), batch=_batch,
-                live_complaints_use=os.environ.get("PROVIDERS", "mock"))
+    return dict(pack=pack["id"], business=pack["name"], has_run=path.exists(), batch=_batch, live_complaints_use=_providers())
 
 
 @app.get("/config")
@@ -295,13 +303,21 @@ def _process_live(c: dict) -> dict:
         n = engine.con.execute("SELECT COUNT(*) FROM complaints WHERE id LIKE 'L-%'").fetchone()[0]
         c["id"] = f"L-{n + 1:05d}"
         c.setdefault("created_at", dt.datetime.now().isoformat(timespec="seconds"))
+        mode, warning = ("live" if engine.gate.name != "mock" else "offline"), None
         try:
-            result = engine.process(c)
+            result = engine.process(dict(c))
         except (ProviderError, BudgetExceeded) as e:
             engine.con.rollback()
-            raise HTTPException(502, str(e))
+            # Fallback: same complaint through the offline stand-ins, labelled as such.
+            live = engine.gate, engine.llm
+            engine.gate, engine.llm = engine.offline
+            try:
+                result = engine.process(dict(c))
+            finally:
+                engine.gate, engine.llm = live
+            mode, warning = "offline", f"Live models unavailable ({str(e)[:120]}); processed offline, results are less reliable."
         engine.con.commit()
-    return dict(result=result, **complaint_trail(c["id"]))
+    return dict(mode=mode, warning=warning, result=result, **complaint_trail(c["id"]))
 
 
 @app.post("/complaints")

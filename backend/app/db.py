@@ -27,6 +27,7 @@ CREATE TABLE events(complaint_id TEXT, stage TEXT, model TEXT, in_tokens INTEGER
     cost_usd REAL, latency_s REAL, estimated INTEGER);
 CREATE TABLE baseline(complaint_id TEXT PRIMARY KEY, prefix_tokens INTEGER, in_tokens INTEGER, out_tokens INTEGER);
 CREATE TABLE run(key TEXT PRIMARY KEY, value TEXT);
+CREATE TABLE merges(from_issue INTEGER, into_issue INTEGER, reason TEXT);
 CREATE INDEX idx_events_stage ON events(stage);
 CREATE INDEX idx_assign_issue ON assignments(issue_id);
 """

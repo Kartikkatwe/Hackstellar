@@ -2,12 +2,14 @@
  "run": {
   "pack": "grocery",
   "mode": "live",
+  "merges": [],
+  "stopped": null,
   "gate": "jev",
   "llm": "openrouter",
   "embedder": "hybrid",
   "n": 1500,
-  "started": "2026-11-13T06:46:23",
-  "wall_seconds": 554.0,
+  "started": "2026-11-13T07:31:38",
+  "wall_seconds": 574.9,
   "thresholds": {
    "is_complaint": 0.5,
    "component_margin": 0.15,
@@ -33,41 +35,44 @@
    {
     "stage": "match",
     "label": "Similarity match",
-    "count": 755,
-    "share": 0.5033
+    "count": 754,
+    "share": 0.5027
    },
    {
     "stage": "verify",
     "label": "Verify (decision model)",
-    "count": 508,
-    "share": 0.3387
+    "count": 520,
+    "share": 0.3467
    },
    {
     "stage": "llm",
     "label": "Adjudicate (LLM)",
-    "count": 2,
-    "share": 0.0013
+    "count": 26,
+    "share": 0.0173
    },
    {
     "stage": "new_issue",
     "label": "Buffer: became a new issue",
-    "count": 53,
-    "share": 0.0353
+    "count": 25,
+    "share": 0.0167
    },
    {
     "stage": "pending",
     "label": "Buffer: unconfirmed, waiting",
-    "count": 31,
-    "share": 0.0207
+    "count": 24,
+    "share": 0.016
    }
   ],
   "gate_calls": 1500,
-  "verify_calls": 594,
-  "llm_adjudications": 66,
-  "llm_naming_calls": 15,
-  "share_without_llm": 0.956,
+  "verify_calls": 595,
+  "llm_adjudications": 58,
+  "llm_naming_calls": 6,
+  "share_without_llm": 0.9613,
   "issues_seeded": 13,
-  "issues_discovered": 15
+  "issues_discovered": 6,
+  "issues_merged": 0,
+  "group_checks": 7,
+  "curator_calls": 6
  },
  "cost": {
   "funnel": {
@@ -79,68 +84,86 @@
      "in_tokens": 1104690,
      "out_tokens": 0,
      "cost_usd": 0.046397,
-     "seconds": 819.7
+     "seconds": 802.3
     },
     {
      "stage": "verify",
      "model": "typesafe/jev-1.14",
-     "calls": 594,
-     "in_tokens": 229967,
+     "calls": 595,
+     "in_tokens": 227430,
      "out_tokens": 0,
-     "cost_usd": 0.009659,
-     "seconds": 329.6
+     "cost_usd": 0.009552,
+     "seconds": 322.0
     },
     {
      "stage": "llm",
      "model": "anthropic/claude-haiku-5.5",
-     "calls": 66,
-     "in_tokens": 39287,
-     "out_tokens": 7701,
-     "cost_usd": 0.007779,
-     "seconds": 87.2
+     "calls": 58,
+     "in_tokens": 26950,
+     "out_tokens": 9447,
+     "cost_usd": 0.007418,
+     "seconds": 110.1
+    },
+    {
+     "stage": "verify_group",
+     "model": "typesafe/jev-1.14",
+     "calls": 7,
+     "in_tokens": 2978,
+     "out_tokens": 0,
+     "cost_usd": 0.000125,
+     "seconds": 3.7
     },
     {
      "stage": "llm_name",
      "model": "anthropic/claude-haiku-5.5",
-     "calls": 15,
-     "in_tokens": 3451,
-     "out_tokens": 1324,
-     "cost_usd": 0.001007,
-     "seconds": 18.4
+     "calls": 6,
+     "in_tokens": 1848,
+     "out_tokens": 511,
+     "cost_usd": 0.00044,
+     "seconds": 8.1
+    },
+    {
+     "stage": "llm_curate",
+     "model": "anthropic/claude-haiku-5.5",
+     "calls": 6,
+     "in_tokens": 4218,
+     "out_tokens": 1201,
+     "cost_usd": 0.001022,
+     "seconds": 13.1
     }
    ],
-   "cost_usd": 0.064842,
-   "per_complaint_usd": 4.323e-05,
-   "per_100k_usd": 4.32,
-   "seconds": 1254.9
+   "cost_usd": 0.064955,
+   "per_complaint_usd": 4.33e-05,
+   "per_100k_usd": 4.33,
+   "seconds": 1259.3
   },
   "baseline": {
-   "in_tokens": 2644051,
-   "out_tokens": 135000,
+   "in_tokens": 2977892,
+   "out_tokens": 295500,
    "models": [
     {
      "model": "anthropic/claude-haiku-5.5",
-     "cost_usd": 0.331905,
-     "cost_cached_usd": 0.097257,
-     "saving_pct": 80.5,
-     "saving_vs_cached_pct": 33.3,
-     "per_100k_usd": 22.13,
-     "per_100k_cached_usd": 6.48
+     "cost_usd": 0.445539,
+     "cost_cached_usd": 0.182239,
+     "saving_pct": 85.4,
+     "saving_vs_cached_pct": 64.4,
+     "per_100k_usd": 29.7,
+     "per_100k_cached_usd": 12.15
     },
     {
      "model": "anthropic/claude-sonnet-5.5",
-     "cost_usd": 6.638102,
-     "cost_cached_usd": 1.945146,
-     "saving_pct": 99.0,
-     "saving_vs_cached_pct": 96.7,
-     "per_100k_usd": 442.54,
-     "per_100k_cached_usd": 129.68
+     "cost_usd": 8.910784,
+     "cost_cached_usd": 3.352218,
+     "saving_pct": 99.3,
+     "saving_vs_cached_pct": 98.1,
+     "per_100k_usd": 594.05,
+     "per_100k_cached_usd": 223.48
     }
    ],
-   "seconds": 3000.0,
-   "note": "Projected from token counts at list price; one call per complaint at an assumed 2.0s. Not run."
+   "seconds": 2850.0,
+   "note": "Projected from token counts at list price; one call per complaint at a measured 1.9s per call. The baseline itself was not run."
   },
-  "speedup": 2.4,
+  "speedup": 2.3,
   "tokens_estimated": false,
   "note": "Token counts and timings are as reported by the providers."
  },
@@ -155,31 +178,31 @@
   },
   "component_accuracy_pct": 99.6,
   "issue": {
-   "assigned": 1318,
-   "correct": 1306,
-   "accuracy_pct": 99.1,
-   "coverage_pct": 97.6,
+   "assigned": 1325,
+   "correct": 1304,
+   "accuracy_pct": 98.4,
+   "coverage_pct": 98.1,
    "by_stage": {
     "verify": {
-     "n": 508,
-     "accuracy_pct": 98.6
+     "n": 520,
+     "accuracy_pct": 97.3
     },
     "new_issue": {
-     "n": 53,
+     "n": 25,
      "accuracy_pct": 100.0
     },
     "match": {
-     "n": 755,
-     "accuracy_pct": 99.3
+     "n": 754,
+     "accuracy_pct": 99.2
     },
     "llm": {
-     "n": 2,
-     "accuracy_pct": 100.0
+     "n": 26,
+     "accuracy_pct": 96.2
     }
    },
    "still_waiting": {
     "new issue, not yet recurring": 20,
-    "known issue, should have matched": 11
+    "known issue, should have matched": 4
    }
   },
   "discovered": {
@@ -188,121 +211,49 @@
    "issues": [
     {
      "key": "new_1",
-     "title": "First-order coupon shows applied but no discount on bill",
+     "title": "Coupon shows applied but no discount reflected on bill",
      "true_issue": "pay_promo_not_applied",
-     "size": 41,
-     "purity_pct": 100.0,
-     "duplicate_of_known": false
-    },
-    {
-     "key": "new_3",
-     "title": "This is unacceptable. I was refunded only part of the amount. Paid Rs 1250 and g",
-     "true_issue": "ref_partial",
-     "size": 38,
+     "size": 44,
      "purity_pct": 100.0,
      "duplicate_of_known": false
     },
     {
      "key": "new_2",
-     "title": "Promotional offer missing at checkout; full price charged",
-     "true_issue": "pay_promo_not_applied",
-     "size": 10,
+     "title": "Delivery executive rude to customer at doorstep",
+     "true_issue": "del_rude_partner",
+     "size": 34,
      "purity_pct": 100.0,
      "duplicate_of_known": false
     },
     {
-     "key": "new_4",
-     "title": "Delivery executive rude to customer's mother",
-     "true_issue": "del_rude_partner",
-     "size": 20,
-     "purity_pct": 100.0,
-     "duplicate_of_known": false
-    },
-    {
-     "key": "new_15",
-     "title": "This is unacceptable. payment page ghoomta rehta hai, UPI request aati hi nahi y",
-     "true_issue": "pay_upi_timeout",
-     "size": 5,
-     "purity_pct": 100.0,
-     "duplicate_of_known": true
-    },
-    {
-     "key": "new_5",
-     "title": "Delivery rider refuses to go upstairs and argues",
-     "true_issue": "del_rude_partner",
-     "size": 9,
+     "key": "new_3",
+     "title": "Refund amount received is less than amount paid",
+     "true_issue": "ref_partial",
+     "size": 35,
      "purity_pct": 100.0,
      "duplicate_of_known": false
     },
     {
      "key": "new_6",
-     "title": "Hi, rider bahut rude tha, extra paise maang raha tha Kindly help.",
+     "title": "Delivery rider demands extra payment before handing over order",
      "true_issue": "del_rude_partner",
      "size": 8,
      "purity_pct": 100.0,
      "duplicate_of_known": false
     },
     {
-     "key": "new_11",
-     "title": "Checkout hangs after selecting Google Pay",
-     "true_issue": "pay_upi_timeout",
-     "size": 5,
-     "purity_pct": 100.0,
-     "duplicate_of_known": true
-    },
-    {
-     "key": "new_7",
-     "title": "UPI payment requests not reaching user's UPI app",
-     "true_issue": "pay_upi_timeout",
-     "size": 6,
-     "purity_pct": 100.0,
-     "duplicate_of_known": true
-    },
-    {
-     "key": "new_9",
-     "title": "This is unacceptable. The app crashes as soon as I open the cart since the lates",
+     "key": "new_5",
+     "title": "App crashes after latest update, including at cart",
      "true_issue": "app_crash_android",
-     "size": 38,
+     "size": 91,
      "purity_pct": 100.0,
      "duplicate_of_known": false
     },
     {
-     "key": "new_8",
-     "title": "Duplicate payment debits for single order after app update",
+     "key": "new_4",
+     "title": "Duplicate payment debits for a single order after app update",
      "true_issue": "pay_double_charge",
      "size": 73,
-     "purity_pct": 100.0,
-     "duplicate_of_known": false
-    },
-    {
-     "key": "new_10",
-     "title": "App crashes on Android after latest update",
-     "true_issue": "app_crash_android",
-     "size": 20,
-     "purity_pct": 100.0,
-     "duplicate_of_known": false
-    },
-    {
-     "key": "new_13",
-     "title": "What is going on? app bar bar crash ho raha hai update ke baad Fix this immediat",
-     "true_issue": "app_crash_android",
-     "size": 6,
-     "purity_pct": 100.0,
-     "duplicate_of_known": false
-    },
-    {
-     "key": "new_12",
-     "title": "App crashes on home screen after update",
-     "true_issue": "app_crash_android",
-     "size": 21,
-     "purity_pct": 100.0,
-     "duplicate_of_known": false
-    },
-    {
-     "key": "new_14",
-     "title": "App freezes and crashes when adding items to cart",
-     "true_issue": "app_crash_android",
-     "size": 8,
      "purity_pct": 100.0,
      "duplicate_of_known": false
     }
@@ -317,13 +268,50 @@
  },
  "top": [
   {
-   "issue_id": 21,
-   "key": "new_8",
+   "issue_id": 1,
+   "key": "pay_debited_no_order",
    "component": "payments",
-   "title": "Duplicate payment debits for single order after app update",
-   "description": "Customers report being charged twice for one order since the latest app update, with the duplicate debit appearing on the same order.",
+   "title": "Money debited but order not placed",
+   "description": "Payment was taken from the customer's account but the app shows no order.",
+   "origin": "seed",
+   "score": 560.2,
+   "unique_customers": 67,
+   "complaints": 110,
+   "unlinked_mentions": 18,
+   "avg_impact": 3.72,
+   "money_share": 1.0,
+   "legal_share": 0.06,
+   "angry_share": 0.5,
+   "trend": 1.0,
+   "customers_last_7d": 21,
+   "customers_prior_7d": 15,
+   "channels": {
+    "social": 26,
+    "chat": 31,
+    "email": 31,
+    "call": 22
+   },
+   "settled_at": {
+    "verify": 36,
+    "match": 74
+   },
+   "flags": [
+    "money",
+    "legal",
+    "angry"
+   ],
+   "badge": "Critical",
+   "formula": "67 customers x 3.72 impact x 2.00 money x 1.12 anger x 1.00 trend = 560.2",
+   "rank": 1
+  },
+  {
+   "issue_id": 17,
+   "key": "new_4",
+   "component": "payments",
+   "title": "Duplicate payment debits for a single order after app update",
+   "description": "Customers are charged twice for one order following the latest app update, with two debits appearing for a single purchase.",
    "origin": "discovered",
-   "score": 546.7,
+   "score": 547.3,
    "unique_customers": 52,
    "complaints": 73,
    "unlinked_mentions": 7,
@@ -342,8 +330,9 @@
    },
    "settled_at": {
     "new_issue": 4,
-    "verify": 27,
-    "match": 42
+    "llm": 1,
+    "verify": 25,
+    "match": 43
    },
    "flags": [
     "money",
@@ -351,44 +340,7 @@
     "rising"
    ],
    "badge": "Critical",
-   "formula": "52 customers x 3.69 impact x 2.00 money x 1.14 anger x 1.25 trend = 546.7",
-   "rank": 1
-  },
-  {
-   "issue_id": 1,
-   "key": "pay_debited_no_order",
-   "component": "payments",
-   "title": "Money debited but order not placed",
-   "description": "Payment was taken from the customer's account but the app shows no order.",
-   "origin": "seed",
-   "score": 526.4,
-   "unique_customers": 63,
-   "complaints": 105,
-   "unlinked_mentions": 17,
-   "avg_impact": 3.71,
-   "money_share": 1.0,
-   "legal_share": 0.07,
-   "angry_share": 0.5,
-   "trend": 1.0,
-   "customers_last_7d": 21,
-   "customers_prior_7d": 15,
-   "channels": {
-    "social": 24,
-    "chat": 31,
-    "email": 29,
-    "call": 21
-   },
-   "settled_at": {
-    "verify": 34,
-    "match": 71
-   },
-   "flags": [
-    "money",
-    "legal",
-    "angry"
-   ],
-   "badge": "Critical",
-   "formula": "63 customers x 3.71 impact x 2.00 money x 1.13 anger x 1.00 trend = 526.4",
+   "formula": "52 customers x 3.69 impact x 2.00 money x 1.14 anger x 1.25 trend = 547.3",
    "rank": 2
   },
   {
@@ -398,33 +350,34 @@
    "title": "Marked delivered but not received",
    "description": "The app shows the order as delivered but the customer never got it.",
    "origin": "seed",
-   "score": 451.8,
-   "unique_customers": 72,
-   "complaints": 94,
+   "score": 462.0,
+   "unique_customers": 74,
+   "complaints": 96,
    "unlinked_mentions": 8,
-   "avg_impact": 3.08,
-   "money_share": 0.79,
+   "avg_impact": 3.09,
+   "money_share": 0.77,
    "legal_share": 0.03,
-   "angry_share": 0.55,
+   "angry_share": 0.56,
    "trend": 1.0,
-   "customers_last_7d": 13,
+   "customers_last_7d": 14,
    "customers_prior_7d": 23,
    "channels": {
-    "chat": 26,
+    "chat": 28,
     "email": 29,
     "call": 23,
     "social": 16
    },
    "settled_at": {
-    "verify": 52,
-    "match": 42
+    "verify": 53,
+    "match": 42,
+    "llm": 1
    },
    "flags": [
     "money",
     "angry"
    ],
    "badge": "Critical",
-   "formula": "72 customers x 3.08 impact x 1.79 money x 1.14 anger x 1.00 trend = 451.8",
+   "formula": "74 customers x 3.09 impact x 1.77 money x 1.14 anger x 1.00 trend = 462.0",
    "rank": 3
   },
   {
@@ -434,32 +387,32 @@
    "title": "Refund not received",
    "description": "A promised refund for a cancelled or returned order has not reached the customer.",
    "origin": "seed",
-   "score": 309.2,
+   "score": 311.8,
    "unique_customers": 46,
-   "complaints": 71,
-   "unlinked_mentions": 11,
-   "avg_impact": 3.24,
+   "complaints": 73,
+   "unlinked_mentions": 12,
+   "avg_impact": 3.27,
    "money_share": 0.92,
    "legal_share": 0.0,
-   "angry_share": 0.34,
+   "angry_share": 0.33,
    "trend": 1.0,
    "customers_last_7d": 16,
-   "customers_prior_7d": 11,
+   "customers_prior_7d": 10,
    "channels": {
-    "call": 14,
-    "chat": 25,
-    "email": 18,
-    "social": 14
+    "call": 15,
+    "chat": 23,
+    "email": 20,
+    "social": 15
    },
    "settled_at": {
-    "verify": 20,
-    "match": 51
+    "verify": 26,
+    "match": 47
    },
    "flags": [
     "money"
    ],
    "badge": "Critical",
-   "formula": "46 customers x 3.24 impact x 1.92 money x 1.08 anger x 1.00 trend = 309.2",
+   "formula": "46 customers x 3.27 impact x 1.92 money x 1.08 anger x 1.00 trend = 311.8",
    "rank": 4
   },
   {
@@ -469,33 +422,71 @@
    "title": "Expired or spoiled product delivered",
    "description": "Food items were past their expiry date, stale, rotten or unsafe to eat.",
    "origin": "seed",
-   "score": 277.8,
-   "unique_customers": 45,
-   "complaints": 53,
+   "score": 274.8,
+   "unique_customers": 47,
+   "complaints": 56,
    "unlinked_mentions": 4,
-   "avg_impact": 3.72,
-   "money_share": 0.4,
-   "legal_share": 0.81,
-   "angry_share": 0.75,
+   "avg_impact": 3.64,
+   "money_share": 0.36,
+   "legal_share": 0.77,
+   "angry_share": 0.73,
    "trend": 1.0,
    "customers_last_7d": 11,
-   "customers_prior_7d": 16,
+   "customers_prior_7d": 17,
    "channels": {
-    "social": 7,
-    "chat": 18,
+    "social": 8,
+    "chat": 20,
     "email": 13,
     "call": 15
    },
    "settled_at": {
-    "verify": 53
+    "verify": 53,
+    "llm": 3
    },
    "flags": [
     "legal",
     "angry"
    ],
    "badge": "Critical",
-   "formula": "45 customers x 3.72 impact x 1.40 money x 1.19 anger x 1.00 trend = 277.8",
+   "formula": "47 customers x 3.64 impact x 1.36 money x 1.18 anger x 1.00 trend = 274.8",
    "rank": 5
+  },
+  {
+   "issue_id": 18,
+   "key": "new_5",
+   "component": "account_app",
+   "title": "App crashes after latest update, including at cart",
+   "description": "Users report that the app crashes or shuts down after the latest update, either on launch or when opening the cart, preventing them from placing orders.",
+   "origin": "discovered",
+   "score": 243.5,
+   "unique_customers": 60,
+   "complaints": 91,
+   "unlinked_mentions": 16,
+   "avg_impact": 2.97,
+   "money_share": 0.0,
+   "legal_share": 0.04,
+   "angry_share": 0.37,
+   "trend": 1.25,
+   "customers_last_7d": 60,
+   "customers_prior_7d": 0,
+   "channels": {
+    "call": 21,
+    "social": 24,
+    "email": 20,
+    "chat": 26
+   },
+   "settled_at": {
+    "new_issue": 4,
+    "verify": 18,
+    "match": 68,
+    "llm": 1
+   },
+   "flags": [
+    "rising"
+   ],
+   "badge": "High",
+   "formula": "60 customers x 2.97 impact x 1.00 money x 1.09 anger x 1.25 trend = 243.5",
+   "rank": 6
   },
   {
    "issue_id": 5,
@@ -504,33 +495,33 @@
    "title": "Items missing from the order",
    "description": "One or more paid items were not in the delivered bag.",
    "origin": "seed",
-   "score": 217.8,
-   "unique_customers": 42,
-   "complaints": 67,
+   "score": 211.6,
+   "unique_customers": 41,
+   "complaints": 66,
    "unlinked_mentions": 11,
    "avg_impact": 2.75,
    "money_share": 0.73,
-   "legal_share": 0.01,
-   "angry_share": 0.36,
+   "legal_share": 0.02,
+   "angry_share": 0.35,
    "trend": 1.0,
-   "customers_last_7d": 14,
+   "customers_last_7d": 13,
    "customers_prior_7d": 13,
    "channels": {
     "email": 26,
     "call": 14,
     "social": 13,
-    "chat": 14
+    "chat": 13
    },
    "settled_at": {
-    "verify": 59,
+    "verify": 58,
     "match": 8
    },
    "flags": [
     "money"
    ],
    "badge": "Critical",
-   "formula": "42 customers x 2.75 impact x 1.73 money x 1.09 anger x 1.00 trend = 217.8",
-   "rank": 6
+   "formula": "41 customers x 2.75 impact x 1.73 money x 1.09 anger x 1.00 trend = 211.6",
+   "rank": 7
   },
   {
    "issue_id": 10,
@@ -539,14 +530,14 @@
    "title": "Login OTP arrives late",
    "description": "The login OTP takes a long time or needs several retries before it arrives.",
    "origin": "seed",
-   "score": 190.0,
+   "score": 190.6,
    "unique_customers": 85,
    "complaints": 147,
    "unlinked_mentions": 28,
    "avg_impact": 2.21,
    "money_share": 0.0,
    "legal_share": 0.0,
-   "angry_share": 0.05,
+   "angry_share": 0.06,
    "trend": 1.0,
    "customers_last_7d": 24,
    "customers_prior_7d": 18,
@@ -562,8 +553,8 @@
    },
    "flags": [],
    "badge": "High",
-   "formula": "85 customers x 2.21 impact x 1.00 money x 1.01 anger x 1.00 trend = 190.0",
-   "rank": 7
+   "formula": "85 customers x 2.21 impact x 1.00 money x 1.02 anger x 1.00 trend = 190.6",
+   "rank": 8
   },
   {
    "issue_id": 4,
@@ -572,104 +563,141 @@
    "title": "Delivery much later than promised",
    "description": "The order arrived far beyond the promised delivery time.",
    "origin": "seed",
-   "score": 184.9,
+   "score": 186.3,
    "unique_customers": 78,
-   "complaints": 117,
+   "complaints": 118,
    "unlinked_mentions": 15,
    "avg_impact": 2.15,
-   "money_share": 0.05,
+   "money_share": 0.06,
    "legal_share": 0.0,
-   "angry_share": 0.21,
+   "angry_share": 0.2,
    "trend": 1.0,
    "customers_last_7d": 25,
-   "customers_prior_7d": 19,
+   "customers_prior_7d": 20,
    "channels": {
     "chat": 36,
     "social": 22,
     "email": 29,
-    "call": 30
+    "call": 31
    },
    "settled_at": {
-    "verify": 45,
+    "verify": 44,
     "match": 71,
-    "llm": 1
+    "llm": 3
    },
    "flags": [],
    "badge": "High",
-   "formula": "78 customers x 2.15 impact x 1.05 money x 1.05 anger x 1.00 trend = 184.9",
-   "rank": 8
+   "formula": "78 customers x 2.15 impact x 1.06 money x 1.05 anger x 1.00 trend = 186.3",
+   "rank": 9
   },
   {
-   "issue_id": 16,
-   "key": "new_3",
-   "component": "refunds",
-   "title": "This is unacceptable. I was refunded only part of the amount. Paid Rs 1250 and g",
-   "description": "This is unacceptable. I was refunded only part of the amount. Paid Rs 1250 and got back much less. ye bilkul galat hai",
-   "origin": "discovered",
-   "score": 159.8,
-   "unique_customers": 20,
-   "complaints": 38,
-   "unlinked_mentions": 8,
-   "avg_impact": 3.66,
-   "money_share": 1.0,
-   "legal_share": 0.0,
-   "angry_share": 0.37,
+   "issue_id": 2,
+   "key": "pay_upi_timeout",
+   "component": "payments",
+   "title": "UPI payment times out at checkout",
+   "description": "Checkout hangs or expires when paying by UPI; no money is taken and the order cannot be placed.",
+   "origin": "seed",
+   "score": 163.3,
+   "unique_customers": 50,
+   "complaints": 79,
+   "unlinked_mentions": 11,
+   "avg_impact": 2.97,
+   "money_share": 0.0,
+   "legal_share": 0.01,
+   "angry_share": 0.41,
    "trend": 1.0,
-   "customers_last_7d": 3,
-   "customers_prior_7d": 4,
+   "customers_last_7d": 16,
+   "customers_prior_7d": 16,
    "channels": {
-    "email": 10,
-    "call": 10,
-    "social": 10,
-    "chat": 8
+    "email": 22,
+    "call": 18,
+    "social": 19,
+    "chat": 20
    },
    "settled_at": {
-    "new_issue": 5,
-    "verify": 9,
-    "match": 24
+    "verify": 15,
+    "llm": 5,
+    "match": 59
    },
    "flags": [
-    "money"
+    "angry"
    ],
-   "badge": "Critical",
-   "formula": "20 customers x 3.66 impact x 2.00 money x 1.09 anger x 1.00 trend = 159.8",
-   "rank": 9
+   "badge": "High",
+   "formula": "50 customers x 2.97 impact x 1.00 money x 1.10 anger x 1.00 trend = 163.3",
+   "rank": 10
   },
   {
    "issue_id": 14,
    "key": "new_1",
    "component": "payments",
-   "title": "First-order coupon shows applied but no discount on bill",
-   "description": "Customers report that the first-order coupon displays as applied at checkout, yet the final bill includes no discount, and they are requesting the discount amount be credited.",
+   "title": "Coupon shows applied but no discount reflected on bill",
+   "description": "Customers see a success message after applying the first-order coupon, yet the bill total does not reflect the discount.",
    "origin": "discovered",
-   "score": 147.0,
-   "unique_customers": 32,
-   "complaints": 41,
-   "unlinked_mentions": 4,
-   "avg_impact": 2.7,
-   "money_share": 0.63,
+   "score": 160.5,
+   "unique_customers": 33,
+   "complaints": 44,
+   "unlinked_mentions": 6,
+   "avg_impact": 2.8,
+   "money_share": 0.66,
    "legal_share": 0.0,
-   "angry_share": 0.17,
+   "angry_share": 0.18,
    "trend": 1.0,
    "customers_last_7d": 8,
-   "customers_prior_7d": 5,
+   "customers_prior_7d": 6,
    "channels": {
-    "email": 12,
-    "chat": 13,
+    "email": 13,
     "call": 9,
-    "social": 7
+    "social": 9,
+    "chat": 13
    },
    "settled_at": {
     "new_issue": 3,
-    "verify": 12,
-    "match": 26
+    "verify": 9,
+    "llm": 5,
+    "match": 27
    },
    "flags": [
     "money"
    ],
    "badge": "Critical",
-   "formula": "32 customers x 2.70 impact x 1.63 money x 1.04 anger x 1.00 trend = 147.0",
-   "rank": 10
+   "formula": "33 customers x 2.80 impact x 1.66 money x 1.05 anger x 1.00 trend = 160.5",
+   "rank": 11
+  },
+  {
+   "issue_id": 16,
+   "key": "new_3",
+   "component": "refunds",
+   "title": "Refund amount received is less than amount paid",
+   "description": "Customers report that the refund they received for a cancelled order is lower than the full amount they paid.",
+   "origin": "discovered",
+   "score": 150.2,
+   "unique_customers": 19,
+   "complaints": 35,
+   "unlinked_mentions": 6,
+   "avg_impact": 3.62,
+   "money_share": 1.0,
+   "legal_share": 0.0,
+   "angry_share": 0.37,
+   "trend": 1.0,
+   "customers_last_7d": 3,
+   "customers_prior_7d": 5,
+   "channels": {
+    "social": 9,
+    "chat": 10,
+    "call": 8,
+    "email": 8
+   },
+   "settled_at": {
+    "new_issue": 3,
+    "verify": 9,
+    "match": 23
+   },
+   "flags": [
+    "money"
+   ],
+   "badge": "Critical",
+   "formula": "19 customers x 3.62 impact x 2.00 money x 1.09 anger x 1.00 trend = 150.2",
+   "rank": 12
   }
  ]
 }

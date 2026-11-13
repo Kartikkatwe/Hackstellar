@@ -38,7 +38,12 @@ def main() -> None:
     for s in f["stages"]:
         print(f"  {s['label']:34s} {s['count']:5d}  {s['share'] * 100:5.1f}%")
     print(f"  never reached an LLM: {f['share_without_llm'] * 100:.1f}%   LLM adjudications: {f['llm_adjudications']}   "
-          f"verify calls: {f['verify_calls']}   issues discovered: {f['issues_discovered']}")
+          f"verify calls: {f['verify_calls']}   group checks: {f['group_checks']}   issues discovered: {f['issues_discovered']} "
+          f"(after {f['issues_merged']} merges by the Curator)")
+    if info.get("stopped"):
+        print(f"  RUN STOPPED EARLY: {info['stopped']}")
+    for m in info.get("merges", []):
+        print(f"    curator: {m['merged']} -> {m['into']} ({m['title'][:50]}): {m['reason'][:90]}")
 
     print(f"\nCOST  ({c['note']})")
     for s in c["funnel"]["stages"]:

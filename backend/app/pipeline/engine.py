@@ -66,7 +66,7 @@ class Engine:
         Why: the API can then take one live complaint (or a voice-agent webhook) on top of
         a batch run without reprocessing 1,500 complaints. Vectors are re-embedded from the
         stored texts. Not stored as blobs: they depend on the embedder in use."""
-        for row in self.con.execute("SELECT * FROM issues ORDER BY id").fetchall():
+        for row in self.con.execute("SELECT * FROM issues WHERE origin != 'merged' ORDER BY id").fetchall():
             texts = [r[0] for r in self.con.execute("SELECT text FROM exemplars WHERE issue_id=? ORDER BY rowid", (row["id"],))]
             issue = dict(row) | dict(texts=texts, mat=self.embedder.encode(texts))
             self._recentre(issue)
@@ -118,7 +118,8 @@ class Engine:
                          (cid, stage, model, usage["in_tokens"], usage["out_tokens"], cost, usage["latency_s"], int(usage["estimated"])))
         self.spent_usd += cost
         if self.budget_usd is not None and self.spent_usd > self.budget_usd:
-            self.con.commit()
+            # Not committing here: the caller decides (a batch keeps what it has; a live
+            # complaint rolls back and is retried offline).
             raise BudgetExceeded(f"spend cap ${self.budget_usd:.2f} reached after ${self.spent_usd:.4f}; run stopped")
 
     def _settle(self, cid: str, stage: str, issue: dict | None = None) -> dict:
@@ -221,19 +222,54 @@ class Engine:
         members = [b for b, s in zip(buf, sims) if s >= self.t["cluster"]]
         # Why only linked customers count: three posts from one angry person are not three people.
         if len({m["customer_id"] for m in members if m["customer_id"]}) >= self.t["new_issue_customers"]:
+            existing = self._existing_match(comp, members, c["id"])
+            if existing:
+                return existing
             issue = self._promote(comp, members, c["created_at"], c["id"])
             return dict(id=c["id"], settled="new_issue", issue=issue["key"], title=issue["title"])
         return dict(id=c["id"], settled="pending", issue=None, title=None, urgent=urgent)
 
-    def _promote(self, comp: str, members: list[dict], created_at: str, trigger: str) -> dict:
+    @staticmethod
+    def _typical(members: list[dict]) -> list[int]:
         mat = np.stack([m["vec"] for m in members])
         centre = mat.mean(axis=0)
-        order = np.argsort(-(mat @ (centre / (np.linalg.norm(centre) or 1.0))))   # most typical first
+        return list(np.argsort(-(mat @ (centre / (np.linalg.norm(centre) or 1.0)))))   # most typical first
+
+    def _existing_match(self, comp: str, members: list[dict], trigger: str) -> dict | None:
+        """Check before creating: is this group of reports really a known issue in new words?
+        Why: in the first live run, different wordings of one problem became separate issues
+             (the Android crash became 5). Three reports together say more than one alone, so
+             the decision model gets a second look with all of them.
+        Not the LLM here: a yes/no is Jev's job and costs ~$0.00002."""
+        order = self._typical(members)
+        state = "\n".join(f"- {members[i]['text']}" for i in order[:3])
+        centre = np.stack([m["vec"] for m in members]).mean(axis=0)
+        cands = self._candidates(centre / (np.linalg.norm(centre) or 1.0), [comp])[: self.t["verify_candidates"]]
+        if not cands:
+            return None
+        p, usage = self.gate.verify(state, cands, mid=self.mid)
+        self._event(trigger, "verify_group", self.gate.model, usage)
+        best = max(cands, key=lambda x: p[x["key"]])
+        if p[best["key"]] < self.t["verify_yes"]:
+            return None
+        issue, ids = best["issue"], {m["id"] for m in members}
+        self.buffer[comp] = [b for b in self.buffer[comp] if b["id"] not in ids]
+        for m in members:
+            self.con.execute("DELETE FROM pending WHERE complaint_id=?", (m["id"],))
+            self.con.execute("INSERT INTO assignments VALUES(?,?,?,?,?,?)", (m["id"], issue["id"], "verify", self._score(m["vec"], issue),
+                                                                            p[best["key"]], "group of similar reports confirmed as a known issue"))
+            self.con.execute("UPDATE complaints SET settled='verify' WHERE id=?", (m["id"],))
+        return dict(id=trigger, settled="verify", issue=issue["key"], title=issue["title"])
+
+    def _promote(self, comp: str, members: list[dict], created_at: str, trigger: str) -> dict:
+        order = self._typical(members)
         named, usage = self.llm.name_issue(comp, [members[i]["text"] for i in order[:5]])
         self._event(trigger, "llm_name", self.llm.model, usage)   # one LLM call per new issue, not per complaint
         self.new_count += 1
+        # Why the title is an exemplar only when the LLM named it: a placeholder title would pull matching off course.
+        head = [f"{named['title']}. {named['description']}"] if named.get("named", True) else []
         issue = self.add_issue(f"new_{self.new_count}", comp, named["title"], named["description"], "discovered",
-                               [f"{named['title']}. {named['description']}"] + [members[i]["text"] for i in order[:8]], created_at)
+                               head + [members[i]["text"] for i in order[:8]], created_at)
         # Sweep the rest of this component's buffer: earlier complaints may belong to the new issue too.
         taken, ids, remaining = list(members), {m["id"] for m in members}, []
         for b in self.buffer[comp]:
@@ -247,3 +283,58 @@ class Engine:
                              (m["id"], issue["id"], "new_issue", self._score(m["vec"], issue), None, "grouped into a newly discovered issue"))
             self.con.execute("UPDATE complaints SET settled='new_issue' WHERE id=?", (m["id"],))
         return issue
+
+    # ---------------------------------------------------------------- curator
+    def curate(self) -> list[dict]:
+        """The Curator: after a batch, review each discovered issue against the issues near it
+        in the same component, and merge duplicates. Also names any issue still unnamed.
+        Why after the batch: by then each discovered issue has its full set of wordings, so
+             "same problem?" is judged on more evidence than at creation time.
+        Why the LLM: deciding that "app crashes on cart" and "app closes after update" share a
+             root cause is a judgement in words (decided 13 Nov). One call per discovered
+             issue, about $0.0002 each.
+        Why merged issues are kept as rows (origin='merged') with a merges record: the merge
+             is visible and traceable, and nothing is deleted."""
+        log = []
+        for issue in [i for i in list(self.issues.values()) if i["origin"] == "discovered"]:
+            if issue["id"] not in self.issues:
+                continue
+            comp = issue["component"]
+            others = [o for o in self.by_component[comp] if o["id"] != issue["id"]]
+            if not others:
+                continue
+            sims = {o["key"]: float(issue["centroid"] @ o["centroid"]) for o in others}
+            near = sorted(others, key=lambda o: -sims[o["key"]])[:4]   # the LLM sees the 4 closest, not the whole list
+            verdict, usage = self.llm.curate(comp, issue, near, sims=sims, threshold=self.t.get("curate_sim", 0.6))
+            self._event(f"issue:{issue['key']}", "llm_curate", self.llm.model, usage)
+            target = next((o for o in near if o["key"] == verdict["same_as"]), None)
+            if target:
+                self._merge(issue, target, verdict)
+                log.append(dict(merged=issue["key"], into=target["key"], title=target["title"], reason=verdict["reason"]))
+            elif issue["title"].startswith("Unnamed"):
+                named, usage = self.llm.name_issue(comp, issue["texts"][:5])
+                self._event(f"issue:{issue['key']}", "llm_name", self.llm.model, usage)
+                if named.get("named"):
+                    self._retitle(issue, named["title"], named["description"])
+        self.con.commit()
+        return log
+
+    def _retitle(self, issue: dict, title: str, description: str) -> None:
+        issue["title"], issue["description"] = title, description
+        self.con.execute("UPDATE issues SET title=?, description=? WHERE id=?", (title, description, issue["id"]))
+
+    def _merge(self, src: dict, dst: dict, verdict: dict) -> None:
+        self.con.execute("UPDATE assignments SET issue_id=? WHERE issue_id=?", (dst["id"], src["id"]))
+        self.con.execute("UPDATE exemplars SET issue_id=? WHERE issue_id=?", (dst["id"], src["id"]))
+        self.con.execute("UPDATE issues SET origin='merged' WHERE id=?", (src["id"],))
+        self.con.execute("INSERT INTO merges VALUES(?,?,?)", (src["id"], dst["id"], verdict["reason"]))
+        room = max(0, EXEMPLAR_CAP - len(dst["texts"]))
+        dst["texts"] += src["texts"][:room]
+        dst["mat"] = np.vstack([dst["mat"], src["mat"][:room]])
+        self._recentre(dst)
+        # Why seeded titles are kept: they are the company's own names for its known issues.
+        if dst["origin"] == "discovered" and verdict.get("title"):
+            self._retitle(dst, verdict["title"], verdict["description"] or dst["description"])
+        del self.issues[src["id"]]
+        self.by_component[src["component"]] = [i for i in self.by_component[src["component"]] if i["id"] != src["id"]]
+        self._baseline_prefix = None
