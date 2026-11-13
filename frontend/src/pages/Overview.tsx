@@ -66,9 +66,6 @@ export default function Overview() {
             <motion.span className="ov__line ov__line--2" initial={reduce ? false : { opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}>
               <AnimatedNumber value={allIssues.length || undefined} className="n-volume" /> issues.
             </motion.span>
-            <motion.span className="ov__line ov__line--3" initial={reduce ? false : { opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.24, ease: [0.16, 1, 0.3, 1] }}>
-              One to fix first.
-            </motion.span>
           </h1>
 
           <div className="ov__focus" aria-live="polite">
