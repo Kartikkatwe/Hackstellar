@@ -207,13 +207,13 @@ Every complaint becomes: `{id, channel, text, created_at, email | phone | user_i
 
 | Function | Input | What it does |
 |---|---|---|
-| `from_email(r)` | `{id, from, subject, body, received_at}` | Strips one greeting line ("Hi team,") and the sign-off ("Regards, …"). Subject is not added to `text` ("Urgent" carries no meaning) but is kept in `scan` and `meta`. |
+| `from_email(r)` | `{id, from, subject, body, received_at}` | Keeps the body exactly as written, greeting and sign-off included. Subject is not added to `text` ("Urgent" carries no meaning) but is kept in `scan` and `meta`. |
 | `from_call(r)` | Voice agent payload | Uses `customer_utterances` (the customer's own words), not the agent's summary, which could distort what was said. Takes the order ID only if `order_verified`. Keeps the IVR choice as a hint. **Also handles the live voice webhook.** |
-| `from_chat(r)` | Chat session | Joins the customer's messages, but skips the reply right after the bot asks for the order ID (that is a form field, already in `order_id`). |
-| `from_social(r)` | Social post | Removes `@mentions` and `#hashtags`. Lowercases the handle. |
+| `from_chat(r)` | Chat session | Joins every customer message as written. Bot messages are left out by their `sender` field, not by reading their text. |
+| `from_social(r)` | Social post | Keeps the post exactly as written, `@mentions` and `#hashtags` included. Lowercases the handle. |
 | `load_all(path)` | The data folder | Runs every adapter and sorts all complaints by time. Order matters because the registry grows as issues are discovered. |
 
-The regexes here only strip **formatting** (greetings, signatures, hashtags). They make no business judgement; that is always the gate, Jev or the LLM.
+No text is cleaned here (decided 13 Nov): a regex can cut real complaint words, so the customer's exact text reaches Jev, the local matcher and the LLM. The only regex left in the system proposes order-ID candidates, which the check digit then verifies.
 
 ### 7.5 `app/pipeline/identity.py`: who sent this?
 
@@ -552,7 +552,7 @@ Identity resolution links every complaint to a CRM customer (login, phone, email
 The check digit fails, so it is marked `failed_check` instead of wrongly linking to someone else's order.
 
 **"Is the regex doing business logic?"**
-No. Regex only strips email greetings, signatures and hashtags, and proposes order-ID candidates (which are then checked). Every judgement about meaning (is it a complaint, which issue, naming, merging) is made by Jev or the LLM.
+No. Complaint text is never edited by regex; it reaches Jev and the LLM exactly as written. The one regex proposes order-ID candidates, which are then checked by the check digit, the order list and one more signal. Every judgement about meaning (is it a complaint, which issue, naming, merging) is made by Jev or the LLM.
 
 **"How is this domain-agnostic?"**
 Everything specific to groceries is in `pack.yaml`. Jev's questions, the LLM's prompts, the segments and the UI labels are all built from it. A telecom writes its own pack; no code changes.

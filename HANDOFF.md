@@ -12,7 +12,7 @@ Everything a new session needs to continue. Read this first, then `HOW_IT_WORKS.
 ## 2. Standing rules from Kartik (follow them)
 
 1. **Code comments:** every file carries short `Why:` / `Not:` notes at decision points: why it was written that way and what was decided against, without wasting tokens.
-2. **Business judgement is never regex or rules.** Naming, merging, "same problem?" are always the LLM's or Jev's job. Regex only strips formatting (email greetings, signatures, hashtags) and proposes order-ID candidates that are then verified.
+2. **Business judgement is never regex or rules.** Naming, merging, "same problem?" are always the LLM's or Jev's job. No regex touches complaint text: it reaches Jev and the LLM exactly as written (Kartik, 13 Nov). The only regex proposes order-ID candidates, which are then verified. The live-run figures were measured with the old greeting/signature/hashtag stripping; a re-run would show the effect of raw text.
 3. **Ask questions** on real decisions (he asked to be asked "a ton of questions").
 4. **Credits:** small live spends are fine ("its a few cents"), but every live run stays capped with `MAX_SPEND_USD`. About $0.25 of the $5 OpenRouter credit has been used.
 5. **Secrets:** API keys live in `backend/.env` and `backend/keys`, both gitignored. Never commit or paste them anywhere. A remote session does not have them: ask Kartik to set `OPENROUTER_API_KEY` in that environment if a live call is needed.

@@ -2,8 +2,10 @@
 
 Why adapters: the funnel should not care where a complaint came from; adding WhatsApp or
      app-store reviews later means one new function here.
-Not cleaning inside the funnel: channel quirks (signatures, agent lines, hashtags) would
-     leak into every stage.
+No text cleaning (decided 13 Nov): greetings, signatures, hashtags and mentions are kept as
+     written. Not regex: a pattern can cut real complaint words ("Hi, my order never came"),
+     so the customer's text reaches Jev and the LLM untouched. Only structure is used: who
+     sent a chat line (bot or customer) and which call fields hold the customer's words.
 
 Complaint = {id, channel, text, created_at, email|phone|user_id|handle, order_id, scan, meta}
   text      what the classifier reads (the customer's own words)
@@ -11,18 +13,11 @@ Complaint = {id, channel, text, created_at, email|phone|user_id|handle, order_id
   scan      text searched for order IDs typed by the customer (email, social)
 """
 import json
-import re
 from pathlib import Path
-
-# Why the length cap: "Hi team," is a greeting, "Hi, my order never came ..." is the complaint.
-GREETING = re.compile(r"^\s*(hi|hello|dear)\b[^\n]{0,30}\n", re.I)
-SIGNOFF = re.compile(r"\n\s*(regards|thanks|thank you|sincerely|cheers)[,!.]?\s*\n.*$", re.I | re.S)
-ASKS_ORDER_ID = re.compile(r"order\s*(id|number)", re.I)
-TAGS = re.compile(r"(^|\s)[@#]\w+")
 
 
 def from_email(r: dict) -> dict:
-    body = SIGNOFF.sub("", GREETING.sub("", r["body"], count=1)).strip()
+    body = r["body"].strip()   # as written, greeting and signature included
     # Not adding the subject to text: "Urgent" / "Complaint" carry no meaning and blur matching.
     return dict(id=r["id"], channel="email", text=body, created_at=r["received_at"], email=r["from"].lower(),
                 scan=f"{r['subject']} {body}", meta={"subject": r["subject"]})
@@ -38,22 +33,15 @@ def from_call(r: dict) -> dict:
 
 
 def from_chat(r: dict) -> dict:
-    parts, answering_id_prompt = [], False
-    for m in r["messages"]:
-        if m["sender"] == "bot":
-            answering_id_prompt = bool(ASKS_ORDER_ID.search(m["text"]))
-            continue
-        # Why skip: the reply to "share your order ID" is a form field, already in r["order_id"].
-        if not answering_id_prompt:
-            parts.append(m["text"])
-        answering_id_prompt = False
+    # Every customer line, as written. Bot lines are left out by their sender field, not by
+    # matching their text: they are the bot's words, not the customer's.
+    parts = [m["text"] for m in r["messages"] if m["sender"] != "bot"]
     return dict(id=r["session_id"], channel="chat", text=" ".join(parts), created_at=r["started_at"], user_id=r.get("user_id"),
                 order_id=r.get("order_id") if r.get("order_verified") else None, meta={"turns": len(r["messages"])})
 
 
 def from_social(r: dict) -> dict:
-    text = TAGS.sub(" ", r["text"]).strip()   # drop @brand mentions and hashtags
-    return dict(id=r["post_id"], channel="social", text=text, created_at=r["posted_at"], handle=r["handle"].lower(),
+    return dict(id=r["post_id"], channel="social", text=r["text"].strip(), created_at=r["posted_at"], handle=r["handle"].lower(),
                 scan=r["text"], meta={"likes": r.get("likes", 0)})
 
 
