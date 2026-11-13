@@ -2323,6 +2323,38 @@ p {
 }
 
 </style>
+<style>
+/* ---------- scalability (added slide; every rule is scoped to #scale) ---------- */
+#scale .title { font-size: 84px; }
+#scale .sc { margin-top: 26px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px 28px; }
+#scale .sc-card { padding: 18px 28px; border-radius: 24px; background: linear-gradient(180deg, rgba(255,255,255,.03), transparent 140px), var(--surface); border: 1px solid var(--line-2); }
+#scale .sc-h { font-size: 21px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--brass); margin-bottom: 14px; }
+#scale .sc-nums { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+#scale .sc-nums b { display: block; font-size: 62px; font-weight: 560; letter-spacing: -.05em; line-height: 1; white-space: nowrap; }
+#scale .sc-nums b small { font-size: 30px; color: var(--muted); letter-spacing: 0; }
+#scale .sc-nums span { display: block; margin-top: 10px; font-size: 22px; line-height: 1.3; color: var(--ink-2); }
+#scale .sc-bars { display: grid; gap: 7px; }
+#scale .sc-bar { display: grid; grid-template-columns: 110px 1fr 120px; align-items: center; gap: 14px; font-size: 21px; color: var(--ink-2); }
+#scale .sc-bar i { height: 16px; border-radius: 8px; background: #1d1d21; position: relative; overflow: hidden; }
+#scale .sc-bar i::before { content: ''; position: absolute; inset: 0 auto 0 0; width: max(var(--w), 6px); border-radius: 8px; background: var(--n-harm); }
+#scale.is-active .sc-bar i::before { animation: sc-reveal 1200ms var(--ease) both; animation-delay: 700ms; }
+#scale .sc-bar b { font-family: var(--mono); font-weight: 500; font-size: 21px; text-align: right; color: var(--ink); }
+#scale .sc-note { margin-top: 12px; font-size: 21px; color: var(--muted); }
+#scale .sc-why { display: grid; gap: 10px; }
+#scale .sc-why div { display: grid; grid-template-columns: 38px 1fr; gap: 16px; align-items: start; }
+#scale .sc-why i { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 12px; font-style: normal; font-family: var(--mono); font-size: 20px; color: #1a1408; background: linear-gradient(180deg, #ecd197, var(--brass)); }
+#scale .sc-why p { font-size: 23px; line-height: 1.35; color: var(--ink-2); }
+#scale .sc-why p b { color: var(--ink); font-weight: 560; }
+#scale .sc-table { display: grid; }
+#scale .sc-tr { display: grid; grid-template-columns: 2fr .9fr 1fr 1.1fr; align-items: center; gap: 12px; padding: 10px 0; border-top: 1px solid var(--line-2); font-family: var(--mono); font-size: 26px; color: var(--ink); }
+#scale .sc-tr span:not(:first-child) { text-align: right; }
+#scale .sc-tr span:first-child { font-family: var(--font); }
+#scale .sc-tr b { font-size: 30px; font-weight: 600; margin-right: 10px; }
+#scale .sc-tr small { font-size: 20px; color: var(--muted); }
+#scale .sc-th { border-top: 0; padding-top: 0; font-family: var(--font); font-size: 20px; color: var(--faint); text-transform: uppercase; letter-spacing: .06em; }
+#scale .foot { font-size: 21px; line-height: 1.35; }
+@keyframes sc-reveal { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+</style>
 <noscript><style>
   /* without JavaScript: every slide, fully built, one under the other */
   html, body { overflow: auto; height: auto; }
@@ -2442,7 +2474,7 @@ p {
       <path d="M400 70 C600 70 600 320 560 320"/><path d="M400 320 H560"/><path d="M400 570 C600 570 600 320 560 320"/>
       <path d="M1240 70 C1040 70 1040 320 1080 320"/><path d="M1240 320 H1080"/><path d="M1240 570 C1040 570 1040 320 1080 320"/>
     </svg>
-    <div class="gate__core in" style="--d:2">“paise kat gaye lekin order nahi bana”<small>Jev · one call · six answers</small></div>
+    <div class="gate__core in" style="--d:2">“Money got deducted but no order was placed”<small>Jev · one call · six answers</small></div>
     <div class="gq in" style="--d:3; left:0; top:0"><span>A complaint?</span><b>Yes</b><i style="--p:94%; --d:0"></i></div>
     <div class="gq in" style="--d:4; left:0; top:250px"><span>Which area?</span><b>Payments</b><i style="--p:89%; --d:1"></i></div>
     <div class="gq in" style="--d:5; left:0; top:500px"><span>Impact</span><b class="n-harm">Harmed</b><i style="--p:100%; --d:2"></i></div>
@@ -2525,23 +2557,6 @@ p {
   <aside>Top row left to right, bottom row back. 1 intake: four channels into one shape, find the customer; order IDs have a check digit. 2 the gate: six questions, one call. 3 similarity: free, files most complaints. 4 verify: Jev's yes or no for unsure matches. 5 the LLM only if still unsure. 6 waiting list until 3 different customers; money or safety is urgent at once. 7 group check. 8 the LLM names the new problem. 9 after each batch it merges duplicates. 10 the Top 10 with a score anyone can check. Every confirmed wording becomes an example, so it gets cheaper the longer it runs.</aside>
 </section>
 
-<!-- 12 versus Jira -->
-<section class="slide" id="jira">
-  <p class="kicker in" style="--d:0">What companies use today</p>
-  <h2 class="title in" style="--d:1">Jira tracks tickets. <span class="soft">We find the problems.</span></h2>
-  <div class="vtable">
-    <div class="vhead in" style="--d:2"><span></span><span>Jira, as support teams run it</span><span>Complaint Compass</span></div>
-    <div class="vrow in" style="--d:3"><b>What one item is</b><span class="vj">A ticket per message</span><span class="vc">A problem, with every complaint behind it</span></div>
-    <div class="vrow in" style="--d:4"><b>300 people, one problem</b><span class="vj">AI suggests matches; an agent links them</span><span class="vc">Filed on arrival: 267 of 267 right in our test</span></div>
-    <div class="vrow in" style="--d:5"><b>One customer, 3 channels</b><span class="vj">Usually 3 separate tickets</span><span class="vc">One customer, counted once</span></div>
-    <div class="vrow in" style="--d:6"><b>A new problem appears</b><span class="vj">Noticed when an agent spots the pattern</span><span class="vc">Named automatically once 3 customers report it</span></div>
-    <div class="vrow in" style="--d:7"><b>What to fix first</b><span class="vj">An agent sets the priority</span><span class="vc">A checkable score: customers × impact × money × anger × trend</span></div>
-    <div class="vrow in" style="--d:8"><b>Who is hit hardest</b><span class="vj">Custom fields and reports to build</span><span class="vc">Built in: students, states, age groups</span></div>
-  </div>
-  <p class="vnote in" style="--d:9">Not instead of Jira: each ranked problem can become <b>one</b> Jira ticket instead of 300 (next step).</p>
-  <aside>Most support teams today run Jira Service Management. It is a good tracker, but its unit is a ticket: one per message. Its AI suggests similar tickets, yet an agent still links them to a problem record, decides the priority, and notices new patterns. One customer writing on email, chat and Twitter is usually three tickets. We do the part before the ticket: every complaint is filed under its recurring problem on arrival, one customer counts once, a new problem gets a name once three customers report it, and the Top 10 comes with a score you can check. We are not asking anyone to drop Jira: the ranked problems can go into it as one ticket each instead of hundreds. That connector is a next step, not built yet.</aside>
-</section>
-
 <!-- 13 tested live: live-test accuracy -->
 <section class="slide" id="tested">
   <p class="kicker in" style="--d:0">Tested live · real models · an answer key</p>
@@ -2570,38 +2585,6 @@ p {
   <aside>We generated 300 complaints the system had never seen, from our real customer list, each with a hidden right answer, and sent them one by one to the live site with the real models, in batches of 50, 100 and 150, each on a clean copy of the data. One square per complaint. Green: filed under the right problem, 267 of 267. Grey: praise and spam correctly set aside, 30 of 30. Gold: 2 the LLM was not sure about, so they wait for staff instead of being guessed. Red: one real complaint missed, a short Hinglish call ending in thanks. Backup slides show every step and every miss.</aside>
 </section>
 
-<!-- 14 costing test -->
-<section class="slide" id="costing">
-  <p class="kicker in" style="--d:0">Costing test · the same 300 complaints</p>
-  <h2 class="title in" style="--d:1">Same 300 complaints. <span class="soft">65–87% cheaper.</span></h2>
-  <p class="cost__label in" style="--d:2">Cost per 1 lakh complaints (100,000)</p>
-  <div class="costs">
-    <div class="crow in" style="--d:2; --c:12.8%"><b>Complaint Compass<small>actual cost: real models, list prices</small></b><i></i><em class="n-save">$4.33</em></div>
-    <div class="crow in" style="--d:3; --c:37.2%"><b>An LLM reads every complaint<small>Claude Haiku, prompt cached (its best case)</small></b><i></i><em>$12.54</em></div>
-    <div class="crow in" style="--d:4; --c:100%"><b>An LLM reads every complaint<small>Claude Haiku, no caching</small></b><i></i><em>$33.71</em></div>
-  </div>
-  <div class="cbatches">
-    <div class="cbatch in" style="--d:5"><span>Batch 1 · 50 complaints</span><b class="n-save">67–88%</b><em>cheaper · $0.0021 vs $0.0063–0.0169</em></div>
-    <div class="cbatch in" style="--d:6"><span>Batch 2 · 100 complaints</span><b class="n-save">64–87%</b><em>cheaper · $0.0045 vs $0.0125–0.0337</em></div>
-    <div class="cbatch in" style="--d:7"><span>Batch 3 · 150 complaints</span><b class="n-save">66–87%</b><em>cheaper · $0.0064 vs $0.0188–0.0506</em></div>
-  </div>
-  <p class="foot">Ours: the tokens actually billed in the live test, at list prices. The LLM side: its real prompt for each of the same complaints, priced at list prices with a token count calibrated on 12 real calls; not run.</p>
-  <aside>The costing test uses the same 300 complaints as the accuracy test. Our side is what the live run actually used: every Jev and Claude Haiku call reports its tokens, priced at list price. Total: 1.3 cents for 300 complaints, 4 dollars 33 per lakh. The other side is an LLM reading every complaint: we built its real prompt for each of the same 300 complaints, the full list of known problems plus the complaint, and priced it the same way. 12 dollars 54 per lakh even if its prompt is cached every time, 33 dollars 71 without caching. So we are 65 to 87 percent cheaper, 3 to 8 times, and every batch size gives the same answer: the cost grows in a straight line with volume. Honest: that side is priced, not run.</aside>
-</section>
-
-<!-- 15 close -->
-<section class="slide close" id="close">
-  <p class="kicker in" style="--d:0">HackStellar · PS-19</p>
-  <h1 class="in" style="--d:1">Complaint <span class="gold">Compass</span></h1>
-  <div class="bigs">
-    <div class="big in" style="--d:2; --w:85%"><b class="n-save">65–85%</b><span>cheaper</span></div>
-    <div class="big in" style="--d:3; --w:90%"><b class="n-save">90%</b><span>fewer output tokens</span></div>
-    <div class="big in" style="--d:4; --w:100%"><b class="n-save">2–3×</b><span>faster</span></div>
-  </div>
-  <p class="thanks in" style="--d:5">Thank you. Questions?</p>
-  <aside>Close on the three numbers against an LLM reading every complaint, then take questions. Backup slides follow: accuracy step by step, every miss, where the money goes, ranking, customer groups, other businesses, limits, funnel.</aside>
-</section>
-
 <!-- 16 accuracy, step by step (live test) -->
 <section class="slide" id="accuracy">
   <span class="backup-tag">Backup</span>
@@ -2618,35 +2601,6 @@ p {
   </div>
   <p class="foot">Bars: complaints that reached each step in the live test. 251 of the 300 are worded unlike anything the engine had seen. The engine never sees the answers.</p>
   <aside>Every step has its own score. The gate kept 269 of 270 real complaints and set aside all 30 non-complaints. The area was right 268 of 269 times. Similarity filed 100, all right; Jev's yes or no filed 162, all right; the LLM settled 5, all right, and sent 2 it was unsure about to the waiting list. Customer linking was checked on batch 3: 121 found, none wrong; 29 unknown senders were left unlinked rather than guessed.</aside>
-</section>
-
-<!-- 17 every miss (live test) -->
-<section class="slide" id="misses">
-  <span class="backup-tag">Backup</span>
-  <p class="kicker in" style="--d:0">Live test · the three not filed</p>
-  <h2 class="title in" style="--d:1">Every miss, <span class="soft">shown.</span></h2>
-  <div class="misses">
-    <div class="miss in" style="--d:2; --k:var(--critical)">
-      <span class="chip" style="--k:#e5534b">Missed</span>
-      <q>ande toote hue aaye. Thanks.</q>
-      <p class="meta">Call · Hinglish · the eggs arrived broken</p>
-      <p>Set aside as not a complaint. Jev gave it 15%: the “Thanks” read as praise.</p>
-    </div>
-    <div class="miss in" style="--d:3; --k:var(--n-save)">
-      <span class="chip" style="--k:#e6c27f">Waiting · urgent</span>
-      <q>order me cooking oil aaya hi nahi, paise pure kate… Sort it out.</q>
-      <p class="meta">Chat · Hinglish · an item missing from the order</p>
-      <p>The LLM was not sure, so it waits for staff instead of a guess. Flagged urgent: money lost.</p>
-    </div>
-    <div class="miss in" style="--d:4; --k:var(--n-save)">
-      <span class="chip" style="--k:#e6c27f">Waiting</span>
-      <q>The detergent had fungus on it.</q>
-      <p class="meta">Email · an expired product</p>
-      <p>The LLM was not sure which known problem it is, so it waits for staff.</p>
-    </div>
-  </div>
-  <p class="foot">Waiting is the safe failure: the complaint is stored, visible on the Unconfirmed page, and never filed under the wrong problem.</p>
-  <aside>These are the only three of 300 not filed under the right problem. One real miss: a very short Hinglish call that ended in thanks; the gate read it as polite, not a complaint. Two the LLM declined to guess; they wait on the Unconfirmed page for staff or for more customers, and the one where money was lost is flagged urgent. Nothing was filed under a wrong problem.</aside>
 </section>
 
 <!-- 18 where the money goes -->
@@ -2747,6 +2701,45 @@ p {
     <canvas id="funnel-canvas" width="1640" height="700" aria-hidden="true"></canvas>
   </div>
   <aside>Left to right: intake, the gate drops non-complaints, a free similarity match files most complaints, Jev's yes or no files the unsure ones, and only the last few reach the LLM. New problems wait until 3 customers report them; then the LLM names them. Every confirmed verdict becomes an example, so the system gets cheaper as it runs.</aside>
+</section>
+
+<!-- 24 scalability -->
+<section class="slide" id="scale">
+  <span class="backup-tag">Backup</span>
+  <p class="kicker in" style="--d:0">How it scales</p>
+  <h2 class="title in" style="--d:1">Lakhs a day. <span class="soft">A server or two.</span></h2>
+  <div class="sc">
+    <div class="sc-card sc-stats in" style="--d:2">
+      <p class="sc-h">The scale in India</p>
+      <div class="sc-nums">
+        <div><b class="n-volume">7.8M</b><span>quick-commerce orders a day</span></div>
+        <div><b class="n-volume">80K–2L</b><span>80,000 to 2 lakh complaints a day, our estimate</span></div>
+        <div><b class="n-save">1–3<small>/s</small></b><span>that is only 1–3 a second</span></div>
+      </div>
+    </div>
+    <div class="sc-card in" style="--d:3">
+      <p class="sc-h">Escalated to the government in a year (FY24)</p>
+      <div class="sc-bars"><div class="sc-bar"><span>Flipkart</span><i style="--w:100%"></i><b>1,60,857</b></div><div class="sc-bar"><span>Amazon</span><i style="--w:36.6%"></i><b>58,875</b></div><div class="sc-bar"><span>Swiggy</span><i style="--w:5.9%"></i><b>9,527</b></div><div class="sc-bar"><span>Zomato</span><i style="--w:4.3%"></i><b>6,983</b></div><div class="sc-bar"><span>Blinkit</span><i style="--w:0.8%"></i><b>1,244</b></div></div>
+      <p class="sc-note">Only the people who gave up on the company: the tip of the iceberg.</p>
+    </div>
+    <div class="sc-card in" style="--d:4">
+      <p class="sc-h">Why it scales</p>
+      <div class="sc-why">
+        <div><i>1</i><p><b>Cost grows in a straight line.</b> Most complaints never touch the LLM.</p></div>
+        <div><i>2</i><p><b>Classifying shares no data: just add workers.</b> One worker ≈ 15 complaints a second.</p></div>
+        <div><i>3</i><p><b>One writer per business area,</b> side by side, so no issue is created twice. A busy area gets split.</p></div>
+      </div>
+    </div>
+    <div class="sc-card in" style="--d:5">
+      <p class="sc-h">Volume a month</p>
+      <div class="sc-table">
+        <div class="sc-tr sc-th"><span></span><span>Workers</span><span>Partitions</span><span>Model cost</span></div>
+        <div class="sc-tr"><span><b>1M</b><small>one business</small></span><span>2</span><span>7</span><span class="n-save">$43</span></div><div class="sc-tr"><span><b>10M</b><small>~10 businesses</small></span><span>2–4</span><span>~70</span><span class="n-save">$433</span></div><div class="sc-tr"><span><b>100M</b><small>~100 businesses</small></span><span>13–16</span><span>~700</span><span class="n-save">$4,330</span></div>
+      </div>
+    </div>
+  </div>
+  <p class="foot">Projected from latencies measured on the live run; model cost = $4.33 per lakh complaints (measured) × volume, hosting excluded. Not built at this scale yet: we load-test first. Sources: Consumer Affairs Ministry FY24 via Storyboard18; PIB, Mar 2025; RedSeer via GAEE, Jan 2026.</p>
+  <aside>About 60 seconds; say it like you are thinking out loud. First, the scale: quick commerce in India does around 7.8 million orders a day. Even what reaches the government is big: the consumer helpline was taking about five thousand calls a day by the end of last year, more than ten times 2015. In one year Swiggy alone had about 9,500 complaints escalated to the government, Zomato about 7,000, Flipkart over one and a half lakh. And those are only the people who gave up on the company. The complaints companies handle themselves are far bigger: probably 80,000 to 2 lakh a day in quick commerce alone, by our estimate. The expensive part is already solved: most complaints never touch the LLM, so cost grows in a straight line; at ten million complaints a month it is around four hundred dollars in model calls. The classifying step shares no data, so we just add workers; one worker does roughly fifteen complaints a second, and 80,000 to 2 lakh a day is only one to three a second on average, so a company like Swiggy fits on a server or two. The only tricky bit is the issue list, because two workers could create the same issue twice, so each business area gets its own single writer, all running side by side. New customer: new partitions. One area gets slammed, like payments during an outage: we split it. Honestly, it is not built at that scale yet; the first thing we would do is load-test it.</aside>
 </section>
 
 </main>
