@@ -105,7 +105,10 @@ thresholds:
   # so (13 Nov) weak matches go to Jev's yes/no instead of the waiting list: match_lo 0.30 -> 0.10.
   # cluster 0.45 -> 0.33: rewordings of one new problem scored 0.35-0.57 against each other,
   # different problems in the same area 0.24 or less.
-  hash: { match_hi: 0.60, match_lo: 0.10, cluster: 0.33 }
+  # match_lo 0.10 -> 0.0 (13 Nov, a judge typed "they defrauded me"): a word-only model scores a
+  # short complaint with no shared words near 0 even when its meaning is clear, so on hash every
+  # complaint goes to Jev's yes/no (about $0.00003) and then the LLM before the waiting list.
+  hash: { match_hi: 0.60, match_lo: 0.0, cluster: 0.33 }
 
 ranking:
   angry_weight: 0.25         # score x (1 + angry_weight x share of angry complaints)
