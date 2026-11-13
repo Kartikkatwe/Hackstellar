@@ -1662,19 +1662,6 @@ p {
   padding-top: 20px;
 }
 
-/* ---------- classification diagram (full-slide image) ---------- */
-.slide.diagram {
-  padding: 56px 72px;
-  align-items: center;
-  justify-content: center;
-}
-.diagram__img {
-  display: block;
-  max-width: 100%;
-  max-height: 100%;
-  border-radius: 24px;
-  box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.06);
-}
 /* ---------- costing test ---------- */
 .cost__label {
   margin-top: 44px;
@@ -1872,6 +1859,303 @@ p {
   color: var(--ink-2);
 }
 
+/* ---------- versus Jira ---------- */
+#jira .title {
+  font-size: 78px;
+  max-width: none;
+}
+.vtable {
+  margin-top: 36px;
+  display: grid;
+  gap: 10px;
+  position: relative;
+}
+.vhead,
+.vrow {
+  display: grid;
+  grid-template-columns: 370px 1fr 1fr;
+  gap: 28px;
+  align-items: center;
+}
+.vhead {
+  font-size: 22px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--faint);
+  padding: 0 28px 4px;
+}
+.vhead span:last-child {
+  color: var(--brass);
+}
+.vrow {
+  padding: 13px 28px;
+  border-radius: 18px;
+  background: linear-gradient(90deg, transparent 62%, rgba(230, 194, 127, 0.07)), var(--surface);
+  border: 1px solid var(--line-2);
+}
+.vrow b {
+  font-size: 26px;
+  font-weight: 560;
+}
+.vrow span {
+  position: relative;
+  padding-left: 38px;
+  font-size: 24px;
+  line-height: 1.3;
+}
+.vrow span::before {
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 16px;
+  font-weight: 700;
+}
+.vj {
+  color: var(--muted);
+}
+.vj::before {
+  content: '–';
+  color: var(--muted);
+  background: #222227;
+}
+.vc {
+  color: var(--ink);
+}
+.vc::before {
+  content: '✓';
+  color: #0a0a0b;
+  background: var(--n-right);
+}
+.vnote {
+  margin-top: 26px;
+  font-size: 28px;
+  color: var(--ink-2);
+}
+.vnote b {
+  color: var(--brass);
+}
+
+/* ---------- decision path ---------- */
+.dmap {
+  position: relative;
+  width: 1640px;
+  height: 590px;
+  margin-top: 34px;
+  flex: none;
+}
+.dmap svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.dmap svg > path {
+  fill: none;
+  stroke: rgba(201, 197, 187, 0.38);
+  stroke-width: 2;
+  stroke-dasharray: 7 9;
+  marker-end: url(#dm-arrow);
+}
+.is-active .dmap svg > path {
+  animation: dash 1.2s linear infinite;
+}
+.dch {
+  position: absolute;
+  left: 0;
+  width: 150px;
+  height: 60px;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  font-size: 25px;
+  font-weight: 540;
+  color: var(--ink);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--k) 22%, transparent), transparent 80%), var(--surface);
+  border: 1px solid color-mix(in srgb, var(--k) 50%, transparent);
+}
+.dn {
+  position: absolute;
+  top: var(--y);
+  translate: 0 -50%; /* centred on its connector, whatever its height */
+  display: grid;
+  align-content: center;
+  gap: 3px;
+  padding: 14px 20px;
+  border-radius: 20px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--k) 12%, transparent), transparent 70%), var(--surface);
+  border: 1.5px solid color-mix(in srgb, var(--k) 55%, transparent);
+}
+.dn span {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--k);
+}
+.dn b {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  line-height: 1.15;
+  font-size: 26px;
+  font-weight: 560;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.dn small {
+  font-size: 20px;
+  line-height: 1.25;
+  color: var(--muted);
+}
+.dn--ok {
+  --k: var(--n-right);
+}
+.dn--wait {
+  --k: var(--n-save);
+}
+.tick {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--n-right);
+  position: relative;
+}
+.tick::after {
+  content: '';
+  position: absolute;
+  left: 9px;
+  top: 5px;
+  width: 6px;
+  height: 11px;
+  border: solid #0a0a0b;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+.djev {
+  position: absolute;
+  left: 450px;
+  top: 20px;
+  width: 360px;
+  height: 560px;
+  padding: 22px 26px;
+  border-radius: 26px;
+  background: radial-gradient(120% 70% at 50% 0%, rgba(127, 176, 240, 0.14), transparent 70%), var(--surface);
+  border: 1.5px solid rgba(127, 176, 240, 0.5);
+  box-shadow: 0 0 0 10px rgba(127, 176, 240, 0.05);
+  display: grid;
+  align-content: start;
+}
+.djev header {
+  display: grid;
+  gap: 2px;
+  padding-bottom: 14px;
+}
+.djev header b {
+  font-size: 32px;
+  font-weight: 560;
+  color: var(--w-jev);
+}
+.djev header small {
+  font-size: 20px;
+  color: var(--muted);
+}
+.dq {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  row-gap: 6px;
+  padding: 15px 0;
+  border-top: 1px solid var(--line-2);
+}
+.dq b {
+  font-size: 25px;
+  font-weight: 540;
+}
+.dq em {
+  grid-column: 1 / -1;
+  font-style: normal;
+  font-size: 20px;
+  color: var(--muted);
+}
+.yn {
+  display: flex;
+  gap: 8px;
+}
+.yn i {
+  font-style: normal;
+  font-size: 19px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 99px;
+  color: var(--muted);
+  background: #222227;
+}
+.yn i.y {
+  color: #0a0a0b;
+  background: var(--w-jev);
+}
+.dots {
+  display: flex;
+  gap: 7px;
+}
+.dots i {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--w-jev) 35%, transparent);
+  box-shadow: inset 0 0 0 1.5px var(--w-jev);
+}
+.dots i:first-child {
+  background: var(--w-jev);
+}
+.meter {
+  display: flex;
+  gap: 5px;
+}
+.meter i {
+  width: 26px;
+  height: 14px;
+  border-radius: 4px;
+  background: var(--w-jev);
+}
+.meter i:nth-child(1) {
+  opacity: 0.35;
+}
+.meter i:nth-child(2) {
+  opacity: 0.55;
+}
+.meter i:nth-child(3) {
+  opacity: 0.78;
+}
+.djev__more {
+  margin-top: 6px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--line-2);
+  font-size: 20px;
+  color: var(--faint);
+}
+.dpill {
+  position: absolute;
+  translate: -50% -50%;
+  padding: 4px 14px;
+  border-radius: 99px;
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--n-save);
+  background: var(--bg);
+  border: 1px solid rgba(230, 194, 127, 0.5);
+}
+.dlegend {
+  position: absolute;
+  left: 0;
+  bottom: 10px;
+}
+
 /* ---------- print / save as PDF: every slide, fully built ---------- */
 @page {
   size: 1920px 1080px;
@@ -2038,6 +2322,19 @@ p {
   }
 }
 
+/* ---------- classification diagram (full-slide image) ---------- */
+.slide.diagram {
+  padding: 56px 72px;
+  align-items: center;
+  justify-content: center;
+}
+.diagram__img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 24px;
+  box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
 </style>
 <noscript><style>
   /* without JavaScript: every slide, fully built, one under the other */
@@ -2045,7 +2342,7 @@ p {
   .stage { position: relative; left: auto; top: auto; transform: none; height: auto; overflow: visible; background: none; box-shadow: none; }
   .slide { position: relative; height: 1080px; opacity: 1; visibility: visible; transform: none; margin-bottom: 24px; background: var(--bg); overflow: hidden; }
   .slide .in, [data-step], .fstep, .funnel .band, .funnel .flab { opacity: 1; transform: none; animation: none; }
-  .srow i::before, .lrow i::before, .crow i::before, .drow i::before { clip-path: none; }
+  .srow i::before, .crow i::before, .wrow i::before, .spend__bar i { clip-path: none; }
   .opt i::after, .gq i::after, .compare i::after, .big i::after { transform: none; }
   .typing span { width: auto; }
   .flow .glow, .cover__mark .ring-arc { stroke-dashoffset: 0; }
@@ -2101,7 +2398,7 @@ p {
   <div class="tree">
     <div class="tree__q in" style="--d:2"><span class="n">1</span><h3>Who sent it?</h3><ul><li>One person on three channels counts once</li></ul></div>
     <div class="tree__q in" style="--d:3"><span class="n">2</span><h3>A complaint?</h3><ul><li class="no">Praise, spam, questions: set aside</li></ul></div>
-    <div class="tree__q in" style="--d:4"><span class="n">3</span><h3>Which component?</h3><ul><li>Which area of the business</li><li>How serious</li></ul></div>
+    <div class="tree__q in" style="--d:4"><span class="n">3</span><h3>About what?</h3><ul><li>Which area of the business</li><li>How serious</li></ul></div>
     <div class="tree__q in" style="--d:5"><span class="n">4</span><h3>Known problem?</h3><ul><li class="ok">Yes: filed</li><li>Unsure: checked closer</li><li>New: waits for 3 customers</li><li class="hot">Money or safety: urgent now</li></ul></div>
   </div>
   <p class="punch" data-step="1">Every step is a <span class="gold">choice</span>, not writing.</p>
@@ -2216,7 +2513,42 @@ p {
   <aside>Blue, Jev: given a complaint and questions with fixed options, it returns a choice and a probability, never free text. The gate, verify and the group check. Green is free on our machine: reading channels, finding the customer, matching by meaning, the waiting list, the ranking. Orange, the LLM: only the last unsure few, naming new problems, merging duplicates. Jev needs no training: labels come from the settings file with each request.</aside>
 </section>
 
-<!-- 10 flow -->
+<!-- 10 decision path -->
+<section class="slide" id="path">
+  <p class="kicker in" style="--d:0">The decision path</p>
+  <h2 class="title in" style="--d:1">Every complaint, <span class="soft">one clear path.</span></h2>
+  <div class="dmap">
+    <svg viewBox="0 0 1640 590" aria-hidden="true">
+      <defs><marker id="dm-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="rgba(201,197,187,.6)" stroke="none"/></marker></defs>
+      <path d="M150 165 C170 165 170 300 186 300"/><path d="M150 255 C170 255 170 300 186 300"/><path d="M150 345 C170 345 170 300 186 300"/><path d="M150 435 C170 435 170 300 186 300"/><path d="M400 300 H446"/><path d="M810 300 H846"/><path d="M1010 300 C1055 300 1055 90 1096 90"/><path d="M1010 300 H1096"/><path d="M1010 300 C1055 300 1055 510 1096 510"/><path d="M1330 300 C1360 300 1360 185 1386 185"/><path d="M1330 300 C1360 300 1360 385 1386 385"/><path d="M1215 351 V454"/><path d="M1330 510 H1386"/>
+    </svg>
+    <div class="dch in" style="--d:2; --k:#16a07a; top:135px">Email</div>
+    <div class="dch in" style="--d:3; --k:#d9652e; top:225px">Call</div>
+    <div class="dch in" style="--d:4; --k:#3f86e0; top:315px">Chat</div>
+    <div class="dch in" style="--d:5; --k:#d7568a; top:405px">Social</div>
+    <div class="dn in" style="--d:6; --k:var(--w-free); left:190px; --y:300px; width:210px"><b>Ingest &amp;<br>identify</b><small>one format, finds who sent it</small></div>
+    <div class="djev in" style="--d:7">
+      <header><b>Jev layer</b><small>one call · picks, never writes</small></header>
+      <div class="dq"><b>A complaint?</b><span class="yn"><i class="y">Yes</i><i>No</i></span><em>No: set aside</em></div>
+      <div class="dq"><b>Which area?</b><span class="dots"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><em>7 areas, set per business</em></div>
+      <div class="dq"><b>Severity</b><span class="meter"><i></i><i></i><i></i><i></i></span><em>1–4 · annoyed → harmed</em></div>
+      <div class="dq"><b>Money lost?</b><span class="yn"><i class="y">Yes</i><i>No</i></span><em>Yes: urgent at once</em></div>
+      <p class="djev__more">+ mood · legal or safety risk</p>
+    </div>
+    <div class="dn in" style="--d:8; --k:var(--w-free); left:850px; --y:300px; width:160px"><b>Similarity</b><small>matches by meaning</small></div>
+    <div class="dn dn--ok in" style="--d:9; left:1100px; --y:90px; width:230px"><span>Close match</span><b><i class="tick"></i>Filed</b><small>under the known problem</small></div>
+    <div class="dn in" style="--d:10; --k:var(--w-jev); left:1100px; --y:300px; width:230px"><span>Not sure</span><b>Jev re-checks</b><small>a yes / no check</small></div>
+    <div class="dn dn--wait in" style="--d:11; left:1100px; --y:510px; width:230px"><span>No match</span><b>Waiting list</b><small>stored, seen by staff</small></div>
+    <div class="dn dn--ok in" style="--d:12; left:1390px; --y:185px; width:250px"><span>Yes</span><b><i class="tick"></i>Filed</b><small>under that problem</small></div>
+    <div class="dn in" style="--d:13; --k:var(--w-llm); left:1390px; --y:385px; width:250px"><span>Still not sure</span><b>LLM decides</b><small>files it, or it waits</small></div>
+    <div class="dn in" style="--d:14; --k:var(--w-llm); left:1390px; --y:510px; width:250px"><span>After 3 customers</span><b>LLM names it</b><small>a new problem</small></div>
+    <span class="dpill in" style="--d:12; left:1215px; top:403px">No</span>
+    <div class="legend dlegend in" style="--d:6"><span><i style="--k:var(--w-free)"></i>Free</span><span><i style="--k:var(--w-jev)"></i>Jev</span><span><i style="--k:var(--w-llm)"></i>LLM</span></div>
+  </div>
+  <aside>Left to right. A complaint arrives by email, call, chat or social media. Intake turns the four formats into one and finds the customer. Then one call to Jev answers the questions at once: is it a complaint (if not, it is set aside), which of the business's areas, how severe, was money lost, plus mood and legal risk. Similarity, free on our machine, compares it with the known problems. A close match is filed straight away. Clearly new: it goes to the waiting list. Not sure: Jev re-checks with a yes or no. Yes: filed. No: waiting list. Still not sure: only now does the LLM decide. When three different customers report the same new thing, the LLM names it as a new problem. The cheapest check always goes first.</aside>
+</section>
+
+<!-- 11 flow -->
 <section class="slide" id="flow">
   <p class="kicker in" style="--d:0">The whole flow</p>
   <h2 class="title in" style="--d:1">Ten steps, <span class="soft">cheapest first.</span></h2>
@@ -2241,7 +2573,24 @@ p {
   <aside>Top row left to right, bottom row back. 1 intake: four channels into one shape, find the customer; order IDs have a check digit. 2 the gate: six questions, one call. 3 similarity: free, files most complaints. 4 verify: Jev's yes or no for unsure matches. 5 the LLM only if still unsure. 6 waiting list until 3 different customers; money or safety is urgent at once. 7 group check. 8 the LLM names the new problem. 9 after each batch it merges duplicates. 10 the Top 10 with a score anyone can check. Every confirmed wording becomes an example, so it gets cheaper the longer it runs.</aside>
 </section>
 
-<!-- 11 tested live: live-test accuracy, added 13 Nov at Jnanottam's request -->
+<!-- 12 versus Jira -->
+<section class="slide" id="jira">
+  <p class="kicker in" style="--d:0">What companies use today</p>
+  <h2 class="title in" style="--d:1">Jira tracks tickets. <span class="soft">We find the problems.</span></h2>
+  <div class="vtable">
+    <div class="vhead in" style="--d:2"><span></span><span>Jira, as support teams run it</span><span>Complaint Compass</span></div>
+    <div class="vrow in" style="--d:3"><b>What one item is</b><span class="vj">A ticket per message</span><span class="vc">A problem, with every complaint behind it</span></div>
+    <div class="vrow in" style="--d:4"><b>300 people, one problem</b><span class="vj">AI suggests matches; an agent links them</span><span class="vc">Filed on arrival: 267 of 267 right in our test</span></div>
+    <div class="vrow in" style="--d:5"><b>One customer, 3 channels</b><span class="vj">Usually 3 separate tickets</span><span class="vc">One customer, counted once</span></div>
+    <div class="vrow in" style="--d:6"><b>A new problem appears</b><span class="vj">Noticed when an agent spots the pattern</span><span class="vc">Named automatically once 3 customers report it</span></div>
+    <div class="vrow in" style="--d:7"><b>What to fix first</b><span class="vj">An agent sets the priority</span><span class="vc">A checkable score: customers × impact × money × anger × trend</span></div>
+    <div class="vrow in" style="--d:8"><b>Who is hit hardest</b><span class="vj">Custom fields and reports to build</span><span class="vc">Built in: students, states, age groups</span></div>
+  </div>
+  <p class="vnote in" style="--d:9">Not instead of Jira: each ranked problem can become <b>one</b> Jira ticket instead of 300 (next step).</p>
+  <aside>Most support teams today run Jira Service Management. It is a good tracker, but its unit is a ticket: one per message. Its AI suggests similar tickets, yet an agent still links them to a problem record, decides the priority, and notices new patterns. One customer writing on email, chat and Twitter is usually three tickets. We do the part before the ticket: every complaint is filed under its recurring problem on arrival, one customer counts once, a new problem gets a name once three customers report it, and the Top 10 comes with a score you can check. We are not asking anyone to drop Jira: the ranked problems can go into it as one ticket each instead of hundreds. That connector is a next step, not built yet.</aside>
+</section>
+
+<!-- 13 tested live: live-test accuracy -->
 <section class="slide" id="tested">
   <p class="kicker in" style="--d:0">Tested live · real models · an answer key</p>
   <h2 class="title in" style="--d:1">300 new complaints. <span class="soft">One mistake.</span></h2>
@@ -2269,7 +2618,7 @@ p {
   <aside>We generated 300 complaints the system had never seen, from our real customer list, each with a hidden right answer, and sent them one by one to the live site with the real models, in batches of 50, 100 and 150, each on a clean copy of the data. One square per complaint. Green: filed under the right problem, 267 of 267. Grey: praise and spam correctly set aside, 30 of 30. Gold: 2 the LLM was not sure about, so they wait for staff instead of being guessed. Red: one real complaint missed, a short Hinglish call ending in thanks. Backup slides show every step and every miss.</aside>
 </section>
 
-<!-- 12 costing test -->
+<!-- 14 costing test -->
 <section class="slide" id="costing">
   <p class="kicker in" style="--d:0">Costing test · the same 300 complaints</p>
   <h2 class="title in" style="--d:1">Same 300 complaints. <span class="soft">65–87% cheaper.</span></h2>
@@ -2288,9 +2637,20 @@ p {
   <aside>The costing test uses the same 300 complaints as the accuracy test. Our side is what the live run actually used: every Jev and Claude Haiku call reports its tokens, priced at list price. Total: 1.3 cents for 300 complaints, 4 dollars 33 per lakh. The other side is an LLM reading every complaint: we built its real prompt for each of the same 300 complaints, the full list of known problems plus the complaint, and priced it the same way. 12 dollars 54 per lakh even if its prompt is cached every time, 33 dollars 71 without caching. So we are 65 to 87 percent cheaper, 3 to 8 times, and every batch size gives the same answer: the cost grows in a straight line with volume. Honest: that side is priced, not run.</aside>
 </section>
 
-<!-- 12 close -->
+<!-- 15 close -->
+<section class="slide close" id="close">
+  <p class="kicker in" style="--d:0">HackStellar · PS-19</p>
+  <h1 class="in" style="--d:1">Complaint <span class="gold">Compass</span></h1>
+  <div class="bigs">
+    <div class="big in" style="--d:2; --w:85%"><b class="n-save">65–85%</b><span>cheaper</span></div>
+    <div class="big in" style="--d:3; --w:90%"><b class="n-save">90%</b><span>fewer output tokens</span></div>
+    <div class="big in" style="--d:4; --w:100%"><b class="n-save">2–3×</b><span>faster</span></div>
+  </div>
+  <p class="thanks in" style="--d:5">Thank you. Questions?</p>
+  <aside>Close on the three numbers against an LLM reading every complaint, then take questions. Backup slides follow: accuracy step by step, every miss, where the money goes, ranking, customer groups, other businesses, limits, funnel.</aside>
+</section>
 
-<!-- 13 accuracy, step by step (live test) -->
+<!-- 16 accuracy, step by step (live test) -->
 <section class="slide" id="accuracy">
   <span class="backup-tag">Backup</span>
   <p class="kicker in" style="--d:0">Accuracy, step by step</p>
@@ -2308,7 +2668,36 @@ p {
   <aside>Every step has its own score. The gate kept 269 of 270 real complaints and set aside all 30 non-complaints. The area was right 268 of 269 times. Similarity filed 100, all right; Jev's yes or no filed 162, all right; the LLM settled 5, all right, and sent 2 it was unsure about to the waiting list. Customer linking was checked on batch 3: 121 found, none wrong; 29 unknown senders were left unlinked rather than guessed.</aside>
 </section>
 
-<!-- 16 where the money goes -->
+<!-- 17 every miss (live test) -->
+<section class="slide" id="misses">
+  <span class="backup-tag">Backup</span>
+  <p class="kicker in" style="--d:0">Live test · the three not filed</p>
+  <h2 class="title in" style="--d:1">Every miss, <span class="soft">shown.</span></h2>
+  <div class="misses">
+    <div class="miss in" style="--d:2; --k:var(--critical)">
+      <span class="chip" style="--k:#e5534b">Missed</span>
+      <q>ande toote hue aaye. Thanks.</q>
+      <p class="meta">Call · Hinglish · the eggs arrived broken</p>
+      <p>Set aside as not a complaint. Jev gave it 15%: the “Thanks” read as praise.</p>
+    </div>
+    <div class="miss in" style="--d:3; --k:var(--n-save)">
+      <span class="chip" style="--k:#e6c27f">Waiting · urgent</span>
+      <q>order me cooking oil aaya hi nahi, paise pure kate… Sort it out.</q>
+      <p class="meta">Chat · Hinglish · an item missing from the order</p>
+      <p>The LLM was not sure, so it waits for staff instead of a guess. Flagged urgent: money lost.</p>
+    </div>
+    <div class="miss in" style="--d:4; --k:var(--n-save)">
+      <span class="chip" style="--k:#e6c27f">Waiting</span>
+      <q>The detergent had fungus on it.</q>
+      <p class="meta">Email · an expired product</p>
+      <p>The LLM was not sure which known problem it is, so it waits for staff.</p>
+    </div>
+  </div>
+  <p class="foot">Waiting is the safe failure: the complaint is stored, visible on the Unconfirmed page, and never filed under the wrong problem.</p>
+  <aside>These are the only three of 300 not filed under the right problem. One real miss: a very short Hinglish call that ended in thanks; the gate read it as polite, not a complaint. Two the LLM declined to guess; they wait on the Unconfirmed page for staff or for more customers, and the one where money was lost is flagged urgent. Nothing was filed under a wrong problem.</aside>
+</section>
+
+<!-- 18 where the money goes -->
 <section class="slide" id="money">
   <span class="backup-tag">Backup</span>
   <p class="kicker in" style="--d:0">Costing test · where our money goes</p>
@@ -2333,9 +2722,7 @@ p {
   <aside>Where our 1.3 cents went. Jev's gate, one call per complaint, is 71 percent of the bill; Jev's yes-or-no checks are 22; the LLM is only 7 percent, because just 7 of 300 complaints needed it. The LLM-everywhere approach writes an answer for every complaint: about 59 thousand output tokens for these 300, against our 1 thousand. Output tokens are the expensive ones. With a bigger model such as Sonnet reading everything, the bill would be 674 dollars per lakh complaints.</aside>
 </section>
 
-<!-- 14 every miss (live test) -->
-
-<!-- 15 ranking -->
+<!-- 19 ranking -->
 <section class="slide" id="ranking">
   <span class="backup-tag">Backup</span>
   <p class="kicker in" style="--d:0">Ranking</p>
@@ -2350,9 +2737,20 @@ p {
   <aside>The ranking is a written formula. Customers, not messages, times average impact from 1 to 4, times one plus the money-lost share, times a small anger factor so a loud customer never outranks a quiet one who lost money, times 1.25 if rising: at least 5 customers this week and double the week before. Every issue in the console shows this breakdown.</aside>
 </section>
 
-<!-- 16 segments -->
+<!-- 20 segments -->
+<section class="slide" id="segments">
+  <span class="backup-tag">Backup</span>
+  <p class="kicker in" style="--d:0">Customer groups</p>
+  <h2 class="title in" style="--d:1">It shows <span class="soft">who is hit hardest.</span></h2>
+  <div class="segs">
+    <div class="seg in" style="--d:2"><h3>Students</h3><p>hit UPI payment timeouts far more often than everyone else</p></div>
+    <div class="seg in" style="--d:3"><h3>Maharashtra</h3><p>reports “delivered but not received” more than anywhere else</p></div>
+  </div>
+  <p class="foot">Rate = customers affected ÷ size of the group, so a big group never looks worst just for being big. Both patterns were planted in the test data, and both show up in the heatmap.</p>
+  <aside>Every customer has a state, an age group and student status. For each issue we compare a group's rate with everyone's. Students hit UPI timeouts far more often; Maharashtra reports delivered-but-not-received more than elsewhere. Both were planted in the mock data, and both show up in the heatmap.</aside>
+</section>
 
-<!-- 17 packs -->
+<!-- 21 packs -->
 <section class="slide" id="packs">
   <span class="backup-tag">Backup</span>
   <p class="kicker in" style="--d:0">Any business</p>
@@ -2369,7 +2767,7 @@ p {
   <aside>Everything about groceries lives in one settings file, the domain pack: the areas, the questions, the known problems. A telecom or a bank writes its own file and the engine does not change. Jev takes its labels with each request, so there is no training step. A telecom pack is next.</aside>
 </section>
 
-<!-- 18 limits -->
+<!-- 22 limits -->
 <section class="slide" id="limits">
   <span class="backup-tag">Backup</span>
   <p class="kicker in" style="--d:0">Honesty</p>
@@ -2381,7 +2779,7 @@ p {
   <aside>Say these before a judge does. Template data, so real accuracy will be lower. Cut-offs tuned on the data they are scored on. The baseline is projected from calibrated token counts, not run. The live test is 300 complaints from the same templates, on one day. Next: telecom pack, the voice agent demo, plain-language insights, tuning on a real labelled sample.</aside>
 </section>
 
-<!-- 19 funnel -->
+<!-- 23 funnel -->
 <section class="slide" id="funnel">
   <span class="backup-tag">Backup</span>
   <p class="kicker in" style="--d:0">The funnel</p>
@@ -2417,7 +2815,7 @@ Make sure your charset is UTF-8`);e=(e>>>8&255)*192+(e&255),n.put(e,13)}};Ee.exp
 The chosen QR Code version cannot contain this amount of data.
 Minimum version required to store current data is: `+i+`.
 `);let s=Vn(t,e,r),a=it.getSymbolSize(t),l=new Fn(a);return Dn(l,t),qn(l),_n(l,t),St(l,e,0),t>=7&&kn(l,t),Hn(l,s),isNaN(o)&&(o=Lt.getBestMask(l,St.bind(null,l,e))),Lt.applyMask(o,l),St(l,e,o),{modules:l,version:t,errorCorrectionLevel:e,maskPattern:o,segments:r}}Ne.create=function(t,e){if(typeof t>"u"||t==="")throw new Error("No input text");let o=bt.M,r,i;return typeof e<"u"&&(o=bt.from(e.errorCorrectionLevel,bt.M),r=rt.from(e.version),i=Lt.from(e.maskPattern),e.toSJISFunc&&it.setToSJISFunction(e.toSJISFunc)),zn(t,r,o,i)}});var Nt=g(R=>{function Pe(n){if(typeof n=="number"&&(n=n.toString()),typeof n!="string")throw new Error("Color should be defined as hex string");let t=n.slice().replace("#","").split("");if(t.length<3||t.length===5||t.length>8)throw new Error("Invalid hex color: "+n);(t.length===3||t.length===4)&&(t=Array.prototype.concat.apply([],t.map(function(o){return[o,o]}))),t.length===6&&t.push("F","F");let e=parseInt(t.join(""),16);return{r:e>>24&255,g:e>>16&255,b:e>>8&255,a:e&255,hex:"#"+t.slice(0,6).join("")}}R.getOptions=function(t){t||(t={}),t.color||(t.color={});let e=typeof t.margin>"u"||t.margin===null||t.margin<0?4:t.margin,o=t.width&&t.width>=21?t.width:void 0,r=t.scale||4;return{width:o,scale:o?4:r,margin:e,color:{dark:Pe(t.color.dark||"#000000ff"),light:Pe(t.color.light||"#ffffffff")},type:t.type,rendererOpts:t.rendererOpts||{}}};R.getScale=function(t,e){return e.width&&e.width>=t+e.margin*2?e.width/(t+e.margin*2):e.scale};R.getImageWidth=function(t,e){let o=R.getScale(t,e);return Math.floor((t+e.margin*2)*o)};R.qrToImageData=function(t,e,o){let r=e.modules.size,i=e.modules.data,s=R.getScale(r,o),a=Math.floor((r+o.margin*2)*s),l=o.margin*s,u=[o.color.light,o.color.dark];for(let c=0;c<a;c++)for(let m=0;m<a;m++){let f=(c*a+m)*4,y=o.color.light;if(c>=l&&m>=l&&c<a-l&&m<a-l){let M=Math.floor((c-l)/s),b=Math.floor((m-l)/s);y=u[i[M*r+b]?1:0]}t[f++]=y.r,t[f++]=y.g,t[f++]=y.b,t[f]=y.a}}});var xe=g(st=>{var It=Nt();function Gn(n,t,e){n.clearRect(0,0,t.width,t.height),t.style||(t.style={}),t.height=e,t.width=e,t.style.height=e+"px",t.style.width=e+"px"}function Kn(){try{return document.createElement("canvas")}catch{throw new Error("You need to specify a canvas element")}}st.render=function(t,e,o){let r=o,i=e;typeof r>"u"&&(!e||!e.getContext)&&(r=e,e=void 0),e||(i=Kn()),r=It.getOptions(r);let s=It.getImageWidth(t.modules.size,r),a=i.getContext("2d"),l=a.createImageData(s,s);return It.qrToImageData(l.data,t,r),Gn(a,i,s),a.putImageData(l,0,0),i};st.renderToDataURL=function(t,e,o){let r=o;typeof r>"u"&&(!e||!e.getContext)&&(r=e,e=void 0),r||(r={});let i=st.render(t,e,r),s=r.type||"image/png",a=r.rendererOpts||{};return i.toDataURL(s,a.quality)}});var qe=g(De=>{var Jn=Nt();function Re(n,t){let e=n.a/255,o=t+'="'+n.hex+'"';return e<1?o+" "+t+'-opacity="'+e.toFixed(2).slice(1)+'"':o}function Pt(n,t,e){let o=n+t;return typeof e<"u"&&(o+=" "+e),o}function On(n,t,e){let o="",r=0,i=!1,s=0;for(let a=0;a<n.length;a++){let l=Math.floor(a%t),u=Math.floor(a/t);!l&&!i&&(i=!0),n[a]?(s++,a>0&&l>0&&n[a-1]||(o+=i?Pt("M",l+e,.5+u+e):Pt("m",r,0),r=0,i=!1),l+1<t&&n[a+1]||(o+=Pt("h",s),s=0)):r++}return o}De.render=function(t,e,o){let r=Jn.getOptions(e),i=t.modules.size,s=t.modules.data,a=i+r.margin*2,l=r.color.light.a?"<path "+Re(r.color.light,"fill")+' d="M0 0h'+a+"v"+a+'H0z"/>':"",u="<path "+Re(r.color.dark,"stroke")+' d="'+On(s,i,r.margin)+'"/>',c='viewBox="0 0 '+a+" "+a+'"',f='<svg xmlns="http://www.w3.org/2000/svg" '+(r.width?'width="'+r.width+'" height="'+r.width+'" ':"")+c+' shape-rendering="crispEdges">'+l+u+`</svg>
-`;return typeof o=="function"&&o(null,f),f}});var ke=g(j=>{var Yn=Vt(),xt=Ie(),_e=xe(),$n=qe();function Rt(n,t,e,o,r){let i=[].slice.call(arguments,1),s=i.length,a=typeof i[s-1]=="function";if(!a&&!Yn())throw new Error("Callback required as last argument");if(a){if(s<2)throw new Error("Too few arguments provided");s===2?(r=e,e=t,t=o=void 0):s===3&&(t.getContext&&typeof r>"u"?(r=o,o=void 0):(r=o,o=e,e=t,t=void 0))}else{if(s<1)throw new Error("Too few arguments provided");return s===1?(e=t,t=o=void 0):s===2&&!t.getContext&&(o=e,e=t,t=void 0),new Promise(function(l,u){try{let c=xt.create(e,o);l(n(c,t,o))}catch(c){u(c)}})}try{let l=xt.create(e,o);r(null,n(l,t,o))}catch(l){r(l)}}j.create=xt.create;j.toCanvas=Rt.bind(null,_e.render);j.toDataURL=Rt.bind(null,_e.renderToDataURL);j.toString=Rt.bind(null,function(n,t,e){return $n.render(n,e)})});var Ve=tn(ke(),1),E=Array.from(document.querySelectorAll(".slide")),ve=document.querySelector(".stage"),jn=document.querySelector(".progress span"),Qn=document.querySelector(".counter"),Wn=document.querySelector(".notes-panel"),ze=matchMedia("(prefers-reduced-motion: reduce)").matches,w=0,N=0,Ge=n=>Math.max(0,...Array.from(n.querySelectorAll("[data-step]")).map(t=>Number(t.dataset.step)));function Ke(){let n=document.documentElement.clientWidth||window.innerWidth,t=document.documentElement.clientHeight||window.innerHeight,e=Math.min(n/1920,t/1080);ve.style.transform=`translate(-50%, -50%) scale(${e})`}function Dt(n=1){E.forEach((e,o)=>{e.classList.toggle("is-active",o===w),e.classList.toggle("is-past",o<w),e.setAttribute("aria-hidden",String(o!==w))});let t=E[w];t.querySelectorAll("[data-step]").forEach(e=>e.classList.toggle("is-shown",Number(e.dataset.step)<=N)),t.dataset.step=String(N),jn.style.width=`${(w+1)/E.length*100}%`,Qn.textContent=`${w+1} / ${E.length}`,Wn.innerHTML=t.querySelector("aside")?.innerHTML??"",location.hash!==`#${t.id}`&&history.replaceState(null,"",`#${t.id}`),(N===0||n<0)&&Je(t)}function D(n,t=!1){let e=Math.max(0,Math.min(E.length-1,n)),o=e>=w?1:-1;w=e,N=t?Ge(E[w]):0,Dt(o)}function at(){N<Ge(E[w])?(N++,Dt(),Je(E[w])):w<E.length-1&&D(w+1)}function lt(){N>0?(N--,Dt(-1)):w>0&&D(w-1,!0)}function Je(n){n.querySelectorAll("[data-count]").forEach(t=>{let e=t.closest("[data-step]");if(e&&!e.classList.contains("is-shown")||t.dataset.done===String(w))return;t.dataset.done=String(w);let o=Number(t.dataset.count),r=Number(t.dataset.decimals??0),i=u=>`${t.dataset.prefix??""}${u.toLocaleString("en-IN",{minimumFractionDigits:r,maximumFractionDigits:r})}${t.dataset.suffix??""}`;if(ze){t.textContent=i(o);return}let s=performance.now(),a=1400,l=u=>{let c=Math.min(1,(u-s)/a);t.textContent=i(o*(1-Math.pow(1-c,4))),c<1&&requestAnimationFrame(l)};requestAnimationFrame(l)}),E.forEach((t,e)=>e!==w&&t.querySelectorAll("[data-count]").forEach(o=>delete o.dataset.done))}var Xn="https://hackstellar-three.vercel.app";document.querySelectorAll("[data-qr]").forEach(n=>{try{let t=location.protocol.startsWith("http")?location.origin:Xn,e=new URL(n.dataset.qr,t).href;Ve.default.toString(e,{type:"svg",margin:0,color:{dark:"#0a0a0b",light:"#f2efe8"}}).then(r=>n.innerHTML=r);let o=n.parentElement?.querySelector("[data-qr-url]");o&&(o.textContent=e.replace(/^https?:\/\//,""))}catch{}});document.querySelectorAll("[data-waffle]").forEach(n=>{let t=0;n.innerHTML=n.dataset.waffle.split(" ").map(e=>{let o=e[0];return Array.from({length:Number(e.slice(1))},()=>`<i class="c-${o}" style="--i:${t++}"></i>`).join("")}).join("")});function Zn(){let n=document.querySelector("#funnel-canvas"),t=document.querySelector("#funnel-svg");if(!n||!t||ze)return;let e=n.getContext("2d"),o=Array.from(t.querySelectorAll("path[data-w]")),r=o.map(c=>Number(c.dataset.w)),i=r.reduce((c,m)=>c+m,0),s=[],a=()=>{let c=Math.random()*i;for(let m=0;m<o.length;m++)if((c-=r[m])<=0)return o[m];return o[0]},l=performance.now(),u=c=>{requestAnimationFrame(u);let m=Math.min(.05,(c-l)/1e3);if(l=c,!!E[w].contains(n)){if(s.length<260)for(let f=0;f<3;f++){let y=a();s.push({path:y,len:y.getTotalLength(),t:0,v:260+Math.random()*120,off:(Math.random()-.5)*Number(y.dataset.spread??30),color:y.dataset.color??"#f3ddb0"})}e.clearRect(0,0,n.width,n.height),e.globalCompositeOperation="lighter",s=s.filter(f=>{if(f.t+=f.v*m,f.t>=f.len)return!1;let y=f.path.getPointAtLength(f.t);return e.fillStyle=f.color,e.globalAlpha=Math.min(1,(f.len-f.t)/80),e.beginPath(),e.arc(y.x,y.y+f.off,2.6,0,Math.PI*2),e.fill(),!0})}};requestAnimationFrame(u)}window.addEventListener("keydown",n=>{["ArrowRight","ArrowDown","PageDown"," ","Enter"].includes(n.key)?(n.preventDefault(),at()):["ArrowLeft","ArrowUp","PageUp","Backspace"].includes(n.key)?(n.preventDefault(),lt()):n.key==="Home"?D(0):n.key==="End"?D(E.length-1):n.key.toLowerCase()==="f"?document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen():n.key.toLowerCase()==="n"&&document.body.classList.toggle("show-notes")});document.querySelector(".nav-next")?.addEventListener("click",at);document.querySelector(".nav-prev")?.addEventListener("click",lt);ve.addEventListener("click",n=>{if(n.target.closest("a, button"))return;n.clientX/window.innerWidth<.25?lt():at()});var Oe=0;window.addEventListener("touchstart",n=>Oe=n.touches[0].clientX,{passive:!0});window.addEventListener("touchend",n=>{let t=n.changedTouches[0].clientX-Oe;Math.abs(t)>50&&(t<0?at:lt)()});window.addEventListener("resize",Ke);window.addEventListener("hashchange",()=>{let n=E.findIndex(t=>`#${t.id}`===location.hash);n>=0&&n!==w&&D(n)});window.addEventListener("beforeprint",()=>{E.forEach(n=>n.classList.add("is-active")),document.querySelectorAll("[data-step]").forEach(n=>n.classList.add("is-shown"))});window.addEventListener("afterprint",()=>D(w));var He=E.findIndex(n=>`#${n.id}`===location.hash);Ke();Zn();D(He>=0?He:0);document.body.classList.add("ready");})();
+`;return typeof o=="function"&&o(null,f),f}});var ke=g(j=>{var Yn=Vt(),xt=Ie(),_e=xe(),$n=qe();function Rt(n,t,e,o,r){let i=[].slice.call(arguments,1),s=i.length,a=typeof i[s-1]=="function";if(!a&&!Yn())throw new Error("Callback required as last argument");if(a){if(s<2)throw new Error("Too few arguments provided");s===2?(r=e,e=t,t=o=void 0):s===3&&(t.getContext&&typeof r>"u"?(r=o,o=void 0):(r=o,o=e,e=t,t=void 0))}else{if(s<1)throw new Error("Too few arguments provided");return s===1?(e=t,t=o=void 0):s===2&&!t.getContext&&(o=e,e=t,t=void 0),new Promise(function(l,u){try{let c=xt.create(e,o);l(n(c,t,o))}catch(c){u(c)}})}try{let l=xt.create(e,o);r(null,n(l,t,o))}catch(l){r(l)}}j.create=xt.create;j.toCanvas=Rt.bind(null,_e.render);j.toDataURL=Rt.bind(null,_e.renderToDataURL);j.toString=Rt.bind(null,function(n,t,e){return $n.render(n,e)})});var Ve=tn(ke()),E=Array.from(document.querySelectorAll(".slide")),ve=document.querySelector(".stage"),jn=document.querySelector(".progress span"),Qn=document.querySelector(".counter"),Wn=document.querySelector(".notes-panel"),ze=matchMedia("(prefers-reduced-motion: reduce)").matches,w=0,N=0,Ge=n=>Math.max(0,...Array.from(n.querySelectorAll("[data-step]")).map(t=>Number(t.dataset.step)));function Ke(){let n=document.documentElement.clientWidth||window.innerWidth,t=document.documentElement.clientHeight||window.innerHeight,e=Math.min(n/1920,t/1080);ve.style.transform=`translate(-50%, -50%) scale(${e})`}function Dt(n=1){E.forEach((e,o)=>{e.classList.toggle("is-active",o===w),e.classList.toggle("is-past",o<w),e.setAttribute("aria-hidden",String(o!==w))});let t=E[w];t.querySelectorAll("[data-step]").forEach(e=>e.classList.toggle("is-shown",Number(e.dataset.step)<=N)),t.dataset.step=String(N),jn.style.width=`${(w+1)/E.length*100}%`,Qn.textContent=`${w+1} / ${E.length}`,Wn.innerHTML=t.querySelector("aside")?.innerHTML??"",location.hash!==`#${t.id}`&&history.replaceState(null,"",`#${t.id}`),(N===0||n<0)&&Je(t)}function D(n,t=!1){let e=Math.max(0,Math.min(E.length-1,n)),o=e>=w?1:-1;w=e,N=t?Ge(E[w]):0,Dt(o)}function at(){N<Ge(E[w])?(N++,Dt(),Je(E[w])):w<E.length-1&&D(w+1)}function lt(){N>0?(N--,Dt(-1)):w>0&&D(w-1,!0)}function Je(n){n.querySelectorAll("[data-count]").forEach(t=>{let e=t.closest("[data-step]");if(e&&!e.classList.contains("is-shown")||t.dataset.done===String(w))return;t.dataset.done=String(w);let o=Number(t.dataset.count),r=Number(t.dataset.decimals??0),i=u=>`${t.dataset.prefix??""}${u.toLocaleString("en-IN",{minimumFractionDigits:r,maximumFractionDigits:r})}${t.dataset.suffix??""}`;if(ze){t.textContent=i(o);return}let s=performance.now(),a=1400,l=u=>{let c=Math.min(1,(u-s)/a);t.textContent=i(o*(1-Math.pow(1-c,4))),c<1&&requestAnimationFrame(l)};requestAnimationFrame(l)}),E.forEach((t,e)=>e!==w&&t.querySelectorAll("[data-count]").forEach(o=>delete o.dataset.done))}var Xn="https://hackstellar-three.vercel.app";document.querySelectorAll("[data-qr]").forEach(n=>{try{let t=location.protocol.startsWith("http")?location.origin:Xn,e=new URL(n.dataset.qr,t).href;Ve.default.toString(e,{type:"svg",margin:0,color:{dark:"#0a0a0b",light:"#f2efe8"}}).then(r=>n.innerHTML=r);let o=n.parentElement?.querySelector("[data-qr-url]");o&&(o.textContent=e.replace(/^https?:\/\//,""))}catch{}});document.querySelectorAll("[data-waffle]").forEach(n=>{let t=0;n.innerHTML=n.dataset.waffle.split(" ").map(e=>{let o=e[0];return Array.from({length:Number(e.slice(1))},()=>`<i class="c-${o}" style="--i:${t++}"></i>`).join("")}).join("")});function Zn(){let n=document.querySelector("#funnel-canvas"),t=document.querySelector("#funnel-svg");if(!n||!t||ze)return;let e=n.getContext("2d"),o=Array.from(t.querySelectorAll("path[data-w]")),r=o.map(c=>Number(c.dataset.w)),i=r.reduce((c,m)=>c+m,0),s=[],a=()=>{let c=Math.random()*i;for(let m=0;m<o.length;m++)if((c-=r[m])<=0)return o[m];return o[0]},l=performance.now(),u=c=>{requestAnimationFrame(u);let m=Math.min(.05,(c-l)/1e3);if(l=c,!!E[w].contains(n)){if(s.length<260)for(let f=0;f<3;f++){let y=a();s.push({path:y,len:y.getTotalLength(),t:0,v:260+Math.random()*120,off:(Math.random()-.5)*Number(y.dataset.spread??30),color:y.dataset.color??"#f3ddb0"})}e.clearRect(0,0,n.width,n.height),e.globalCompositeOperation="lighter",s=s.filter(f=>{if(f.t+=f.v*m,f.t>=f.len)return!1;let y=f.path.getPointAtLength(f.t);return e.fillStyle=f.color,e.globalAlpha=Math.min(1,(f.len-f.t)/80),e.beginPath(),e.arc(y.x,y.y+f.off,2.6,0,Math.PI*2),e.fill(),!0})}};requestAnimationFrame(u)}window.addEventListener("keydown",n=>{["ArrowRight","ArrowDown","PageDown"," ","Enter"].includes(n.key)?(n.preventDefault(),at()):["ArrowLeft","ArrowUp","PageUp","Backspace"].includes(n.key)?(n.preventDefault(),lt()):n.key==="Home"?D(0):n.key==="End"?D(E.length-1):n.key.toLowerCase()==="f"?document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen():n.key.toLowerCase()==="n"&&document.body.classList.toggle("show-notes")});document.querySelector(".nav-next")?.addEventListener("click",at);document.querySelector(".nav-prev")?.addEventListener("click",lt);ve.addEventListener("click",n=>{if(n.target.closest("a, button"))return;n.clientX/window.innerWidth<.25?lt():at()});var Oe=0;window.addEventListener("touchstart",n=>Oe=n.touches[0].clientX,{passive:!0});window.addEventListener("touchend",n=>{let t=n.changedTouches[0].clientX-Oe;Math.abs(t)>50&&(t<0?at:lt)()});window.addEventListener("resize",Ke);window.addEventListener("hashchange",()=>{let n=E.findIndex(t=>`#${t.id}`===location.hash);n>=0&&n!==w&&D(n)});window.addEventListener("beforeprint",()=>{E.forEach(n=>n.classList.add("is-active")),document.querySelectorAll("[data-step]").forEach(n=>n.classList.add("is-shown"))});window.addEventListener("afterprint",()=>D(w));var He=E.findIndex(n=>`#${n.id}`===location.hash);Ke();Zn();D(He>=0?He:0);document.body.classList.add("ready");})();
 
 </script>
 </body>
