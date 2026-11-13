@@ -187,3 +187,13 @@ if (typeof window !== 'undefined') {
     }
   }, 4000)
 }
+
+/* ---------------- staff actions on issues ---------------- */
+// Why one helper: remove and restore are the same shape, and every view must refresh after.
+async function staffPost(path: string, body: unknown = {}) {
+  const data = await fetchJson(path, { method: 'POST', body: JSON.stringify(body) }, 30000)
+  refreshAll()
+  return data
+}
+export const removeIssue = (id: number, reason: string) => staffPost(`/issues/${id}/remove`, { reason })
+export const restoreIssue = (id: number) => staffPost(`/issues/${id}/restore`)

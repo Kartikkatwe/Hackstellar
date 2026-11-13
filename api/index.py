@@ -168,7 +168,7 @@ from starlette.concurrency import run_in_threadpool  # noqa: E402
 
 DB = TMP / "grocery.db"
 _write_lock = threading.Lock()
-WRITES = ("/complaints", "/webhooks/call", "/link")
+WRITES = ("/complaints", "/webhooks/call", "/link", "/remove", "/restore")
 
 
 class LiveSync:

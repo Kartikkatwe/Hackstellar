@@ -9,6 +9,7 @@ import { CHANNEL, CHANNELS } from '../lib/meta'
 import { BadgePill, Flags, SegBar, Skeleton, Empty } from '../components/ui'
 import { Meters, MetersKey } from '../components/Meters'
 import { NumberKey } from '../components/NumberKey'
+import { RemovedIssues } from '../components/RemovedIssues'
 import './Issues.css'
 
 export default function Issues() {
@@ -113,6 +114,7 @@ export default function Issues() {
           ))}
         </AnimatePresence>
       </ol>
+      <RemovedIssues />
     </div>
   )
 }

@@ -286,6 +286,63 @@ def link_customer(cid: str, req: LinkRequest):
     return dict(linked=True)
 
 
+# ------------------------------------------------------------------ staff remove / restore an issue
+# Why (13 Nov, Kartik): staff must be able to take any issue off the list (fixed, wrong, a test).
+# Why a soft remove (origin 'removed:<old origin>') and a merges row, not DELETE: complaints keep
+#      their trail, the action is on record, and Restore puts it back exactly. It also needs no new
+#      table, so the Vercel live sync (row diffs) carries it to every instance unchanged.
+# After removal the issue is off the ranking and no longer matched; new complaints like it go to
+#      the waiting list and can form a fresh issue.
+class RemoveRequest(BaseModel):
+    reason: str | None = None
+
+
+@app.post("/issues/{issue_id}/remove")
+def remove_issue(issue_id: int, req: RemoveRequest):
+    with _lock:
+        engine = _live_engine()
+        row = engine.con.execute("SELECT origin, component FROM issues WHERE id = ?", (issue_id,)).fetchone()
+        if not row or row["origin"] == "merged" or row["origin"].startswith("removed:"):
+            raise HTTPException(404, "No such issue, or it is already removed or merged.")
+        engine.con.execute("UPDATE issues SET origin = 'removed:' || origin WHERE id = ?", (issue_id,))
+        reason = (req.reason or "").strip()[:300]
+        engine.con.execute("INSERT INTO merges VALUES(?,?,?)", (issue_id, None, f"Removed by staff{': ' + reason if reason else ''}"))
+        engine.con.commit()
+        engine.issues.pop(issue_id, None)
+        engine.by_component[row["component"]] = [i for i in engine.by_component[row["component"]] if i["id"] != issue_id]
+    return dict(removed=True)
+
+
+@app.post("/issues/{issue_id}/restore")
+def restore_issue(issue_id: int):
+    global _engine
+    with _lock:
+        engine = _live_engine()
+        row = engine.con.execute("SELECT origin FROM issues WHERE id = ?", (issue_id,)).fetchone()
+        if not row or not row["origin"].startswith("removed:"):
+            raise HTTPException(404, "No such removed issue.")
+        engine.con.execute("UPDATE issues SET origin = substr(origin, 9) WHERE id = ?", (issue_id,))
+        engine.con.execute("INSERT INTO merges VALUES(?,?,?)", (issue_id, None, "Restored by staff"))
+        engine.con.commit()
+        engine.con.close()
+        _engine = None          # rebuilt on next use, with the issue back in matching
+    return dict(restored=True)
+
+
+@app.get("/removed-issues")
+def removed_issues():
+    con = _read()
+    try:
+        rows = con.execute(
+            "SELECT i.id, i.title, i.component, "
+            "(SELECT reason FROM merges m WHERE m.from_issue = i.id AND m.into_issue IS NULL ORDER BY rowid DESC LIMIT 1) reason, "
+            "(SELECT COUNT(*) FROM assignments a WHERE a.issue_id = i.id) complaints "
+            "FROM issues i WHERE i.origin LIKE 'removed:%' ORDER BY i.id").fetchall()
+        return dict(issues=[dict(r) for r in rows])
+    finally:
+        con.close()
+
+
 # ------------------------------------------------------------------ live intake
 class NewComplaint(BaseModel):
     channel: str = "chat"

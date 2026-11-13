@@ -60,7 +60,7 @@ def rank(con, pack: dict, filters: dict | None = None, n: int | None = None) -> 
             a["unlinked"] += 1
 
     out = []
-    for issue in con.execute("SELECT * FROM issues"):
+    for issue in con.execute("SELECT * FROM issues WHERE origin NOT LIKE 'removed:%'"):   # staff removed it: off the ranking
         a = agg.get(issue["id"])
         if not a:
             continue

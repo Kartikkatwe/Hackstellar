@@ -66,7 +66,7 @@ class Engine:
         Why: the API can then take one live complaint (or a voice-agent webhook) on top of
         a batch run without reprocessing 1,500 complaints. Vectors are re-embedded from the
         stored texts. Not stored as blobs: they depend on the embedder in use."""
-        for row in self.con.execute("SELECT * FROM issues WHERE origin != 'merged' ORDER BY id").fetchall():
+        for row in self.con.execute("SELECT * FROM issues WHERE origin != 'merged' AND origin NOT LIKE 'removed:%' ORDER BY id").fetchall():
             texts = [r[0] for r in self.con.execute("SELECT text FROM exemplars WHERE issue_id=? ORDER BY rowid", (row["id"],))]
             issue = dict(row) | dict(texts=texts, mat=self.embedder.encode(texts))
             self._recentre(issue)

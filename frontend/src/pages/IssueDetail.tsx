@@ -8,6 +8,7 @@ import { componentName, int, pct, when } from '../lib/format'
 import { CHANNEL, CHANNELS, STAGE, STAGE_ORDER } from '../lib/meta'
 import { AnimatedNumber, BadgePill, ChannelIcon, ChannelTag, Empty, Flags, SegBar, Skeleton } from '../components/ui'
 import { ScoreWhy } from '../components/ScoreWhy'
+import { RemoveIssue } from '../components/RemoveIssue'
 import { NumberKey } from '../components/NumberKey'
 import { TrendChart } from '../components/TrendChart'
 import './IssueDetail.css'
@@ -64,6 +65,7 @@ export default function IssueDetail() {
         </motion.h1>
         {s.description && <p className="idet__desc">{s.description}</p>}
         <ScoreWhy s={s} />
+        <RemoveIssue key={s.issue_id} id={s.issue_id} title={s.title} />
       </header>
 
       <NumberKey only={['n-volume', 'n-harm']} />
