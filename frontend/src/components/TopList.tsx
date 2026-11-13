@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react'
 import { ArrowUpRight } from 'lucide-react'
 import type { Issue } from '../lib/types'
-import { componentName } from '../lib/format'
+import { componentName, scoreScale } from '../lib/format'
 import { BadgePill, Flags } from './ui'
 import './TopList.css'
 
@@ -11,6 +11,7 @@ import './TopList.css'
 export function TopList({ issues, focusId, onFocus, maxScore }: { issues: Issue[]; focusId?: number | null; onFocus?: (id: number | null) => void; maxScore?: number }) {
   const reduce = useReducedMotion()
   const top = maxScore ?? Math.max(1, ...issues.map((i) => i.score))
+  const scale = scoreScale(top)
   return (
     <ol className="toplist">
       <AnimatePresence initial={false}>
@@ -42,9 +43,12 @@ export function TopList({ issues, focusId, onFocus, maxScore }: { issues: Issue[
               </span>
               <span className="toplist__score">
                 <span className="toplist__bar" aria-hidden="true">
-                  <span style={{ width: `${(i.score / top) * 100}%` }} />
+                  <span style={{ width: `${(i.score / scale) * 100}%` }} />
                 </span>
-                <span className="num">{i.score.toFixed(1)}</span>
+                <span className="num toplist__out">
+                  {Math.round(i.score)}
+                  <span>/{scale}</span>
+                </span>
               </span>
               <BadgePill badge={i.badge} size="sm" />
               <ArrowUpRight size={16} className="toplist__go" aria-hidden="true" />
