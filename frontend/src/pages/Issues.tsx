@@ -8,6 +8,7 @@ import { componentName, segmentValue } from '../lib/format'
 import { CHANNEL, CHANNELS } from '../lib/meta'
 import { BadgePill, Flags, SegBar, Skeleton, Empty } from '../components/ui'
 import { Formula } from '../components/Formula'
+import { NumberKey } from '../components/NumberKey'
 import './Issues.css'
 
 export default function Issues() {
@@ -42,6 +43,7 @@ export default function Issues() {
         </div>
       </header>
 
+      <NumberKey only={['n-volume', 'n-harm']} />
       <div className="issues__legend" aria-hidden="true">
         {CHANNELS.map((c) => (
           <span key={c}>
@@ -79,10 +81,10 @@ export default function Issues() {
                 <div className="irow__side">
                   <div className="irow__nums">
                     <span>
-                      <strong className="num">{i.unique_customers}</strong> customers
+                      <strong className="num n-harm">{i.unique_customers}</strong> customers
                     </span>
                     <span>
-                      <strong className="num">{i.complaints}</strong> complaints
+                      <strong className="num n-volume">{i.complaints}</strong> complaints
                     </span>
                   </div>
                   <SegBar

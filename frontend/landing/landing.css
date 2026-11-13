@@ -666,7 +666,7 @@
   width: var(--w);
   min-width: 4px;
   border-radius: 4px;
-  background: linear-gradient(90deg, #9c7434, #f3ddb0);
+  background: linear-gradient(90deg, #2f5f9e, var(--n-volume)); /* a count: the volume colour */
 }
 .proof__stage b {
   font-weight: 500;
@@ -703,5 +703,97 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     column-gap: 48px;
+  }
+}
+
+/* ---------- number colours: the console's four, darker on the light funnel section ---------- */
+:root {
+  --n-volume: #7fb0f0;
+  --n-harm: #f08a64;
+  --n-save: #e6c27f;
+  --n-right: #52c76a;
+}
+.ground-inverse {
+  --n-volume: #245ca8;
+  --n-harm: #b0451d;
+  --n-save: #8a6420;
+  --n-right: #1d7433;
+}
+.n-volume { color: var(--n-volume) !important; }
+.n-harm { color: var(--n-harm) !important; }
+.n-save { color: var(--n-save) !important; }
+.n-right { color: var(--n-right) !important; }
+.nkey {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  margin: 0 0 40px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  border: 1px solid #26262b;
+  background: linear-gradient(90deg, rgb(127 176 240 / 0.05), rgb(240 138 100 / 0.05) 33%, rgb(230 194 127 / 0.06) 66%, rgb(82 199 106 / 0.05)), #0e0e10;
+}
+.nkey__title {
+  font-size: 13px;
+  color: var(--p-muted);
+  padding-right: 18px;
+  border-right: 1px solid #2d2d33;
+}
+.nkey__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+.nkey__list li {
+  display: grid;
+  grid-template-columns: auto auto;
+  column-gap: 9px;
+  align-items: center;
+}
+.nkey__list i {
+  grid-row: span 2;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--k);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--k) 18%, transparent), 0 0 14px color-mix(in srgb, var(--k) 50%, transparent);
+}
+.nkey__list strong {
+  font-size: 14px;
+  font-weight: 560;
+  line-height: 1.2;
+}
+.nkey__list span {
+  font-size: 13px;
+  color: var(--p-muted);
+  line-height: 1.2;
+}
+.nkey--light {
+  border-color: rgb(10 10 11 / 0.14);
+  background: rgb(10 10 11 / 0.04);
+}
+.nkey--light .nkey__title,
+.nkey--light .nkey__list span {
+  color: #575654;
+}
+.nkey--light .nkey__title {
+  border-right-color: rgb(10 10 11 / 0.15);
+}
+@media (max-width: 639px) {
+  .nkey {
+    border-radius: 16px;
+  }
+  .nkey__title {
+    border-right: 0;
+    padding-right: 0;
+    width: 100%;
+  }
+  .nkey__list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
 }

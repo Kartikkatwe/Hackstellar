@@ -3,6 +3,7 @@ import { useApi } from '../lib/api'
 import type { Accuracy } from '../lib/types'
 import { int, pctRaw } from '../lib/format'
 import { AnimatedNumber, Empty, Skeleton } from '../components/ui'
+import { NumberKey } from '../components/NumberKey'
 import './AccuracyPage.css'
 
 /* Measured, not claimed: the mock data records each complaint's true issue, the engine never
@@ -43,12 +44,13 @@ export default function AccuracyPage() {
         </div>
       </header>
 
+      <NumberKey only={['n-right', 'n-volume']} />
       <section className="accp__grid" aria-label="Accuracy">
         {big.map((b) => (
           <article key={b.label} className="accp__card">
             <div className="accp__ring">
               <Ring value={b.value} label={b.label} />
-              <strong>
+              <strong className="n-right">
                 <AnimatedNumber value={b.value} format={pct1} />
               </strong>
             </div>
@@ -64,7 +66,7 @@ export default function AccuracyPage() {
         <div className="panel__head">
           <div>
             <h2 id="disc-h" className="panel__title">
-              Hidden problems found: {acc.discovered.hidden_issues_found} of {acc.discovered.hidden_issues_in_data}
+              Hidden problems found: <span className="n-right">{acc.discovered.hidden_issues_found} of {acc.discovered.hidden_issues_in_data}</span>
             </h2>
             <p className="accp__sub">Five problems were planted in the data with no name and no seed. The engine found them, grouped them and the LLM named them.</p>
           </div>
@@ -86,8 +88,8 @@ export default function AccuracyPage() {
                     <CheckCircle2 size={15} aria-hidden="true" /> {d.title}
                   </td>
                   <td className="mono accp__key">{d.true_issue}</td>
-                  <td className="r">{d.size}</td>
-                  <td className="r">{pctRaw(d.purity_pct, 0)}</td>
+                  <td className="r n-volume">{d.size}</td>
+                  <td className="r n-right">{pctRaw(d.purity_pct, 0)}</td>
                 </tr>
               ))}
             </tbody>

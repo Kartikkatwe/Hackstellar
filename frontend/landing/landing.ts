@@ -67,7 +67,7 @@ async function refresh() {
         cells[0].textContent = String(it.rank)
         cells[1].textContent = it.title
         cells[2].textContent = it.badge
-        cells[3].textContent = `${it.unique_customers} customers`
+        cells[3].innerHTML = `<b class="n-harm">${it.unique_customers}</b> customers`
       })
     }
   } catch {
