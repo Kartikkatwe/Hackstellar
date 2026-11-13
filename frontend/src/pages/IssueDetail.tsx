@@ -8,6 +8,7 @@ import { componentName, int, pct, when } from '../lib/format'
 import { CHANNEL, CHANNELS, STAGE, STAGE_ORDER } from '../lib/meta'
 import { AnimatedNumber, BadgePill, ChannelIcon, ChannelTag, Empty, Flags, SegBar, Skeleton } from '../components/ui'
 import { Formula } from '../components/Formula'
+import { NumberKey } from '../components/NumberKey'
 import { TrendChart } from '../components/TrendChart'
 import './IssueDetail.css'
 
@@ -65,36 +66,37 @@ export default function IssueDetail() {
         <Formula formula={s.formula} size="lg" />
       </header>
 
+      <NumberKey only={['n-volume', 'n-harm']} />
       <section className="idet__stats" aria-label="Key numbers">
         <div>
           <span className="label">Unique customers</span>
-          <strong>
+          <strong className="n-harm">
             <AnimatedNumber value={s.unique_customers} />
           </strong>
           <span className="idet__sub">counted once across channels</span>
         </div>
         <div>
           <span className="label">Complaints</span>
-          <strong>
+          <strong className="n-volume">
             <AnimatedNumber value={s.complaints} />
           </strong>
           <span className="idet__sub">{s.unlinked_mentions} from people not yet linked</span>
         </div>
         <div>
           <span className="label">This week vs last</span>
-          <strong>
+          <strong className="n-harm">
             {s.customers_last_7d} <span className="idet__vs">vs {s.customers_prior_7d}</span>
           </strong>
           <span className="idet__sub">{s.trend > 1 ? 'Rising: trend × 1.25' : 'Not rising'}</span>
         </div>
         <div>
           <span className="label">Money lost</span>
-          <strong>{pct(s.money_share, 0)}</strong>
+          <strong className="n-harm">{pct(s.money_share, 0)}</strong>
           <span className="idet__sub">of complaints report it</span>
         </div>
         <div>
           <span className="label">Angry</span>
-          <strong>{pct(s.angry_share, 0)}</strong>
+          <strong className="n-harm">{pct(s.angry_share, 0)}</strong>
           <span className="idet__sub">of complaints</span>
         </div>
       </section>

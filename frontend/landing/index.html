@@ -83,7 +83,7 @@
     <div class="wrap"><div class="hero-text grid hero__grid">
       <div class="span-3">
         <h1 id="hero-h">Complaint triage for help desks</h1>
-        <p class="hero__lead">Files every complaint from email, calls, chat and social under the problem behind it, then ranks the ten to fix first. <span data-live="no-llm">96.1%</span> never wait on an LLM.</p>
+        <p class="hero__lead">Files every complaint from email, calls, chat and social under the problem behind it, then ranks the ten to fix first. <span data-live="no-llm" class="n-save">96.1%</span> never wait on an LLM.</p>
       </div>
       <div class="ly-collage span-6 start-4" role="img" aria-label="Complaints in English and Hinglish from four channels, each filed under the issue behind it; a new issue the engine found on its own; and the funnel that settled them">
         <div class="ly-collage__set is-on">
@@ -146,7 +146,7 @@
   <section class="section" id="console" aria-labelledby="console-h">
     <div class="wrap">
       <div class="section-head section-head--row">
-        <h2 id="console-h">The console, live on <span data-live="total">1,500</span> complaints. <span class="muted">Every number on it comes from the engine.</span></h2>
+        <h2 id="console-h">The console, live on <span data-live="total" class="n-volume">1,500</span> complaints. <span class="muted">Every number on it comes from the engine.</span></h2>
       </div>
       <a class="appframe" href="/console" aria-label="Open the live console">
         <div class="appframe__bar" aria-hidden="true"><i></i><i></i><i></i><span>Complaint Compass · BasketNow</span></div>
@@ -167,8 +167,8 @@
         <h2 id="words-h">Five complaints, one issue</h2>
         <p class="t-lead">A customer writes in Hinglish on chat, another emails, a third calls. All three land under one issue, and a customer who uses three channels counts once.</p>
         <dl class="words__facts">
-          <div><dt>Customer links correct</dt><dd><span data-live="links">100%</span> of 1,215</dd></div>
-          <div><dt>Sent to the right part of the business</dt><dd data-live="component">99.6%</dd></div>
+          <div><dt>Customer links correct</dt><dd><span data-live="links" class="n-right">100%</span> of 1,215</dd></div>
+          <div><dt>Sent to the right part of the business</dt><dd data-live="component" class="n-right">99.6%</dd></div>
         </dl>
       </div>
       <div class="span-7 hub" aria-label="Five complaints in four channels and two languages joining one issue" role="img">
@@ -183,7 +183,7 @@
         <div class="hub__out">
           <span class="pc-k">One issue</span>
           <strong>Duplicate payment debits after an app update</strong>
-          <span class="hub__n"><b data-live="dup-customers">52</b> customers, counted once</span>
+          <span class="hub__n"><b data-live="dup-customers" class="n-harm">52</b> customers, counted once</span>
         </div>
       </div>
     </div>
@@ -192,13 +192,19 @@
   <section class="section ground-inverse" id="funnel" data-moment="iris-opens" data-moment-opts='{"from": "base"}' aria-labelledby="funnel-h">
     <div class="wrap">
       <div class="section-head">
-        <h2 id="funnel-h"><span data-live="no-llm">96.1%</span> never wait on an LLM. <span class="muted">Cheap checks go first.</span></h2>
+        <h2 id="funnel-h"><span data-live="no-llm" class="n-save">96.1%</span> never wait on an LLM. <span class="muted">Cheap checks go first.</span></h2>
       </div>
+      <div class="nkey nkey--light" role="note" aria-label="What the number colours mean"><span class="nkey__title">Number colours</span><ul class="nkey__list">
+          <li style="--k: var(--n-volume)"><i aria-hidden="true"></i><strong class="n-volume">Volume</strong><span>complaints and counts</span></li>
+          <li style="--k: var(--n-harm)"><i aria-hidden="true"></i><strong class="n-harm">Customer harm</strong><span>people hurt, money lost</span></li>
+          <li style="--k: var(--n-save)"><i aria-hidden="true"></i><strong class="n-save">Speed and savings</strong><span>LLM avoided, cost, time</span></li>
+          <li style="--k: var(--n-right)"><i aria-hidden="true"></i><strong class="n-right">Accuracy</strong><span>against the answer key</span></li>
+        </ul></div>
       <ol class="steps4">
-        <li><span class="step-num">1</span><h3>Gate drops what is not a complaint</h3><p>Jev reads every message. Praise, spam and questions stop here.</p><b class="t-stat" data-live="dropped">151</b><span class="steps4__u">dropped</span></li>
-        <li><span class="step-num">2</span><h3>Similarity files the clear ones</h3><p>A free, local match against every known issue.</p><b class="t-stat" data-live="match">754</b><span class="steps4__u">filed</span></li>
-        <li><span class="step-num">3</span><h3>A yes-or-no check confirms the match</h3><p>Same problem as issue X? A confident yes files it.</p><b class="t-stat" data-live="verify">520</b><span class="steps4__u">filed</span></li>
-        <li class="is-llm"><span class="step-num">4</span><h3>The LLM takes the rest</h3><p>Claude Haiku decides what the cheap checks could not.</p><b class="t-stat" data-live="llm">58</b><span class="steps4__u">reached it</span></li>
+        <li><span class="step-num">1</span><h3>Gate drops what is not a complaint</h3><p>Jev reads every message. Praise, spam and questions stop here.</p><b class="t-stat n-volume" data-live="dropped">151</b><span class="steps4__u">dropped</span></li>
+        <li><span class="step-num">2</span><h3>Similarity files the clear ones</h3><p>A free, local match against every known issue.</p><b class="t-stat n-volume" data-live="match">754</b><span class="steps4__u">filed</span></li>
+        <li><span class="step-num">3</span><h3>A yes-or-no check confirms the match</h3><p>Same problem as issue X? A confident yes files it.</p><b class="t-stat n-volume" data-live="verify">520</b><span class="steps4__u">filed</span></li>
+        <li class="is-llm"><span class="step-num">4</span><h3>The LLM takes the rest</h3><p>Claude Haiku decides what the cheap checks could not.</p><b class="t-stat n-save" data-live="llm">58</b><span class="steps4__u">reached it</span></li>
       </ol>
     </div>
   </section>
@@ -209,17 +215,17 @@
         <h2 id="ranking-h">A Top 10 you can check with a calculator</h2>
         <p class="t-lead">Unique customers × impact × money lost × anger × trend. Every factor is printed next to the issue.</p>
         <div class="rank__formula" aria-label="52 customers times 3.69 impact times 2.00 money times 1.14 anger times 1.25 trend equals 547.3">
-          <span><b>52</b>customers</span><i>×</i><span><b>3.69</b>impact</span><i>×</i><span><b>2.00</b>money</span><i>×</i><span><b>1.14</b>anger</span><i>×</i><span><b>1.25</b>trend</span><i>=</i><span class="is-score"><b>547.3</b>score</span>
+          <span><b class="n-harm">52</b>customers</span><i>×</i><span><b class="n-harm">3.69</b>impact</span><i>×</i><span><b class="n-harm">2.00</b>money</span><i>×</i><span><b class="n-harm">1.14</b>anger</span><i>×</i><span><b>1.25</b>trend</span><i>=</i><span class="is-score"><b>547.3</b>score</span>
         </div>
       </div>
       <div class="span-7 rank__side">
         <div class="panel rank__panel"><div class="ui ui-panel rank__ui"><div class="rank__ui-head"><span>Top issues · BasketNow</span><span>Score</span></div><ol class="rank__list" data-live="top">
-          <li><span class="mono">1</span><strong>Money debited but order not placed</strong><em>Critical</em><span>67 customers</span></li>
-          <li><span class="mono">2</span><strong>Duplicate payment debits for a single order after app update</strong><em>Critical</em><span>52 customers</span></li>
-          <li><span class="mono">3</span><strong>Marked delivered but not received</strong><em>Critical</em><span>74 customers</span></li>
-          <li><span class="mono">4</span><strong>Refund not received</strong><em>Critical</em><span>46 customers</span></li>
-          <li><span class="mono">5</span><strong>Expired or spoiled product delivered</strong><em>Critical</em><span>47 customers</span></li>
-          <li><span class="mono">6</span><strong>App crashes after latest update, including at cart</strong><em>High</em><span>60 customers</span></li>
+          <li><span class="mono">1</span><strong>Money debited but order not placed</strong><em>Critical</em><span><b class="n-harm">67</b> customers</span></li>
+          <li><span class="mono">2</span><strong>Duplicate payment debits for a single order after app update</strong><em>Critical</em><span><b class="n-harm">52</b> customers</span></li>
+          <li><span class="mono">3</span><strong>Marked delivered but not received</strong><em>Critical</em><span><b class="n-harm">74</b> customers</span></li>
+          <li><span class="mono">4</span><strong>Refund not received</strong><em>Critical</em><span><b class="n-harm">46</b> customers</span></li>
+          <li><span class="mono">5</span><strong>Expired or spoiled product delivered</strong><em>Critical</em><span><b class="n-harm">47</b> customers</span></li>
+          <li><span class="mono">6</span><strong>App crashes after latest update, including at cart</strong><em>High</em><span><b class="n-harm">60</b> customers</span></li>
         </ol></div></div>
       </div>
     </div>
@@ -230,17 +236,23 @@
       <div class="section-head">
         <h2 id="proof-h">Results on 1,500 complaints. <span class="muted">Scored against an answer key the engine never sees.</span></h2>
       </div>
+      <div class="nkey" role="note" aria-label="What the number colours mean"><span class="nkey__title">Number colours</span><ul class="nkey__list">
+          <li style="--k: var(--n-volume)"><i aria-hidden="true"></i><strong class="n-volume">Volume</strong><span>complaints and counts</span></li>
+          <li style="--k: var(--n-harm)"><i aria-hidden="true"></i><strong class="n-harm">Customer harm</strong><span>people hurt, money lost</span></li>
+          <li style="--k: var(--n-save)"><i aria-hidden="true"></i><strong class="n-save">Speed and savings</strong><span>LLM avoided, cost, time</span></li>
+          <li style="--k: var(--n-right)"><i aria-hidden="true"></i><strong class="n-right">Accuracy</strong><span>against the answer key</span></li>
+        </ul></div>
       <div class="proof">
-        <div class="proof__item"><b data-live="acc">98.4%</b><span>filed under the right issue, of 1,325 checked</span></div>
-        <div class="proof__item"><b>5 of 5</b><span>hidden problems found and named, none a duplicate</span></div>
-        <div class="proof__item"><b data-live="per100k">$4.33</b><span>per 100,000 complaints; Claude Haiku on each costs <span data-live="haiku100k">$29.70</span></span></div>
-        <div class="proof__item"><b data-live="speedup">2.3×</b><span>faster than one LLM call per complaint</span></div>
+        <div class="proof__item"><b data-live="acc" class="n-right">98.4%</b><span>filed under the right issue, of 1,325 checked</span></div>
+        <div class="proof__item"><b class="n-right">5 of 5</b><span>hidden problems found and named, none a duplicate</span></div>
+        <div class="proof__item"><b data-live="per100k" class="n-save">$4.33</b><span>per 100,000 complaints; Claude Haiku on each costs <span data-live="haiku100k">$29.70</span></span></div>
+        <div class="proof__item"><b data-live="speedup" class="n-save">2.3×</b><span>faster than one LLM call per complaint</span></div>
       </div>
       <div class="proof__stages" role="img" aria-label="Complaints filed by each check and the share filed under the right issue: similarity 754 at 99.2%, Jev 520 at 97.3%, the LLM 26 at 96.2%, new issues 25 at 100%">
-        <div class="proof__stage"><span>Similarity match</span><b><span data-live="n-match">754</span> · <span data-live="acc-match">99.2%</span> right</b><span class="proof__track"><i style="--w: 100%"></i></span></div>
-        <div class="proof__stage"><span>Verified by Jev</span><b><span data-live="n-verify">520</span> · <span data-live="acc-verify">97.3%</span> right</b><span class="proof__track"><i style="--w: 69%"></i></span></div>
-        <div class="proof__stage"><span>Settled by the LLM</span><b><span data-live="n-llm">26</span> · <span data-live="acc-llm">96.2%</span> right</b><span class="proof__track"><i style="--w: 3.4%"></i></span></div>
-        <div class="proof__stage"><span>Became new issues</span><b><span data-live="n-new">25</span> · <span data-live="acc-new">100%</span> right</b><span class="proof__track"><i style="--w: 3.3%"></i></span></div>
+        <div class="proof__stage"><span>Similarity match</span><b><span data-live="n-match" class="n-volume">754</span> · <span data-live="acc-match" class="n-right">99.2%</span> right</b><span class="proof__track"><i style="--w: 100%"></i></span></div>
+        <div class="proof__stage"><span>Verified by Jev</span><b><span data-live="n-verify" class="n-volume">520</span> · <span data-live="acc-verify" class="n-right">97.3%</span> right</b><span class="proof__track"><i style="--w: 69%"></i></span></div>
+        <div class="proof__stage"><span>Settled by the LLM</span><b><span data-live="n-llm" class="n-volume">26</span> · <span data-live="acc-llm" class="n-right">96.2%</span> right</b><span class="proof__track"><i style="--w: 3.4%"></i></span></div>
+        <div class="proof__stage"><span>Became new issues</span><b><span data-live="n-new" class="n-volume">25</span> · <span data-live="acc-new" class="n-right">100%</span> right</b><span class="proof__track"><i style="--w: 3.3%"></i></span></div>
       </div>
       <p class="proof__note">The data is template-generated with a fixed seed, so real complaints will be messier. The LLM-for-everything baseline is priced from real token counts; it was not run.</p>
     </div>

@@ -52,7 +52,7 @@
 }
 .ring__fill {
   fill: none;
-  stroke: var(--brass);
+  stroke: var(--n-right);
   stroke-width: 6;
   stroke-linecap: round;
   transition: stroke-dashoffset 1400ms var(--ease-out);

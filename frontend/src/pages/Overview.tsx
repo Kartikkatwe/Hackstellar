@@ -11,6 +11,7 @@ import { FunnelFlow } from '../components/FunnelFlow'
 import { Formula } from '../components/Formula'
 import { TopList } from '../components/TopList'
 import { LiveFeed } from '../components/LiveFeed'
+import { NumberKey } from '../components/NumberKey'
 import { AnimatedNumber, BadgePill, Flags, LiveDot, SegBar, Skeleton } from '../components/ui'
 import './Overview.css'
 
@@ -60,10 +61,10 @@ export default function Overview() {
           </p>
           <h1 id="ov-title" className="ov__title">
             <motion.span className="ov__line" initial={reduce ? false : { opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}>
-              <AnimatedNumber value={funnel?.total} /> complaints.
+              <AnimatedNumber value={funnel?.total} className="n-volume" /> complaints.
             </motion.span>
             <motion.span className="ov__line ov__line--2" initial={reduce ? false : { opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}>
-              <AnimatedNumber value={allIssues.length || undefined} /> issues.
+              <AnimatedNumber value={allIssues.length || undefined} className="n-volume" /> issues.
             </motion.span>
             <motion.span className="ov__line ov__line--3" initial={reduce ? false : { opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.24, ease: [0.16, 1, 0.3, 1] }}>
               One to fix first.
@@ -124,11 +125,12 @@ export default function Overview() {
       </section>
 
       {/* ---------- proof tiles ---------- */}
+      <NumberKey />
       <section className="ov__tiles" aria-label="Measured results">
         <article className="tile">
           <span className="label">Never waited on an LLM</span>
           <span className="tile__value">
-            <AnimatedNumber value={funnel ? funnel.share_without_llm * 100 : undefined} format={pct1} />
+            <AnimatedNumber value={funnel ? funnel.share_without_llm * 100 : undefined} format={pct1} className="n-save" />
           </span>
           <SegBar
             label="Complaints settled without an LLM versus with one"
@@ -142,7 +144,7 @@ export default function Overview() {
         <article className="tile">
           <span className="label">Filed under the right issue</span>
           <span className="tile__value">
-            <AnimatedNumber value={acc?.issue.accuracy_pct} format={pct1} />
+            <AnimatedNumber value={acc?.issue.accuracy_pct} format={pct1} className="n-right" />
           </span>
           <SegBar
             label="Correct versus wrong filings"
@@ -156,7 +158,7 @@ export default function Overview() {
         <article className="tile">
           <span className="label">Cost per 100,000 complaints</span>
           <span className="tile__value">
-            <AnimatedNumber value={cost?.funnel.per_100k_usd} format={usd2} />
+            <AnimatedNumber value={cost?.funnel.per_100k_usd} format={usd2} className="n-save" />
           </span>
           <div className="tile__bars" aria-hidden="true">
             <span style={{ width: haiku ? `${(cost!.funnel.per_100k_usd / haiku.per_100k_usd) * 100}%` : 0 }} className="is-us" />
@@ -167,7 +169,7 @@ export default function Overview() {
         <article className="tile">
           <span className="label">Faster than one LLM call each</span>
           <span className="tile__value">
-            <AnimatedNumber value={cost?.speedup} format={x1} />
+            <AnimatedNumber value={cost?.speedup} format={x1} className="n-save" />
           </span>
           <div className="tile__bars" aria-hidden="true">
             <span style={{ width: avgSec && baseSec ? `${(avgSec / baseSec) * 100}%` : 0 }} className="is-us" />

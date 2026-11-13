@@ -4,6 +4,7 @@ import { int, pctRaw, seconds, usd } from '../lib/format'
 import { modelName } from '../lib/meta'
 import { FunnelFlow } from '../components/FunnelFlow'
 import { AnimatedNumber, Skeleton } from '../components/ui'
+import { NumberKey } from '../components/NumberKey'
 import './FunnelCost.css'
 
 const STAGE_NAME: Record<string, string> = {
@@ -64,27 +65,28 @@ export default function FunnelCost() {
         <div className="panel__body">{funnel ? <FunnelFlow funnel={funnel} /> : <Skeleton h={420} />}</div>
       </section>
 
+      <NumberKey />
       <section className="fc__hero" aria-label="Headline numbers">
         <div>
           <span className="label">Cost of the whole run</span>
           <strong>
-            <AnimatedNumber value={cost?.funnel.cost_usd} format={(v) => usd(v, 4)} />
+            <AnimatedNumber value={cost?.funnel.cost_usd} format={(v) => usd(v, 4)} className="n-save" />
           </strong>
           <span className="fc__sub">{haiku ? `Haiku on every complaint: ${usd(haiku.cost_usd, 3)}` : ''}</span>
         </div>
         <div>
           <span className="label">Saving against Claude Haiku</span>
-          <strong>{haiku ? pctRaw(haiku.saving_pct) : '–'}</strong>
+          <strong className="n-save">{haiku ? pctRaw(haiku.saving_pct) : '–'}</strong>
           <span className="fc__sub">{haiku ? `${pctRaw(haiku.saving_vs_cached_pct)} even if every call hit the cache` : ''}</span>
         </div>
         <div>
           <span className="label">Saving against Claude Sonnet</span>
-          <strong>{sonnet ? pctRaw(sonnet.saving_pct) : '–'}</strong>
+          <strong className="n-save">{sonnet ? pctRaw(sonnet.saving_pct) : '–'}</strong>
           <span className="fc__sub">{sonnet ? `${pctRaw(sonnet.saving_vs_cached_pct)} against the best cache` : ''}</span>
         </div>
         <div>
           <span className="label">Faster</span>
-          <strong>{cost ? `${cost.speedup.toFixed(1)}×` : '–'}</strong>
+          <strong className="n-save">{cost ? `${cost.speedup.toFixed(1)}×` : '–'}</strong>
           <span className="fc__sub">{cost ? `${(cost.funnel.seconds / n).toFixed(2)} s a complaint in models, against ${(cost.baseline.seconds / n).toFixed(1)} s` : ''}</span>
         </div>
       </section>
@@ -150,11 +152,11 @@ export default function FunnelCost() {
                 <tr key={s.stage}>
                   <td className="fc__stage">{STAGE_NAME[s.stage] ?? s.stage}</td>
                   <td>{modelName(s.model)}</td>
-                  <td className="r">{int(s.calls)}</td>
+                  <td className="r n-volume">{int(s.calls)}</td>
                   <td className="r">{int(s.in_tokens)}</td>
                   <td className="r">{int(s.out_tokens)}</td>
                   <td className="r">{seconds(s.seconds)}</td>
-                  <td className="r mono">{usd(s.cost_usd, 4)}</td>
+                  <td className="r mono n-save">{usd(s.cost_usd, 4)}</td>
                 </tr>
               ))}
               {cost && (
@@ -165,7 +167,7 @@ export default function FunnelCost() {
                   <td className="r">{int(cost.funnel.stages.reduce((a, s) => a + s.in_tokens, 0))}</td>
                   <td className="r">{int(cost.funnel.stages.reduce((a, s) => a + s.out_tokens, 0))}</td>
                   <td className="r">{seconds(cost.funnel.seconds)}</td>
-                  <td className="r mono">{usd(cost.funnel.cost_usd, 4)}</td>
+                  <td className="r mono n-save">{usd(cost.funnel.cost_usd, 4)}</td>
                 </tr>
               )}
             </tbody>
@@ -190,7 +192,7 @@ export default function FunnelCost() {
               return (
                 <div key={k} className="fc__acc-item">
                   <span className="label">{{ match: 'Similarity match', verify: 'Verified by Jev', llm: 'Settled by the LLM', new_issue: 'New issues' }[k]}</span>
-                  <strong>{pctRaw(s.accuracy_pct)}</strong>
+                  <strong className="n-right">{pctRaw(s.accuracy_pct)}</strong>
                   <span className="fc__sub">of {int(s.n)} complaints</span>
                 </div>
               )

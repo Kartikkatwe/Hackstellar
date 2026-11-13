@@ -423,3 +423,13 @@ p {
     scroll-behavior: auto !important;
   }
 }
+
+/* ---------- number colours (see components/NumberKey) ---------- */
+.n-volume { color: var(--n-volume) !important; }
+.n-harm { color: var(--n-harm) !important; }
+.n-save { color: var(--n-save) !important; }
+.n-right { color: var(--n-right) !important; }
+svg .n-volume { fill: var(--n-volume) !important; }
+svg .n-harm { fill: var(--n-harm) !important; }
+svg .n-save { fill: var(--n-save) !important; }
+svg .n-right { fill: var(--n-right) !important; }

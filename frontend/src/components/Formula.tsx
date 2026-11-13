@@ -18,6 +18,9 @@ export function parseFormula(s: string) {
   return { factors, result: (rhs ?? '').trim() }
 }
 
+// customers, impact, money and anger say how much it hurts; the score is what ranks it
+const KIND: Record<string, string> = { customers: 'n-harm', impact: 'n-harm', money: 'n-harm', anger: 'n-harm' }
+
 const HINT: Record<string, string> = {
   customers: 'Unique customers, counted once across channels',
   impact: 'Average impact, 1 annoyed to 4 harmed',
@@ -47,7 +50,7 @@ export function Formula({ formula, size = 'md', animate = true }: { formula: str
             </span>
           )}
           <span className="formula__stack">
-            <span className="formula__v">{f.value}</span>
+            <span className={`formula__v ${KIND[f.name] ?? ''}`}>{f.value}</span>
             <span className="formula__n">{f.name}</span>
           </span>
         </motion.span>

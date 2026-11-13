@@ -261,7 +261,7 @@ export function FunnelFlow({ funnel, compact = false }: { funnel: Funnel; compac
 
           {/* labels */}
           <g className="ff__lbl">
-            <text x={X.in - 14} y={SPINE - 34} className="ff__big">
+            <text x={X.in - 14} y={SPINE - 34} className="ff__big n-volume">
               {int(nums.total)}
             </text>
             <text x={X.in - 14} y={SPINE - 12} className="ff__sub">
@@ -271,25 +271,25 @@ export function FunnelFlow({ funnel, compact = false }: { funnel: Funnel; compac
             <text x={X.drop + 18} y={H - 82} className="ff__sub">
               not complaints, dropped
             </text>
-            <text x={X.drop + 18} y={H - 58} className="ff__val">
+            <text x={X.drop + 18} y={H - 58} className="ff__val n-volume">
               {int(nums.dropped)} <tspan className="ff__pct">{share(nums.dropped)}</tspan>
             </text>
 
-            <text x={X.sim + 12} y={labelY - 18} className="ff__val">
+            <text x={X.sim + 12} y={labelY - 18} className="ff__val n-volume">
               {int(nums.match)} <tspan className="ff__pct">{share(nums.match)}</tspan>
             </text>
             <text x={X.sim + 12} y={labelY} className="ff__sub">
               filed by similarity
             </text>
 
-            <text x={X.ver + 12} y={labelY - 18} className="ff__val">
+            <text x={X.ver + 12} y={labelY - 18} className="ff__val n-volume">
               {int(nums.verify)} <tspan className="ff__pct">{share(nums.verify)}</tspan>
             </text>
             <text x={X.ver + 12} y={labelY} className="ff__sub">
               filed by Jev
             </text>
 
-            <text x={X.llm + 12} y={SPINE + 30} className="ff__val ff__val--llm">
+            <text x={X.llm + 12} y={SPINE + 30} className="ff__val ff__val--llm n-save">
               {int(nums.reachedLlm)} <tspan className="ff__pct">{share(nums.reachedLlm)}</tspan>
             </text>
             <text x={X.llm + 12} y={SPINE + 50} className="ff__sub">
@@ -303,7 +303,7 @@ export function FunnelFlow({ funnel, compact = false }: { funnel: Funnel; compac
               {int(nums.fresh)} new issues · {int(nums.waiting)} waiting
             </text>
 
-            <text x={X.end - 8} y={RAIL + nums.filedAll * flow.k + 30} className="ff__val" textAnchor="end">
+            <text x={X.end - 8} y={RAIL + nums.filedAll * flow.k + 30} className="ff__val n-right" textAnchor="end">
               {int(nums.filedAll)} <tspan className="ff__pct">{share(nums.filedAll)}</tspan>
             </text>
             <text x={X.end - 8} y={RAIL + nums.filedAll * flow.k + 50} className="ff__sub" textAnchor="end">

@@ -37,7 +37,7 @@ export function TopList({ issues, focusId, onFocus, maxScore }: { issues: Issue[
                 </span>
               </span>
               <span className="toplist__cust num" title="Unique customers">
-                {i.unique_customers}
+                <b className="n-harm">{i.unique_customers}</b>
                 <span>customers</span>
               </span>
               <span className="toplist__score">
