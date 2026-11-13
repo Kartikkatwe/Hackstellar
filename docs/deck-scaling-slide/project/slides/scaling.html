@@ -1,0 +1,22 @@
+<section id="scaling">
+<p class="eyebrow">SCALABILITY</p>
+<h2 class="title">India’s complaint volume fits on a few servers</h2>
+<p class="label">THE SCALE</p>
+<div class="stats">
+<div class="stat rise" style="--i:1"><p class="big">7.8M</p><p class="text">quick-commerce orders a day (RedSeer, Jan 2026)</p></div>
+<div class="stat rise" style="--i:2"><p class="big">~5,000</p><p class="text">calls a day to the National Consumer Helpline (Dec 2024)</p></div>
+<div class="stat rise" style="--i:3"><p class="big">9,527</p><p class="text">Swiggy escalations to government, FY24 (Zomato: 6,983)</p></div>
+<div class="stat hot rise" style="--i:4"><p class="big">1–3 / sec</p><p class="text">complaints in quick commerce: 80,000 to 2 lakh a day (our estimate)</p></div>
+</div>
+<p class="label">HOW WE SCALE</p>
+<div class="cards">
+<div class="card rise" style="--i:5"><p class="step">CLASSIFY</p><h3>Add workers</h3><p class="text">No shared data. ~15 complaints a second per worker.</p></div>
+<div class="card rise" style="--i:6"><p class="step">FILE</p><h3>One writer per area</h3><p class="text">No duplicate issues; all areas run in parallel.</p></div>
+<div class="card rise" style="--i:7"><p class="step">GROW</p><h3>Add, don’t redesign</h3><p class="text">New customer = new areas. Busy area = split it.</p></div>
+</div>
+<p class="bottom rise" style="--i:8"><b>~$433 a month</b> in model calls at 10M complaints · next step: load test</p>
+<p class="source">Sources: GAEE report citing RedSeer; PIB, 14 Mar 2025; Storyboard18 citing the Consumer Affairs Ministry. Throughput and servers projected from measured latencies; 1–3/sec assumes 1–3% of orders lead to a complaint.</p>
+<aside>So, first, the scale. Quick commerce in India does around 7.8 million orders a day. Even what reaches the government is big: the consumer helpline takes about five thousand calls a day, and in one year Swiggy alone had about 9,500 complaints escalated to the government, Zomato about 7,000. Those are only the people who gave up on the company. The complaints companies handle themselves are far bigger: by our estimate 80,000 to 2 lakh a day in quick commerce. That sounds like a lot, but it’s only one to three a second on average.
+
+Classifying doesn’t share any data, so we just add workers; one does about fifteen a second. Filing changes the issue list, so each business area gets its own single writer, and areas run side by side. New customer? New partitions. Busy area? Split it. Model cost stays around $433 a month at ten million complaints, and a business fits on a server or two. It’s not built at that scale yet, so the first thing we do is load-test it.</aside>
+</section>
