@@ -15,7 +15,7 @@
   <g font-size="18" fill="#1B2330">
     <rect x="1330" y="50" width="20" height="20" rx="5" fill="#4338CA"/><text x="1360" y="67">Jev decision model</text>
     <rect x="1620" y="50" width="20" height="20" rx="5" fill="#0F766E"/><text x="1650" y="67">Local, free</text>
-    <rect x="1330" y="90" width="20" height="20" rx="5" fill="#B45309"/><text x="1360" y="107">Claude Haiku 5.5</text>
+    <rect x="1330" y="90" width="20" height="20" rx="5" fill="#B45309"/><text x="1360" y="107">LLM (Claude Haiku 5.5)</text>
     <rect x="1620" y="90" width="20" height="20" rx="5" fill="#334155"/><text x="1650" y="107">Rules and arithmetic</text>
   </g>
 
@@ -65,7 +65,7 @@
     <rect x="1296" y="170" width="270" height="240" rx="14" fill="#FDF3E3" stroke="#B45309" stroke-width="2"/>
     <text x="1316" y="204" font-size="21" font-weight="700" fill="#B45309">5 · Adjudicate</text>
     <text x="1316" y="236">Only the unsure few</text>
-    <text x="1316" y="261">Claude reads that area's</text>
+    <text x="1316" y="261">The LLM reads that area's</text>
     <text x="1316" y="286">issue list and picks one,</text>
     <text x="1316" y="311">or says it is new</text>
     <text x="1316" y="344" font-weight="700">1.9 s · $0.00013 a call</text>
@@ -78,7 +78,7 @@
     <text x="1630" y="261">At 3 different customers:</text>
     <text x="1630" y="286"><tspan fill="#4338CA" font-weight="700">Jev:</tspan> a known issue</text>
     <text x="1630" y="311">in new words?</text>
-    <text x="1630" y="336"><tspan fill="#B45309" font-weight="700">Claude:</tspan> names it if new</text>
+    <text x="1630" y="336"><tspan fill="#B45309" font-weight="700">LLM:</tspan> names it if new</text>
     <text x="1630" y="369" font-weight="700">Money or legal → urgent</text>
   </g>
 
@@ -120,7 +120,7 @@
   <g font-size="17" fill="#2B3440">
     <rect x="668" y="700" width="400" height="160" rx="14" fill="#FDF3E3" stroke="#B45309" stroke-width="2"/>
     <text x="688" y="732" font-size="21" font-weight="700" fill="#B45309">7 · Curator, after each batch</text>
-    <text x="688" y="762">Claude checks each new issue against</text>
+    <text x="688" y="762">The LLM checks each new issue against</text>
     <text x="688" y="786">its 4 nearest in the same area.</text>
     <text x="688" y="810">Same problem → merge and rename.</text>
     <text x="688" y="834">About $0.0002 per issue.</text>
