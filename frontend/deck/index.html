@@ -1662,6 +1662,203 @@ p {
   padding-top: 20px;
 }
 
+/* ---------- costing test ---------- */
+.cost__label {
+  margin-top: 44px;
+  font-size: 24px;
+  color: var(--muted);
+}
+.costs {
+  margin-top: 18px;
+  display: grid;
+  gap: 18px;
+}
+.crow {
+  display: grid;
+  grid-template-columns: 560px 1fr 170px;
+  gap: 32px;
+  align-items: center;
+}
+.crow b {
+  font-size: 30px;
+  font-weight: 540;
+}
+.crow b small {
+  display: block;
+  font-size: 21px;
+  color: var(--muted);
+  font-weight: 400;
+}
+.crow i {
+  position: relative;
+  height: 52px;
+  border-radius: 14px;
+  background: #17171a;
+  overflow: hidden;
+}
+.crow i::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--c);
+  border-radius: 14px;
+  background: #6b6760;
+  clip-path: inset(0 100% 0 0);
+}
+.crow:first-child i::before {
+  background: linear-gradient(90deg, var(--brass-lo), var(--brass-hi));
+  box-shadow: 0 0 30px rgba(217, 178, 107, 0.5);
+}
+.is-active .crow i::before {
+  animation: reveal 1300ms var(--ease) forwards;
+  animation-delay: calc(500ms + var(--d) * 150ms);
+}
+.crow em {
+  font-style: normal;
+  font-family: var(--mono);
+  font-size: 40px;
+  text-align: right;
+  color: var(--ink-2);
+}
+.cbatches {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.cbatch {
+  display: grid;
+  gap: 6px;
+  padding: 24px 30px;
+  border-radius: 24px;
+  background: radial-gradient(120% 100% at 0% 0%, rgba(230, 194, 127, 0.1), transparent 60%), var(--surface);
+  border: 1px solid rgba(230, 194, 127, 0.28);
+}
+.cbatch span {
+  font-size: 22px;
+  color: var(--muted);
+}
+.cbatch b {
+  font-size: 64px;
+  font-weight: 560;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  white-space: nowrap;
+}
+.cbatch em {
+  font-style: normal;
+  font-size: 22px;
+  color: var(--ink-2);
+}
+
+/* ---------- where the money goes ---------- */
+.spend {
+  margin-top: 56px;
+  display: grid;
+  gap: 22px;
+}
+.spend__bar {
+  display: flex;
+  height: 92px;
+  border-radius: 20px;
+  overflow: hidden;
+  gap: 4px;
+}
+.spend__bar i {
+  flex: var(--g) 1 0; /* shares of the bill; flex keeps the gaps inside the bar */
+  min-width: 0;
+  font-style: normal;
+  background: var(--k);
+  display: grid;
+  place-items: center start;
+  padding-left: 22px;
+  clip-path: inset(0 100% 0 0);
+}
+.is-active .spend__bar i {
+  animation: reveal 900ms var(--ease) forwards;
+}
+.is-active .spend__bar i:nth-child(2) {
+  animation-delay: 500ms;
+}
+.is-active .spend__bar i:nth-child(3) {
+  animation-delay: 800ms;
+}
+.spend__bar span {
+  font-family: var(--mono);
+  font-size: 30px;
+  font-weight: 600;
+  color: #0a0a0b;
+}
+.spend__key {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.spend__key div {
+  display: grid;
+  gap: 4px;
+  padding-left: 22px;
+  border-left: 6px solid var(--k);
+}
+.spend__key b {
+  font-size: 30px;
+  font-weight: 540;
+}
+.spend__key span {
+  font-size: 23px;
+  color: var(--muted);
+  font-family: var(--mono);
+}
+.words {
+  margin-top: 56px;
+  display: grid;
+  gap: 16px;
+}
+.words h3 {
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--muted);
+}
+.wrow {
+  display: grid;
+  grid-template-columns: 500px 1fr 170px;
+  gap: 32px;
+  align-items: center;
+}
+.wrow b {
+  font-size: 30px;
+  font-weight: 540;
+}
+.wrow i {
+  position: relative;
+  height: 40px;
+  border-radius: 12px;
+  background: #17171a;
+}
+.wrow i::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: max(var(--c), 8px);
+  border-radius: 12px;
+  background: var(--k);
+  clip-path: inset(0 100% 0 0);
+}
+.is-active .wrow i::before {
+  animation: reveal 1200ms var(--ease) 700ms forwards;
+}
+.wrow em {
+  font-style: normal;
+  font-family: var(--mono);
+  font-size: 36px;
+  text-align: right;
+  color: var(--ink-2);
+}
+.words__note {
+  font-size: 28px;
+  color: var(--ink-2);
+}
+
 /* ---------- print / save as PDF: every slide, fully built ---------- */
 @page {
   size: 1920px 1080px;
@@ -2053,6 +2250,25 @@ p {
   <aside>We generated 300 complaints the system had never seen, from our real customer list, each with a hidden right answer, and sent them one by one to the live site with the real models, in batches of 50, 100 and 150, each on a clean copy of the data. One square per complaint. Green: filed under the right problem, 267 of 267. Grey: praise and spam correctly set aside, 30 of 30. Gold: 2 the LLM was not sure about, so they wait for staff instead of being guessed. Red: one real complaint missed, a short Hinglish call ending in thanks. Backup slides show every step and every miss.</aside>
 </section>
 
+<!-- 12 costing test -->
+<section class="slide" id="costing">
+  <p class="kicker in" style="--d:0">Costing test · the same 300 complaints</p>
+  <h2 class="title in" style="--d:1">Same 300 complaints. <span class="soft">65–87% cheaper.</span></h2>
+  <p class="cost__label in" style="--d:2">Cost per 1 lakh complaints (100,000)</p>
+  <div class="costs">
+    <div class="crow in" style="--d:2; --c:12.8%"><b>Complaint Compass<small>actual cost: real models, list prices</small></b><i></i><em class="n-save">$4.33</em></div>
+    <div class="crow in" style="--d:3; --c:37.2%"><b>An LLM reads every complaint<small>Claude Haiku, prompt cached (its best case)</small></b><i></i><em>$12.54</em></div>
+    <div class="crow in" style="--d:4; --c:100%"><b>An LLM reads every complaint<small>Claude Haiku, no caching</small></b><i></i><em>$33.71</em></div>
+  </div>
+  <div class="cbatches">
+    <div class="cbatch in" style="--d:5"><span>Batch 1 · 50 complaints</span><b class="n-save">67–88%</b><em>cheaper · $0.0021 vs $0.0063–0.0169</em></div>
+    <div class="cbatch in" style="--d:6"><span>Batch 2 · 100 complaints</span><b class="n-save">64–87%</b><em>cheaper · $0.0045 vs $0.0125–0.0337</em></div>
+    <div class="cbatch in" style="--d:7"><span>Batch 3 · 150 complaints</span><b class="n-save">66–87%</b><em>cheaper · $0.0064 vs $0.0188–0.0506</em></div>
+  </div>
+  <p class="foot">Ours: the tokens actually billed in the live test, at list prices. The LLM side: its real prompt for each of the same complaints, priced at list prices with a token count calibrated on 12 real calls; not run.</p>
+  <aside>The costing test uses the same 300 complaints as the accuracy test. Our side is what the live run actually used: every Jev and Claude Haiku call reports its tokens, priced at list price. Total: 1.3 cents for 300 complaints, 4 dollars 33 per lakh. The other side is an LLM reading every complaint: we built its real prompt for each of the same 300 complaints, the full list of known problems plus the complaint, and priced it the same way. 12 dollars 54 per lakh even if its prompt is cached every time, 33 dollars 71 without caching. So we are 65 to 87 percent cheaper, 3 to 8 times, and every batch size gives the same answer: the cost grows in a straight line with volume. Honest: that side is priced, not run.</aside>
+</section>
+
 <!-- 12 close -->
 
 <!-- 13 accuracy, step by step (live test) -->
@@ -2071,6 +2287,31 @@ p {
   </div>
   <p class="foot">Bars: complaints that reached each step in the live test. 251 of the 300 are worded unlike anything the engine had seen. The engine never sees the answers.</p>
   <aside>Every step has its own score. The gate kept 269 of 270 real complaints and set aside all 30 non-complaints. The area was right 268 of 269 times. Similarity filed 100, all right; Jev's yes or no filed 162, all right; the LLM settled 5, all right, and sent 2 it was unsure about to the waiting list. Customer linking was checked on batch 3: 121 found, none wrong; 29 unknown senders were left unlinked rather than guessed.</aside>
+</section>
+
+<!-- 16 where the money goes -->
+<section class="slide" id="money">
+  <span class="backup-tag">Backup</span>
+  <p class="kicker in" style="--d:0">Costing test · where our money goes</p>
+  <h2 class="title in" style="--d:1">Mostly Jev. <span class="soft">The LLM writes rarely.</span></h2>
+  <div class="spend">
+    <div class="spend__bar in" style="--d:2" role="img" aria-label="Jev gate 71% of the cost, Jev verify 22%, the LLM 7%">
+      <i style="--k:var(--w-jev); --g:71.4"><span>71%</span></i><i style="--k:#4f7fbf; --g:21.7"><span>22%</span></i><i style="--k:var(--w-llm); --g:6.9"><span>7%</span></i>
+    </div>
+    <div class="spend__key in" style="--d:3">
+      <div style="--k:var(--w-jev)"><b>Gate · Jev</b><span>300 calls · $0.0093</span></div>
+      <div style="--k:#4f7fbf"><b>Verify · Jev</b><span>169 calls · $0.0028</span></div>
+      <div style="--k:var(--w-llm)"><b>LLM · Claude Haiku</b><span>7 calls · $0.0009</span></div>
+    </div>
+  </div>
+  <div class="words in" style="--d:4">
+    <h3>Output tokens written for 300 complaints</h3>
+    <div class="wrow" style="--k:var(--n-save); --c:1.85%"><b>Complaint Compass</b><i></i><em class="n-save">1,091</em></div>
+    <div class="wrow" style="--k:#6b6760; --c:100%"><b>An LLM reads every complaint</b><i></i><em>59,100</em></div>
+    <p class="words__note"><span class="n-save">98% fewer.</span> Output is the dearest token: 5× the price of input on Claude Haiku.</p>
+  </div>
+  <p class="foot">A bigger LLM reading every complaint (Claude Sonnet) would cost $674 per lakh complaints. Ours is 99% cheaper.</p>
+  <aside>Where our 1.3 cents went. Jev's gate, one call per complaint, is 71 percent of the bill; Jev's yes-or-no checks are 22; the LLM is only 7 percent, because just 7 of 300 complaints needed it. The LLM-everywhere approach writes an answer for every complaint: about 59 thousand output tokens for these 300, against our 1 thousand. Output tokens are the expensive ones. With a bigger model such as Sonnet reading everything, the bill would be 674 dollars per lakh complaints.</aside>
 </section>
 
 <!-- 14 every miss (live test) -->
