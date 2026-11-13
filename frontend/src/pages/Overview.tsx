@@ -8,7 +8,7 @@ import type { Accuracy, Config, Cost, Funnel, TopResponse } from '../lib/types'
 import { componentName, segmentValue, usd } from '../lib/format'
 import { CompassDial } from '../components/CompassDial'
 import { FunnelFlow } from '../components/FunnelFlow'
-import { Formula } from '../components/Formula'
+import { ScoreMap } from '../components/ScoreMap'
 import { TopList } from '../components/TopList'
 import { LiveFeed } from '../components/LiveFeed'
 import { NumberKey } from '../components/NumberKey'
@@ -88,7 +88,7 @@ export default function Overview() {
                     <Flags flags={focus.flags} />
                   </div>
                   <h2 className="ov__focus-title">{focus.title}</h2>
-                  <Formula formula={focus.formula} size="md" animate={false} />
+                  <ScoreMap key={focus.issue_id} formula={focus.formula} />
                 </motion.div>
               ) : (
                 <div className="ov__focus-skel">
