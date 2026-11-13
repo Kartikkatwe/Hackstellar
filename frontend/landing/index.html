@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en" data-type="software" data-radius="soft" data-ground="sand" data-buttons="pill" data-motion>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Complaint Compass: complaint triage for help desks</title>
+<meta name="description" content="Files every complaint from email, calls, chat and social under the problem behind it and ranks the ten to fix first. 96.1% never wait on an LLM.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Complaint Compass: complaint triage for help desks">
+<meta property="og:description" content="Every complaint filed under the problem behind it. 96.1% never wait on an LLM.">
+<meta property="og:image" content="/share.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0a0a0b">
+<meta name="site-kind" content="software">
+<meta name="page-type" content="software">
+<link rel="stylesheet" href="/kit/system.css">
+<link rel="stylesheet" href="/kit/ui/cards.css">
+<link rel="stylesheet" href="/kit/motion/motion.css">
+<link rel="stylesheet" href="/kit/backgrounds/backgrounds.css">
+<link rel="stylesheet" href="/kit/layout/layout.css">
+<link rel="stylesheet" href="/kit/icons/icon.css">
+<style>
+:root {
+  --p-bg: #0a0a0b; --p-surface: #131316; --p-ink: #f2efe8; --p-muted: #9a958a;
+  --p-accent: #d9b26b; --p-accent-ink: #0a0a0b; --p-action: #d9b26b; --p-action-ink: #0a0a0b;
+  --p-inv-bg: #f2efe8; --p-inv-surface: #dfdcd6; --p-inv-ink: #0a0a0b; --p-inv-muted: #575654;
+  --p-inv-accent: #0a0a0b; --p-inv-accent-ink: #f2efe8; --p-inv-action: #0a0a0b; --p-inv-action-ink: #f2efe8;
+  --font-display: "Geist Variable", "Geist", system-ui, sans-serif;
+  --font-text: "Geist Variable", "Geist", system-ui, sans-serif;
+  --font-mono: "Geist Mono Variable", "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --display-weight: 500;
+  --display-tracking: -0.035em;
+  --display-tracking-xl: -0.045em;
+}
+</style>
+<script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
+<script src="/kit/backgrounds/backgrounds.js"></script>
+<script>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
+<link rel="modulepreload" href="/kit/moments/moments.js">
+<link rel="modulepreload" href="/kit/moments/lib.js">
+<link rel="modulepreload" href="/kit/moments/iris-opens/moment.js">
+<link rel="stylesheet" href="/landing/landing.css">
+<script type="module" src="/landing/landing.ts"></script>
+</head>
+<body>
+<!-- type: software
+     deal: hero triptych, lit ground sand (dealt sky; its cool blue clashes with the brass logo, the next warm one taken), nav nav-centre, close close-word, footer footer-statement, rhythm space, buttons pill,
+     mark: the client's own logo (an open ring with a brass needle), grounds topglow (on the hero)
+     palette: the client's own colours through start.mjs brand: warm black #0a0a0b and brass #d9b26b, the logo's
+     and the console's, so the product page and the product read as one thing
+     type: geist, not the dealt host: the wordmark in the logo is set in Geist and host would clash with it
+     moments: iris-opens on #funnel (the one section on the inverse ground) -->
+
+<header class="nav nav--centre">
+  <div class="wrap nav__bar">
+    <a class="skip-link" href="#top">Skip to content</a>
+    <a class="nav__logo cc-logo" href="#top" aria-label="Complaint Compass">
+      <svg class="cc-mark" width="28" height="28" viewBox="0 0 64 64" aria-hidden="true">
+        <defs><linearGradient id="lb" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#9c7434"/><stop offset=".55" stop-color="#d9b26b"/><stop offset="1" stop-color="#f6e3b8"/></linearGradient></defs>
+        <path class="cc-ring" d="M56.15 25.53 A25 25 0 1 1 38.47 7.85" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" pathLength="1"/>
+        <g class="cc-needle"><path d="M32 2 L39 32 L32 32 Z" fill="url(#lb)"/><path d="M32 2 L25 32 L32 32 Z" fill="#f6e3b8"/><path d="M32 46 L25 32 L32 32 Z" fill="#3b3933"/><path d="M32 46 L39 32 L32 32 Z" fill="#2a2925"/><circle cx="32" cy="32" r="2.6" fill="#0a0a0b" stroke="#f6e3b8" stroke-width="1.4"/></g>
+      </svg>
+      <span class="nav__name">Complaint Compass</span>
+    </a>
+    <nav class="nav__links" aria-label="Main">
+      <div class="nav__item"><a class="nav__link" href="#console">Console</a></div>
+      <div class="nav__item"><a class="nav__link" href="#funnel">How it works</a></div>
+      <div class="nav__item"><a class="nav__link" href="#ranking">Ranking</a></div>
+      <div class="nav__item"><a class="nav__link" href="#proof">Results</a></div>
+    </nav>
+    <div class="nav__actions">
+      <a class="btn btn--primary" href="/console">Try the live console</a>
+    </div>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Menu">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero hero--triptych bg-topglow" data-enter aria-labelledby="hero-h">
+    <div class="wrap"><div class="hero-text grid hero__grid">
+      <div class="span-3">
+        <h1 id="hero-h">Complaint triage for help desks</h1>
+        <p class="hero__lead">Files every complaint from email, calls, chat and social under the problem behind it, then ranks the ten to fix first. <span data-live="no-llm">96.1%</span> never wait on an LLM.</p>
+      </div>
+      <div class="ly-collage span-6 start-4" role="img" aria-label="Complaints in English and Hinglish from four channels, each filed under the issue behind it; a new issue the engine found on its own; and the funnel that settled them">
+        <div class="ly-collage__set is-on">
+          <div class="ly-piece pc-msg" data-ch="social" style="left: 4%; top: 5%; width: 54%">
+            <span class="pc-ch">Social · S-00186</span>
+            <p>The amount was deducted but the order was not placed. I have the bank SMS for Rs 320.</p>
+          </div>
+          <div class="ly-piece pc-msg" data-ch="chat" style="left: 42%; top: 31%; width: 54%">
+            <span class="pc-ch">Chat · Joseph F.</span>
+            <p>paise kat gaye Rs 415 lekin order place hi nahi hua</p>
+          </div>
+          <div class="ly-piece pc-issue" style="left: 4%; top: 58%; width: 92%; height: 38%">
+            <span class="pc-k">Filed under issue #1 · Payments</span>
+            <strong>Money debited but order not placed</strong>
+            <span class="pc-f">67 customers × 3.72 impact × 2.00 money × 1.12 anger = 560.2</span>
+            <span class="pc-badge">Critical</span>
+          </div>
+        </div>
+        <div class="ly-collage__set" aria-hidden="true">
+          <div class="ly-piece pc-msg" data-ch="email" style="left: 4%; top: 4%; width: 58%">
+            <span class="pc-ch">Email · Shreya P.</span>
+            <p>Two debits of Rs 780 for one order since the new app update.</p>
+          </div>
+          <div class="ly-piece pc-msg" data-ch="call" style="left: 38%; top: 24%; width: 58%">
+            <span class="pc-ch">Call · Imran K.</span>
+            <p>ek hi order ke liye do baar paise kat gaye, Rs 249 do baar</p>
+          </div>
+          <div class="ly-piece pc-msg" data-ch="chat" style="left: 4%; top: 42%; width: 52%">
+            <span class="pc-ch">Chat · Imran S.</span>
+            <p>I was charged twice for a single order.</p>
+          </div>
+          <div class="ly-piece pc-issue pc-issue--new" style="left: 4%; top: 64%; width: 92%; height: 32%">
+            <span class="pc-k">New issue, found by the engine</span>
+            <strong>Duplicate payment debits after an app update</strong>
+            <span class="pc-f">Named 15 hours after the first report · now #2</span>
+          </div>
+        </div>
+        <div class="ly-collage__set" aria-hidden="true">
+          <div class="ly-piece pc-msg pc-msg--drop" data-ch="social" style="left: 4%; top: 5%; width: 50%">
+            <span class="pc-ch">Social · dropped at the gate</span>
+            <p>Thanks for the quick refund last week, really appreciated.</p>
+          </div>
+          <div class="ly-piece pc-msg pc-msg--drop" data-ch="social" style="left: 46%; top: 16%; width: 50%">
+            <span class="pc-ch">Social · dropped at the gate</span>
+            <p>Earn Rs 5000 daily from home, click this link now</p>
+          </div>
+          <div class="ly-piece pc-funnel" style="left: 4%; top: 42%; width: 92%; height: 54%">
+            <span class="pc-k">Where 1,500 complaints settled</span>
+            <div class="pc-row"><span>Gate: not a complaint</span><i style="--w: 10.1%"></i><b>151</b></div>
+            <div class="pc-row"><span>Similarity, free</span><i style="--w: 50.3%"></i><b>754</b></div>
+            <div class="pc-row"><span>Jev, yes or no</span><i style="--w: 34.7%"></i><b>520</b></div>
+            <div class="pc-row is-llm"><span>Reached the LLM</span><i style="--w: 3.9%"></i><b>58</b></div>
+          </div>
+        </div>
+      </div>
+      <div class="span-3 start-10 hero__cta"><a class="btn btn--primary" href="/console">Try the live console</a></div>
+    </div></div>
+  </section>
+
+  <section class="section" id="console" aria-labelledby="console-h">
+    <div class="wrap">
+      <div class="section-head section-head--row">
+        <h2 id="console-h">The console, live on <span data-live="total">1,500</span> complaints. <span class="muted">Every number on it comes from the engine.</span></h2>
+      </div>
+      <a class="appframe" href="/console" aria-label="Open the live console">
+        <div class="appframe__bar" aria-hidden="true"><i></i><i></i><i></i><span>Complaint Compass · BasketNow</span></div>
+        <div class="appframe__view frame">
+          <picture>
+            <source media="(max-width: 639px)" srcset="/console-poster-phone.jpg">
+            <img class="frame__img appframe__poster" src="/console-poster.jpg" alt="The console: 1,500 complaints, 19 issues and the compass pointing at the issue to fix first" width="1440" height="560">
+          </picture>
+          <iframe src="/console" title="The Complaint Compass console, live" loading="lazy" tabindex="-1" scrolling="no"></iframe>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="section" id="words" aria-labelledby="words-h">
+    <div class="wrap grid words">
+      <div class="span-5 words__text">
+        <h2 id="words-h">Five complaints, one issue</h2>
+        <p class="t-lead">A customer writes in Hinglish on chat, another emails, a third calls. All three land under one issue, and a customer who uses three channels counts once.</p>
+        <dl class="words__facts">
+          <div><dt>Customer links correct</dt><dd><span data-live="links">100%</span> of 1,215</dd></div>
+          <div><dt>Sent to the right part of the business</dt><dd data-live="component">99.6%</dd></div>
+        </dl>
+      </div>
+      <div class="span-7 hub" aria-label="Five complaints in four channels and two languages joining one issue" role="img">
+        <svg class="hub__lines" viewBox="0 0 100 484" preserveAspectRatio="none" aria-hidden="true"><path d="M0 42 C55 42 45 242 100 242"/><path d="M0 142 C55 142 45 242 100 242"/><path d="M0 242 C55 242 45 242 100 242"/><path d="M0 342 C55 342 45 242 100 242"/><path d="M0 442 C55 442 45 242 100 242"/><path class="hub__pulse" style="animation-delay:-0.0s" d="M0 42 C55 42 45 242 100 242"/><path class="hub__pulse" style="animation-delay:-0.6s" d="M0 142 C55 142 45 242 100 242"/><path class="hub__pulse" style="animation-delay:-1.2s" d="M0 242 C55 242 45 242 100 242"/><path class="hub__pulse" style="animation-delay:-1.8s" d="M0 342 C55 342 45 242 100 242"/><path class="hub__pulse" style="animation-delay:-2.4s" d="M0 442 C55 442 45 242 100 242"/></svg>
+        <div class="hub__in">
+          <div class="hub__msg" data-ch="email"><span>Email</span>Two debits of Rs 780 for one order since the new app update.</div>
+          <div class="hub__msg" data-ch="call"><span>Call</span>ek hi order ke liye do baar paise kat gaye</div>
+          <div class="hub__msg" data-ch="chat"><span>Chat</span>I was charged twice for a single order.</div>
+          <div class="hub__msg" data-ch="social"><span>Social</span>Two debits of Rs 149 for one order since the update.</div>
+          <div class="hub__msg" data-ch="chat"><span>Chat</span>naye update ke baad ek order pe double charge ho gaya</div>
+        </div>
+        <div class="hub__out">
+          <span class="pc-k">One issue</span>
+          <strong>Duplicate payment debits after an app update</strong>
+          <span class="hub__n"><b data-live="dup-customers">52</b> customers, counted once</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section ground-inverse" id="funnel" data-moment="iris-opens" data-moment-opts='{"from": "base"}' aria-labelledby="funnel-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="funnel-h"><span data-live="no-llm">96.1%</span> never wait on an LLM. <span class="muted">Cheap checks go first.</span></h2>
+      </div>
+      <ol class="steps4">
+        <li><span class="step-num">1</span><h3>Gate drops what is not a complaint</h3><p>Jev reads every message. Praise, spam and questions stop here.</p><b class="t-stat" data-live="dropped">151</b><span class="steps4__u">dropped</span></li>
+        <li><span class="step-num">2</span><h3>Similarity files the clear ones</h3><p>A free, local match against every known issue.</p><b class="t-stat" data-live="match">754</b><span class="steps4__u">filed</span></li>
+        <li><span class="step-num">3</span><h3>A yes-or-no check confirms the match</h3><p>Same problem as issue X? A confident yes files it.</p><b class="t-stat" data-live="verify">520</b><span class="steps4__u">filed</span></li>
+        <li class="is-llm"><span class="step-num">4</span><h3>The LLM takes the rest</h3><p>Claude Haiku decides what the cheap checks could not.</p><b class="t-stat" data-live="llm">58</b><span class="steps4__u">reached it</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="ranking" aria-labelledby="ranking-h">
+    <div class="wrap grid rank">
+      <div class="span-5 rank__text">
+        <h2 id="ranking-h">A Top 10 you can check with a calculator</h2>
+        <p class="t-lead">Unique customers × impact × money lost × anger × trend. Every factor is printed next to the issue.</p>
+        <div class="rank__formula" aria-label="52 customers times 3.69 impact times 2.00 money times 1.14 anger times 1.25 trend equals 547.3">
+          <span><b>52</b>customers</span><i>×</i><span><b>3.69</b>impact</span><i>×</i><span><b>2.00</b>money</span><i>×</i><span><b>1.14</b>anger</span><i>×</i><span><b>1.25</b>trend</span><i>=</i><span class="is-score"><b>547.3</b>score</span>
+        </div>
+      </div>
+      <div class="span-7 rank__side">
+        <div class="panel rank__panel"><div class="ui ui-panel rank__ui"><div class="rank__ui-head"><span>Top issues · BasketNow</span><span>Score</span></div><ol class="rank__list" data-live="top">
+          <li><span class="mono">1</span><strong>Money debited but order not placed</strong><em>Critical</em><span>67 customers</span></li>
+          <li><span class="mono">2</span><strong>Duplicate payment debits for a single order after app update</strong><em>Critical</em><span>52 customers</span></li>
+          <li><span class="mono">3</span><strong>Marked delivered but not received</strong><em>Critical</em><span>74 customers</span></li>
+          <li><span class="mono">4</span><strong>Refund not received</strong><em>Critical</em><span>46 customers</span></li>
+          <li><span class="mono">5</span><strong>Expired or spoiled product delivered</strong><em>Critical</em><span>47 customers</span></li>
+          <li><span class="mono">6</span><strong>App crashes after latest update, including at cart</strong><em>High</em><span>60 customers</span></li>
+        </ol></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="proof" aria-labelledby="proof-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="proof-h">Results on 1,500 complaints. <span class="muted">Scored against an answer key the engine never sees.</span></h2>
+      </div>
+      <div class="proof">
+        <div class="proof__item"><b data-live="acc">98.4%</b><span>filed under the right issue, of 1,325 checked</span></div>
+        <div class="proof__item"><b>5 of 5</b><span>hidden problems found and named, none a duplicate</span></div>
+        <div class="proof__item"><b data-live="per100k">$4.33</b><span>per 100,000 complaints; Claude Haiku on each costs <span data-live="haiku100k">$29.70</span></span></div>
+        <div class="proof__item"><b data-live="speedup">2.3×</b><span>faster than one LLM call per complaint</span></div>
+      </div>
+      <div class="proof__stages" role="img" aria-label="Complaints filed by each check and the share filed under the right issue: similarity 754 at 99.2%, Jev 520 at 97.3%, the LLM 26 at 96.2%, new issues 25 at 100%">
+        <div class="proof__stage"><span>Similarity match</span><b><span data-live="n-match">754</span> · <span data-live="acc-match">99.2%</span> right</b><span class="proof__track"><i style="--w: 100%"></i></span></div>
+        <div class="proof__stage"><span>Verified by Jev</span><b><span data-live="n-verify">520</span> · <span data-live="acc-verify">97.3%</span> right</b><span class="proof__track"><i style="--w: 69%"></i></span></div>
+        <div class="proof__stage"><span>Settled by the LLM</span><b><span data-live="n-llm">26</span> · <span data-live="acc-llm">96.2%</span> right</b><span class="proof__track"><i style="--w: 3.4%"></i></span></div>
+        <div class="proof__stage"><span>Became new issues</span><b><span data-live="n-new">25</span> · <span data-live="acc-new">100%</span> right</b><span class="proof__track"><i style="--w: 3.3%"></i></span></div>
+      </div>
+      <p class="proof__note">The data is template-generated with a fixed seed, so real complaints will be messier. The LLM-for-everything baseline is priced from real token counts; it was not run.</p>
+    </div>
+  </section>
+
+  <section class="section" id="faq" aria-labelledby="faq-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="faq-h">Questions about the engine</h2>
+      </div>
+      <div class="faq">
+        <div class="faq__item"><h3>Does it need training data?</h3><p>No. Jev takes the labels with each request, so a new business needs one settings file, not a trained model.</p></div>
+        <div class="faq__item"><h3>How is one customer counted once?</h3><p>Each complaint is tied to a customer by sender email, caller number, chat login or a verified order ID with a check digit.</p></div>
+        <div class="faq__item"><h3>Which languages does it read?</h3><p>English, Hindi and mixes of both. The similarity model is multilingual and Jev reads Hinglish as written.</p></div>
+        <div class="faq__item"><h3>What if the live models are down?</h3><p>The complaint goes through offline stand-ins, and the console labels the result so nobody takes it for a live one.</p></div>
+        <div class="faq__item"><h3>Does it work beyond groceries?</h3><p>Yes. Areas, issues, severity and customer groups live in one settings file per business. A telecom pack is next.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer closing footer--statement" id="contact" aria-labelledby="close-h">
+  <div class="wrap">
+    <div class="closing__cta close--word">
+      <div class="section-head--split">
+        <div><h2 id="close-h">Try the live console</h2><p class="t-lead">Type a complaint, watch which check files it, and watch the Top 10 move.</p></div>
+        <a class="btn btn--primary" href="/console">Try the live console<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+      </div>
+      <p class="close__word" aria-hidden="true">Complaint Compass</p>
+    </div>
+    <div class="closing__links">
+      <div class="grid">
+        <div class="span-4 stack-4">
+          <a class="nav__logo" href="#top">Complaint Compass</a>
+          <p class="footer__lede">Files customer complaints under the problem behind them and ranks the ones to fix first.</p>
+        </div>
+        <div class="span-2 footer__col"><h3>Console</h3><ul><li><a href="/console">Overview</a></li><li><a href="/console/issues">Top issues</a></li><li><a href="/console/live">Live intake</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>How it works</h3><ul><li><a href="#funnel">The funnel</a></li><li><a href="#ranking">Ranking</a></li><li><a href="/console/funnel">Funnel and cost</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Results</h3><ul><li><a href="#proof">On 1,500 complaints</a></li><li><a href="/console/accuracy">Accuracy</a></li><li><a href="/console/segments">Customer groups</a></li></ul></div>
+        <div class="span-2 footer__col"><h3>Customers</h3><ul><li><a href="/submit">Phone complaint form</a></li><li><a href="#faq">Questions</a></li></ul></div>
+      </div>
+      <div class="footer__legal">
+        <span>&copy; 2026 Complaint Compass · HackStellar, problem statement 19</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<nav class="actionbar" aria-label="Quick actions">
+  <a class="btn btn--primary" href="/console">Try the live console</a>
+</nav>
+
+<script type="module" src="/kit/system.js"></script>
+<script type="module" src="/kit/motion/motion.js"></script>
+<script type="module" src="/kit/layout/layout.js"></script>
+</body>
+</html>

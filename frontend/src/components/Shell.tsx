@@ -1,5 +1,5 @@
 import { useEffect, useState, type ReactNode } from 'react'
-import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 import { Compass, ListOrdered, Radio, Filter, Grid3x3, Hourglass, Target, Search, Plus, Smartphone, Menu, X } from 'lucide-react'
 import { Logo } from './Logo'
@@ -56,9 +56,9 @@ export function Shell({ children }: { children: ReactNode }) {
       </a>
       <aside className={`side${menu ? ' is-open' : ''}`} aria-label="Console">
         <div className="side__top">
-          <Link to="/" className="side__logo" aria-label="Complaint Compass home">
+          <a href="/" className="side__logo" aria-label="Complaint Compass product page">
             <Logo size={28} animate />
-          </Link>
+          </a>
           <button className="side__close btn btn--ghost btn--sm" onClick={() => setMenu(false)} aria-label="Close menu">
             <X size={18} />
           </button>

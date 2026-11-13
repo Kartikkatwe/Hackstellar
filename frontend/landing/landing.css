@@ -1,0 +1,707 @@
+/* Page CSS: only what sits inside a visual and the kit lacks (taste-skill system.md).
+   Why the channel colours repeat the console's: one product, one set of identities. */
+
+/* ---------- logo ---------- */
+.cc-logo {
+  gap: 10px;
+}
+.cc-mark {
+  overflow: visible;
+  color: var(--p-ink);
+}
+.cc-needle {
+  transform-origin: 32px 32px;
+  transform: rotate(45deg);
+  animation: cc-settle 1700ms cubic-bezier(0.22, 1, 0.36, 1) 300ms both;
+}
+.cc-ring {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: cc-draw 900ms cubic-bezier(0.16, 1, 0.3, 1) 80ms forwards;
+}
+.cc-logo:hover .cc-needle {
+  animation: cc-twitch 900ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes cc-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes cc-settle {
+  0% {
+    transform: rotate(-150deg);
+  }
+  42% {
+    transform: rotate(72deg);
+  }
+  60% {
+    transform: rotate(32deg);
+  }
+  74% {
+    transform: rotate(52deg);
+  }
+  86% {
+    transform: rotate(42deg);
+  }
+  100% {
+    transform: rotate(45deg);
+  }
+}
+@keyframes cc-twitch {
+  0%,
+  100% {
+    transform: rotate(45deg);
+  }
+  30% {
+    transform: rotate(62deg);
+  }
+  55% {
+    transform: rotate(38deg);
+  }
+  78% {
+    transform: rotate(48deg);
+  }
+}
+
+/* ---------- hero collage pieces ---------- */
+.ly-collage {
+  container-type: inline-size;
+}
+.ly-collage .ly-piece {
+  border-radius: 2.4cqw;
+  box-shadow:
+    0 1px 2px rgb(0 0 0 / 0.4),
+    0 26px 56px -24px rgb(0 0 0 / 0.9);
+}
+[data-ch='email'] {
+  --c: #16a07a;
+}
+[data-ch='call'] {
+  --c: #d9652e;
+}
+[data-ch='chat'] {
+  --c: #3f86e0;
+}
+[data-ch='social'] {
+  --c: #d7568a;
+}
+.ly-collage .pc-msg {
+  display: grid;
+  gap: 1.6cqw;
+  padding: 3.4cqw 3.8cqw;
+  background: #18181c;
+  border: 1px solid #2d2d33;
+  color: #f2efe8;
+  font: 400 max(13px, 2.6cqw) / 1.42 var(--font-text);
+}
+.pc-msg p {
+  margin: 0;
+}
+.pc-ch {
+  display: flex;
+  align-items: center;
+  gap: 1.4cqw;
+  font: 500 max(13px, 1.9cqw) / 1.2 var(--font-text);
+  color: #9a958a;
+}
+.pc-ch::before {
+  content: '';
+  width: max(8px, 1.6cqw);
+  height: max(8px, 1.6cqw);
+  border-radius: 30%;
+  background: var(--c);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 22%, transparent);
+}
+.pc-msg--drop {
+  background: #121214;
+  color: #9a958a;
+}
+.ly-collage .pc-issue {
+  display: grid;
+  align-content: center;
+  gap: 1.6cqw;
+  padding: 4cqw 4.4cqw;
+  background:
+    radial-gradient(120% 140% at 0% 0%, rgb(217 178 107 / 0.2), transparent 60%),
+    #17140f;
+  border: 1px solid rgb(217 178 107 / 0.45);
+  color: #f2efe8;
+}
+.pc-k {
+  font: 500 max(13px, 1.9cqw) / 1.2 var(--font-text);
+  color: #d9b26b;
+}
+.pc-issue strong {
+  font: 500 max(17px, 4.4cqw) / 1.12 var(--font-display);
+  letter-spacing: -0.03em;
+}
+.pc-f {
+  font: 400 max(13px, 1.9cqw) / 1.35 var(--font-mono);
+  color: #c9c5bb;
+}
+.pc-badge {
+  justify-self: start;
+  padding: 0.6cqw 1.8cqw;
+  border-radius: 99px;
+  font: 600 max(13px, 1.8cqw) / 1.3 var(--font-text);
+  color: #ff9a92;
+  background: rgb(229 83 75 / 0.14);
+  box-shadow: inset 0 0 0 1px rgb(229 83 75 / 0.45);
+}
+.ly-collage .pc-funnel {
+  display: grid;
+  align-content: center;
+  gap: 2.4cqw;
+  padding: 4cqw 4.4cqw;
+  background: #141417;
+  border: 1px solid #2d2d33;
+  color: #f2efe8;
+}
+.pc-row {
+  display: grid;
+  grid-template-columns: 38% 1fr 12%;
+  align-items: center;
+  gap: 2.4cqw;
+  font: 400 max(13px, 2.2cqw) / 1.2 var(--font-text);
+  color: #c9c5bb;
+}
+.pc-row i {
+  height: max(6px, 1.4cqw);
+  border-radius: 99px;
+  background: linear-gradient(90deg, #9c7434, #f3ddb0);
+  width: var(--w);
+  min-width: 4px;
+}
+.pc-row b {
+  font: 500 max(13px, 2.4cqw) / 1 var(--font-mono);
+  color: #f2efe8;
+  text-align: right;
+}
+.pc-row.is-llm span,
+.pc-row.is-llm b {
+  color: #f3ddb0;
+}
+
+/* ---------- the console in an app window ---------- */
+.appframe {
+  display: block;
+  border-radius: 18px;
+  border: 1px solid #2d2d33;
+  background: #0e0e10;
+  overflow: hidden;
+  box-shadow:
+    0 50px 120px -50px rgb(217 178 107 / 0.35),
+    0 30px 80px -30px #000;
+  transition:
+    transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 220ms;
+}
+.appframe:hover {
+  transform: translateY(-2px);
+  border-color: rgb(217 178 107 / 0.45);
+}
+.appframe__bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 14px;
+  border-bottom: 1px solid #222226;
+  font-size: 13px;
+  color: #9a958a;
+}
+.appframe__bar i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #2d2d33;
+}
+.appframe__bar span {
+  margin-left: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.appframe__view {
+  --vw: 1440;
+  --vh: 560;
+  position: relative;
+  height: calc(var(--s, 0.85) * var(--vh) * 1px);
+  overflow: hidden;
+}
+.appframe__poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top left;
+}
+.appframe__view iframe {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: calc(var(--vw) * 1px);
+  height: calc(var(--vh) * 1px);
+  border: 0;
+  transform: scale(var(--s, 0.85));
+  transform-origin: 0 0;
+  pointer-events: none;
+  background: #0a0a0b;
+}
+
+/* ---------- one problem, many wordings ---------- */
+.words {
+  align-items: start;
+}
+.words__text {
+  display: grid;
+  gap: 24px;
+  align-content: start;
+}
+.words__facts {
+  display: grid;
+  gap: 16px;
+  margin: 8px 0 0;
+}
+.words__facts div {
+  display: grid;
+  gap: 2px;
+  padding-top: 14px;
+  border-top: 1px solid #222226;
+}
+.words__facts dt {
+  font-size: 14px;
+  color: var(--p-muted);
+}
+.words__facts dd {
+  margin: 0;
+  font: var(--display-weight) 28px/1.1 var(--font-display);
+  letter-spacing: -0.03em;
+}
+.hub {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 90px minmax(0, 0.8fr);
+  align-items: center;
+}
+.hub__out {
+  align-self: center;
+}
+.hub__lines {
+  grid-column: 2;
+  grid-row: 1;
+  width: 100%;
+  height: 484px;
+  overflow: visible;
+}
+.hub__lines path {
+  fill: none;
+  stroke: #3a3a41;
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+}
+.hub__lines .hub__pulse {
+  stroke: #f3ddb0;
+  stroke-width: 2;
+  stroke-dasharray: 14 400;
+  animation: hub-pulse 3s linear infinite;
+  filter: drop-shadow(0 0 4px rgb(243 221 176 / 0.8));
+}
+@keyframes hub-pulse {
+  from {
+    stroke-dashoffset: 414;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.hub__in {
+  grid-column: 1;
+  grid-row: 1;
+  display: grid;
+  grid-template-rows: repeat(5, 84px);
+  gap: 16px;
+}
+.hub__msg {
+  display: grid;
+  align-content: center;
+  gap: 4px;
+  padding: 0 16px;
+  border-radius: 12px;
+  background: #141417;
+  border: 1px solid #26262b;
+  font-size: 15px;
+  line-height: 1.35;
+  color: #f2efe8;
+  overflow: hidden;
+}
+.hub__msg span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #9a958a;
+}
+.hub__msg span::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 3px;
+  background: var(--c);
+}
+.hub__out {
+  grid-column: 3;
+  grid-row: 1;
+  display: grid;
+  gap: 10px;
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid rgb(217 178 107 / 0.45);
+  background:
+    radial-gradient(120% 140% at 0% 0%, rgb(217 178 107 / 0.18), transparent 60%),
+    #17140f;
+  box-shadow: 0 30px 80px -40px rgb(217 178 107 / 0.5);
+}
+.hub__out strong {
+  font: var(--display-weight) 24px/1.15 var(--font-display);
+  letter-spacing: -0.03em;
+}
+.hub__n {
+  font-size: 14px;
+  color: #c9c5bb;
+}
+.hub__n b {
+  font-weight: 600;
+  color: #f3ddb0;
+}
+
+/* ---------- the funnel steps, on the inverse ground ---------- */
+.steps4 {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+}
+.steps4 li {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding-top: 20px;
+  border-top: 2px solid rgb(10 10 11 / 0.18);
+}
+.steps4 li.is-llm {
+  border-top-color: #0a0a0b;
+}
+.steps4 h3 {
+  font: var(--display-weight) 22px/1.2 var(--font-display);
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+.steps4 p {
+  margin: 0;
+  font-size: 16px;
+  color: var(--muted, #575654);
+  min-height: 3em;
+}
+.steps4 .t-stat {
+  margin-top: 20px;
+  font-size: clamp(30px, 2.6vw, 38px);
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+.steps4__u {
+  font-size: 14px;
+  color: var(--muted, #575654);
+}
+
+/* ---------- ranking ---------- */
+.rank {
+  align-items: start;
+}
+.rank__text {
+  display: grid;
+  gap: 24px;
+  align-content: start;
+}
+.rank__text .rank__formula {
+  margin-top: 16px;
+}
+.rank__formula {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 14px 12px;
+  font-family: var(--font-mono);
+}
+.rank__formula span {
+  display: grid;
+  justify-items: start;
+  gap: 8px;
+  font-family: var(--font-text);
+  font-size: 14px;
+  color: var(--p-muted);
+}
+.rank__formula b {
+  font: 500 clamp(26px, 2.2vw, 36px) / 1 var(--font-mono);
+  letter-spacing: -0.04em;
+  color: var(--p-ink);
+}
+.rank__formula i {
+  font-style: normal;
+  font-size: clamp(22px, 2vw, 30px);
+  color: #9a958a;
+  padding-top: 6px;
+}
+.rank__formula .is-score b {
+  color: #f3ddb0;
+  text-shadow: 0 0 28px rgb(217 178 107 / 0.45);
+}
+.rank__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+}
+.rank__list li {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr) 72px 104px;
+  align-items: center;
+  gap: 16px;
+  min-height: 60px;
+  border-top: 1px solid #222226;
+  font-size: 16px;
+}
+.rank__list .mono {
+  color: #d9b26b;
+  font-family: var(--font-mono);
+}
+.rank__list strong {
+  font-weight: 500;
+}
+.rank__list li > span:not(.mono) {
+  color: var(--p-muted);
+  text-align: right;
+}
+.rank__list em {
+  font-style: normal;
+  font-size: 13px;
+  font-weight: 600;
+  color: #ff9a92;
+}
+
+/* ---------- results ---------- */
+.proof {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+}
+.proof__item {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+  padding-top: 20px;
+  border-top: 1px solid #2d2d33;
+}
+.proof__item b {
+  font: var(--display-weight) clamp(30px, 2.6vw, 38px) / 1 var(--font-display);
+  letter-spacing: -0.05em;
+  color: var(--p-ink);
+}
+.proof__item:first-child b {
+  color: #f3ddb0;
+}
+.proof__item > span {
+  font-size: 16px;
+  color: #c9c5bb;
+  max-width: 26ch;
+}
+.proof__note {
+  margin-top: 32px;
+  font-size: 15px;
+  color: #c9c5bb;
+  max-width: 70ch;
+}
+
+@media (max-width: 1023px) {
+  .hub {
+    grid-template-columns: minmax(0, 1fr) 60px minmax(0, 0.8fr);
+  }
+  .steps4,
+  .proof {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 639px) {
+  .hub {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+  }
+  .hub__lines {
+    display: none;
+  }
+  .hub__in {
+    grid-template-rows: none;
+    gap: 8px;
+  }
+  .hub__in .hub__msg:nth-child(n + 4) {
+    display: none;
+  }
+  .hub__msg {
+    padding: 12px 14px;
+  }
+  .hub__out {
+    grid-column: 1;
+    grid-row: auto;
+  }
+  .rank__list li {
+    grid-template-columns: 28px minmax(0, 1fr) auto;
+  }
+  .rank__list li > span:not(.mono) {
+    display: none;
+  }
+  .steps4 {
+    gap: 16px;
+  }
+  .steps4 .t-stat {
+    margin-top: 8px;
+  }
+  .steps4 p {
+    min-height: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cc-needle,
+  .cc-ring,
+  .hub__lines .hub__pulse {
+    animation: none;
+  }
+  .cc-ring {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ---------- the close: the kit sizes its word for a one-word name; ours has two ---------- */
+.closing .close__word {
+  font-size: clamp(40px, 8.3vw, 128px);
+  line-height: 1.04;
+  padding-bottom: 0.06em;
+  min-width: 0;
+  max-width: 100%;
+}
+@media (max-width: 639px) {
+  .closing .close__word {
+    font-size: 8.4vw;
+  }
+  /* the kit: a name of 17 characters or more shortens to its mark on a phone (the link keeps its label) */
+  .nav__logo .nav__name {
+    display: none;
+  }
+}
+
+/* one action, one look: the statement footer draws its button in the ground's ink; ours keeps the brass */
+.footer--statement .btn--primary,
+.actionbar .btn--primary {
+  background: var(--p-action);
+  color: var(--p-action-ink);
+}
+/* a phone: the formula's chips sit on three column lines instead of wherever the wrap drops them */
+@media (max-width: 639px) {
+  .rank__formula {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px 12px;
+  }
+  .rank__formula i {
+    display: none;
+  }
+  .rank__formula span {
+    justify-items: start;
+  }
+  .rank__formula b {
+    font-size: 24px;
+    padding: 10px 12px;
+  }
+}
+
+/* a phone: the window shows the console's own phone layout, not a 1440 page shrunk to a sliver */
+@media (max-width: 639px) {
+  .appframe__view {
+    --vw: 390;
+    --vh: 640;
+  }
+}
+
+/* ---------- results: filed by each check ---------- */
+.proof__stages {
+  display: grid;
+  gap: 12px;
+  margin-top: 40px;
+}
+.proof__stages-h {
+  font-size: 14px;
+  color: #c9c5bb;
+  margin-bottom: 4px;
+}
+.proof__stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px 16px;
+  align-items: center;
+  font-size: 15px;
+  color: #c9c5bb;
+}
+.proof__track {
+  grid-column: 1 / -1;
+  display: block;
+  height: 8px;
+  border-radius: 4px;
+  background: #1c1c20;
+}
+.proof__track i {
+  display: block;
+  height: 100%;
+  width: var(--w);
+  min-width: 4px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #9c7434, #f3ddb0);
+}
+.proof__stage b {
+  font-weight: 500;
+  color: var(--p-ink);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+
+/* the ranking drawn as the product draws it: the console's dark card on the page's lit panel */
+.rank__panel {
+  padding: 28px;
+}
+.rank__panel .rank__ui {
+  display: grid;
+  gap: 4px;
+  background: #111114;
+  border: 1px solid #26262b;
+  border-radius: 14px;
+  padding: 18px 20px 10px;
+  color: #f2efe8;
+  box-shadow: 0 30px 70px -34px rgb(0 0 0 / 0.75);
+}
+.rank__ui-head {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 0 10px;
+  font-size: 13px;
+  color: #9a958a;
+}
+/* two columns of answers, so the five questions hold one screen */
+@media (min-width: 1024px) {
+  #faq .faq {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 48px;
+  }
+}

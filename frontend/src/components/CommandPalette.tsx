@@ -32,7 +32,7 @@ export function CommandPalette({ open, onClose }: { open: boolean; onClose: () =
       onClose()
     }
     const pages: Item[] = [
-      { id: 'p-home', group: 'Pages', label: 'Product page', icon: <Home size={16} />, run: go('/') },
+      { id: 'p-home', group: 'Pages', label: 'Product page', icon: <Home size={16} />, run: () => window.location.assign('/') },
       { id: 'p-ov', group: 'Pages', label: 'Overview', icon: <Compass size={16} />, run: go('/console') },
       { id: 'p-top', group: 'Pages', label: 'Top issues', icon: <ListOrdered size={16} />, run: go('/console/issues') },
       { id: 'p-live', group: 'Pages', label: 'Live intake: send a complaint', icon: <Radio size={16} />, run: go('/console/live') },
