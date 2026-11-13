@@ -4,7 +4,7 @@ import { AlertOctagon } from 'lucide-react'
 import { useApi } from '../lib/api'
 import type { Config, PendingItem } from '../lib/types'
 import { componentName, when } from '../lib/format'
-import { ChannelTag, Empty, Meter, Skeleton } from '../components/ui'
+import { ChannelTag, Empty, Meter, Skeleton, YesNo } from '../components/ui'
 import './Waiting.css'
 
 /* Unconfirmed reports: complaints that match no known issue yet. A pattern becomes an issue
@@ -76,7 +76,9 @@ export default function Waiting() {
                   <Meter value={p.impact} max={3} color="var(--serious)" label="Impact" />
                 </div>
                 <div>
-                  <span>Money lost</span>
+                  <span className="wcard__yn">
+                    Money lost <YesNo yes={p.money_lost >= 0.5} title={`Jev: ${Math.round(p.money_lost * 100)}% likely`} />
+                  </span>
                   <Meter value={p.money_lost} color="var(--brass)" label="Money lost likelihood" />
                 </div>
                 <div>

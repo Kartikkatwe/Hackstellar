@@ -1,6 +1,7 @@
 import { motion, useReducedMotion } from 'motion/react'
 import { useApi } from '../lib/api'
 import type { Config } from '../lib/types'
+import { YesNo } from './ui'
 import './Meters.css'
 
 /* Severity, money lost and anger as three gauges, each filled up to where the issue is,
@@ -48,10 +49,11 @@ export function Meters({ s, compact = false, score, scale }: { s: S; compact?: b
       key: 'money',
       fill: s.money_share,
       value: pct(s.money_share),
+      yesno: s.money_share >= moneyLine,
       ticks: [],
       line: moneyLine,
       over: s.money_share >= moneyLine,
-      note: `of complaints lost money · Critical from ${pct(moneyLine)}`,
+      note: `${pct(s.money_share)} of complaints lost money · Yes from ${pct(moneyLine)}, which makes it Critical`,
     },
     {
       key: 'anger',
@@ -87,7 +89,11 @@ export function Meters({ s, compact = false, score, scale }: { s: S; compact?: b
             title={`${f.name}: ${r.value} ${r.note}`}
           >
             <span className="mtr__name">{f.name}</span>
-            <span className="mtr__val">{r.value}</span>
+            {'yesno' in r ? (
+              <YesNo yes={!!r.yesno} title={`${r.value} ${r.note}`} />
+            ) : (
+              <span className="mtr__val">{r.value}</span>
+            )}
             <span
               className="mtr__track"
               role="meter"

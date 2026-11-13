@@ -88,3 +88,17 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
+.wcard__yn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.wcard__yn {
+  white-space: nowrap;
+}
+.wcard__yn .yn {
+  min-width: 32px;
+  height: 18px;
+  padding: 0 6px;
+}

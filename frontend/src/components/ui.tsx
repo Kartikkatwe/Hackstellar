@@ -127,6 +127,16 @@ export function Meter({ value, max = 1, color = 'var(--brass)', label }: { value
   )
 }
 
+/** Money lost as a plain Yes/No. Why (13 Nov, Kartik): a percentage reads as noise to judges;
+    the line is the same 50% cut-off the ranker and the urgent flag use. */
+export function YesNo({ yes, title }: { yes: boolean; title?: string }) {
+  return (
+    <span className={`yn ${yes ? 'yn--yes' : 'yn--no'}`} title={title}>
+      {yes ? 'Yes' : 'No'}
+    </span>
+  )
+}
+
 export function LiveDot({ mode }: { mode: 'live' | 'snapshot' | 'connecting' | undefined }) {
   return <span className={`livedot livedot--${mode ?? 'connecting'}`} aria-hidden="true" />
 }

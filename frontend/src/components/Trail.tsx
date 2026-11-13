@@ -1,3 +1,4 @@
+import { YesNo } from './ui'
 import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, useReducedMotion } from 'motion/react'
@@ -98,7 +99,9 @@ export function buildSteps(t: TrailT, config?: Config): Step[] {
           <div className="trail__chips">
             <span>Impact: {level(config?.impact_levels, gate.impact)}</span>
             <span>Mood: {level(config?.emotion_levels, gate.emotion)}</span>
-            <span className={gate.money_lost >= 0.5 ? 'is-hot' : ''}>Money lost {Math.round(gate.money_lost * 100)}%</span>
+            <span className="trail__yn" title={`Jev: ${Math.round(gate.money_lost * 100)}% likely`}>
+              Money lost <YesNo yes={gate.money_lost >= 0.5} />
+            </span>
             <span className={gate.legal_risk >= 0.5 ? 'is-hot' : ''}>Legal risk {Math.round(gate.legal_risk * 100)}%</span>
           </div>
         </div>

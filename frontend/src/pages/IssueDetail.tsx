@@ -91,8 +91,8 @@ export default function IssueDetail() {
         </div>
         <div>
           <span className="label">Money lost</span>
-          <strong className="n-harm">{pct(s.money_share, 0)}</strong>
-          <span className="idet__sub">of complaints report it</span>
+          <strong className="n-harm">{s.money_share >= 0.5 ? 'Yes' : 'No'}</strong>
+          <span className="idet__sub">{pct(s.money_share, 0)} of complaints report it</span>
         </div>
         <div>
           <span className="label">Angry</span>
