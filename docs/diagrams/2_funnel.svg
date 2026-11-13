@@ -9,7 +9,7 @@
   <rect width="1920" height="1080" fill="#FFFFFF"/>
 
   <text x="40" y="84" font-size="46" font-weight="700" fill="#1B2330">Complete architecture: the funnel</text>
-  <text x="40" y="122" font-size="22" fill="#5B6676">Each complaint stops at the cheapest step that can file it. Figures from a live run on 1,500 complaints.</text>
+  <text x="40" y="122" font-size="22" fill="#5B6676">Each complaint stops at the cheapest step that can file it.</text>
 
   <!-- legend -->
   <g font-size="18" fill="#1B2330">
@@ -38,8 +38,8 @@
     <text x="374" y="261">Which of 7 areas?</text>
     <text x="374" y="286">Impact and emotion</text>
     <text x="374" y="311">Money lost? Legal risk?</text>
-    <text x="374" y="344" font-weight="700">1 call · 0.53 s</text>
-    <text x="374" y="369">$0.00003 per complaint</text>
+    <text x="374" y="344" font-weight="700">1 call per complaint</text>
+    <text x="374" y="369">answers by choosing</text>
 
     <!-- 3 match -->
     <rect x="668" y="170" width="270" height="240" rx="14" fill="#E6F4F2" stroke="#0F766E" stroke-width="2"/>
@@ -68,7 +68,7 @@
     <text x="1316" y="261">The LLM reads that area's</text>
     <text x="1316" y="286">issue list and picks one,</text>
     <text x="1316" y="311">or says it is new</text>
-    <text x="1316" y="344" font-weight="700">1.9 s · $0.00013 a call</text>
+    <text x="1316" y="344" font-weight="700">only when still unsure</text>
     <text x="1316" y="369">New → buffer</text>
 
     <!-- 6 buffer -->
@@ -93,14 +93,14 @@
 
   <!-- outcomes -->
   <g font-size="18" font-weight="700" text-anchor="middle">
-    <rect x="60" y="436" width="230" height="40" rx="20" fill="#EEF1F5" stroke="#334155" stroke-width="2"/><text x="175" y="462" fill="#334155">1,500 complaints in</text>
-    <rect x="374" y="436" width="230" height="40" rx="20" fill="#F1F2F4" stroke="#8A94A3" stroke-width="2"/><text x="489" y="462" fill="#4B5563">Dropped 151 · 10.1%</text>
-    <rect x="688" y="436" width="230" height="40" rx="20" fill="#E8F5EC" stroke="#15803D" stroke-width="2"/><text x="803" y="462" fill="#166534">Filed 754 · 50.3%</text>
-    <rect x="1002" y="436" width="230" height="40" rx="20" fill="#E8F5EC" stroke="#15803D" stroke-width="2"/><text x="1117" y="462" fill="#166534">Filed 520 · 34.7%</text>
-    <rect x="1316" y="436" width="230" height="40" rx="20" fill="#E8F5EC" stroke="#15803D" stroke-width="2"/><text x="1431" y="462" fill="#166534">Filed 26 · 1.7%</text>
-    <rect x="1630" y="436" width="230" height="40" rx="20" fill="#E8F5EC" stroke="#15803D" stroke-width="2"/><text x="1745" y="462" fill="#166534">New issues 25 · 1.7%</text>
+    <rect x="60" y="436" width="230" height="40" rx="20" fill="#EEF1F5" stroke="#334155" stroke-width="2"/><text x="175" y="462" fill="#334155">Complaints in</text>
+    <rect x="374" y="436" width="230" height="40" rx="20" fill="#F1F2F4" stroke="#8A94A3" stroke-width="2"/><text x="489" y="462" fill="#4B5563">Dropped</text>
+    <rect x="688" y="436" width="230" height="40" rx="20" fill="#E8F5EC" stroke="#15803D" stroke-width="2"/><text x="803" y="462" fill="#166534">Filed, free</text>
+    <rect x="1002" y="436" width="230" height="40" rx="20" fill="#E8F5EC" stroke="#15803D" stroke-width="2"/><text x="1117" y="462" fill="#166534">Filed by Jev</text>
+    <rect x="1316" y="436" width="230" height="40" rx="20" fill="#E8F5EC" stroke="#15803D" stroke-width="2"/><text x="1431" y="462" fill="#166534">Filed by the LLM</text>
+    <rect x="1630" y="436" width="230" height="40" rx="20" fill="#E8F5EC" stroke="#15803D" stroke-width="2"/><text x="1745" y="462" fill="#166534">New issue named</text>
   </g>
-  <text x="1770" y="502" font-size="16" fill="#5B6676" text-anchor="middle">24 still waiting (1.6%)</text>
+  <text x="1770" y="502" font-size="16" fill="#5B6676" text-anchor="middle">the rest keep waiting</text>
   <g stroke="#15803D" stroke-width="3" marker-end="url(#ag)">
     <line x1="803" y1="478" x2="803" y2="556"/>
     <line x1="1117" y1="478" x2="1117" y2="556"/>
@@ -110,7 +110,7 @@
 
   <!-- ROW 2: registry -->
   <rect x="668" y="560" width="1212" height="84" rx="14" fill="#F4F6F9" stroke="#334155" stroke-width="2"/>
-  <text x="690" y="594" font-size="21" font-weight="700" fill="#1B2330">Issue registry: 13 known issues + 6 discovered, each with example complaints</text>
+  <text x="690" y="594" font-size="21" font-weight="700" fill="#1B2330">Issue registry: every known issue, each with example complaints</text>
   <text x="690" y="624" font-size="17" fill="#3B4552">Every confirmed verdict adds an example, so the next complaint worded that way is matched for free.</text>
   <path d="M668 620 H648 V392 H664" fill="none" stroke="#0F766E" stroke-width="3" stroke-dasharray="8 6" marker-end="url(#at)"/>
   <text x="640" y="520" font-size="15" font-weight="700" fill="#0F766E" text-anchor="end">learns</text>
@@ -123,7 +123,7 @@
     <text x="688" y="762">The LLM checks each new issue against</text>
     <text x="688" y="786">its 4 nearest in the same area.</text>
     <text x="688" y="810">Same problem → merge and rename.</text>
-    <text x="688" y="834">About $0.0002 per issue.</text>
+    <text x="688" y="834">One call per new issue.</text>
 
     <rect x="1110" y="700" width="380" height="160" rx="14" fill="#EEF1F5" stroke="#334155" stroke-width="2"/>
     <text x="1130" y="732" font-size="21" font-weight="700" fill="#334155">8 · Rank</text>
@@ -146,18 +146,18 @@
 
   <!-- results panel -->
   <rect x="40" y="560" width="584" height="300" rx="14" fill="#FFFFFF" stroke="#C9D1DC" stroke-width="2"/>
-  <text x="64" y="596" font-size="19" font-weight="700" fill="#5B6676" letter-spacing="1">LIVE RUN · 1,500 COMPLAINTS</text>
+  <text x="64" y="596" font-size="19" font-weight="700" fill="#5B6676" letter-spacing="1">WHY IT IS FAST AND CHEAP</text>
   <g fill="#1B2330">
-    <text x="64" y="646" font-size="32" font-weight="700">96.1%</text><text x="214" y="644" font-size="19" fill="#3B4552">never reached an LLM</text>
-    <text x="64" y="696" font-size="32" font-weight="700">98.4%</text><text x="214" y="694" font-size="19" fill="#3B4552">filed under the right issue</text>
-    <text x="64" y="746" font-size="32" font-weight="700">$0.065</text><text x="214" y="744" font-size="19" fill="#3B4552">in total · $4.33 per 100,000</text>
-    <text x="64" y="796" font-size="32" font-weight="700">0.55 s</text><text x="214" y="794" font-size="19" fill="#3B4552">median time per complaint</text>
-    <text x="64" y="846" font-size="32" font-weight="700">99.6%</text><text x="214" y="844" font-size="19" fill="#3B4552">sent to the right area</text>
+    <text x="64" y="646" font-size="32" font-weight="700">Free</text><text x="214" y="644" font-size="19" fill="#3B4552">most complaints matched on the laptop</text>
+    <text x="64" y="696" font-size="32" font-weight="700">Jev</text><text x="214" y="694" font-size="19" fill="#3B4552">unsure ones settled by yes / no</text>
+    <text x="64" y="746" font-size="32" font-weight="700">LLM</text><text x="214" y="744" font-size="19" fill="#3B4552">only what nothing cheaper can decide</text>
+    <text x="64" y="796" font-size="32" font-weight="700">Learns</text><text x="214" y="794" font-size="19" fill="#3B4552">every verdict becomes an example</text>
+    <text x="64" y="846" font-size="32" font-weight="700">Traced</text><text x="214" y="844" font-size="19" fill="#3B4552">each complaint keeps its path</text>
   </g>
 
   <!-- comparison -->
   <rect x="40" y="900" width="1840" height="120" rx="16" fill="#F4F6F9"/>
-  <text x="72" y="942" font-size="22" font-weight="700" fill="#1B2330">The same 1,500 complaints if an LLM reads every one</text>
-  <text x="72" y="976" font-size="19" fill="#3B4552">Claude Haiku 5.5: $0.45, or $0.18 to $0.23 with prompt caching (we save 65% to 71%)   ·   Claude Sonnet 5.5: $8.91 (we save 98%)</text>
-  <text x="72" y="1004" font-size="19" fill="#3B4552">At least 1.9 s per complaint, and about 200 output tokens written for every one.</text>
+  <text x="72" y="942" font-size="22" font-weight="700" fill="#1B2330">If an LLM reads every complaint instead</text>
+  <text x="72" y="976" font-size="19" fill="#3B4552">Every complaint waits on the model, and the model writes an answer for every one.</text>
+  <text x="72" y="1004" font-size="19" fill="#3B4552">Output tokens are the expensive part, so the cost grows with every complaint.</text>
 </svg>

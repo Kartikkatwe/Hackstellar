@@ -2,8 +2,8 @@
 <p class="eyebrow">THE USUAL WAY</p>
 <h2 class="title">Have an LLM read every complaint. It works, but…</h2>
 <div class="cards">
-<div class="card fragment"><p class="big">1.9 s+</p><p class="text">every complaint waits on the model</p></div>
-<div class="card fragment"><p class="big">~200</p><p class="text">output tokens written per complaint, every time</p></div>
+<div class="card fragment"><h3>Slow</h3><p class="text">Every complaint waits while the model reads it and writes an answer.</p></div>
+<div class="card fragment"><h3>Expensive</h3><p class="text">It writes an answer for every single complaint, and output tokens are the costly ones.</p></div>
 </div>
-<aside>Pause before this slide. Then: the usual way to build this is to send every complaint to an LLM and let it decide. It works, but two things go wrong. Click: every complaint waits on the model, at least 1.9 seconds, measured on Claude Haiku 5.5 with a short prompt, so a real everything-prompt is slower. Click: the LLM writes an answer for every single complaint, about 200 tokens each, and output tokens are the expensive ones. Then pause again before the numbers.</aside>
+<aside>Pause before this slide. Then: the usual way to build this is to send every complaint to an LLM and let it decide. It works, but two things go wrong. Click: it is slow, because every complaint waits for the model to read it and write a reply. Click: it is expensive, because the LLM writes an answer for every single complaint, and output tokens are the expensive part. Then pause again before the numbers.</aside>
 </section>

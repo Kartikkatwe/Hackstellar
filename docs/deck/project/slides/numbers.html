@@ -1,11 +1,10 @@
 <section id="numbers" class="dark drop" data-transition="fade">
-<p class="eyebrow">SAME JOB · LIVE RUN, 1,500 COMPLAINTS</p>
+<p class="eyebrow">SAME JOB</p>
 <h2 class="title">Compared with an LLM reading every complaint</h2>
 <div class="row3">
-<div class="stat fragment"><p class="big">65–85%</p><p class="text">cheaper</p><p class="sub">vs Claude Haiku 5.5, with and without prompt caching</p></div>
-<div class="stat fragment"><p class="big">96%</p><p class="text">fewer output tokens</p><p class="sub">11,159 written in total vs about 295,000</p></div>
-<div class="stat fragment"><p class="big">2.3×</p><p class="text">faster</p><p class="sub">on average · 3.5× at the median (0.55 s vs 1.9 s+)</p></div>
+<div class="stat fragment"><p class="big">65–85%</p><p class="text">cheaper</p></div>
+<div class="stat fragment"><p class="big">96%</p><p class="text">fewer output tokens</p></div>
+<div class="stat fragment"><p class="big">2.3×</p><p class="text">faster</p></div>
 </div>
-<p class="note fragment">Our side measured live with the real models. The LLM-everywhere side is projected from token counts calibrated on 12 real calls.</p>
-<aside>Pause, then drop the numbers one click at a time. One: 65 to 85 percent cheaper than the cheapest LLM-everywhere setup, Claude Haiku 5.5: 65 to 76 percent cheaper even when Haiku gets the best prompt caching, 85 percent without caching. Two: 96 percent fewer output tokens. Across the whole run we wrote 11,159 output tokens; reading every complaint with an LLM would write about 295,000. Most of our work is choosing, not writing, so it produces almost no output. Three: 2.3 times faster on average and 3.5 times at the median: a typical complaint is filed in 0.55 seconds, while one LLM call alone takes 1.9 seconds or more. Last line, say it out loud: our numbers were measured live; the comparison side is projected from calibrated token counts, not run. If asked about tokens overall: we use about 55 to 60 percent fewer tokens in total, but most of ours go to a decision model that is far cheaper per token than an LLM, so the cost saving is bigger than the token saving.</aside>
+<aside>Pause, then drop the numbers one click at a time. One: 65 to 85 percent cheaper than having an LLM read every complaint. Two: 96 percent fewer output tokens: most of our work is choosing, not writing, so we produce almost no output. Three: 2.3 times faster. If asked how this was measured: our side was measured on our test run with the real models; the LLM-everywhere side is projected from calibrated token counts, not run. If asked about tokens overall: the total token saving is smaller than the cost saving, because most of our tokens go to a decision model that is far cheaper per token than an LLM.</aside>
 </section>

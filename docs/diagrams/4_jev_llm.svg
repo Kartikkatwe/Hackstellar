@@ -2,7 +2,7 @@
   <!-- Who does what: every Jev call, every LLM call, and the free local steps between them. Live-run figures, 1,500 complaints. -->
   <rect width="1920" height="1080" fill="#FFFFFF"/>
   <text x="40" y="80" font-size="44" font-weight="700" fill="#1B2330">Who does what: Jev, the LLM, and free local maths</text>
-  <text x="40" y="118" font-size="21" fill="#5B6676">Jev answers choices. The LLM writes words. Everything else runs on the laptop for free. Calls and cost from the live run on 1,500 complaints.</text>
+  <text x="40" y="118" font-size="21" fill="#5B6676">Jev answers choices. The LLM writes words. Everything else runs on the laptop for free.</text>
 
   <!-- lane labels -->
   <g font-weight="700">
@@ -30,8 +30,8 @@
     <text x="342" y="280">• Which of 7 areas? <tspan fill="#5B6676">pick one</tspan></text>
     <text x="342" y="306">• Impact, emotion <tspan fill="#5B6676">scores 1 to 4</tspan></text>
     <text x="342" y="332">• Money lost? Legal or safety risk? <tspan fill="#5B6676">yes / no</tspan></text>
-    <text x="342" y="372" font-weight="700">1,500 calls · $0.046 · 0.53 s each</text>
-    <text x="342" y="400" fill="#5B6676">99.9% complaints kept · 99.6% right area</text>
+    <text x="342" y="372" font-weight="700">one call per complaint</text>
+    <text x="342" y="400" fill="#5B6676">only real complaints go on</text>
 
     <rect x="850" y="160" width="510" height="270" rx="14" fill="#EEF0FF" stroke="#4338CA" stroke-width="2"/>
     <text x="872" y="196" font-size="23" font-weight="700" fill="#4338CA">Verify · the unsure ones</text>
@@ -40,8 +40,8 @@
     <text x="872" y="280">one yes / no for each of the top 3</text>
     <text x="872" y="306">Yes ≥ 0.80 → filed · all ≤ 0.20 → buffer</text>
     <text x="872" y="332">otherwise → the LLM</text>
-    <text x="872" y="372" font-weight="700">595 calls · $0.0096</text>
-    <text x="872" y="400" fill="#5B6676">filed 34.7% of complaints · 97.3% right</text>
+    <text x="872" y="372" font-weight="700">only for unsure matches</text>
+    <text x="872" y="400" fill="#5B6676">a cheap yes / no instead of the LLM</text>
 
     <rect x="1380" y="160" width="500" height="270" rx="14" fill="#EEF0FF" stroke="#4338CA" stroke-width="2"/>
     <text x="1402" y="196" font-size="23" font-weight="700" fill="#4338CA">Group check · before a new issue</text>
@@ -50,7 +50,7 @@
     <text x="1402" y="280">“Is this a known issue in new words?”</text>
     <text x="1402" y="306">Yes → filed under the known issue</text>
     <text x="1402" y="332">No → the LLM names a new one</text>
-    <text x="1402" y="372" font-weight="700">7 calls · $0.0001</text>
+    <text x="1402" y="372" font-weight="700">only before a new issue</text>
     <text x="1402" y="400" fill="#5B6676">stops duplicates of known issues</text>
 
     <!-- Local -->
@@ -63,8 +63,8 @@
       <rect x="710" y="450" width="380" height="150" rx="14" fill="#E6F4F2" stroke="#0F766E" stroke-width="2"/>
       <text x="732" y="486" font-size="21" font-weight="700" fill="#0F766E">Similarity match</text>
       <text x="732" y="516">multilingual model + word matching</text>
-      <text x="732" y="542">≥ 0.65 → filed, free, 0.02 s</text>
-      <text x="732" y="568">50.3% of complaints · 99.2% right</text>
+      <text x="732" y="542">≥ 0.65 → filed, free, instant</text>
+      <text x="732" y="568">files most complaints on its own</text>
       <rect x="1110" y="450" width="370" height="150" rx="14" fill="#E6F4F2" stroke="#0F766E" stroke-width="2"/>
       <text x="1132" y="486" font-size="21" font-weight="700" fill="#0F766E">Buffer</text>
       <text x="1132" y="516">holds reports that match nothing</text>
@@ -84,8 +84,8 @@
     <text x="342" y="712">picks one issue or says “new”</text>
     <text x="342" y="738">Reply is JSON; an invented issue</text>
     <text x="342" y="764">key is treated as “new”</text>
-    <text x="342" y="804" font-weight="700">58 calls · $0.0074 · 1.9 s each</text>
-    <text x="342" y="832" fill="#5B6676">only 1.7% of complaints · 96.2% right</text>
+    <text x="342" y="804" font-weight="700">only the last unsure few</text>
+    <text x="342" y="832" fill="#5B6676">rarely reached</text>
 
     <rect x="850" y="620" width="510" height="270" rx="14" fill="#FDF3E3" stroke="#B45309" stroke-width="2"/>
     <text x="872" y="656" font-size="23" font-weight="700" fill="#B45309">Name · each new issue</text>
@@ -93,7 +93,7 @@
     <text x="872" y="712">writes a neutral English title</text>
     <text x="872" y="738">and one-line description, even</text>
     <text x="872" y="764">for Hindi or Hinglish complaints</text>
-    <text x="872" y="804" font-weight="700">6 calls · $0.0004</text>
+    <text x="872" y="804" font-weight="700">writes the title</text>
     <text x="872" y="832" fill="#5B6676">one call per issue, not per complaint</text>
 
     <rect x="1380" y="620" width="500" height="270" rx="14" fill="#FDF3E3" stroke="#B45309" stroke-width="2"/>
@@ -102,7 +102,7 @@
     <text x="1402" y="712">4 nearest issues in the same area</text>
     <text x="1402" y="738">Same root cause → merge and rename</text>
     <text x="1402" y="764">Merges are kept and traceable</text>
-    <text x="1402" y="804" font-weight="700">6 calls · $0.0010</text>
+    <text x="1402" y="804" font-weight="700">one check per new issue</text>
     <text x="1402" y="832" fill="#5B6676">keeps the issue list free of repeats</text>
   </g>
 
@@ -112,6 +112,6 @@
   <g font-size="17" fill="#3B4552">
     <text x="70" y="982"><tspan font-weight="700">Same problem, different words:</tspan> similarity → Jev verify → LLM  ·  <tspan font-weight="700">New problems:</tspan> buffer → Jev group check → LLM name → Curator</text>
     <text x="70" y="1012"><tspan font-weight="700">No double counting:</tspan> identity counts unique customers  ·  <tspan font-weight="700">Transparent Top 10:</tspan> written score formula  ·  <tspan font-weight="700">Customer groups:</tspan> segment filters and heatmap</text>
-    <text x="70" y="1040"><tspan font-weight="700">Total:</tspan> 96.1% never reach the LLM · 98.4% filed correctly · $0.065 for 1,500 · 0.55 s median per complaint</text>
+    <text x="70" y="1040"><tspan font-weight="700">The idea:</tspan> cheapest step first. Free matching, then Jev's yes / no, and the LLM only where words are needed.</text>
   </g>
 </svg>
