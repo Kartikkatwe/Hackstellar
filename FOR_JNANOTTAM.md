@@ -80,7 +80,15 @@ Priority order for 11 AM. The first four carry the demo.
 
 Ideas discussed but not built in the backend: a severity-by-reach scatter plot (x = `unique_customers`, y = `avg_impact`; the data is already in `/issues/top`), a phone simulator for a voice-agent call (the webhook exists: `POST /webhooks/call`), and a QR code so judges can submit a complaint from their phone.
 
-**For the pitch, quote the saving with its comparison model.** Measured on 1,500 complaints: 99.0% cheaper than Claude Sonnet 5.5, 80.5% cheaper than Claude Haiku 5.5, and 33.3% cheaper than Haiku with prompt caching. The baseline is projected from token counts, not run.
+**For the pitch, quote the saving with its comparison model.** Funnel measured at $0.065 for 1,500 complaints. The LLM-for-everything baseline is priced from 12 real calibration calls and a replay of arrival times against the cache rules (`backend/cache_analysis.py`), not run for accuracy:
+
+| Baseline | Funnel saving |
+|---|---|
+| Claude Sonnet 5.5, with or without prompt caching | about 98% |
+| Claude Haiku 5.5, no caching | 87.6% |
+| Claude Haiku 5.5, realistic caching | 67% to 74% (depends on volume) |
+
+`/cost` returns the uncached figure (`saving_pct`) and the every-call-a-cache-hit ceiling (`saving_vs_cached_pct`, 65.9% for Haiku). Show the ceiling as the honest worst case.
 
 ## 6. The API
 
@@ -91,7 +99,7 @@ Base URL `http://localhost:8000`. Interactive docs with full response shapes: `h
 | GET | `/health` | `{pack, business, has_run, batch:{running, done, total, error}}` |
 | GET | `/config` | Business name, components, `segments:[{key, label, values}]`, impact and emotion level names, cut-offs, prices |
 | GET | `/funnel` | `{total, stages:[{stage, label, count, share}], share_without_llm, llm_adjudications, verify_calls, issues_seeded, issues_discovered, run}` |
-| GET | `/cost` | `{funnel:{stages, cost_usd, per_100k_usd, seconds}, baseline:{models:[{model, cost_usd, cost_cached_usd, saving_pct, saving_vs_cached_pct}], seconds, note}, speedup}` |
+| GET | `/cost` | `{funnel:{stages, cost_usd, per_100k_usd, seconds}, baseline:{models:[{model, cost_usd, cost_cached_usd, saving_pct, saving_vs_cached_pct, per_100k_usd, per_100k_cached_usd}], seconds, note}, speedup}` |
 | GET | `/accuracy` | Gate, component, issue (overall and by stage), discovery and identity accuracy |
 | GET | `/issues/top?n=10&<segment>=<value>` | `{filters, issues:[…]}`, see below |
 | GET | `/issues/{id}` | `{summary, complaints:[…], repeat_customers:[…], daily:[[date, count]], impact_mix}` |
