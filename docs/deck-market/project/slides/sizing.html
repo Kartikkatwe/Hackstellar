@@ -2,14 +2,13 @@
 <p class="eyebrow">ILLUSTRATIVE SIZING · OUR ESTIMATE</p>
 <h2 class="title">Model cost is not the buyer’s problem; contact volume is</h2>
 <table class="table">
-<tr class="head"><th style="width:64%">Input (assumes 2% of orders lead to a complaint)</th><th style="width:18%">Low</th><th style="width:18%">High</th></tr>
-<tr><td>Orders per day</td><td>2.5M</td><td>7.8M</td></tr>
-<tr><td>Complaints per month</td><td>1.5M</td><td>4.7M</td></tr>
-<tr class="hi"><td>Our model cost per month ($4.33 per 100k, measured)</td><td>$65</td><td>$203</td></tr>
-<tr><td>LLM on every complaint, Haiku with best caching</td><td>$185</td><td>$577</td></tr>
-<tr><td>Assisted contacts avoided if fixing top issues removes 1%</td><td>15,000</td><td>47,000</td></tr>
+<tr class="head"><th style="width:52%">Share of orders that lead to a complaint (assumption)</th><th style="width:16%">1%</th><th style="width:16%">2%</th><th style="width:16%">3%</th></tr>
+<tr><td>Complaints per month</td><td>2.3M</td><td>4.7M</td><td>7.0M</td></tr>
+<tr class="hi"><td>Our model cost per month</td><td>$101</td><td>$203</td><td>$304</td></tr>
+<tr><td>LLM on every complaint, Haiku with best caching</td><td>$288</td><td>$577</td><td>$865</td></tr>
+<tr><td>Complaints avoided if fixing top issues removes 1%</td><td>23,400</td><td>46,800</td><td>70,200</td></tr>
 </table>
-<p class="lead">At Gartner’s $13.50 global median per assisted contact, that 1% is worth $0.2–0.6M a month: an upper bound for India.</p>
-<p class="source">The 2% complaint rate is an assumption, not a published figure. Cost per contact: Gartner, Feb 2024.</p>
-<aside>This is our own estimate, so the assumption is on the slide: 2% of orders lead to a complaint. That gives 1.5 to 4.7 million complaints a month across quick commerce. Our model cost for that is 65 to 203 dollars a month; even an LLM on every complaint is only a few hundred. So the pitch to a buyer is not token cost. It is fewer contacts: if finding and fixing the top issues removes just 1% of complaints, that is 15,000 to 47,000 fewer assisted contacts a month. At Gartner’s global median that is worth up to 0.6 million dollars a month; Indian contact centres cost less, so treat it as a ceiling.</aside>
+<p class="lead">The value of the last row is each avoided complaint times the operator’s own cost per contact, which the pilot measures.</p>
+<p class="source">Based on 7.8M orders a day (RedSeer via GAEE) over 30 days. The complaint rate is our assumption, so three rates are shown. Costs: our measured $4.33 and the $12.32 baseline per 100,000.</p>
+<aside>This is our own estimate, so the assumption is shown openly: we don’t know the share of orders that lead to a complaint, so we show 1, 2 and 3%. At 7.8 million orders a day, that is 2.3 to 7 million complaints a month across quick commerce. Our model cost is 100 to 300 dollars a month; even an LLM on every complaint is only a few hundred more. So the buyer’s problem is not token cost, it is contact volume. If fixing the top issues removes just 1% of complaints, that is 23,000 to 70,000 fewer contacts a month. Its value is the operator’s own cost per contact, which we will measure in the pilot rather than guess.</aside>
 </section>

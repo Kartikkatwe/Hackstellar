@@ -1,0 +1,15 @@
+<section id="unit-cost">
+<p class="eyebrow">UNIT ECONOMICS · LIVE RUN</p>
+<h2 class="title">$4.33 per 100,000 is our model cost, not our price</h2>
+<table class="table">
+<tr class="head"><th style="width:58%">Step</th><th style="width:18%">Calls in run</th><th style="width:24%">Per 100,000</th></tr>
+<tr><td>Jev gate (every complaint)</td><td>1,500</td><td>$3.09</td></tr>
+<tr><td>Jev verify</td><td>595</td><td>$0.64</td></tr>
+<tr><td>LLM decisions</td><td>58</td><td>$0.49</td></tr>
+<tr><td>Naming, merging, group checks</td><td>19</td><td>$0.10</td></tr>
+<tr class="hi"><td>Total</td><td></td><td>$4.33</td></tr>
+</table>
+<p class="lead">If 20% of complaints needed the LLM instead of 3.9%, the total would be about $6.40: still half the cheapest LLM-on-everything option ($12.32).</p>
+<p class="source">Source: backend/runs/grocery_report.json (cost.funnel). Excludes servers, database, local compute, engineering and support, which were not measured.</p>
+<aside>A common confusion, so say it plainly: 4.33 dollars per 100,000 complaints is what we pay Jev and Claude, measured on the live run. It is our cost, not our price. Three quarters of it is the Jev gate, which every complaint passes. The LLM is under 50 cents per 100,000, because only 3.9% of complaints reach it. If real data were much messier and 20% needed the LLM, the total would rise to about 6.40, still half the cheapest LLM-on-everything option. This figure leaves out hosting, which we will measure in Phase 1; hosting will likely cost more than the model calls.</aside>
+</section>
