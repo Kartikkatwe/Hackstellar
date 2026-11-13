@@ -5,3 +5,4 @@ __pycache__/
 .venv/
 **/runs/*.db*
 **/runs/*.log
+!**/runs/grocery_live_backup.db
