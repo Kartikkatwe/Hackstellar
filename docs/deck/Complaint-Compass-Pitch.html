@@ -1937,10 +1937,10 @@ p {
   <div class="bigs">
     <div class="big" data-step="1" style="--w:85%"><b class="n-save">65–85%</b><span>cheaper</span><i></i></div>
     <div class="big" data-step="2" style="--w:90%"><b class="n-save" data-count="90" data-suffix="%">90%</b><span>fewer output tokens</span><i></i></div>
-    <div class="big" data-step="3" style="--w:100%"><b class="n-save" data-count="2.3" data-decimals="1" data-suffix="×">2.3×</b><span>faster</span><i></i></div>
+    <div class="big" data-step="3" style="--w:100%"><b class="n-save">2–3×</b><span>faster</span><i></i></div>
   </div>
   <p class="foot">Our side measured with the real models on our test run. The LLM-everywhere side is projected from calibrated token counts, not run.</p>
-  <aside>One click per number. 65 to 85 percent cheaper than an LLM reading every complaint. 90 percent fewer output tokens: most of our work is choosing, not writing. 2.3 times faster. If asked: our side was measured with the real models; the LLM side is projected from calibrated token counts. Total token saving is smaller than the cost saving, because most of our tokens go to a decision model that is far cheaper per token.</aside>
+  <aside>One click per number. 65 to 85 percent cheaper than an LLM reading every complaint. 90 percent fewer output tokens: most of our work is choosing, not writing. 2 to 3 times faster. If asked: our side was measured with the real models; the LLM side is projected from calibrated token counts. Total token saving is smaller than the cost saving, because most of our tokens go to a decision model that is far cheaper per token.</aside>
 </section>
 
 <!-- 7 idea -->
@@ -2054,17 +2054,6 @@ p {
 </section>
 
 <!-- 12 close -->
-<section class="slide close" id="close">
-  <p class="kicker in" style="--d:0">HackStellar · PS-19</p>
-  <h1 class="in" style="--d:1">Complaint <span class="gold">Compass</span></h1>
-  <div class="bigs">
-    <div class="big in" style="--d:2; --w:85%"><b class="n-save">65–85%</b><span>cheaper</span></div>
-    <div class="big in" style="--d:3; --w:90%"><b class="n-save">90%</b><span>fewer output tokens</span></div>
-    <div class="big in" style="--d:4; --w:100%"><b class="n-save">2.3×</b><span>faster</span></div>
-  </div>
-  <p class="thanks in" style="--d:5">Thank you. Questions?</p>
-  <aside>Close on the three numbers against an LLM reading every complaint, then take questions. Backup slides follow: accuracy step by step, every miss, ranking, customer groups, other businesses, limits, funnel.</aside>
-</section>
 
 <!-- 13 accuracy, step by step (live test) -->
 <section class="slide" id="accuracy">
@@ -2085,33 +2074,6 @@ p {
 </section>
 
 <!-- 14 every miss (live test) -->
-<section class="slide" id="misses">
-  <span class="backup-tag">Backup</span>
-  <p class="kicker in" style="--d:0">Live test · the three not filed</p>
-  <h2 class="title in" style="--d:1">Every miss, <span class="soft">shown.</span></h2>
-  <div class="misses">
-    <div class="miss in" style="--d:2; --k:var(--critical)">
-      <span class="chip" style="--k:#e5534b">Missed</span>
-      <q>ande toote hue aaye. Thanks.</q>
-      <p class="meta">Call · Hinglish · the eggs arrived broken</p>
-      <p>Set aside as not a complaint. Jev gave it 15%: the “Thanks” read as praise.</p>
-    </div>
-    <div class="miss in" style="--d:3; --k:var(--n-save)">
-      <span class="chip" style="--k:#e6c27f">Waiting · urgent</span>
-      <q>order me cooking oil aaya hi nahi, paise pure kate… Sort it out.</q>
-      <p class="meta">Chat · Hinglish · an item missing from the order</p>
-      <p>The LLM was not sure, so it waits for staff instead of a guess. Flagged urgent: money lost.</p>
-    </div>
-    <div class="miss in" style="--d:4; --k:var(--n-save)">
-      <span class="chip" style="--k:#e6c27f">Waiting</span>
-      <q>The detergent had fungus on it.</q>
-      <p class="meta">Email · an expired product</p>
-      <p>The LLM was not sure which known problem it is, so it waits for staff.</p>
-    </div>
-  </div>
-  <p class="foot">Waiting is the safe failure: the complaint is stored, visible on the Unconfirmed page, and never filed under the wrong problem.</p>
-  <aside>These are the only three of 300 not filed under the right problem. One real miss: a very short Hinglish call that ended in thanks; the gate read it as polite, not a complaint. Two the LLM declined to guess; they wait on the Unconfirmed page for staff or for more customers, and the one where money was lost is flagged urgent. Nothing was filed under a wrong problem.</aside>
-</section>
 
 <!-- 15 ranking -->
 <section class="slide" id="ranking">
@@ -2129,17 +2091,6 @@ p {
 </section>
 
 <!-- 16 segments -->
-<section class="slide" id="segments">
-  <span class="backup-tag">Backup</span>
-  <p class="kicker in" style="--d:0">Customer groups</p>
-  <h2 class="title in" style="--d:1">It shows <span class="soft">who is hit hardest.</span></h2>
-  <div class="segs">
-    <div class="seg in" style="--d:2"><h3>Students</h3><p>hit UPI payment timeouts far more often than everyone else</p></div>
-    <div class="seg in" style="--d:3"><h3>Maharashtra</h3><p>reports “delivered but not received” more than anywhere else</p></div>
-  </div>
-  <p class="foot">Rate = customers affected ÷ size of the group, so a big group never looks worst just for being big. Both patterns were planted in the test data, and both show up in the heatmap.</p>
-  <aside>Every customer has a state, an age group and student status. For each issue we compare a group's rate with everyone's. Students hit UPI timeouts far more often; Maharashtra reports delivered-but-not-received more than elsewhere. Both were planted in the mock data, and both show up in the heatmap.</aside>
-</section>
 
 <!-- 17 packs -->
 <section class="slide" id="packs">
@@ -2165,7 +2116,7 @@ p {
   <h2 class="title in" style="--d:1">What is not done yet.</h2>
   <div class="cols">
     <div class="in" style="--d:2"><h3>Limits</h3><ul style="--k:var(--n-harm)"><li style="--k:var(--n-harm)">Test data is cleaner than real</li><li style="--k:var(--n-harm)">Cut-offs tuned on the same data</li><li style="--k:var(--n-harm)">LLM baseline priced, not run</li><li style="--k:var(--n-harm)">Live test: 300 complaints, one day</li></ul></div>
-    <div class="in" style="--d:3"><h3>Next</h3><ul><li style="--k:var(--n-right)">Telecom pack</li><li style="--k:var(--n-right)">Voice agent demo (webhook built)</li><li style="--k:var(--n-right)">Weekly insights in plain words</li><li style="--k:var(--n-right)">Tune on real labelled data</li></ul></div>
+    <div class="in" style="--d:3"><h3>Next</h3><ul><li style="--k:var(--n-right)">Voice agent demo (webhook built)</li><li style="--k:var(--n-right)">Weekly insights in plain words</li><li style="--k:var(--n-right)">Tune on real labelled data</li></ul></div>
   </div>
   <aside>Say these before a judge does. Template data, so real accuracy will be lower. Cut-offs tuned on the data they are scored on. The baseline is projected from calibrated token counts, not run. The live test is 300 complaints from the same templates, on one day. Next: telecom pack, the voice agent demo, plain-language insights, tuning on a real labelled sample.</aside>
 </section>

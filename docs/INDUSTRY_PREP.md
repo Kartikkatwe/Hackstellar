@@ -61,7 +61,7 @@ Notes:
 
 ### Scale, speed and cost
 
-**How fast?** A typical complaint is filed in about half a second; one LLM call alone takes about 1.9 seconds. On average we are 2.3 times faster than an LLM reading every complaint.
+**How fast?** A typical complaint is filed in about half a second; one LLM call alone takes about 1.9 seconds. On average we are 2–3× faster than an LLM reading every complaint.
 
 **What does it cost at scale?** 65 to 85% cheaper than Claude Haiku reading every complaint, with or without prompt caching, and about 99% cheaper than Claude Sonnet. 90% fewer output tokens. The LLM-everywhere side is projected from calibrated token counts, not run.
 
