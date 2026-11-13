@@ -16,7 +16,15 @@
 </div>
 <p class="bottom rise" style="--i:8"><b>~$433 a month</b> in model calls at 10M complaints · next step: load test</p>
 <p class="source">Sources: GAEE report citing RedSeer; PIB, 14 Mar 2025; Storyboard18 citing the Consumer Affairs Ministry. Throughput and servers projected from measured latencies; 1–3/sec assumes 1–3% of orders lead to a complaint.</p>
-<aside>So, first, the scale. Quick commerce in India does around 7.8 million orders a day. Even the complaints escalated to the government’s consumer helpline are significant: it takes about five thousand calls a day, and in one year Swiggy had about 9,500 complaints registered there, Zomato about 7,000. The complaints they handle directly are far larger, and those aren’t published: by our estimate 80,000 to 2 lakh a day in quick commerce. That sounds like a lot, but it’s only one to three a second on average.
+<aside>Let me start with how big this is. In India, quick-commerce apps get about 7.8 million orders every day. Some of those go wrong, and people complain.
 
-Classifying doesn’t share any data, so we just add workers; one does about fifteen a second. Filing changes the issue list, so each business area gets its own single writer, and areas run side by side. New customer? New partitions. Busy area? Split it. Model cost stays around $433 a month at ten million complaints, and a business fits on a server or two. It’s not built at that scale yet, so the first thing we do is load-test it.</aside>
+We can see part of it in government data. The national consumer helpline gets about five thousand calls a day. In one year, Swiggy had about 9,500 complaints there, and Zomato about 7,000. And it’s the same few problems again and again: refunds that never came, late deliveries, damaged items, payments that failed. Those are exactly the problems our system catches early.
+
+And that’s only what reaches the government. Most people just complain to the app directly. We estimate 80,000 to 2 lakh complaints a day in quick commerce. That sounds huge, but it’s only one to three complaints a second.
+
+So can we handle it? Yes. Reading a complaint is the slow part, and it doesn’t share anything, so we just add more workers. One worker reads about fifteen complaints a second. So one company fits on one or two servers.
+
+Saving the complaint under the right issue is the only tricky part, because two workers could create the same issue twice. So each area, like payments or delivery, gets its own single worker, and all the areas work at the same time. A new company just adds new areas. If one area gets too busy, we split it.
+
+And it stays cheap. Most complaints never need the expensive AI, so at ten million complaints a month we pay about four hundred dollars. It’s not built at that size yet, so the first thing we’ll do is a load test.</aside>
 </section>
