@@ -57,7 +57,8 @@ _api.db_path = _db_path
 
 TOKEN = os.environ.get("BLOB_READ_WRITE_TOKEN")
 API = os.environ.get("VERCEL_BLOB_API_URL", "https://vercel.com/api/blob")  # the SDK reads the same variable
-PREFIX = "live/"
+# A new LIVE_SYNC_PREFIX (and a redeploy) starts every instance clean from the live run.
+PREFIX = os.environ.get("LIVE_SYNC_PREFIX", "live/")
 EVERY_S = 1.5  # how often an instance looks for others' writes
 
 _applied: set[str] = set()
