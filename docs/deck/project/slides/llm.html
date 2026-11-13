@@ -1,10 +1,10 @@
 <section id="llm">
-<p class="eyebrow">THE OBVIOUS ANSWER</p>
-<h2 class="title">An LLM reading every complaint is slow, fragile and costly</h2>
+<p class="eyebrow">THE USUAL WAY</p>
+<h2 class="title">Have an LLM read every complaint. It works, but…</h2>
 <div class="cards">
-<div class="card rise" style="--i:1"><p class="big">1.9 s+</p><p class="text">per complaint, waiting on the model</p></div>
-<div class="card rise" style="--i:2"><p class="big">0</p><p class="text">complaints filed while the LLM provider is down</p></div>
-<div class="card rise" style="--i:3"><p class="big">$594</p><p class="text">per 100,000 complaints on Claude Sonnet 5.5</p></div>
+<div class="card fragment"><p class="big">1.9 s+</p><p class="text">every complaint waits on the model</p></div>
+<div class="card fragment"><p class="big">0</p><p class="text">complaints filed while the LLM provider is down</p></div>
+<div class="card fragment"><p class="big">~200</p><p class="text">output tokens written per complaint, every time</p></div>
 </div>
-<aside>The obvious design is to send every complaint to an LLM. It works, but every complaint waits on the model, at least 1.9 seconds measured on Claude Haiku. If the provider is down or rate-limiting during a complaint spike, nothing gets filed. And it costs about $594 per 100,000 complaints on Sonnet. The 1.9 s is our measured Haiku call time with a short prompt; an everything-prompt is longer, so it is a floor.</aside>
+<aside>Pause before this slide. Then: the usual way to build this is to send every complaint to an LLM and let it decide. It works, but three things go wrong. Click: every complaint waits on the model, at least 1.9 seconds, measured on Claude Haiku 5.5 with a short prompt, so a real everything-prompt is slower. Click: if the provider is down or rate-limiting during a complaint spike, nothing gets filed. Click: the LLM writes an answer for every single complaint, about 200 tokens each, and output tokens are the expensive ones. On Sonnet that is about $594 per 100,000 complaints. Then pause again before the numbers.</aside>
 </section>

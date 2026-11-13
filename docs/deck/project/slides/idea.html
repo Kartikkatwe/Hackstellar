@@ -1,6 +1,6 @@
 <section id="idea" class="statement" data-transition="fade">
 <p class="eyebrow">OUR IDEA</p>
-<h1>Cheapest step first.</h1>
-<p class="say">Each complaint stops at the first check that can file it. The LLM only sees what nothing cheaper could decide.</p>
-<aside>Our idea in one line: a funnel, cheapest step first. A decision model sorts the complaint, a free local model matches it against known problems, a cheap yes/no check handles the unsure ones, and only the few left over reach the LLM. In the live run, 96 percent never reached an LLM.</aside>
+<h1>Choose, don't write.</h1>
+<p class="say">Filing a complaint is a set of choices: is it a complaint, which area, which known problem. A decision model makes those choices. The LLM writes only when something new needs words.</p>
+<aside>Here is why the numbers look like that. An LLM is a writer: you pay for it to produce text, and it is slow because it produces text. But filing a complaint is not a writing task. It is a set of choices from options we already have: is this a complaint, yes or no; which of seven areas; how serious; which known problem. So we use a classifier, a decision model called Jev, that picks from given options and returns probabilities instead of writing. It writes no output tokens at all. When it is sure, the complaint is filed. When it is unsure, it says so instead of guessing, and only then do we pass it on. Cheapest step first: a free local match, then Jev's yes or no, and only the last 1.7 percent reach the LLM. The LLM's real job is naming new problems and merging duplicates, where words are actually needed.</aside>
 </section>
