@@ -9,18 +9,6 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/deck/deck.css">
 <script type="module" src="/deck/deck.ts"></script>
-<noscript><style>
-  /* without JavaScript: every slide, fully built, one under the other */
-  html, body { overflow: auto; height: auto; }
-  .stage { position: relative; left: auto; top: auto; transform: none; height: auto; overflow: visible; background: none; box-shadow: none; }
-  .slide { position: relative; height: 1080px; opacity: 1; visibility: visible; transform: none; margin-bottom: 24px; background: var(--bg); overflow: hidden; }
-  .slide .in, [data-step], .fstep, .funnel .band, .funnel .flab { opacity: 1; transform: none; animation: none; }
-  .srow i::before, .lrow i::before, .crow i::before, .drow i::before { clip-path: none; }
-  .opt i::after, .gq i::after, .compare i::after, .big i::after { transform: none; }
-  .typing span { width: auto; }
-  .flow .glow, .cover__mark .ring-arc { stroke-dashoffset: 0; }
-  .hud, .progress, #funnel-canvas, .waffle, .rotate-hint { display: none; }
-</style></noscript>
 </head>
 <body>
 <main class="stage" aria-live="polite">
@@ -50,11 +38,11 @@
   <p class="kicker in" style="--d:0">The problem</p>
   <h2 class="title in" style="--d:1">Complaints arrive everywhere, <span class="soft">worded every way.</span></h2>
   <div class="mess">
-    <div class="bubble" style="--d:0; --k:#16a07a; left:0; top:20px"><b>Email</b>Money debited, no order</div>
-    <div class="bubble" style="--d:1; --k:#3f86e0; left:430px; top:0"><b>Chat</b>paise kat gaye lekin order nahi bana</div>
-    <div class="bubble" style="--d:2; --k:#d9652e; left:1030px; top:30px"><b>Call</b>Paid by UPI, the app shows nothing</div>
-    <div class="bubble" style="--d:3; --k:#d7568a; left:130px; top:175px"><b>Social</b>@basketnow where is my ₹415??</div>
-    <div class="bubble" style="--d:4; --k:#3f86e0; left:780px; top:165px"><b>Chat</b>Same customer, third message today</div>
+    <div class="bubble" style="--d:0; --k:#16a07a; left:0; top:30px"><b>Email</b>Money debited, no order</div>
+    <div class="bubble" style="--d:1; --k:#3f86e0; left:420px; top:0"><b>Chat</b>paise kat gaye lekin order nahi bana</div>
+    <div class="bubble" style="--d:2; --k:#d9652e; left:1000px; top:40px"><b>Call</b>Paid by UPI, the app shows nothing</div>
+    <div class="bubble" style="--d:3; --k:#d7568a; left:220px; top:130px"><b>Social</b>@basketnow where is my ₹415??</div>
+    <div class="bubble" style="--d:4; --k:#3f86e0; left:820px; top:150px"><b>Chat</b>Same customer, third message today</div>
   </div>
   <div class="trio">
     <div class="card" data-step="1"><b class="n-volume">4</b><span>channels, each its own format</span></div>
@@ -99,12 +87,12 @@
   <h2 class="title in" style="--d:1">An LLM reads <span class="soft">every complaint.</span></h2>
   <div class="usual">
     <div class="pile in" style="--d:2" aria-hidden="true">
-      <span class="pile__dot" style="--d:0; top:150px"></span><span class="pile__dot" style="--d:1; top:200px"></span><span class="pile__dot" style="--d:2; top:250px"></span><span class="pile__dot" style="--d:3; top:300px"></span><span class="pile__dot" style="--d:4; top:350px"></span><span class="pile__dot" style="--d:5; top:175px"></span><span class="pile__dot" style="--d:6; top:275px"></span><span class="pile__dot" style="--d:7; top:325px"></span><span class="pile__dot" style="--d:8; top:225px"></span><span class="pile__dot" style="--d:9; top:375px"></span><span class="pile__dot" style="--d:10; top:160px"></span><span class="pile__dot" style="--d:11; top:340px"></span>
+      <span class="pile__dot" style="--d:0; top:120px"></span><span class="pile__dot" style="--d:1; top:170px"></span><span class="pile__dot" style="--d:2; top:220px"></span><span class="pile__dot" style="--d:3; top:270px"></span><span class="pile__dot" style="--d:4; top:320px"></span><span class="pile__dot" style="--d:5; top:370px"></span><span class="pile__dot" style="--d:6; top:145px"></span><span class="pile__dot" style="--d:7; top:245px"></span><span class="pile__dot" style="--d:8; top:345px"></span><span class="pile__dot" style="--d:9; top:195px"></span><span class="pile__dot" style="--d:10; top:295px"></span><span class="pile__dot" style="--d:11; top:395px"></span>
       <div class="pile__llm">LLM<small>reads and writes,<br>one by one</small></div>
     </div>
     <div class="woes">
-      <div class="woe" data-step="1"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12M6 21h12M7 3c0 5 5 6 5 9s-5 4-5 9M17 3c0 5-5 6-5 9s5 4 5 9"/></svg></span><div><h3>Slow</h3><p>Every complaint waits for an answer to be written.</p></div></div>
-      <div class="woe" data-step="2"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h11M7 9h11M10 4c4 0 6 2 6 5s-2 5-6 5H7l8 7"/></svg></span><div><h3>Expensive</h3><p>It writes for every complaint. Output tokens cost the most.</p></div></div>
+      <div class="woe" data-step="1"><span class="ico">⧗</span><div><h3>Slow</h3><p>Every complaint waits for an answer to be written.</p></div></div>
+      <div class="woe" data-step="2"><span class="ico">₹</span><div><h3>Expensive</h3><p>It writes for every complaint. Output tokens cost the most.</p></div></div>
     </div>
   </div>
   <aside>The usual build sends every complaint to an LLM. It works, but click: it is slow, every complaint waits for a written reply. Click: it is expensive, it writes an answer for every single complaint, and output tokens are the costly part. Pause before the numbers.</aside>
@@ -116,8 +104,8 @@
   <h2 class="title in" style="--d:1">Against an LLM <span class="soft">reading every complaint.</span></h2>
   <div class="bigs">
     <div class="big" data-step="1" style="--w:85%"><b class="n-save">65–85%</b><span>cheaper</span><i></i></div>
-    <div class="big" data-step="2" style="--w:96%"><b class="n-save" data-count="96" data-suffix="%">96%</b><span>fewer output tokens</span><i></i></div>
-    <div class="big" data-step="3" style="--w:100%"><b class="n-save" data-count="2.3" data-decimals="1" data-suffix="×">2.3×</b><span>faster</span><i></i></div>
+    <div class="big" data-step="2" style="--w:96%"><b class="n-save" data-count="96" data-suffix="%">0%</b><span>fewer output tokens</span><i></i></div>
+    <div class="big" data-step="3" style="--w:100%"><b class="n-save" data-count="2.3" data-decimals="1" data-suffix="×">0×</b><span>faster</span><i></i></div>
   </div>
   <p class="foot">Our side measured with the real models on our test run. The LLM-everywhere side is projected from calibrated token counts, not run.</p>
   <aside>One click per number. 65 to 85 percent cheaper than an LLM reading every complaint. 96 percent fewer output tokens: most of our work is choosing, not writing. 2.3 times faster. If asked: our side was measured with the real models; the LLM side is projected from calibrated token counts. Total token saving is smaller than the cost saving, because most of our tokens go to a decision model that is far cheaper per token.</aside>
@@ -130,7 +118,7 @@
   <div class="versus">
     <div class="vs vs--llm in" style="--d:2">
       <h3>LLM <small>a writer</small></h3>
-      <div class="typing"><span style="--d:0">“This complaint appears to concern</span><br><span style="--d:1">a failed payment where the user…”</span><i class="caret"></i></div>
+      <div class="typing"><span style="--d:0">“This complaint appears to concern</span><br><span style="--d:1">a failed payment where the user…”</span></div>
       <div class="meter-row"><span>Writes for every complaint</span><b class="n-harm">slow · costly</b></div>
     </div>
     <div class="vs vs--jev in" style="--d:3">
@@ -205,35 +193,7 @@
   <aside>Top row left to right, bottom row back. 1 intake: four channels into one shape, find the customer; order IDs have a check digit. 2 the gate: six questions, one call. 3 similarity: free, files most complaints. 4 verify: Jev's yes or no for unsure matches. 5 the LLM only if still unsure. 6 waiting list until 3 different customers; money or safety is urgent at once. 7 group check. 8 the LLM names the new problem. 9 after each batch it merges duplicates. 10 the Top 10 with a score anyone can check. Every confirmed wording becomes an example, so it gets cheaper the longer it runs.</aside>
 </section>
 
-<!-- 11 tested live: live-test accuracy, added 13 Nov at Jnanottam's request -->
-<section class="slide" id="tested">
-  <p class="kicker in" style="--d:0">Tested live · real models · an answer key</p>
-  <h2 class="title in" style="--d:1">300 new complaints. <span class="soft">One mistake.</span></h2>
-  <div class="batches">
-    <div class="batch in" style="--d:2">
-      <div class="batch__head"><span>Batch 1 · 50 complaints</span><b class="n-right">49<small>/50</small></b><em>right · 1 missed</em></div>
-      <div class="waffle" data-waffle="g44 d5 x1" role="img" aria-label="50 complaints: 44 filed under the right problem, 5 set aside correctly as not complaints, 1 real complaint missed"></div>
-    </div>
-    <div class="batch in" style="--d:3">
-      <div class="batch__head"><span>Batch 2 · 100 complaints</span><b class="n-right">99<small>/100</small></b><em>right · 1 waiting · 0 wrong</em></div>
-      <div class="waffle" data-waffle="g89 d10 w1" role="img" aria-label="100 complaints: 89 filed under the right problem, 10 set aside correctly, 1 waiting for staff"></div>
-    </div>
-    <div class="batch in" style="--d:4">
-      <div class="batch__head"><span>Batch 3 · 150 complaints</span><b class="n-right">149<small>/150</small></b><em>right · 1 waiting · 0 wrong</em></div>
-      <div class="waffle" data-waffle="g134 d15 w1" role="img" aria-label="150 complaints: 134 filed under the right problem, 15 set aside correctly, 1 waiting for staff"></div>
-    </div>
-  </div>
-  <div class="wkey in" style="--d:5">
-    <span><i class="c-g"></i><b>267</b> filed under the right problem</span>
-    <span><i class="c-d"></i><b>30</b> set aside: not complaints</span>
-    <span><i class="c-w"></i><b>2</b> waiting: not guessed</span>
-    <span><i class="c-x"></i><b>1</b> real complaint missed</span>
-  </div>
-  <p class="foot">Sent one by one to the live site. Complaints the system had never seen, scored against a hidden answer key. Made from the same templates as the data, so real complaints will be harder.</p>
-  <aside>We generated 300 complaints the system had never seen, from our real customer list, each with a hidden right answer, and sent them one by one to the live site with the real models, in batches of 50, 100 and 150, each on a clean copy of the data. One square per complaint. Green: filed under the right problem, 267 of 267. Grey: praise and spam correctly set aside, 30 of 30. Gold: 2 the LLM was not sure about, so they wait for staff instead of being guessed. Red: one real complaint missed, a short Hinglish call ending in thanks. Backup slides show every step and every miss.</aside>
-</section>
-
-<!-- 12 close -->
+<!-- 11 close -->
 <section class="slide close" id="close">
   <p class="kicker in" style="--d:0">HackStellar · PS-19</p>
   <h1 class="in" style="--d:1">Complaint <span class="gold">Compass</span></h1>
@@ -243,57 +203,23 @@
     <div class="big in" style="--d:4; --w:100%"><b class="n-save">2.3×</b><span>faster</span></div>
   </div>
   <p class="thanks in" style="--d:5">Thank you. Questions?</p>
-  <aside>Close on the three numbers against an LLM reading every complaint, then take questions. Backup slides follow: accuracy step by step, every miss, ranking, customer groups, other businesses, limits, funnel.</aside>
+  <aside>Close on the three numbers against an LLM reading every complaint, then take questions. Backup slides follow: accuracy, ranking, customer groups, other businesses, limits, funnel.</aside>
 </section>
 
-<!-- 13 accuracy, step by step (live test) -->
+<!-- 12 accuracy -->
 <section class="slide" id="accuracy">
   <span class="backup-tag">Backup</span>
-  <p class="kicker in" style="--d:0">Accuracy, step by step</p>
-  <h2 class="title in" style="--d:1">Right at <span class="soft">every step.</span></h2>
-  <div class="steps">
-    <div class="steps__head in" style="--d:2"><span>Step</span><span>Done by</span><span>Live test</span><span class="r">Right</span></div>
-    <div class="srow in" style="--d:3; --k:var(--w-jev); --n:100%"><b>Complaint or not?</b><span>Jev</span><i><em>300</em></i><strong class="n-right">99.7%</strong></div>
-    <div class="srow in" style="--d:4; --k:var(--w-jev); --n:89.7%"><b>Which area?</b><span>Jev</span><i><em>269</em></i><strong class="n-right">99.6%</strong></div>
-    <div class="srow in" style="--d:5; --k:var(--w-free); --n:33.3%"><b>Filed by similarity</b><span>Free</span><i><em>100</em></i><strong class="n-right">100%</strong></div>
-    <div class="srow in" style="--d:6; --k:var(--w-jev); --n:54%"><b>Verified by Jev</b><span>Jev</span><i><em>162</em></i><strong class="n-right">100%</strong></div>
-    <div class="srow in" style="--d:7; --k:var(--w-llm); --n:2.3%"><b>Settled by the LLM</b><span>Claude Haiku</span><i><em>5 + 2 waiting</em></i><strong class="n-right">100%</strong></div>
-    <div class="srow in" style="--d:8; --k:var(--w-free); --n:40.3%"><b>Customer found</b><span>Free</span><i><em>121 · batch 3</em></i><strong class="n-right">100%</strong></div>
+  <p class="kicker in" style="--d:0">Accuracy</p>
+  <h2 class="title in" style="--d:1">Checked against <span class="soft">an answer key.</span></h2>
+  <div class="cols">
+    <div class="in" style="--d:2"><h3>What is checked</h3><ul><li style="--k:var(--n-right)">Filed under the right issue</li><li style="--k:var(--n-right)">Real complaints kept</li><li style="--k:var(--n-right)">Praise and spam removed</li><li style="--k:var(--n-right)">Sent to the right area</li><li style="--k:var(--n-right)">Customer links correct</li></ul></div>
+    <div class="in" style="--d:3"><h3>Against what</h3><ul><li>Each complaint's true issue</li><li>No real complaint dropped</li><li>None reach the issue list</li><li>Each complaint's true area</li><li>Each link's true customer</li></ul></div>
   </div>
-  <p class="foot">Bars: complaints that reached each step in the live test. 251 of the 300 are worded unlike anything the engine had seen. The engine never sees the answers.</p>
-  <aside>Every step has its own score. The gate kept 269 of 270 real complaints and set aside all 30 non-complaints. The area was right 268 of 269 times. Similarity filed 100, all right; Jev's yes or no filed 162, all right; the LLM settled 5, all right, and sent 2 it was unsure about to the waiting list. Customer linking was checked on batch 3: 121 found, none wrong; 29 unknown senders were left unlinked rather than guessed.</aside>
+  <p class="foot">The engine never sees the answers. Test data is template-made, so real complaints will be messier.</p>
+  <aside>Every test complaint carries a hidden answer: its issue, area and customer. The engine never sees it; we only score with it. Honest: the data was generated from templates and the cut-offs were tuned on it. On real data we would tune on one labelled sample and measure on another.</aside>
 </section>
 
-<!-- 14 every miss (live test) -->
-<section class="slide" id="misses">
-  <span class="backup-tag">Backup</span>
-  <p class="kicker in" style="--d:0">Live test · the three not filed</p>
-  <h2 class="title in" style="--d:1">Every miss, <span class="soft">shown.</span></h2>
-  <div class="misses">
-    <div class="miss in" style="--d:2; --k:var(--critical)">
-      <span class="chip" style="--k:#e5534b">Missed</span>
-      <q>ande toote hue aaye. Thanks.</q>
-      <p class="meta">Call · Hinglish · the eggs arrived broken</p>
-      <p>Set aside as not a complaint. Jev gave it 15%: the “Thanks” read as praise.</p>
-    </div>
-    <div class="miss in" style="--d:3; --k:var(--n-save)">
-      <span class="chip" style="--k:#e6c27f">Waiting · urgent</span>
-      <q>order me cooking oil aaya hi nahi, paise pure kate… Sort it out.</q>
-      <p class="meta">Chat · Hinglish · an item missing from the order</p>
-      <p>The LLM was not sure, so it waits for staff instead of a guess. Flagged urgent: money lost.</p>
-    </div>
-    <div class="miss in" style="--d:4; --k:var(--n-save)">
-      <span class="chip" style="--k:#e6c27f">Waiting</span>
-      <q>The detergent had fungus on it.</q>
-      <p class="meta">Email · an expired product</p>
-      <p>The LLM was not sure which known problem it is, so it waits for staff.</p>
-    </div>
-  </div>
-  <p class="foot">Waiting is the safe failure: the complaint is stored, visible on the Unconfirmed page, and never filed under the wrong problem.</p>
-  <aside>These are the only three of 300 not filed under the right problem. One real miss: a very short Hinglish call that ended in thanks; the gate read it as polite, not a complaint. Two the LLM declined to guess; they wait on the Unconfirmed page for staff or for more customers, and the one where money was lost is flagged urgent. Nothing was filed under a wrong problem.</aside>
-</section>
-
-<!-- 15 ranking -->
+<!-- 13 ranking -->
 <section class="slide" id="ranking">
   <span class="backup-tag">Backup</span>
   <p class="kicker in" style="--d:0">Ranking</p>
@@ -308,7 +234,7 @@
   <aside>The ranking is a written formula. Customers, not messages, times average impact from 1 to 4, times one plus the money-lost share, times a small anger factor so a loud customer never outranks a quiet one who lost money, times 1.25 if rising: at least 5 customers this week and double the week before. Every issue in the console shows this breakdown.</aside>
 </section>
 
-<!-- 16 segments -->
+<!-- 14 segments -->
 <section class="slide" id="segments">
   <span class="backup-tag">Backup</span>
   <p class="kicker in" style="--d:0">Customer groups</p>
@@ -321,7 +247,7 @@
   <aside>Every customer has a state, an age group and student status. For each issue we compare a group's rate with everyone's. Students hit UPI timeouts far more often; Maharashtra reports delivered-but-not-received more than elsewhere. Both were planted in the mock data, and both show up in the heatmap.</aside>
 </section>
 
-<!-- 17 packs -->
+<!-- 15 packs -->
 <section class="slide" id="packs">
   <span class="backup-tag">Backup</span>
   <p class="kicker in" style="--d:0">Any business</p>
@@ -338,30 +264,46 @@
   <aside>Everything about groceries lives in one settings file, the domain pack: the areas, the questions, the known problems. A telecom or a bank writes its own file and the engine does not change. Jev takes its labels with each request, so there is no training step. A telecom pack is next.</aside>
 </section>
 
-<!-- 18 limits -->
+<!-- 16 limits -->
 <section class="slide" id="limits">
   <span class="backup-tag">Backup</span>
   <p class="kicker in" style="--d:0">Honesty</p>
   <h2 class="title in" style="--d:1">What is not done yet.</h2>
   <div class="cols">
-    <div class="in" style="--d:2"><h3>Limits</h3><ul style="--k:var(--n-harm)"><li style="--k:var(--n-harm)">Test data is cleaner than real</li><li style="--k:var(--n-harm)">Cut-offs tuned on the same data</li><li style="--k:var(--n-harm)">LLM baseline priced, not run</li><li style="--k:var(--n-harm)">Live test: 300 complaints, one day</li></ul></div>
+    <div class="in" style="--d:2"><h3>Limits</h3><ul style="--k:var(--n-harm)"><li style="--k:var(--n-harm)">Test data is cleaner than real</li><li style="--k:var(--n-harm)">Cut-offs tuned on the same data</li><li style="--k:var(--n-harm)">LLM baseline priced, not run</li></ul></div>
     <div class="in" style="--d:3"><h3>Next</h3><ul><li style="--k:var(--n-right)">Telecom pack</li><li style="--k:var(--n-right)">Voice agent demo (webhook built)</li><li style="--k:var(--n-right)">Weekly insights in plain words</li><li style="--k:var(--n-right)">Tune on real labelled data</li></ul></div>
   </div>
-  <aside>Say these before a judge does. Template data, so real accuracy will be lower. Cut-offs tuned on the data they are scored on. The baseline is projected from calibrated token counts, not run. The live test is 300 complaints from the same templates, on one day. Next: telecom pack, the voice agent demo, plain-language insights, tuning on a real labelled sample.</aside>
+  <aside>Say these before a judge does. Template data, so real accuracy will be lower. Cut-offs tuned on the data they are scored on. The baseline is projected from calibrated token counts, not run. Next: telecom pack, the voice agent demo, plain-language insights, tuning on a real labelled sample.</aside>
 </section>
 
-<!-- 19 funnel -->
+<!-- 17 funnel -->
 <section class="slide" id="funnel">
   <span class="backup-tag">Backup</span>
   <p class="kicker in" style="--d:0">The funnel</p>
   <h2 class="title in" style="--d:1">Only <span class="n-save">the last few</span> reach the LLM.</h2>
   <div class="funnel">
-    <svg id="funnel-svg" viewBox="0 0 1640 700" role="img" aria-label="Complaints in: some set aside at the gate, most filed free by similarity, the unsure ones by Jev, and only the last few reach the LLM">
-      <defs><linearGradient id="fg-sim" gradientUnits="userSpaceOnUse" x1="440" x2="680" y1="0" y2="0"><stop offset="0" stop-color="#2e2d2a"/><stop offset="1" stop-color="#52c76a" stop-opacity="0.6"/></linearGradient><linearGradient id="fg-jev" gradientUnits="userSpaceOnUse" x1="700" x2="940" y1="0" y2="0"><stop offset="0" stop-color="#2e2d2a"/><stop offset="1" stop-color="#7fb0f0" stop-opacity="0.6"/></linearGradient><linearGradient id="fg-llm" gradientUnits="userSpaceOnUse" x1="910" x2="1150" y1="0" y2="0"><stop offset="0" stop-color="#2e2d2a"/><stop offset="1" stop-color="#f08a64" stop-opacity="0.6"/></linearGradient><linearGradient id="fg-wait" gradientUnits="userSpaceOnUse" x1="910" x2="1150" y1="0" y2="0"><stop offset="0" stop-color="#2e2d2a"/><stop offset="1" stop-color="#e6c27f" stop-opacity="0.6"/></linearGradient><linearGradient id="fg-drop" gradientUnits="userSpaceOnUse" x1="180" x2="420" y1="0" y2="0"><stop offset="0" stop-color="#2e2d2a"/><stop offset="1" stop-color="#8a857a" stop-opacity="0.55"/></linearGradient></defs>
-      <g><path class="band" style="--d:0" d="M40 519.8 H220 C320 519.8 320 600.0 420 600.0 H480 V630.2 H420 C320 630.2 320 550.0 220 550.0 H40 Z" fill="url(#fg-drop)"/><path class="band" style="--d:1" d="M40 250.0 H480 C580 250.0 580 40.0 680 40.0 H1150 V190.8 H680 C580 190.8 580 400.8 480 400.8 H40 Z" fill="url(#fg-sim)"/><path class="band" style="--d:2" d="M40 400.8 H740 C840 400.8 840 250.0 940 250.0 H1150 V354.0 H940 C840 354.0 840 504.8 740 504.8 H40 Z" fill="url(#fg-jev)"/><path class="band" style="--d:3" d="M40 504.8 H950 C1050 504.8 1050 410.0 1150 410.0 H1150 V421.6 H1150 C1050 421.6 1050 516.4 950 516.4 H40 Z" fill="url(#fg-llm)"/><path class="band" style="--d:4" d="M40 516.4 H950 C1050 516.4 1050 500.0 1150 500.0 H1150 V503.4 H1150 C1050 503.4 1050 519.8 950 519.8 H40 Z" fill="url(#fg-wait)"/></g>
-      <g fill="none" stroke="none"><path data-w="754" data-color="#52c76a" data-spread="121" d="M40 325.4 H480 C580 325.4 580 115.4 680 115.4 H1150"/><path data-w="520" data-color="#7fb0f0" data-spread="83" d="M40 452.8 H740 C840 452.8 840 302.0 940 302.0 H1150"/><path data-w="58" data-color="#f08a64" data-spread="9" d="M40 510.6 H950 C1050 510.6 1050 415.8 1150 415.8 H1150"/><path data-w="17" data-color="#e6c27f" data-spread="3" d="M40 518.1 H950 C1050 518.1 1050 501.7 1150 501.7 H1150"/><path data-w="151" data-color="#b3ad9f" data-spread="24" d="M40 534.9 H220 C320 534.9 320 615.1 420 615.1 H480"/></g>
-      <text x="40" y="220" class="lab flab" style="--d:0">complaints in</text>
-      <text x="504" y="624" class="lab flab" style="--d:0">set aside: not complaints</text><text x="1174" y="124" class="lab flab" style="--d:1; fill:#52c76a">filed by similarity · free</text><text x="1174" y="311" class="lab flab" style="--d:2; fill:#7fb0f0">filed by Jev</text><text x="1174" y="425" class="lab flab" style="--d:3; fill:#f08a64">reached the LLM</text><text x="1174" y="511" class="lab flab" style="--d:4; fill:#e6c27f">new: to the waiting list</text>
+    <svg id="funnel-svg" viewBox="0 0 1640 700" aria-label="Complaints in: some dropped at the gate, most filed free by similarity, the unsure ones by Jev, and only the last few reach the LLM">
+      <g fill="none" stroke-linecap="butt">
+        <path class="band" style="--d:0" d="M60 380 H420" stroke="#3a3833" stroke-width="150"/>
+        <path class="band" style="--d:1" d="M420 380 H760" stroke="#34322d" stroke-width="135"/>
+        <path class="band" style="--d:2" d="M760 380 H1080" stroke="#2f2d29" stroke-width="60"/>
+        <path class="band" style="--d:3" d="M1080 380 H1400" stroke="#2a2926" stroke-width="8"/>
+        <path class="band" style="--d:1" d="M420 440 C520 440 520 650 640 650" stroke="#4a4740" stroke-width="15"/>
+        <path class="band" style="--d:2" d="M760 340 C880 340 880 120 1000 120 H1580" stroke="rgba(243,221,176,.35)" stroke-width="75"/>
+        <path class="band" style="--d:3" d="M1080 360 C1200 360 1200 175 1320 175 H1580" stroke="rgba(221,182,111,.4)" stroke-width="52"/>
+        <path class="band" style="--d:4" d="M1400 380 C1480 380 1480 215 1580 215" stroke="rgba(240,138,100,.7)" stroke-width="6"/>
+      </g>
+      <g fill="none" stroke="none">
+        <path data-w="151" data-color="#8a857a" data-spread="12" d="M60 380 H420 C520 440 520 650 640 650"/>
+        <path data-w="754" data-color="#f3ddb0" data-spread="60" d="M60 380 H760 C880 340 880 120 1000 120 H1580"/>
+        <path data-w="520" data-color="#ddb66f" data-spread="44" d="M60 380 H1080 C1200 360 1200 175 1320 175 H1580"/>
+        <path data-w="58" data-color="#f08a64" data-spread="4" d="M60 380 H1400 C1480 380 1480 215 1580 215"/>
+      </g>
+      <text x="60" y="290" class="lab">complaints in</text>
+      <text x="660" y="660" class="lab">dropped: not complaints</text>
+      <text x="880" y="70" class="lab">filed by similarity · free</text>
+      <text x="1330" y="250" class="lab">filed by Jev</text>
+      <text x="1340" y="470" class="lab">reached the LLM</text>
     </svg>
     <canvas id="funnel-canvas" width="1640" height="700" aria-hidden="true"></canvas>
   </div>
@@ -371,8 +313,7 @@
 </main>
 <div class="progress" aria-hidden="true"><span></span></div>
 <div class="notes-panel" aria-live="polite"></div>
-<p class="rotate-hint">Turn your phone sideways for a bigger view · tap to advance</p>
-<div class="hud"><button class="nav-prev" aria-label="Previous slide">‹</button><span class="counter"></span><button class="nav-next" aria-label="Next slide">›</button><span>← → keys · N notes · F fullscreen</span></div>
+<div class="hud"><button class="nav-prev" aria-label="Previous">‹</button><span class="counter"></span><button class="nav-next" aria-label="Next">›</button><span>N notes · F fullscreen</span></div>
 <script>
   // the cover's 120 ticks, drawn once
   const g = document.querySelector('#tk'); const t = g.innerHTML; let h = '';

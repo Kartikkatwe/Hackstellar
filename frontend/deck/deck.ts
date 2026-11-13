@@ -18,10 +18,7 @@ let step = 0
 const steps = (s: HTMLElement) => Math.max(0, ...Array.from(s.querySelectorAll<HTMLElement>('[data-step]')).map((e) => Number(e.dataset.step)))
 
 function fit() {
-  // the layout viewport, so a phone's pinch zoom never changes the slide's scale
-  const w = document.documentElement.clientWidth || window.innerWidth
-  const h = document.documentElement.clientHeight || window.innerHeight
-  const k = Math.min(w / 1920, h / 1080)
+  const k = Math.min(window.innerWidth / 1920, window.innerHeight / 1080)
   stage.style.transform = `translate(-50%, -50%) scale(${k})`
 }
 
@@ -89,28 +86,12 @@ function countUp(s: HTMLElement) {
   slides.forEach((o, i) => i !== index && o.querySelectorAll<HTMLElement>('[data-count]').forEach((e) => delete e.dataset.done))
 }
 
-// QR codes: [data-qr] points at the site's pages. Opened as a file (the offline copy), there is
-// no site to point at, so it points at the live deployment instead.
-const LIVE = 'https://hackstellar-three.vercel.app'
+// QR codes: [data-qr] points at the live site's pages
 document.querySelectorAll<HTMLElement>('[data-qr]').forEach((el) => {
-  try {
-    const base = location.protocol.startsWith('http') ? location.origin : LIVE
-    const url = new URL(el.dataset.qr!, base).href
-    QRCode.toString(url, { type: 'svg', margin: 0, color: { dark: '#0a0a0b', light: '#f2efe8' } }).then((svg) => (el.innerHTML = svg))
-    const label = el.parentElement?.querySelector('[data-qr-url]')
-    if (label) label.textContent = url.replace(/^https?:\/\//, '')
-  } catch {
-    // a missing QR code must never stop the deck
-  }
-})
-
-// One square per complaint: data-waffle="g44 d5 x1" is 44 of kind g, then 5 of d, then 1 of x.
-document.querySelectorAll<HTMLElement>('[data-waffle]').forEach((el) => {
-  let i = 0
-  el.innerHTML = el.dataset.waffle!.split(' ').map((part) => {
-    const kind = part[0]
-    return Array.from({ length: Number(part.slice(1)) }, () => `<i class="c-${kind}" style="--i:${i++}"></i>`).join('')
-  }).join('')
+  const url = new URL(el.dataset.qr!, location.origin).href
+  QRCode.toString(url, { type: 'svg', margin: 0, color: { dark: '#0a0a0b', light: '#f2efe8' } }).then((svg) => (el.innerHTML = svg))
+  const label = el.parentElement?.querySelector('[data-qr-url]')
+  if (label) label.textContent = url.replace(/^https?:\/\//, '')
 })
 
 // Funnel particles: dots ride the funnel's paths, weighted by how many complaints took each.
@@ -191,13 +172,6 @@ window.addEventListener('hashchange', () => {
   const i = slides.findIndex((sl) => `#${sl.id}` === location.hash)
   if (i >= 0 && i !== index) go(i)
 })
-
-// Printing (or "Save as PDF") lays every slide out fully built, one per page.
-window.addEventListener('beforeprint', () => {
-  slides.forEach((s) => s.classList.add('is-active'))
-  document.querySelectorAll<HTMLElement>('[data-step]').forEach((e) => e.classList.add('is-shown'))
-})
-window.addEventListener('afterprint', () => go(index))
 
 const start = slides.findIndex((s) => `#${s.id}` === location.hash)
 fit()

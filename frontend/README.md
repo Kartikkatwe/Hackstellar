@@ -47,7 +47,6 @@ The "Complain from a phone" card in the sidebar shows a QR code for `http://<lap
 | `src/components/FunnelFlow.tsx` | The funnel as a Sankey with particles, computed from `GET /funnel` |
 | `src/components/Trail.tsx` | One complaint's path, replayed from what the backend recorded |
 | `src/pages/` | Overview, Top issues, Issue detail, Live intake, Funnel and cost, Customer groups, Unconfirmed, Accuracy, Phone form |
-| `deck/` | The pitch deck at `/deck`: 19 slides (12 main, 7 backup); arrow keys, Space or click to advance, N for speaker notes, F for fullscreen, print for a PDF |
-| `scripts/deck-offline.mjs` | Builds the deck as one offline HTML file in `../docs/deck/export/` (`node scripts/deck-offline.mjs`) |
+| `deck/` | The pitch deck at `/deck`: 17 slides; arrow keys, Space or click to advance, N for speaker notes, F for fullscreen |
 | `landing/` | The product page: static HTML built on the taste-skill kit (`public/kit`), with live numbers from the API (`landing.ts`) |
 | `public/console-poster*.jpg` | Stills of the console, shown in the product page's app window until the live console loads |
