@@ -17,10 +17,6 @@
       "destination": "/api/index"
     },
     {
-      "source": "/deck",
-      "destination": "/deck/index.html"
-    },
-    {
       "source": "/console",
       "destination": "/app.html"
     },

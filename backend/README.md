@@ -15,18 +15,6 @@ All commands from `backend/`, using the virtual environment's Python.
 .\.venv\Scripts\uvicorn.exe app.api:app --port 8000    # API for the frontend, docs at http://localhost:8000/docs
 ```
 
-## Live accuracy test
-
-Complaints the engine has never seen, sent one at a time to a running site and scored against an answer key. Results of the 13 Nov run are in `../docs/live-test.md`.
-
-```powershell
-.\.venv\Scripts\python.exe data\generate.py --n 50 --fresh 5001 --out live_test_runs\b50   # 50 new complaints, same customers
-.\.venv\Scripts\python.exe live_test.py send live_test_runs\b50 https://hackstellar-three.vercel.app/api
-.\.venv\Scripts\python.exe live_test.py score live_test_runs\b50
-```
-
-The test adds its complaints to the site's data. On Vercel, reset it afterwards: change `LIVE_SYNC_PREFIX` and redeploy.
-
 Each run rewrites `runs/<pack>.db` and `runs/<pack>_report.json`. Copy the `.db` file to keep a run as a demo backup.
 
 ## Spending credit
@@ -41,7 +29,6 @@ Each run rewrites `runs/<pack>.db` and `runs/<pack>_report.json`. Copy the `.db`
 |---|---|
 | `packs/<name>/pack.yaml` | Everything about one business: components, known issues, gate questions, cut-offs, ranking weights, segments, prices |
 | `data/generate.py`, `data/catalog_grocery.py` | Mock data generator and its ground truth |
-| `live_test.py` | Live accuracy test: send new complaints to a running site, score them |
 | `app/ingest.py` | Four channel formats into one complaint shape |
 | `app/pipeline/identity.py` | Complaint to customer, order-ID checks |
 | `app/pipeline/engine.py` | The funnel: gate, match, verify, adjudicate, buffer |
