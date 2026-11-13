@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" font-family="Segoe UI, Inter, Arial, sans-serif">
+  <!-- Tree form of 4_jev_llm: root = a complaint, branches = who does the work, leaves = each step with live-run figures. -->
+  <rect width="1920" height="1080" fill="#FFFFFF"/>
+  <text x="40" y="70" font-size="42" font-weight="700" fill="#1B2330">Who does what: Jev, the LLM, and free local maths</text>
+  <text x="40" y="106" font-size="20" fill="#5B6676">Jev answers choices. The LLM writes words. Everything else runs on the laptop for free. Figures from the live run on 1,500 complaints.</text>
+
+  <!-- root -->
+  <rect x="720" y="134" width="480" height="70" rx="35" fill="#1B2330"/>
+  <text x="960" y="166" font-size="22" font-weight="700" fill="#FFFFFF" text-anchor="middle">A complaint arrives</text>
+  <text x="960" y="191" font-size="16" fill="#C9D1DC" text-anchor="middle">email · call · chat · social</text>
+  <path d="M960 204 V232 M330 232 H1590 M330 232 V258 M960 232 V258 M1590 232 V258" fill="none" stroke="#8A94A3" stroke-width="3"/>
+
+  <!-- branches -->
+  <rect x="40" y="260" width="580" height="88" rx="14" fill="#4338CA"/>
+  <text x="330" y="298" font-size="28" font-weight="700" fill="#FFFFFF" text-anchor="middle">Jev · decision model</text>
+  <text x="330" y="328" font-size="17" fill="#E0E3FF" text-anchor="middle">picks from options and returns probabilities</text>
+  <rect x="670" y="260" width="580" height="88" rx="14" fill="#0F766E"/>
+  <text x="960" y="298" font-size="28" font-weight="700" fill="#FFFFFF" text-anchor="middle">Local · on the laptop</text>
+  <text x="960" y="328" font-size="17" fill="#D5EFEB" text-anchor="middle">free maths, no model call</text>
+  <rect x="1300" y="260" width="580" height="88" rx="14" fill="#B45309"/>
+  <text x="1590" y="298" font-size="28" font-weight="700" fill="#FFFFFF" text-anchor="middle">LLM · Claude Haiku 5.5</text>
+  <text x="1590" y="328" font-size="17" fill="#FDECD3" text-anchor="middle">writes and judges in words</text>
+
+  <!-- spines and ticks -->
+  <g fill="none" stroke-width="3">
+    <path d="M80 348 V785 M80 455 H118 M80 627 H118 M80 799 H118" stroke="#4338CA"/>
+    <path d="M710 348 V823 M710 432 H748 M710 562 H748 M710 692 H748 M710 822 H748" stroke="#0F766E"/>
+    <path d="M1340 348 V785 M1340 455 H1378 M1340 627 H1378 M1340 799 H1378" stroke="#B45309"/>
+  </g>
+  <path d="M80 785 V799" stroke="#4338CA" stroke-width="3"/>
+  <path d="M1340 785 V799" stroke="#B45309" stroke-width="3"/>
+
+  <g font-size="17" fill="#2B3440">
+    <!-- Jev leaves -->
+    <rect x="120" y="380" width="500" height="150" rx="12" fill="#EEF0FF" stroke="#4338CA" stroke-width="2"/>
+    <text x="140" y="410" font-size="21" font-weight="700" fill="#4338CA">Gate · six questions, every complaint</text>
+    <text x="140" y="437">Complaint? · which of 7 areas? · impact · emotion</text>
+    <text x="140" y="461">money lost? · legal or safety risk? (one call)</text>
+    <text x="140" y="508" font-weight="700">1,500 calls · $0.046 · 0.53 s · 99.6% right area</text>
+
+    <rect x="120" y="552" width="500" height="150" rx="12" fill="#EEF0FF" stroke="#4338CA" stroke-width="2"/>
+    <text x="140" y="582" font-size="21" font-weight="700" fill="#4338CA">Verify · the unsure ones</text>
+    <text x="140" y="609">Similarity 0.18 to 0.65: “same problem as …?”</text>
+    <text x="140" y="633">yes ≥ 0.80 → filed · all ≤ 0.20 → buffer · else LLM</text>
+    <text x="140" y="680" font-weight="700">595 calls · $0.0096 · filed 34.7% · 97.3% right</text>
+
+    <rect x="120" y="724" width="500" height="150" rx="12" fill="#EEF0FF" stroke="#4338CA" stroke-width="2"/>
+    <text x="140" y="754" font-size="21" font-weight="700" fill="#4338CA">Group check · before a new issue</text>
+    <text x="140" y="781">3 customers report something new:</text>
+    <text x="140" y="805">“Is this a known issue in new words?”</text>
+    <text x="140" y="852" font-weight="700">7 calls · $0.0001 · stops duplicate issues</text>
+
+    <!-- Local leaves -->
+    <rect x="750" y="380" width="500" height="104" rx="12" fill="#E6F4F2" stroke="#0F766E" stroke-width="2"/>
+    <text x="770" y="410" font-size="21" font-weight="700" fill="#0F766E">Intake and identity</text>
+    <text x="770" y="437">4 channels → one format</text>
+    <text x="770" y="463">who sent it: login, phone, email, checked order ID</text>
+
+    <rect x="750" y="510" width="500" height="104" rx="12" fill="#E6F4F2" stroke="#0F766E" stroke-width="2"/>
+    <text x="770" y="540" font-size="21" font-weight="700" fill="#0F766E">Similarity match</text>
+    <text x="770" y="567">multilingual model + word matching, 0.02 s</text>
+    <text x="770" y="593" font-weight="700">≥ 0.65 → filed free · 50.3% · 99.2% right</text>
+
+    <rect x="750" y="640" width="500" height="104" rx="12" fill="#E6F4F2" stroke="#0F766E" stroke-width="2"/>
+    <text x="770" y="670" font-size="21" font-weight="700" fill="#0F766E">Buffer</text>
+    <text x="770" y="697">waits for 3 different customers → new issue</text>
+    <text x="770" y="723">money or legal risk → urgent at once</text>
+
+    <rect x="750" y="770" width="500" height="104" rx="12" fill="#E6F4F2" stroke="#0F766E" stroke-width="2"/>
+    <text x="770" y="800" font-size="21" font-weight="700" fill="#0F766E">Ranking and segments</text>
+    <text x="770" y="827">customers × impact × money × anger × trend</text>
+    <text x="770" y="853">Top 10 · filter by state, age, student</text>
+
+    <!-- LLM leaves -->
+    <rect x="1380" y="380" width="500" height="150" rx="12" fill="#FDF3E3" stroke="#B45309" stroke-width="2"/>
+    <text x="1400" y="410" font-size="21" font-weight="700" fill="#B45309">Adjudicate · the last unsure few</text>
+    <text x="1400" y="437">reads that area’s issues, picks one or says “new”</text>
+    <text x="1400" y="461">an invented issue key is treated as “new”</text>
+    <text x="1400" y="508" font-weight="700">58 calls · $0.0074 · 1.7% of complaints · 96.2%</text>
+
+    <rect x="1380" y="552" width="500" height="150" rx="12" fill="#FDF3E3" stroke="#B45309" stroke-width="2"/>
+    <text x="1400" y="582" font-size="21" font-weight="700" fill="#B45309">Name · each new issue</text>
+    <text x="1400" y="609">neutral English title from the 5 most typical</text>
+    <text x="1400" y="633">reports, even for Hindi or Hinglish</text>
+    <text x="1400" y="680" font-weight="700">6 calls · $0.0004 · one call per issue</text>
+
+    <rect x="1380" y="724" width="500" height="150" rx="12" fill="#FDF3E3" stroke="#B45309" stroke-width="2"/>
+    <text x="1400" y="754" font-size="21" font-weight="700" fill="#B45309">Curator · after each batch</text>
+    <text x="1400" y="781">compares each new issue with its 4 nearest</text>
+    <text x="1400" y="805">same root cause → merge and rename</text>
+    <text x="1400" y="852" font-weight="700">6 calls · $0.0010 · 5 of 5 hidden problems found</text>
+  </g>
+
+  <!-- how PS-19 is solved -->
+  <rect x="40" y="900" width="1840" height="150" rx="16" fill="#F4F6F9"/>
+  <text x="70" y="938" font-size="21" font-weight="700" fill="#1B2330">How PS-19 is solved</text>
+  <g font-size="17" fill="#3B4552">
+    <text x="70" y="972"><tspan font-weight="700">Same problem, different words:</tspan> similarity → Jev verify → LLM  ·  <tspan font-weight="700">New problems:</tspan> buffer → Jev group check → LLM name → Curator</text>
+    <text x="70" y="1002"><tspan font-weight="700">No double counting:</tspan> identity counts unique customers  ·  <tspan font-weight="700">Transparent Top 10:</tspan> written score formula  ·  <tspan font-weight="700">Customer groups:</tspan> segment filters and heatmap</text>
+    <text x="70" y="1032"><tspan font-weight="700">Total:</tspan> 96.1% never reach the LLM · 98.4% filed correctly · $0.065 for 1,500 · 0.55 s median per complaint</text>
+  </g>
+</svg>
