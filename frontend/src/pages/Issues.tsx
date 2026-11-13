@@ -7,7 +7,7 @@ import type { TopResponse, Channel } from '../lib/types'
 import { componentName, segmentValue } from '../lib/format'
 import { CHANNEL, CHANNELS } from '../lib/meta'
 import { BadgePill, Flags, SegBar, Skeleton, Empty } from '../components/ui'
-import { Formula } from '../components/Formula'
+import { ScoreMap, ScoreKey } from '../components/ScoreMap'
 import { NumberKey } from '../components/NumberKey'
 import './Issues.css'
 
@@ -29,7 +29,7 @@ export default function Issues() {
       <header className="phead">
         <div>
           <h1>{group ? `Top issues for ${group}` : 'Top issues'}</h1>
-          <p>Ranked by a score anyone can check with a calculator. Every factor is on the row, straight from the engine.</p>
+          <p>Ranked by a score anyone can check with a calculator. Each colour bar shows what drives the score; hover for the exact numbers, or open an issue for the full formula.</p>
         </div>
         <div className="phead__right">
           <div className="seg" role="group" aria-label="How many issues">
@@ -44,13 +44,22 @@ export default function Issues() {
       </header>
 
       <NumberKey only={['n-volume', 'n-harm']} />
-      <div className="issues__legend" aria-hidden="true">
-        {CHANNELS.map((c) => (
-          <span key={c}>
-            <i style={{ background: CHANNEL[c].color }} />
-            {CHANNEL[c].label}
-          </span>
-        ))}
+      <div className="issues__keys">
+        <div className="issues__key">
+          <span className="issues__keyname">Left bar: what drives the score</span>
+          <ScoreKey />
+        </div>
+        <div className="issues__key">
+          <span className="issues__keyname">Right bar: channels</span>
+          <div className="issues__legend" aria-hidden="true">
+            {CHANNELS.map((c) => (
+              <span key={c}>
+                <i style={{ background: CHANNEL[c].color }} />
+                {CHANNEL[c].label}
+              </span>
+            ))}
+          </div>
+        </div>
       </div>
 
       {error && !data && <Empty title="Could not load issues">{error}</Empty>}
@@ -76,7 +85,7 @@ export default function Issues() {
                     <Flags flags={i.flags} labels />
                   </div>
                   <h2 className="irow__title">{i.title}</h2>
-                  <Formula formula={i.formula} size="sm" animate={false} />
+                  <ScoreMap formula={i.formula} compact />
                 </div>
                 <div className="irow__side">
                   <div className="irow__nums">

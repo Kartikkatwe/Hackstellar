@@ -92,3 +92,11 @@
   font-size: 15px;
   color: var(--muted);
 }
+
+/* One row in Top issues: a slimmer bar, no head or key (the page shows one key). */
+.smap__bar--compact {
+  height: 12px;
+  padding: 2px;
+  margin-top: 6px;
+  max-width: 520px;
+}

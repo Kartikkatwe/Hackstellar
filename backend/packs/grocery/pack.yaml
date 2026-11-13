@@ -100,7 +100,12 @@ thresholds:
   # yes/no check, which costs about $0.00002 a call (measured), far less than a wrong grouping.
   hybrid: { match_hi: 0.65, match_lo: 0.18, cluster: 0.50 }
   st:   { match_hi: 0.72, match_lo: 0.45, cluster: 0.62 }
-  hash: { match_hi: 0.60, match_lo: 0.30, cluster: 0.45 }
+  # hash = the word-only embedder, used where the sentence model cannot load (the Vercel function).
+  # Its scores run lower, but it still ranks the right issue first or in the top 3 almost always,
+  # so (13 Nov) weak matches go to Jev's yes/no instead of the waiting list: match_lo 0.30 -> 0.10.
+  # cluster 0.45 -> 0.33: rewordings of one new problem scored 0.35-0.57 against each other,
+  # different problems in the same area 0.24 or less.
+  hash: { match_hi: 0.60, match_lo: 0.10, cluster: 0.33 }
 
 ranking:
   angry_weight: 0.25         # score x (1 + angry_weight x share of angry complaints)
