@@ -5,10 +5,10 @@ import { ArrowRight, Send } from 'lucide-react'
 import { useApi, useConnection } from '../lib/api'
 import { useFilters } from '../lib/filters'
 import type { Accuracy, Config, Cost, Funnel, TopResponse } from '../lib/types'
-import { componentName, scoreScale, segmentValue, usd } from '../lib/format'
+import { componentName, segmentValue, usd } from '../lib/format'
 import { CompassDial } from '../components/CompassDial'
 import { FunnelFlow } from '../components/FunnelFlow'
-import { ScoreMap } from '../components/ScoreMap'
+import { Meters } from '../components/Meters'
 import { TopList } from '../components/TopList'
 import { LiveFeed } from '../components/LiveFeed'
 import { NumberKey } from '../components/NumberKey'
@@ -88,7 +88,10 @@ export default function Overview() {
                     <Flags flags={focus.flags} />
                   </div>
                   <h2 className="ov__focus-title">{focus.title}</h2>
-                  <ScoreMap key={focus.issue_id} formula={focus.formula} scale={scoreScale(Math.max(0, ...(allIssues.length ? allIssues : issues).map((i) => i.score)))} />
+                  <p className="ov__focus-people">
+                    <strong className="num n-harm">{focus.unique_customers}</strong> customers affected
+                  </p>
+                  <Meters key={focus.issue_id} s={focus} />
                 </motion.div>
               ) : (
                 <div className="ov__focus-skel">

@@ -72,11 +72,23 @@ class Engine:
             self._recentre(issue)
             self.issues[issue["id"]] = issue
             self.by_component[issue["component"]].append(issue)
-        for row in self.con.execute("SELECT p.complaint_id, p.component, c.text, c.customer_id FROM pending p "
+        for row in self.con.execute("SELECT p.complaint_id, p.component, c.text, c.customer_id, c.sender FROM pending p "
                                     "JOIN complaints c ON c.id = p.complaint_id").fetchall():
             self.buffer[row["component"]].append(dict(id=row["complaint_id"], vec=self.embedder.encode([row["text"]])[0],
-                                                      text=row["text"], customer_id=row["customer_id"]))
+                                                      text=row["text"], customer_id=row["customer_id"],
+                                                      person=self._person(row["customer_id"], row["sender"])))
         self.new_count = self.con.execute("SELECT COUNT(*) FROM issues WHERE origin='discovered'").fetchone()[0]
+
+    @staticmethod
+    def _person(customer_id: str | None, sender: str | None) -> str | None:
+        """Who counts as one person for the new-issue rule.
+        Why the sender too (decided 13 Nov): someone not in the customer list (a new email
+             address, an unknown phone or handle) is still one identifiable person, so their
+             report should count. Not: a sender-less complaint. With no address at all, three
+             reports could be one person, so they still do not count."""
+        if customer_id:
+            return customer_id
+        return f"sender:{str(sender).strip().lower()}" if sender and str(sender).strip() else None
 
     @staticmethod
     def _recentre(issue: dict) -> None:
@@ -213,15 +225,18 @@ class Engine:
              for two more people (decided 13 Nov)."""
         urgent = g["money_lost"] >= self.t["urgent_flag"] or g["legal_risk"] >= self.t["urgent_flag"]
         buf = self.buffer[comp]
-        buf.append(dict(id=c["id"], vec=vec, text=c["text"], customer_id=ident["customer_id"]))
+        sender = c.get("email") or c.get("phone") or c.get("handle") or c.get("user_id")
+        buf.append(dict(id=c["id"], vec=vec, text=c["text"], customer_id=ident["customer_id"],
+                        person=self._person(ident["customer_id"], sender)))
         self.con.execute("INSERT INTO pending VALUES(?,?)", (c["id"], comp))
         self.con.execute("UPDATE complaints SET settled='pending', urgent=? WHERE id=?", (int(urgent), c["id"]))
         # Why a star around the new complaint, not chained clustering: chains drift (A~B, B~C
         # does not mean A and C are one problem). Every member here is close to this complaint.
         sims = np.stack([b["vec"] for b in buf]) @ vec
         members = [b for b, s in zip(buf, sims) if s >= self.t["cluster"]]
-        # Why only linked customers count: three posts from one angry person are not three people.
-        if len({m["customer_id"] for m in members if m["customer_id"]}) >= self.t["new_issue_customers"]:
+        # Why distinct people, not complaints: three posts from one angry person are not three people.
+        # A person is a linked customer, or else a distinct sender address (see _person).
+        if len({m["person"] for m in members if m["person"]}) >= self.t["new_issue_customers"]:
             existing = self._existing_match(comp, members, c["id"])
             if existing:
                 return existing

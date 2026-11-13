@@ -59,7 +59,13 @@ export function buildSteps(t: TrailT, config?: Config): Step[] {
       who: 'Identity',
       icon: <UserRound size={16} />,
       status: 'pass',
-      verdict: t.complaint.customer_id ? `Customer ${t.complaint.customer_id}, by ${LINK_METHOD[t.complaint.link_method] ?? t.complaint.link_method}` : 'Not linked to a customer yet; still counts towards its issue',
+      // Why three cases (13 Nov): a new problem needs 3 different people. A customer or a sender
+      // address (email, phone, handle, chat login) is one person; with neither, it can't count.
+      verdict: t.complaint.customer_id
+        ? `Customer ${t.complaint.customer_id}, by ${LINK_METHOD[t.complaint.link_method] ?? t.complaint.link_method}`
+        : t.complaint.sender
+          ? `Not in the customer list; counted as one person by ${t.complaint.sender}`
+          : 'No sender given, so it cannot count towards the 3 people a new problem needs',
       detail: t.complaint.order_id ? <span className="mono">Order {t.complaint.order_id} · {t.complaint.order_status.replace(/_/g, ' ')}</span> : undefined,
     },
     {
