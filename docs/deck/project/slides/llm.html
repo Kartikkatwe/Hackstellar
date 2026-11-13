@@ -4,7 +4,6 @@
 <div class="cards">
 <div class="card fragment"><p class="big">1.9 s+</p><p class="text">every complaint waits on the model</p></div>
 <div class="card fragment"><p class="big">~200</p><p class="text">output tokens written per complaint, every time</p></div>
-<div class="card fragment"><p class="big">$594</p><p class="text">per 100,000 complaints on Claude Sonnet 5.5</p></div>
 </div>
-<aside>Pause before this slide. Then: the usual way to build this is to send every complaint to an LLM and let it decide. It works, but three things go wrong. Click: every complaint waits on the model, at least 1.9 seconds, measured on Claude Haiku 5.5 with a short prompt, so a real everything-prompt is slower. Click: the LLM writes an answer for every single complaint, about 200 tokens each, and output tokens are the expensive ones. Click: on Sonnet that adds up to about $594 per 100,000 complaints, and $12 to $30 even on Haiku. Then pause again before the numbers.</aside>
+<aside>Pause before this slide. Then: the usual way to build this is to send every complaint to an LLM and let it decide. It works, but two things go wrong. Click: every complaint waits on the model, at least 1.9 seconds, measured on Claude Haiku 5.5 with a short prompt, so a real everything-prompt is slower. Click: the LLM writes an answer for every single complaint, about 200 tokens each, and output tokens are the expensive ones. Then pause again before the numbers.</aside>
 </section>
