@@ -1,10 +1,10 @@
-import { ScoreMap, FACTORS } from './ScoreMap'
+import { Meters, FACTORS } from './Meters'
 import './ScoreWhy.css'
 
 /* Why an issue ranks where it does, in plain words for people who have never seen the formula.
-   Why (13 Nov): judges read "3.72 impact x 2.00 money x 1.12 anger" as noise. Each factor is
-   said the way a support lead would say it, with the colour it has in the score bar below.
-   The exact formula stays in the bar's hover text and in the API (transparency is kept). */
+   Why (13 Nov): judges read "3.72 impact x 2.00 money x 1.12 anger" as noise. Customers and
+   trend stay plain words; severity, money lost and anger are gauges filled up to their cut-off.
+   The exact formula stays in the API (transparency is kept). */
 
 type Summary = {
   unique_customers: number
@@ -15,27 +15,14 @@ type Summary = {
   formula: string
 }
 
-const share = (x: number) => {
-  if (x >= 0.95) return 'almost all'
-  if (x >= 0.7) return 'most'
-  if (x >= 0.4) return 'about half'
-  if (x >= 0.15) return 'some'
-  return 'few'
-}
-
-export function ScoreWhy({ s, impactNames }: { s: Summary; impactNames: string[] }) {
-  const level = impactNames[Math.min(impactNames.length - 1, Math.max(0, Math.round(s.avg_impact) - 1))] ?? ''
+export function ScoreWhy({ s }: { s: Summary }) {
   const items = [
     { key: 'customers', color: FACTORS.customers.color, big: `${s.unique_customers}`, text: 'customers affected, each counted once' },
-    { key: 'impact', color: FACTORS.impact.color, big: level, text: 'how badly a typical customer is hit' },
-    { key: 'money', color: FACTORS.money.color, big: share(s.money_share), text: 'of complaints report money lost' },
-    { key: 'anger', color: FACTORS.anger.color, big: share(s.angry_share), text: 'sound angry (counts only a little)' },
     { key: 'trend', color: FACTORS.trend.color, big: s.trend > 1 ? 'Rising' : 'Steady', text: s.trend > 1 ? 'more customers this week than last' : 'no jump this week' },
   ]
   return (
     <div className="swhy">
-      <span className="swhy__title">Why it ranks here</span>
-      <ul className="swhy__list">
+            <ul className="swhy__list">
         {items.map((i) => (
           <li key={i.key} style={{ ['--c' as string]: i.color }}>
             <i aria-hidden="true" />
@@ -44,7 +31,7 @@ export function ScoreWhy({ s, impactNames }: { s: Summary; impactNames: string[]
           </li>
         ))}
       </ul>
-      <ScoreMap formula={s.formula} compact />
+      <Meters s={s} />
     </div>
   )
 }

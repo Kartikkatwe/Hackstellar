@@ -214,3 +214,11 @@
     padding: 16px;
   }
 }
+.ov__focus-people {
+  margin: 0 0 18px;
+  font-size: 16px;
+  color: var(--ink-2);
+}
+.ov__focus-people strong {
+  font-size: 18px;
+}

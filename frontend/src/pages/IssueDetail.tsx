@@ -63,7 +63,7 @@ export default function IssueDetail() {
           {s.title}
         </motion.h1>
         {s.description && <p className="idet__desc">{s.description}</p>}
-        <ScoreWhy s={s} impactNames={impactNames} />
+        <ScoreWhy s={s} />
       </header>
 
       <NumberKey only={['n-volume', 'n-harm']} />

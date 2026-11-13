@@ -7,7 +7,7 @@ import type { TopResponse, Channel } from '../lib/types'
 import { componentName, segmentValue } from '../lib/format'
 import { CHANNEL, CHANNELS } from '../lib/meta'
 import { BadgePill, Flags, SegBar, Skeleton, Empty } from '../components/ui'
-import { ScoreMap, ScoreKey } from '../components/ScoreMap'
+import { Meters, MetersKey } from '../components/Meters'
 import { NumberKey } from '../components/NumberKey'
 import './Issues.css'
 
@@ -29,7 +29,7 @@ export default function Issues() {
       <header className="phead">
         <div>
           <h1>{group ? `Top issues for ${group}` : 'Top issues'}</h1>
-          <p>Ranked by a score anyone can check with a calculator. Each colour bar shows what drives the score; hover for the exact numbers, or open an issue for the full formula.</p>
+          <p>Ranked by a score anyone can check with a calculator. Each row shows how severe the issue is, how many lost money and how many are angry; open an issue for the full breakdown.</p>
         </div>
         <div className="phead__right">
           <div className="seg" role="group" aria-label="How many issues">
@@ -46,11 +46,11 @@ export default function Issues() {
       <NumberKey only={['n-volume', 'n-harm']} />
       <div className="issues__keys">
         <div className="issues__key">
-          <span className="issues__keyname">Left bar: what drives the score</span>
-          <ScoreKey />
+          <span className="issues__keyname">Severity score</span>
+          <MetersKey />
         </div>
         <div className="issues__key">
-          <span className="issues__keyname">Right bar: channels</span>
+          <span className="issues__keyname">Channels</span>
           <div className="issues__legend" aria-hidden="true">
             {CHANNELS.map((c) => (
               <span key={c}>
@@ -85,7 +85,7 @@ export default function Issues() {
                     <Flags flags={i.flags} labels />
                   </div>
                   <h2 className="irow__title">{i.title}</h2>
-                  <ScoreMap formula={i.formula} compact />
+                  <Meters s={i} compact />
                 </div>
                 <div className="irow__side">
                   <div className="irow__nums">
