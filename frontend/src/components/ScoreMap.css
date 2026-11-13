@@ -65,3 +65,30 @@
   font-size: 12.5px;
   color: var(--faint);
 }
+
+.smap__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+.smap__score {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  font-variant-numeric: tabular-nums;
+}
+.smap__score b {
+  font-size: 28px;
+  font-weight: 560;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  background: linear-gradient(100deg, #f6e3b8, #d9b26b 60%, #b08443);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.smap__score span {
+  font-size: 15px;
+  color: var(--muted);
+}

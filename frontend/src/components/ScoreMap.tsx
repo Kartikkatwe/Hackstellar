@@ -17,7 +17,7 @@ const FACTORS: Record<string, { name: string; color: string }> = {
   trend: { name: 'Trend', color: '#d55181' },
 }
 
-export function ScoreMap({ formula }: { formula: string }) {
+export function ScoreMap({ formula, scale }: { formula: string; scale: number }) {
   const reduce = useReducedMotion()
   const { factors, result } = parseFormula(formula)
   const parts = factors
@@ -31,7 +31,13 @@ export function ScoreMap({ formula }: { formula: string }) {
 
   return (
     <div className="smap">
-      <span className="smap__title">What drives the score</span>
+      <div className="smap__head">
+        <span className="smap__title">What drives the score</span>
+        <span className="smap__score" aria-label={`Score ${Math.round(parseFloat(result))} out of ${scale}`}>
+          <b>{Math.round(parseFloat(result))}</b>
+          <span>/ {scale}</span>
+        </span>
+      </div>
       <div className="smap__bar" role="img" aria-label={`Share of the score, ${label}. Score ${result}.`}>
         {parts
           .filter((p) => p.weight > 0)

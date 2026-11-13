@@ -1,5 +1,9 @@
 const nf = new Intl.NumberFormat('en-IN')
 
+/** The "out of" for scores: the top score rounded up to the next hundred (560.2 -> 600).
+    Why: a score is a product with no natural maximum; this gives every issue a fixed yardstick. */
+export const scoreScale = (max: number) => (max <= 0 ? 100 : Math.ceil(max / 100) * 100)
+
 export const int = (n: number | undefined | null) => (n == null ? '–' : nf.format(Math.round(n)))
 export const pct = (share: number | undefined | null, digits = 1) => (share == null ? '–' : `${(share * 100).toFixed(digits)}%`)
 export const pctRaw = (p: number | undefined | null, digits = 1) => (p == null ? '–' : `${p.toFixed(digits)}%`)
