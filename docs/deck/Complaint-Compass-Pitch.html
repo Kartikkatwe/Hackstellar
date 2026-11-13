@@ -2484,18 +2484,6 @@ p {
   <aside>How Jev works, in general. We give it the text and some questions, and each question carries its own answer space. A noul question is yes or no, and Jev says how likely yes is. A choice question lists the options, and Jev gives a probability for every one. A score question is an ordered scale, and Jev gives a point on it. One call answers all of them. Nothing comes back as free text, so there is nothing to parse and almost nothing to pay for, and every answer says how sure it is.</aside>
 </section>
 
-<!-- 9 roles -->
-<section class="slide" id="roles">
-  <p class="kicker in" style="--d:0">Who does what</p>
-  <h2 class="title in" style="--d:1">Three workers, <span class="soft">priced by what they do.</span></h2>
-  <div class="roles">
-    <div class="role in" style="--d:2; --k:var(--w-jev)"><h3>Jev<small>decision model · picks, never writes</small></h3><ul><li>Gate: 6 questions</li><li>Verify: same problem?</li><li>Group check: known in new words?</li></ul></div>
-    <div class="role in" style="--d:3; --k:var(--w-free)"><h3>Free<small>runs on our machine</small></h3><ul><li>Read 4 channels</li><li>Find the customer</li><li>Match by meaning</li><li>Waiting list</li><li>Ranking</li></ul></div>
-    <div class="role in" style="--d:4; --k:var(--w-llm)"><h3>LLM<small>Claude Haiku · only where words are needed</small></h3><ul><li>The last unsure few</li><li>Name new problems</li><li>Merge duplicates</li></ul></div>
-  </div>
-  <aside>Blue, Jev: given a complaint and questions with fixed options, it returns a choice and a probability, never free text. The gate, verify and the group check. Green is free on our machine: reading channels, finding the customer, matching by meaning, the waiting list, the ranking. Orange, the LLM: only the last unsure few, naming new problems, merging duplicates. Jev needs no training: labels come from the settings file with each request.</aside>
-</section>
-
 <!-- 10 decision path -->
 <section class="slide" id="path">
   <p class="kicker in" style="--d:0">The decision path</p>
