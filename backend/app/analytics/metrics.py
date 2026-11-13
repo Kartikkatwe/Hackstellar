@@ -45,10 +45,17 @@ def cost(con, pack: dict) -> dict:
         stages.append(dict(stage=r["stage"], model=r["model"], calls=r["calls"], in_tokens=r["i"], out_tokens=r["o"],
                            cost_usd=round(r["c"], 6), seconds=round(r["s"], 1)))
         total, seconds, estimated = total + r["c"], seconds + r["s"], estimated or bool(r["e"])
-    b = con.execute("SELECT SUM(prefix_tokens) p, SUM(in_tokens) i, SUM(out_tokens) o FROM baseline").fetchone()
+    raw = con.execute("SELECT SUM(prefix_tokens) p, SUM(in_tokens) i, SUM(out_tokens) o FROM baseline").fetchone()
+    # Why calibrate: 12 real baseline calls (cache_analysis.py --measure) showed the prompt is
+    # 1.42x the chars/4 estimate and the reply about 197 tokens, not the 90 first assumed.
+    cal = pack.get("baseline_calibration", {})
+    scale = cal.get("token_scale", 1.0)
+    b = dict(p=round(raw["p"] * scale), i=round(raw["i"] * scale), o=round(cal["out_tokens"] * n) if "out_tokens" in cal else raw["o"])
     baselines = []
     for model in pack["baseline_models"]:
         full = cost_usd(pack, model, b["i"], b["o"])
+        # "cached" is the baseline's best case: every call a cache hit. Arrival gaps and the
+        # 5-minute expiry make real figures worse for the baseline; see cache_analysis.py.
         cached = cost_usd(pack, model, b["i"], b["o"], cached_tokens=b["p"])
         baselines.append(dict(model=model, cost_usd=round(full, 6), cost_cached_usd=round(cached, 6),
                               saving_pct=round((1 - total / full) * 100, 1), saving_vs_cached_pct=round((1 - total / cached) * 100, 1),

@@ -123,9 +123,13 @@ models:
 prices_usd_per_million:   # OpenRouter list prices, read 13 Nov 2026
   typesafe/jev-1.14:            { input: 0.042, output: 0.0 }
   anthropic/claude-haiku-5.5:   { input: 0.10,  output: 0.50, cache_read: 0.01 }
-  anthropic/claude-sonnet-5.5:  { input: 2.00,  output: 10.00, cache_read: 0.20 }
+  anthropic/claude-sonnet-5.5:  { input: 2.00,  output: 10.00, cache_read: 0.10 }   # was mistyped as 0.20
 
 baseline_models: [anthropic/claude-haiku-5.5, anthropic/claude-sonnet-5.5]
+
+# Measured 13 Nov with 12 real Haiku 5.5 baseline calls. out_tokens is a floor: replies hit
+# the 200-token cap set for the test, so the real baseline writes at least this much.
+baseline_calibration: { token_scale: 1.42, out_tokens: 197 }
 
 # Mock mode only. AI/ML API's docs example bills 406 input tokens for a request of about
 # 475 characters (chars/4 would say ~120), so estimates are scaled up to avoid flattering Jev.
