@@ -2630,6 +2630,19 @@ p {
   <aside>The ranking is a written formula. Customers, not messages, times average impact from 1 to 4, times one plus the money-lost share, times a small anger factor so a loud customer never outranks a quiet one who lost money, times 1.25 if rising: at least 5 customers this week and double the week before. Every issue in the console shows this breakdown.</aside>
 </section>
 
+<!-- 20 segments -->
+<section class="slide" id="segments">
+  <span class="backup-tag">Backup</span>
+  <p class="kicker in" style="--d:0">Customer groups</p>
+  <h2 class="title in" style="--d:1">It shows <span class="soft">who is hit hardest.</span></h2>
+  <div class="segs">
+    <div class="seg in" style="--d:2"><h3>Students</h3><p>hit UPI payment timeouts far more often than everyone else</p></div>
+    <div class="seg in" style="--d:3"><h3>Maharashtra</h3><p>reports “delivered but not received” more than anywhere else</p></div>
+  </div>
+  <p class="foot">Rate = customers affected ÷ size of the group, so a big group never looks worst just for being big. Both patterns were planted in the test data, and both show up in the heatmap.</p>
+  <aside>Every customer has a state, an age group and student status. For each issue we compare a group's rate with everyone's. Students hit UPI timeouts far more often; Maharashtra reports delivered-but-not-received more than elsewhere. Both were planted in the mock data, and both show up in the heatmap.</aside>
+</section>
+
 <!-- 21 packs -->
 <section class="slide" id="packs">
   <span class="backup-tag">Backup</span>
@@ -2645,6 +2658,18 @@ p {
     </div>
   </div>
   <aside>Everything about groceries lives in one settings file, the domain pack: the areas, the questions, the known problems. A telecom or a bank writes its own file and the engine does not change. Jev takes its labels with each request, so there is no training step. A telecom pack is next.</aside>
+</section>
+
+<!-- 22 limits -->
+<section class="slide" id="limits">
+  <span class="backup-tag">Backup</span>
+  <p class="kicker in" style="--d:0">Honesty</p>
+  <h2 class="title in" style="--d:1">What is not done yet.</h2>
+  <div class="cols">
+    <div class="in" style="--d:2"><h3>Limits</h3><ul style="--k:var(--n-harm)"><li style="--k:var(--n-harm)">Test data is cleaner than real</li><li style="--k:var(--n-harm)">Cut-offs tuned on the same data</li><li style="--k:var(--n-harm)">LLM baseline priced, not run</li><li style="--k:var(--n-harm)">Live test: 300 complaints, one day</li></ul></div>
+    <div class="in" style="--d:3"><h3>Next</h3><ul><li style="--k:var(--n-right)">Voice agent demo (webhook built)</li><li style="--k:var(--n-right)">Weekly insights in plain words</li><li style="--k:var(--n-right)">Tune on real labelled data</li></ul></div>
+  </div>
+  <aside>Say these before a judge does. Template data, so real accuracy will be lower. Cut-offs tuned on the data they are scored on. The baseline is projected from calibrated token counts, not run. The live test is 300 complaints from the same templates, on one day. Next: telecom pack, the voice agent demo, plain-language insights, tuning on a real labelled sample.</aside>
 </section>
 
 <!-- 23 funnel -->

@@ -290,3 +290,30 @@
   gap: 8px;
   padding-right: 4px;
 }
+
+/* waiting-list countdown: one dot per customer needed, filled as reports arrive */
+.trail__count {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+.trail__count i {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1.5px var(--line-3);
+}
+.trail__count i.is-on {
+  background: var(--brass);
+  box-shadow: 0 0 10px rgba(217, 178, 107, 0.5);
+}
+.trail__count b {
+  margin-left: 4px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}

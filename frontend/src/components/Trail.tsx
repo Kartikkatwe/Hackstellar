@@ -273,6 +273,17 @@ export function TrailView({ trail, mode, warning, replay = true }: { trail: Trai
         <div>
           <span className="trail__out-title">{outcome.title}</span>
           <span className="trail__out-text">{outcome.text}</span>
+          {settled === 'pending' && !anonymous && (
+            <span className="trail__count" aria-label={`${people ?? 1} of ${need} customers so far`}>
+              {Array.from({ length: need }, (_, i) => (
+                <i key={i} className={i < (people ?? 1) ? 'is-on' : ''} />
+              ))}
+              <b>
+                {people ?? 1} of {need}
+              </b>
+              <span>customers so far</span>
+            </span>
+          )}
         </div>
         {trail.filed_under && (
           <Link to={`/console/issues/${trail.filed_under.issue_id}`} className="btn btn--sm">
