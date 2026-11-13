@@ -1,0 +1,13 @@
+<section id="architecture">
+<div class="split">
+<div class="side">
+<p class="eyebrow">TARGET ARCHITECTURE</p>
+<h2 class="title">Copies scale the stateless steps; one writer per partition keeps order</h2>
+<p class="lead"><b>Stage A</b> (identity, Jev gate, embed) depends only on the complaint itself, so we add copies until throughput is met.</p>
+<p class="lead"><b>Stage B</b> (match, verify, LLM, new issues) runs one writer per business × area, so each partition stays in order while partitions run side by side.</p>
+</div>
+<img src="/_blob/0647c8e9ddf441414ec4dfdc8f4e6b3f" alt="Target architecture: channels to a stateless intake API and queue, stateless Stage A workers, a queue keyed by business and area, Stage B with one writer per partition, Postgres with pgvector, then Curator, Ranker and read API">
+</div>
+<p class="source">Projected design; today’s prototype runs as one process. 7 partitions for grocery, about 700 for 100 businesses.</p>
+<aside>Here is the target design. Complaints arrive from four channels into a stateless intake API and a queue. Stage A workers resolve the customer, run the Jev gate and embed the text. None of that needs shared state, so we just add copies. Their output goes onto a queue keyed by business and area. Stage B is where order matters, because the list of known issues grows as new problems are discovered. So each business-and-area partition gets exactly one writer. A grocery business has 7 partitions; 100 businesses have about 700, all running in parallel. Results land in Postgres with pgvector, and the Curator, the ranker and the dashboard read from there.</aside>
+</section>

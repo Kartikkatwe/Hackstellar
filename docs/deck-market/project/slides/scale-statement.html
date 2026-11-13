@@ -1,0 +1,6 @@
+<section id="scale-statement" class="statement">
+<p class="eyebrow">SCALABILITY STRATEGY</p>
+<h1>Scale by adding copies, not by redesigning</h1>
+<p class="say">96% of complaints skip the LLM, cost grows linearly, and the only shared state, the issue list, already splits by business and by area.</p>
+<aside>The scalability story in one line: we scale by adding copies of workers, not by redesigning the funnel. Three properties make that true. First, 96% of complaints never reach the LLM, so LLM rate limits and outages touch only 4% of traffic. Second, cost is linear and small. Third, the only shared state is the list of known issues, and that list is already divided by business and by area of the business, which gives us a natural way to split the work.</aside>
+</section>

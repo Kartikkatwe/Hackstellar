@@ -1,0 +1,17 @@
+<section id="volume">
+<p class="eyebrow">COST AND THROUGHPUT AT SCALE</p>
+<h2 class="title">At 10M complaints a month, model cost is about $433</h2>
+<table class="table">
+<tr class="head"><th style="width:25%">Complaints a month</th><th style="width:25%">Complaint Compass</th><th style="width:25%">Haiku, best caching</th><th style="width:25%">Sonnet, no caching</th></tr>
+<tr><td>1M</td><td>$43</td><td>$123</td><td>$5,940</td></tr>
+<tr class="hi"><td>10M</td><td>$433</td><td>$1,232</td><td>$59,400</td></tr>
+<tr><td>100M</td><td>$4,330</td><td>$12,320</td><td>$594,000</td></tr>
+</table>
+<div class="cards">
+<div class="card"><h3>~15 a second</h3><p class="text">per intake worker; 10 workers ≈ 13M a day</p></div>
+<div class="card"><h3>~50 a second</h3><p class="text">per partition on the free match path (0.02 s local)</p></div>
+<div class="card"><h3>~0.15 a second</h3><p class="text">LLM calls at 10M a month; the queue absorbs spikes</p></div>
+</div>
+<p class="source">Measured cost per complaint × volume; hosting excluded. Throughput projected from measured latencies, not load-tested.</p>
+<aside>Cost scales linearly with volume. At 10 million complaints a month our model cost is about 433 dollars, against about 1,200 dollars for an LLM on every complaint with the best caching, or 59,000 dollars with Sonnet. Throughput comes from measured latencies: each intake worker handles about 15 complaints a second, so ten workers handle about 13 million a day. Each partition files about 50 a second on the free match path. The LLM sees about 4% of traffic, roughly 0.15 calls a second at 10 million a month. These are projections; a load test comes first.</aside>
+</section>

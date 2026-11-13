@@ -1,0 +1,15 @@
+<section id="risks">
+<p class="eyebrow">RISKS</p>
+<h2 class="title">The largest risk is real-world accuracy, not scale</h2>
+<table class="table small">
+<tr class="head"><th style="width:36%">Risk</th><th style="width:13%">Likelihood</th><th style="width:11%">Impact</th><th style="width:40%">Mitigation</th></tr>
+<tr class="hi"><td>Accuracy falls on real, messy data</td><td>High</td><td>High</td><td>Tune per customer on one labelled sample; measure on another</td></tr>
+<tr><td>Cut-offs tuned on the data they were scored on</td><td>High</td><td>Medium</td><td>Report held-out accuracy only</td></tr>
+<tr><td>Jev’s endpoint is in alpha</td><td>Medium</td><td>High</td><td>Degraded mode; gate logic in one file</td></tr>
+<tr><td>Rate limits at volume unknown</td><td>Medium</td><td>Medium</td><td>Load test before the first contract</td></tr>
+<tr><td>Learned examples drift an issue</td><td>Low</td><td>Medium</td><td>Cap of 25 per issue; weekly re-check</td></tr>
+<tr><td>Incumbents add similar triage</td><td>Medium</td><td>Medium</td><td>Integrate; win on cost and auditability</td></tr>
+</table>
+<p class="source">Our test data is template-generated with a fixed seed; the engine never sees the answer key.</p>
+<aside>The biggest risk is not scale, it is accuracy on real complaints. Our data is template-generated, so it is cleaner than reality, and our cut-offs were tuned on the same data we scored them on. The fix is the same for both: tune on one labelled sample from the customer and report accuracy on a separate one. Jev’s endpoint is still in alpha, so we have a degraded mode and keep all gate logic in one file. Rate limits at production volume are unknown until we load-test. Learned examples could drift an issue, which the cap of 25 and a weekly re-check contain. And incumbents could copy the idea, which is why we integrate with them rather than fight them.</aside>
+</section>

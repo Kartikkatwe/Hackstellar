@@ -1,0 +1,17 @@
+<section id="limits">
+<p class="eyebrow">WHAT BREAKS FIRST</p>
+<h2 class="title">Eight known limits, each with a standard fix</h2>
+<table class="table small">
+<tr class="head"><th style="width:38%">Limit in today’s prototype</th><th style="width:24%">Breaks at about</th><th style="width:38%">Fix</th></tr>
+<tr><td>One global writer, in-memory issue list</td><td>A few per second</td><td>One writer per business × area</td></tr>
+<tr><td>SQLite, one file per run</td><td>Several writers</td><td>Postgres + pgvector</td></tr>
+<tr><td>Jev gate 0.53 s, 8 in parallel</td><td>~1.3M a day per worker</td><td>More workers; reuse near-duplicate answers</td></tr>
+<tr><td>Dense vectors, scanned one by one</td><td>~1.7 GB per large area</td><td>Sparse vectors; nearest-neighbour index</td></tr>
+<tr><td>Waiting-tray scan grows with backlog</td><td>Large backlogs</td><td>30-day expiry; index on the tray</td></tr>
+<tr><td>Top 10 recounted from scratch</td><td>Millions of filings</td><td>Running totals, refreshed each minute</td></tr>
+<tr><td>Jev on the critical path</td><td>A Jev outage</td><td>Degraded mode, re-checked later</td></tr>
+<tr><td>Provider rate limits</td><td>Not yet tested</td><td>Queue back-pressure; second LLM provider</td></tr>
+</table>
+<p class="source">From the prototype code (engine.py, api.py, run.py). Thresholds are projections; no load test has been run.</p>
+<aside>Before a judge finds them, here are the eight places today’s prototype would break, and the fix for each. The first two are the big ones: one global writer and an in-memory issue list, and SQLite. Both go away with the partitioned design and Postgres. The gate is network-bound at about half a second per call, so we add workers and reuse answers for near-identical texts. Vectors get sparse storage and an index. The ranker moves to running totals. Jev is on the critical path, so we add a degraded mode that sorts by similarity and re-checks when Jev is back. Rate limits are the real unknown, so a load test comes before any throughput claim.</aside>
+</section>
