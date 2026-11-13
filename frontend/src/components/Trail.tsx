@@ -182,11 +182,26 @@ export function TrailView({ trail, mode, warning, replay = true }: { trail: Trai
     return () => timers.forEach(clearTimeout)
   }, [trail.complaint.id, replay, reduce, steps])
 
+  // How many different people have reported this so far (stored when it joined the waiting list).
+  const need = Number(config?.thresholds?.new_issue_customers ?? 3)
+  const people = (() => {
+    try {
+      return JSON.parse(trail.complaint.meta || '{}').people_so_far as number | undefined
+    } catch {
+      return undefined
+    }
+  })()
+  const anonymous = !trail.complaint.sender && !trail.complaint.customer_id
+  const left = people === undefined ? need - 1 : Math.max(1, need - people)
+  const countdown = anonymous
+    ? `It has no sender, so it cannot count towards the ${need} customers a new issue needs.`
+    : `${people ?? 1} of ${need} customers so far. ${left === 1 ? 'One more customer' : `${left} more customers`} with the same problem make it an issue.`
+
   const outcome =
     settled === 'dropped'
       ? { title: 'Dropped at the gate', text: 'Praise, spam or a question: kept out of the counts.', tone: 'muted' }
       : settled === 'pending'
-        ? { title: trail.complaint.urgent ? 'Waiting list, flagged urgent' : 'Waiting list', text: trail.complaint.urgent ? 'Matches nothing known yet, and money or safety is at risk, so staff see it now.' : 'Matches nothing known yet. Two more customers with the same problem make it an issue.', tone: trail.complaint.urgent ? 'urgent' : 'muted' }
+        ? { title: trail.complaint.urgent ? 'Waiting list, flagged urgent' : 'Waiting list', text: trail.complaint.urgent ? `Matches nothing known yet, and money or safety is at risk, so staff see it now. ${countdown}` : `Matches nothing known yet. ${countdown}`, tone: trail.complaint.urgent ? 'urgent' : 'muted' }
         : settled === 'new_issue'
           ? { title: 'Became a new issue', text: 'Three different customers reported the same new problem.', tone: 'brass' }
           : { title: 'Filed under', text: trail.filed_under?.title ?? 'a known issue', tone: 'brass' }

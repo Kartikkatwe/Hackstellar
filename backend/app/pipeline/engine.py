@@ -234,9 +234,14 @@ class Engine:
         # does not mean A and C are one problem). Every member here is close to this complaint.
         sims = np.stack([b["vec"] for b in buf]) @ vec
         members = [b for b, s in zip(buf, sims) if s >= self.t["cluster"]]
+        people = len({m["person"] for m in members if m["person"]})
+        # Why stored on the complaint: the trail can then count down ("1 more customer") instead of
+        # always saying "two more", which read as broken after the second report (13 Nov).
+        self.con.execute("UPDATE complaints SET meta = json_set(COALESCE(NULLIF(meta, ''), '{}'), '$.people_so_far', ?) WHERE id=?",
+                         (people, c["id"]))
         # Why distinct people, not complaints: three posts from one angry person are not three people.
         # A person is a linked customer, or else a distinct sender address (see _person).
-        if len({m["person"] for m in members if m["person"]}) >= self.t["new_issue_customers"]:
+        if people >= self.t["new_issue_customers"]:
             existing = self._existing_match(comp, members, c["id"])
             if existing:
                 return existing
