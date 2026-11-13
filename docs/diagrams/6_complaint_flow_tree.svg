@@ -3,108 +3,108 @@
   <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#64748B"/></marker></defs>
   <rect width="1920" height="1080" fill="#FFFFFF"/>
   <text x="60" y="62" font-size="40" font-weight="700" fill="#1B2330">How a complaint flows, step by step</text>
-  <text x="60" y="100" font-size="19" fill="#5B6676">Colour shows who does the work: <tspan fill="#4338CA" font-weight="700">Jev</tspan> (decision model), <tspan fill="#0F766E" font-weight="700">local</tspan> (free, on the laptop), <tspan fill="#B45309" font-weight="700">LLM</tspan> (Claude Haiku 5.5). Figures from the live run on 1,500 complaints.</text>
+  <text x="60" y="100" font-size="18" fill="#5B6676">Colour shows who does the work. <tspan fill="#4338CA" font-weight="700">Jev:</tspan> a decision model that only picks from given options. <tspan fill="#0F766E" font-weight="700">Local:</tspan> free, on our own computer. <tspan fill="#B45309" font-weight="700">LLM:</tspan> a language model, used only where words are needed.</text>
   <line x1="110" y1="200" x2="110" y2="214" stroke="#64748B" stroke-width="3" marker-end="url(#ah)"/>
   <line x1="700" y1="164" x2="1330" y2="164" stroke="#0F766E" stroke-width="2.5"/>
   <rect x="60" y="128" width="640" height="72" rx="12" fill="#E6F4F2" stroke="#0F766E" stroke-width="2"/>
   <text x="80" y="158" font-size="21" font-weight="700" fill="#0F766E">1 · Intake and identity</text>
   <text x="680" y="157" font-size="14" font-weight="700" letter-spacing="1.5" fill="#0F766E" text-anchor="end">LOCAL · FREE</text>
-  <text x="80" y="184" font-size="17" fill="#2B3440">4 channels → one format · finds who sent it</text>
+  <text x="80" y="184" font-size="17" fill="#2B3440">email, calls, chat and social posts become one format</text>
   <rect x="760" y="138" width="540" height="52" rx="26" fill="#F4F6F9" stroke="#94A3B8" stroke-width="2"/>
-  <text x="784" y="170" font-size="18" font-weight="600" fill="#334155">1,500 complaints in</text>
+  <text x="784" y="170" font-size="18" font-weight="600" fill="#334155">finds the customer: login, phone number or email</text>
   <rect x="1330" y="138" width="550" height="52" rx="26" fill="#F4F6F9" stroke="#94A3B8" stroke-width="2"/>
-  <text x="1354" y="170" font-size="18" font-weight="600" fill="#334155">customer: login, phone, email or checked order ID</text>
+  <text x="1354" y="170" font-size="18" font-weight="600" fill="#334155">order IDs are checked for typos before use</text>
   <line x1="110" y1="288" x2="110" y2="302" stroke="#64748B" stroke-width="3" marker-end="url(#ah)"/>
   <line x1="700" y1="252" x2="1330" y2="252" stroke="#4338CA" stroke-width="2.5"/>
   <rect x="60" y="216" width="640" height="72" rx="12" fill="#EEF0FF" stroke="#4338CA" stroke-width="2"/>
   <text x="80" y="246" font-size="21" font-weight="700" fill="#4338CA">2 · Gate</text>
   <text x="680" y="245" font-size="14" font-weight="700" letter-spacing="1.5" fill="#4338CA" text-anchor="end">JEV</text>
-  <text x="80" y="272" font-size="17" fill="#2B3440">6 questions in one call · 0.53 s · $0.00003</text>
+  <text x="80" y="272" font-size="17" fill="#2B3440">six questions about the complaint, answered in one call</text>
   <rect x="760" y="226" width="540" height="52" rx="26" fill="#F1F2F4" stroke="#8A94A3" stroke-width="2"/>
-  <text x="784" y="258" font-size="18" font-weight="600" fill="#4B5563">not a complaint → dropped · 151 (10.1%)</text>
+  <text x="784" y="258" font-size="18" font-weight="600" fill="#4B5563">not a complaint (praise, spam, questions) → removed</text>
   <rect x="1330" y="226" width="550" height="52" rx="26" fill="#F4F6F9" stroke="#94A3B8" stroke-width="2"/>
-  <text x="1354" y="258" font-size="18" font-weight="600" fill="#334155">complaint → area, impact, emotion, money, legal</text>
+  <text x="1354" y="258" font-size="18" font-weight="600" fill="#334155">complaint → area, severity, money lost, legal risk</text>
   <line x1="110" y1="376" x2="110" y2="390" stroke="#64748B" stroke-width="3" marker-end="url(#ah)"/>
   <line x1="700" y1="340" x2="1330" y2="340" stroke="#0F766E" stroke-width="2.5"/>
   <rect x="60" y="304" width="640" height="72" rx="12" fill="#E6F4F2" stroke="#0F766E" stroke-width="2"/>
   <text x="80" y="334" font-size="21" font-weight="700" fill="#0F766E">3 · Similarity match</text>
   <text x="680" y="333" font-size="14" font-weight="700" letter-spacing="1.5" fill="#0F766E" text-anchor="end">LOCAL · FREE</text>
-  <text x="80" y="360" font-size="17" fill="#2B3440">against that area’s known issues · 0.02 s</text>
+  <text x="80" y="360" font-size="17" fill="#2B3440">compares its meaning with known problems in that area</text>
   <rect x="760" y="314" width="540" height="52" rx="26" fill="#E8F5EC" stroke="#15803D" stroke-width="2"/>
-  <text x="784" y="346" font-size="18" font-weight="600" fill="#166534">≥ 0.65 → filed · 754 (50.3%)</text>
+  <text x="784" y="346" font-size="18" font-weight="600" fill="#166534">clearly a known problem → filed</text>
   <rect x="1330" y="314" width="550" height="52" rx="26" fill="#F4F6F9" stroke="#94A3B8" stroke-width="2"/>
-  <text x="1354" y="346" font-size="18" font-weight="600" fill="#334155">&lt; 0.18 → buffer (step 6)</text>
+  <text x="1354" y="346" font-size="18" font-weight="600" fill="#334155">like nothing known → waiting list (step 6)</text>
   <line x1="110" y1="464" x2="110" y2="478" stroke="#64748B" stroke-width="3" marker-end="url(#ah)"/>
   <line x1="700" y1="428" x2="1330" y2="428" stroke="#4338CA" stroke-width="2.5"/>
   <rect x="60" y="392" width="640" height="72" rx="12" fill="#EEF0FF" stroke="#4338CA" stroke-width="2"/>
   <text x="80" y="422" font-size="21" font-weight="700" fill="#4338CA">4 · Verify</text>
   <text x="680" y="421" font-size="14" font-weight="700" letter-spacing="1.5" fill="#4338CA" text-anchor="end">JEV</text>
-  <text x="80" y="448" font-size="17" fill="#2B3440">only if similarity is 0.18 to 0.65 · yes / no on top 3</text>
+  <text x="80" y="448" font-size="17" fill="#2B3440">only when the match is unsure: same problem, yes or no?</text>
   <rect x="760" y="402" width="540" height="52" rx="26" fill="#E8F5EC" stroke="#15803D" stroke-width="2"/>
-  <text x="784" y="434" font-size="18" font-weight="600" fill="#166534">yes ≥ 0.80 → filed · 520 (34.7%)</text>
+  <text x="784" y="434" font-size="18" font-weight="600" fill="#166534">confident yes → filed</text>
   <rect x="1330" y="402" width="550" height="52" rx="26" fill="#F4F6F9" stroke="#94A3B8" stroke-width="2"/>
-  <text x="1354" y="434" font-size="18" font-weight="600" fill="#334155">all ≤ 0.20 → buffer (step 6)</text>
+  <text x="1354" y="434" font-size="18" font-weight="600" fill="#334155">confident no → waiting list (step 6)</text>
   <line x1="110" y1="552" x2="110" y2="566" stroke="#64748B" stroke-width="3" marker-end="url(#ah)"/>
   <line x1="700" y1="516" x2="1330" y2="516" stroke="#B45309" stroke-width="2.5"/>
   <rect x="60" y="480" width="640" height="72" rx="12" fill="#FDF3E3" stroke="#B45309" stroke-width="2"/>
-  <text x="80" y="510" font-size="21" font-weight="700" fill="#B45309">5 · Adjudicate</text>
+  <text x="80" y="510" font-size="21" font-weight="700" fill="#B45309">5 · Decide</text>
   <text x="680" y="509" font-size="14" font-weight="700" letter-spacing="1.5" fill="#B45309" text-anchor="end">LLM</text>
-  <text x="80" y="536" font-size="17" fill="#2B3440">only if Jev is still unsure · reads that area’s issues</text>
+  <text x="80" y="536" font-size="17" fill="#2B3440">only if still unsure: reads the area’s known problems</text>
   <rect x="760" y="490" width="540" height="52" rx="26" fill="#E8F5EC" stroke="#15803D" stroke-width="2"/>
-  <text x="784" y="522" font-size="18" font-weight="600" fill="#166534">known issue → filed · 26 (1.7%)</text>
+  <text x="784" y="522" font-size="18" font-weight="600" fill="#166534">picks a known problem → filed</text>
   <rect x="1330" y="490" width="550" height="52" rx="26" fill="#F4F6F9" stroke="#94A3B8" stroke-width="2"/>
-  <text x="1354" y="522" font-size="18" font-weight="600" fill="#334155">“new” → buffer (step 6)</text>
+  <text x="1354" y="522" font-size="18" font-weight="600" fill="#334155">says it is new → waiting list (step 6)</text>
   <line x1="110" y1="640" x2="110" y2="654" stroke="#64748B" stroke-width="3" marker-end="url(#ah)"/>
   <line x1="700" y1="604" x2="1330" y2="604" stroke="#0F766E" stroke-width="2.5"/>
   <rect x="60" y="568" width="640" height="72" rx="12" fill="#E6F4F2" stroke="#0F766E" stroke-width="2"/>
-  <text x="80" y="598" font-size="21" font-weight="700" fill="#0F766E">6 · Buffer</text>
+  <text x="80" y="598" font-size="21" font-weight="700" fill="#0F766E">6 · Waiting list</text>
   <text x="680" y="597" font-size="14" font-weight="700" letter-spacing="1.5" fill="#0F766E" text-anchor="end">LOCAL · FREE</text>
-  <text x="80" y="624" font-size="17" fill="#2B3440">unmatched reports wait for 3 different customers</text>
+  <text x="80" y="624" font-size="17" fill="#2B3440">unmatched complaints wait for similar ones to arrive</text>
   <rect x="760" y="578" width="540" height="52" rx="26" fill="#F1F2F4" stroke="#8A94A3" stroke-width="2"/>
-  <text x="784" y="610" font-size="18" font-weight="600" fill="#4B5563">fewer than 3 → waits · 24 (1.6%)</text>
+  <text x="784" y="610" font-size="18" font-weight="600" fill="#4B5563">fewer than 3 different customers → keeps waiting</text>
   <rect x="1330" y="578" width="550" height="52" rx="26" fill="#FDECEC" stroke="#B91C1C" stroke-width="2"/>
-  <text x="1354" y="610" font-size="18" font-weight="600" fill="#991B1B">money or legal risk → urgent at once</text>
+  <text x="1354" y="610" font-size="18" font-weight="600" fill="#991B1B">money lost or safety risk → flagged urgent at once</text>
   <line x1="110" y1="728" x2="110" y2="742" stroke="#64748B" stroke-width="3" marker-end="url(#ah)"/>
   <line x1="700" y1="692" x2="1330" y2="692" stroke="#4338CA" stroke-width="2.5"/>
   <rect x="60" y="656" width="640" height="72" rx="12" fill="#EEF0FF" stroke="#4338CA" stroke-width="2"/>
   <text x="80" y="686" font-size="21" font-weight="700" fill="#4338CA">7 · Group check</text>
   <text x="680" y="685" font-size="14" font-weight="700" letter-spacing="1.5" fill="#4338CA" text-anchor="end">JEV</text>
-  <text x="80" y="712" font-size="17" fill="#2B3440">3 customers: a known issue in new words?</text>
+  <text x="80" y="712" font-size="17" fill="#2B3440">3 different customers: a known problem in new words?</text>
   <rect x="760" y="666" width="540" height="52" rx="26" fill="#E8F5EC" stroke="#15803D" stroke-width="2"/>
-  <text x="784" y="698" font-size="18" font-weight="600" fill="#166534">yes → filed under the known issue</text>
+  <text x="784" y="698" font-size="18" font-weight="600" fill="#166534">yes → filed under that known problem</text>
   <rect x="1330" y="666" width="550" height="52" rx="26" fill="#F4F6F9" stroke="#94A3B8" stroke-width="2"/>
-  <text x="1354" y="698" font-size="18" font-weight="600" fill="#334155">no → step 8</text>
+  <text x="1354" y="698" font-size="18" font-weight="600" fill="#334155">no → becomes a new problem (step 8)</text>
   <line x1="110" y1="816" x2="110" y2="846" stroke="#64748B" stroke-width="3" stroke-dasharray="6 5" marker-end="url(#ah)"/>
   <line x1="700" y1="780" x2="1330" y2="780" stroke="#B45309" stroke-width="2.5"/>
   <rect x="60" y="744" width="640" height="72" rx="12" fill="#FDF3E3" stroke="#B45309" stroke-width="2"/>
-  <text x="80" y="774" font-size="21" font-weight="700" fill="#B45309">8 · Name the new issue</text>
+  <text x="80" y="774" font-size="21" font-weight="700" fill="#B45309">8 · Name the new problem</text>
   <text x="680" y="773" font-size="14" font-weight="700" letter-spacing="1.5" fill="#B45309" text-anchor="end">LLM</text>
-  <text x="80" y="800" font-size="17" fill="#2B3440">neutral title from the 5 most typical reports</text>
+  <text x="80" y="800" font-size="17" fill="#2B3440">writes a short, neutral title from typical complaints</text>
   <rect x="760" y="754" width="540" height="52" rx="26" fill="#E8F5EC" stroke="#15803D" stroke-width="2"/>
-  <text x="784" y="786" font-size="18" font-weight="600" fill="#166534">new issue created · 25 (1.7%)</text>
+  <text x="784" y="786" font-size="18" font-weight="600" fill="#166534">new problem added to the list</text>
   <rect x="1330" y="754" width="550" height="52" rx="26" fill="#F4F6F9" stroke="#94A3B8" stroke-width="2"/>
-  <text x="1354" y="786" font-size="18" font-weight="600" fill="#334155">close waiting reports join it</text>
+  <text x="1354" y="786" font-size="18" font-weight="600" fill="#334155">similar waiting complaints join it</text>
   <line x1="110" y1="920" x2="110" y2="934" stroke="#64748B" stroke-width="3" marker-end="url(#ah)"/>
   <line x1="700" y1="884" x2="1330" y2="884" stroke="#B45309" stroke-width="2.5"/>
   <rect x="60" y="848" width="640" height="72" rx="12" fill="#FDF3E3" stroke="#B45309" stroke-width="2"/>
-  <text x="80" y="878" font-size="21" font-weight="700" fill="#B45309">9 · Curator</text>
+  <text x="80" y="878" font-size="21" font-weight="700" fill="#B45309">9 · Remove duplicates</text>
   <text x="680" y="877" font-size="14" font-weight="700" letter-spacing="1.5" fill="#B45309" text-anchor="end">LLM</text>
-  <text x="80" y="904" font-size="17" fill="#2B3440">compares each new issue with its 4 nearest</text>
+  <text x="80" y="904" font-size="17" fill="#2B3440">checks each new problem against the closest existing ones</text>
   <rect x="760" y="858" width="540" height="52" rx="26" fill="#E8F5EC" stroke="#15803D" stroke-width="2"/>
-  <text x="784" y="890" font-size="18" font-weight="600" fill="#166534">same problem → merged and renamed</text>
+  <text x="784" y="890" font-size="18" font-weight="600" fill="#166534">same problem → merged into one</text>
   <rect x="1330" y="858" width="550" height="52" rx="26" fill="#F4F6F9" stroke="#94A3B8" stroke-width="2"/>
-  <text x="1354" y="890" font-size="18" font-weight="600" fill="#334155">5 of 5 hidden problems found</text>
+  <text x="1354" y="890" font-size="18" font-weight="600" fill="#334155">different problem → kept separate</text>
   <line x1="700" y1="972" x2="1330" y2="972" stroke="#0F766E" stroke-width="2.5"/>
   <rect x="60" y="936" width="640" height="72" rx="12" fill="#E6F4F2" stroke="#0F766E" stroke-width="2"/>
   <text x="80" y="966" font-size="21" font-weight="700" fill="#0F766E">10 · Rank</text>
   <text x="680" y="965" font-size="14" font-weight="700" letter-spacing="1.5" fill="#0F766E" text-anchor="end">LOCAL · FREE</text>
-  <text x="80" y="992" font-size="17" fill="#2B3440">customers × impact × money × anger × trend</text>
+  <text x="80" y="992" font-size="17" fill="#2B3440">customers affected × severity × money lost × anger × growth</text>
   <rect x="760" y="946" width="540" height="52" rx="26" fill="#E8F5EC" stroke="#15803D" stroke-width="2"/>
-  <text x="784" y="978" font-size="18" font-weight="600" fill="#166534">Top 10 with badges and score breakdown</text>
+  <text x="784" y="978" font-size="18" font-weight="600" fill="#166534">Top 10 problems, each with its score explained</text>
   <rect x="1330" y="946" width="550" height="52" rx="26" fill="#F4F6F9" stroke="#94A3B8" stroke-width="2"/>
-  <text x="1354" y="978" font-size="18" font-weight="600" fill="#334155">filter by state, age group, student</text>
+  <text x="1354" y="978" font-size="18" font-weight="600" fill="#334155">filter by state, age group or student status</text>
   <line x1="60" y1="832" x2="1880" y2="832" stroke="#C9D1DC" stroke-width="2" stroke-dasharray="8 6"/>
   <rect x="1640" y="820" width="240" height="24" fill="#FFFFFF"/>
   <text x="1880" y="838" font-size="15" font-weight="700" letter-spacing="1.5" fill="#64748B" text-anchor="end">AFTER EACH BATCH</text>
-  <text x="60" y="1048" font-size="19" fill="#1B2330"><tspan font-weight="700">Result:</tspan> 96.1% never reach the LLM · 98.4% filed under the right issue · $0.065 for 1,500 complaints · 0.55 s median per complaint</text>
+  <text x="60" y="1048" font-size="19" fill="#1B2330"><tspan font-weight="700">The idea:</tspan> most complaints are filed by the free local step or by Jev. The LLM only sees the few that nothing cheaper can decide.</text>
 </svg>
