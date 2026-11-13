@@ -63,7 +63,7 @@ Notes:
 
 **How fast?** A typical complaint is filed in about half a second; one LLM call alone takes about 1.9 seconds. On average we are 2.3 times faster than an LLM reading every complaint.
 
-**What does it cost at scale?** 65 to 85% cheaper than Claude Haiku reading every complaint, with or without prompt caching, and about 99% cheaper than Claude Sonnet. 96% fewer output tokens. The LLM-everywhere side is projected from calibrated token counts, not run.
+**What does it cost at scale?** 65 to 85% cheaper than Claude Haiku reading every complaint, with or without prompt caching, and about 99% cheaper than Claude Sonnet. 90% fewer output tokens. The LLM-everywhere side is projected from calibrated token counts, not run.
 
 **Will it scale to millions?** The heavy work per complaint is one Jev call plus a vector comparison against the issues of one area, a few dozen at most. That is linear and small. The prototype uses SQLite and an in-memory list; a company would use a real database and a vector index. The design does not change.
 
