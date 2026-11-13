@@ -102,7 +102,7 @@ export function buildSteps(t: TrailT, config?: Config): Step[] {
             <span className="trail__yn" title={`Jev: ${Math.round(gate.money_lost * 100)}% likely`}>
               Money lost <YesNo yes={gate.money_lost >= 0.5} />
             </span>
-            <span className={gate.legal_risk >= 0.5 ? 'is-hot' : ''}>Legal risk {Math.round(gate.legal_risk * 100)}%</span>
+            <span className={gate.legal_risk >= 0.5 ? 'is-hot' : ''}>Safety or legal risk {Math.round(gate.legal_risk * 100)}%</span>
           </div>
         </div>
       ),

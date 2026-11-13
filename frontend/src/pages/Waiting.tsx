@@ -82,7 +82,7 @@ export default function Waiting() {
                   <Meter value={p.money_lost} color="var(--brass)" label="Money lost likelihood" />
                 </div>
                 <div>
-                  <span>Legal risk</span>
+                  <span>Safety or legal</span>
                   <Meter value={p.legal_risk} color="var(--critical)" label="Legal or safety risk likelihood" />
                 </div>
               </div>

@@ -85,7 +85,9 @@ gate:
   emotion_levels: ["Calm", "Frustrated", "Angry", "Furious or threatening"]
   flags:
     money_lost: "Did the customer lose money or get charged wrongly?"
-    legal_risk: "Does the complaint mention legal action, consumer court, fraud, police, food safety or a health problem?"
+    # Why physical harm is here (13 Nov): "the delivery guy punched me" was not flagged, because the
+    # question only named legal and food risks. Violence or a threat to a person is the most urgent kind.
+    legal_risk: "Does the complaint mention physical harm, violence or a threat to someone's safety, legal action, consumer court, fraud, police, food safety or a health problem?"
 
 thresholds:
   is_complaint: 0.5
