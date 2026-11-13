@@ -65,7 +65,7 @@ export function PhoneQR({ open, onClose }: { open: boolean; onClose: () => void 
                 <code className="qrcard__url">{url}</code>
                 <p className="qrcard__note">
                   <Wifi size={14} aria-hidden="true" />
-                  {local ? 'Start the frontend with npm run dev; the phone needs the laptop’s Wi-Fi address.' : 'The phone must be on the same Wi-Fi as this laptop.'}
+                  {local ? 'Start the frontend with npm run dev; the phone needs the laptop’s Wi-Fi address.' : lan ? 'The phone must be on the same Wi-Fi as this laptop.' : 'Works on any phone with internet.'}
                 </p>
               </div>
             </div>
