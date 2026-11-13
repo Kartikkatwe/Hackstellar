@@ -1,0 +1,81 @@
+section {
+  --ink: #141A2E;
+  --body: #4A5568;
+  --paper: #F6F7FA;
+  --paper2: #ECEFF5;
+  --card: #FCFCFD;
+  --line: #D9DEE8;
+  --accent: #4338CA;
+  --accent-soft: #E7E9FB;
+  --night: #141A2E;
+  --night-text: #E6E8F2;
+  --night-muted: #AEB4CC;
+  --night-accent: #A5B4FC;
+  --statement: #312E81;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Inter', Arial, sans-serif;
+  padding: 128px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+h1, h2, h3 { font-family: 'Space Grotesk', Arial, sans-serif; font-weight: 600; }
+
+.eyebrow { font-size: 24px; font-weight: 600; letter-spacing: 3px; color: var(--accent); }
+.title { font-size: 64px; line-height: 1.1; color: var(--ink); }
+.lead { font-size: 32px; line-height: 1.4; color: var(--body); }
+.note { font-size: 24px; line-height: 1.4; color: var(--body); }
+.spacer { flex: 1; }
+
+.cards { display: flex; gap: 32px; margin-top: 24px; }
+.card { flex: 1; background: var(--card); border: 2px solid var(--line); border-radius: 20px; padding: 40px; display: flex; flex-direction: column; gap: 16px; }
+.card h3 { font-size: 44px; line-height: 1.1; color: var(--ink); }
+.card .text { font-size: 32px; line-height: 1.4; color: var(--body); }
+.card .big { font-family: 'Space Grotesk', Arial, sans-serif; font-size: 120px; font-weight: 600; line-height: 1; color: var(--accent); }
+
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 48px 64px; margin-top: 24px; }
+.stat { display: flex; flex-direction: column; gap: 8px; }
+.stat .big { font-family: 'Space Grotesk', Arial, sans-serif; font-size: 120px; font-weight: 600; line-height: 1; color: var(--accent); }
+.stat .text { font-size: 32px; line-height: 1.35; color: var(--body); }
+
+.table { font-size: 32px; color: var(--ink); width: 100%; margin-top: 16px; }
+.table .head { background: var(--paper2); }
+.formula { font-family: 'JetBrains Mono', 'Courier New', monospace; font-size: 32px; line-height: 1.3; color: var(--ink); background: var(--accent-soft); padding: 28px 36px; border-radius: 16px; margin-top: 16px; }
+.example { font-size: 32px; line-height: 1.4; color: var(--body); }
+
+.cols { display: flex; gap: 64px; margin-top: 24px; }
+.col { flex: 1; display: flex; flex-direction: column; gap: 16px; }
+.col h3 { font-size: 44px; color: var(--ink); }
+.list { font-size: 32px; line-height: 1.5; color: var(--body); }
+
+.full { padding: 0; background: #FFFFFF; }
+.full img { width: 1920px; height: 1080px; object-fit: contain; }
+
+.dark { background: var(--night); color: var(--night-text); }
+.dark .eyebrow { color: var(--night-accent); }
+.cover { justify-content: flex-end; gap: 32px; }
+.cover h1 { font-size: 120px; line-height: 1; color: var(--night-text); }
+.cover .tagline { font-size: 44px; line-height: 1.25; color: var(--night-muted); width: 1320px; }
+.cover .team { font-size: 32px; color: var(--night-text); }
+
+.statement { background: var(--statement); justify-content: center; gap: 40px; }
+.statement .eyebrow { color: #C7D2FE; }
+.statement h1 { font-size: 120px; line-height: 1.05; color: #F6F7FA; }
+.statement .say { font-size: 44px; line-height: 1.3; color: #E0E7FF; width: 1400px; }
+
+.row3 { display: flex; gap: 64px; margin-top: 16px; }
+.row3 .stat { flex: 1; }
+.dark .stat .big { color: var(--night-accent); }
+.dark .stat .text { color: var(--night-muted); }
+.close h1 { font-size: 120px; line-height: 1; color: var(--night-text); }
+.close .lead { color: var(--night-text); }
+
+.demo-line { font-family: 'JetBrains Mono', 'Courier New', monospace; font-size: 32px; line-height: 1.35; color: var(--ink); background: var(--card); border: 2px solid var(--line); border-radius: 16px; padding: 24px 32px; }
+.demo-expect { font-size: 24px; color: var(--accent); font-weight: 600; letter-spacing: 1px; }
+.demo-item { display: flex; flex-direction: column; gap: 10px; }
+.demo-list { display: flex; flex-direction: column; gap: 32px; margin-top: 24px; }
+
+.rise { animation: rise 600ms ease-out both; animation-delay: calc(var(--i) * 120ms); }
+@keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0px); } }
