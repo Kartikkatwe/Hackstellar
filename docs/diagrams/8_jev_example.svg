@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" font-family="Segoe UI, Inter, Arial, sans-serif">
+  <!-- How Jev works, on one example complaint. Probabilities are illustrative, not run figures. -->
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#4338CA"/></marker>
+    <marker id="arg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#8A93A3"/></marker>
+  </defs>
+  <rect width="1920" height="1080" fill="#FFFFFF"/>
+  <text x="60" y="84" font-size="44" font-weight="700" fill="#1B2330">How Jev works: one complaint, step by step</text>
+  <text x="60" y="124" font-size="22" fill="#5B6676">You give it the text and questions with fixed options. It returns a choice and a probability for each. It writes nothing.</text>
+
+  <!-- ================= CALL 1: THE GATE ================= -->
+  <text x="60" y="186" font-size="18" font-weight="700" fill="#4338CA" letter-spacing="2">CALL 1 · THE GATE · EVERY COMPLAINT</text>
+
+  <!-- input: complaint -->
+  <rect x="60" y="206" width="520" height="118" rx="16" fill="#F3F4F8" stroke="#C9CEDA" stroke-width="2"/>
+  <text x="84" y="240" font-size="16" font-weight="700" fill="#5B6676" letter-spacing="1.5">THE COMPLAINT</text>
+  <text x="84" y="276" font-size="24" fill="#1B2330">“Money got deducted but no</text>
+  <text x="84" y="306" font-size="24" fill="#1B2330">order was placed”</text>
+
+  <!-- input: questions -->
+  <rect x="60" y="340" width="520" height="350" rx="16" fill="#F3F4F8" stroke="#C9CEDA" stroke-width="2"/>
+  <text x="84" y="374" font-size="16" font-weight="700" fill="#5B6676" letter-spacing="1.5">SIX QUESTIONS, FIXED OPTIONS</text>
+  <g font-size="19" fill="#1B2330">
+    <text x="84" y="414">1  Is it a complaint?</text><text x="556" y="414" text-anchor="end" fill="#5B6676">yes / no</text>
+    <text x="84" y="460">2  Which area?</text><text x="556" y="460" text-anchor="end" fill="#5B6676">payments · delivery · …</text>
+    <text x="84" y="506">3  How bad?</text><text x="556" y="506" text-anchor="end" fill="#5B6676">annoyed … harmed</text>
+    <text x="84" y="552">4  Mood?</text><text x="556" y="552" text-anchor="end" fill="#5B6676">calm … furious</text>
+    <text x="84" y="598">5  Money lost?</text><text x="556" y="598" text-anchor="end" fill="#5B6676">yes / no</text>
+    <text x="84" y="644">6  Safety or legal risk?</text><text x="556" y="644" text-anchor="end" fill="#5B6676">yes / no</text>
+  </g>
+
+  <!-- arrows in -->
+  <path d="M580 265 C640 265 640 420 700 430" fill="none" stroke="#4338CA" stroke-width="3" marker-end="url(#ar)"/>
+  <path d="M580 515 C640 515 640 460 700 455" fill="none" stroke="#4338CA" stroke-width="3" marker-end="url(#ar)"/>
+
+  <!-- Jev -->
+  <rect x="704" y="350" width="300" height="190" rx="22" fill="#4338CA"/>
+  <text x="854" y="432" font-size="46" font-weight="700" fill="#FFFFFF" text-anchor="middle">Jev</text>
+  <text x="854" y="468" font-size="19" fill="#E0E3FF" text-anchor="middle">decision model</text>
+  <text x="854" y="496" font-size="19" fill="#E0E3FF" text-anchor="middle">one call per complaint</text>
+  <text x="854" y="582" font-size="18" fill="#5B6676" text-anchor="middle">reads once, scores</text>
+  <text x="854" y="606" font-size="18" fill="#5B6676" text-anchor="middle">every option</text>
+
+  <!-- arrow out -->
+  <path d="M1004 445 L1068 445" fill="none" stroke="#4338CA" stroke-width="3" marker-end="url(#ar)"/>
+
+  <!-- output -->
+  <rect x="1074" y="206" width="786" height="484" rx="16" fill="#EEF0FF" stroke="#A5ABEF" stroke-width="2"/>
+  <text x="1098" y="240" font-size="16" font-weight="700" fill="#4338CA" letter-spacing="1.5">WHAT COMES BACK: NUMBERS, NO WORDS</text>
+  <g font-size="20" fill="#1B2330">
+    <!-- row helper: label, bar (max 300px at x=1440), value -->
+    <text x="1098" y="292">Complaint?</text><text x="1420" y="292" text-anchor="end" font-weight="700">Yes</text>
+    <rect x="1440" y="276" width="300" height="18" rx="9" fill="#DADDF5"/><rect x="1440" y="276" width="282" height="18" rx="9" fill="#4338CA"/><text x="1836" y="292" text-anchor="end" font-weight="700">94%</text>
+
+    <text x="1098" y="352">Area</text><text x="1420" y="352" text-anchor="end" font-weight="700">Payments</text>
+    <rect x="1440" y="336" width="300" height="18" rx="9" fill="#DADDF5"/><rect x="1440" y="336" width="267" height="18" rx="9" fill="#4338CA"/><text x="1836" y="352" text-anchor="end" font-weight="700">89%</text>
+    <text x="1120" y="384" font-size="16" fill="#5B6676">refunds 6% · support 3% · others 2%</text>
+
+    <text x="1098" y="440">How bad</text><text x="1420" y="440" text-anchor="end" font-weight="700">Harmed</text>
+    <text x="1098" y="496">Mood</text><text x="1420" y="496" text-anchor="end" font-weight="700">Calm</text>
+
+    <text x="1098" y="552">Money lost?</text><text x="1420" y="552" text-anchor="end" font-weight="700" fill="#B91C1C">Yes</text>
+    <rect x="1440" y="536" width="300" height="18" rx="9" fill="#DADDF5"/><rect x="1440" y="536" width="276" height="18" rx="9" fill="#B91C1C"/><text x="1836" y="552" text-anchor="end" font-weight="700">92%</text>
+
+    <text x="1098" y="608">Safety or legal risk?</text><text x="1420" y="608" text-anchor="end" font-weight="700">No</text>
+    <rect x="1440" y="592" width="300" height="18" rx="9" fill="#DADDF5"/><rect x="1440" y="592" width="9" height="18" rx="4.5" fill="#4338CA"/><text x="1836" y="608" text-anchor="end" font-weight="700">3%</text>
+  </g>
+  <text x="1098" y="664" font-size="18" fill="#4338CA">Money lost is 50% or more, so it is flagged at once.</text>
+
+  <!-- ================= CALL 2: VERIFY ================= -->
+  <line x1="60" y1="730" x2="1860" y2="730" stroke="#E2E5EC" stroke-width="2"/>
+  <text x="60" y="776" font-size="18" font-weight="700" fill="#4338CA" letter-spacing="2">CALL 2 · ONLY WHEN THE MATCH IS UNSURE · “IS IT THE SAME PROBLEM AS …?”</text>
+
+  <rect x="60" y="800" width="520" height="190" rx="16" fill="#F3F4F8" stroke="#C9CEDA" stroke-width="2"/>
+  <text x="84" y="834" font-size="16" font-weight="700" fill="#5B6676" letter-spacing="1.5">THE 3 CLOSEST KNOWN PROBLEMS</text>
+  <g font-size="19" fill="#1B2330">
+    <text x="84" y="876">Money debited but order not placed</text>
+    <text x="84" y="916">UPI payment times out at checkout</text>
+    <text x="84" y="956">Duplicate payment debits</text>
+  </g>
+
+  <path d="M580 895 L700 895" fill="none" stroke="#4338CA" stroke-width="3" marker-end="url(#ar)"/>
+  <rect x="704" y="840" width="300" height="110" rx="22" fill="#4338CA"/>
+  <text x="854" y="892" font-size="36" font-weight="700" fill="#FFFFFF" text-anchor="middle">Jev</text>
+  <text x="854" y="926" font-size="18" fill="#E0E3FF" text-anchor="middle">one yes / no each</text>
+  <path d="M1004 895 L1068 895" fill="none" stroke="#4338CA" stroke-width="3" marker-end="url(#ar)"/>
+
+  <rect x="1074" y="800" width="786" height="190" rx="16" fill="#EEF0FF" stroke="#A5ABEF" stroke-width="2"/>
+  <g font-size="19" fill="#1B2330">
+    <text x="1098" y="852">Same as “Money debited…”?</text>
+    <rect x="1440" y="837" width="300" height="18" rx="9" fill="#DADDF5"/><rect x="1440" y="837" width="279" height="18" rx="9" fill="#0F766E"/><text x="1836" y="852" text-anchor="end" font-weight="700" fill="#0F766E">93%</text>
+    <text x="1098" y="892">Same as “UPI times out”?</text>
+    <rect x="1440" y="877" width="300" height="18" rx="9" fill="#DADDF5"/><rect x="1440" y="877" width="18" height="18" rx="9" fill="#8A93A3"/><text x="1836" y="892" text-anchor="end" font-weight="700">6%</text>
+    <text x="1098" y="932">Same as “Duplicate debits”?</text>
+    <rect x="1440" y="917" width="300" height="18" rx="9" fill="#DADDF5"/><rect x="1440" y="917" width="12" height="18" rx="6" fill="#8A93A3"/><text x="1836" y="932" text-anchor="end" font-weight="700">4%</text>
+  </g>
+  <text x="1098" y="972" font-size="18" font-weight="700" fill="#0F766E">80% or more → filed under that problem. No LLM needed.</text>
+
+  <!-- footer -->
+  <text x="60" y="1044" font-size="19" fill="#5B6676"><tspan font-weight="700" fill="#1B2330">Why it is fast and cheap:</tspan> Jev only picks from options, so it writes no output text, there is nothing to parse, and each answer is a probability we can set a cut-off on. Example values for illustration.</text>
+</svg>
