@@ -19,6 +19,11 @@ Everything a new session needs to continue. Read this first, then `HOW_IT_WORKS.
 6. **Privacy:** never put Kartik's email in commits or external requests. Commit as `Kartikkatwe <Kartikkatwe@users.noreply.github.com>`, ending messages with `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`.
 7. **Pitch honesty:** quote measured numbers only, name the comparison model, say what was projected rather than run.
 8. **Pitch: do not use** "finds new problems on its own / 5 of 5 hidden problems found" or "keeps working when the LLM provider is down" (a fallback LLM solves outages). Kartik removed both; lead with speed, cost and output tokens. Cost is shown as a percentage only: no dollar figures on slides or in notes unless Kartik asks. No test-run numbers in the deck or its diagrams (no 0.55 s, 96.1%, 98.4%, call counts, 1,500 complaints and so on): the only figures are the three headlines on `numbers` and `close`. Diagrams 1, 2, 4 and 5 were stripped of run data; design rules such as the 0.65 cut-off or the 3-customer threshold stay.
+   **Exception (Jnanottam, 13 Nov):** live-test accuracy is on `/deck` (`frontend/deck`).
+   - The `tested` slide comes before the close; the `accuracy` and `misses` backups follow it.
+   - The figures come from 300 new complaints sent to the live site, in batches of 50, 100 and 150; see `docs/live-test.md`.
+   - Nothing else changed: no dollar figures, no discovery claim, and no figures from the 1,500 run.
+   - The main deck in `docs/deck/project` does not have these slides.
 
 ## 3. Where things are
 

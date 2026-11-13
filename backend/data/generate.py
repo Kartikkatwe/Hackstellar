@@ -121,6 +121,9 @@ def main():
     ap.add_argument("--customers", type=int, default=400)
     ap.add_argument("--seed", type=int, default=7)
     ap.add_argument("--out", default=str(ROOT / "data" / "grocery"))
+    # --fresh: keep the CRM and orders of --seed, but write new complaints from this seed.
+    # Why: a live test needs complaints the engine has never seen, from customers it knows.
+    ap.add_argument("--fresh", type=int, default=None)
     args = ap.parse_args()
     rng = random.Random(args.seed)
     out = Path(args.out)
@@ -128,6 +131,8 @@ def main():
 
     customers = make_customers(rng, args.customers)
     orders = make_orders(rng, customers)
+    if args.fresh is not None:
+        rng.seed(args.fresh)
     orders_by_cust = {}
     for o in orders:
         orders_by_cust.setdefault(o["customer_id"], []).append(o)
