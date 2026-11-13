@@ -8,6 +8,20 @@
   font-weight: 500;
   color: var(--muted);
 }
+.mtr__title {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.mtr__score {
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+.mtr__score b {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ink);
+}
 .mtr__row {
   display: grid;
   grid-template-columns: 1fr auto;

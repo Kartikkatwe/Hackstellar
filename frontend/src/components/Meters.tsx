@@ -26,7 +26,7 @@ const DEFAULT_LEVELS = ['Annoyed', 'Inconvenienced', 'Blocked', 'Harmed']
 
 type S = { avg_impact: number; money_share: number; angry_share: number }
 
-export function Meters({ s, compact = false }: { s: S; compact?: boolean }) {
+export function Meters({ s, compact = false, score, scale }: { s: S; compact?: boolean; score?: number; scale?: number }) {
   const reduce = useReducedMotion()
   const { data: config } = useApi<Config>('/config')
   const levels = config?.impact_levels.map((l) => l.split(':')[0]) ?? DEFAULT_LEVELS
@@ -66,7 +66,17 @@ export function Meters({ s, compact = false }: { s: S; compact?: boolean }) {
 
   return (
     <div className={`mtr${compact ? ' mtr--compact' : ''}`}>
-      {!compact && <span className="mtr__title">Severity score</span>}
+      {!compact && (
+        <span className="mtr__title">
+          Severity score
+          {score !== undefined && (
+            <span className="mtr__score">
+              <b>{Math.round(score)}</b>
+              {scale ? ` / ${scale}` : ''}
+            </span>
+          )}
+        </span>
+      )}
       {rows.map((r, i) => {
         const f = FACTORS[r.key]
         return (
