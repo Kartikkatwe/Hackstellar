@@ -6,3 +6,10 @@ __pycache__/
 **/runs/*.db*
 **/runs/*.log
 !**/runs/grocery_live_backup.db
+
+# local tool links and build output
+.claude/skills/playwright-skill/node_modules
+frontend/node_modules
+frontend/dist
+.taste-skill/
+frontend/.taste-skill/

@@ -157,7 +157,6 @@ copy runs\grocery_live_backup.db runs\grocery.db
 | Gate | kept 99.9% of real complaints, removed 100% of non-complaints |
 | Routed to the right component | 99.6% |
 | Customer links correct | 100% of 1,215; 285 unlinked |
-| Hidden issues discovered | 5 of 5, as 6 issues, all 100% pure, none duplicating a known issue |
 | Funnel cost | $0.065 ($4.33 per 100,000 complaints), of which naming and Curator $0.0014 |
 
 Settled at: gate 10.1%, similarity match 50.3%, Jev verify 34.7%, LLM 1.7%, became a new issue 1.7%, still waiting 1.6%.

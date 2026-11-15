@@ -1,0 +1,102 @@
+/* Complaint Compass design tokens.
+   Why one warm-black ground and one brass accent: an instrument panel, not a SaaS template.
+        Brass is the needle, the primary action and the funnel's stage ramp; nothing else.
+   Not: violet/indigo gradients (every AI dashboard has them), or a light theme for now.
+   Every colour pair below was checked: text on --bg/--surface (WCAG), channel and stage
+   palettes with the dataviz validator (CVD-safe adjacent pairs, ordinal ramp). */
+:root {
+  color-scheme: dark;
+
+  /* ground and surfaces */
+  --bg: #0a0a0b;
+  --bg-raised: #0e0e10;
+  --surface: #131316;
+  --surface-2: #1a1a1e;
+  --surface-3: #222227;
+  --line: #222226;
+  --line-2: #2d2d33;
+  --line-3: #3a3a41;
+
+  /* text: ink 17:1, ink-2 10.8:1, muted 5.8:1 on --bg (labels and meta only) */
+  --ink: #f2efe8;
+  --ink-2: #c9c5bb;
+  --muted: #9a958a;
+  --faint: #5f5b54;
+
+  /* brass: the brand */
+  --brass: #d9b26b;
+  --brass-hi: #f3ddb0;
+  --brass-lo: #9c7434;
+  --brass-ink: #1a1408;
+  --brass-wash: rgba(217, 178, 107, 0.1);
+  --brass-line: rgba(217, 178, 107, 0.32);
+
+  /* channels: categorical, fixed order, validated on #131316 (dark) */
+  --ch-email: #16a07a;
+  --ch-call: #d9652e;
+  --ch-chat: #3f86e0;
+  --ch-social: #d7568a;
+
+  /* funnel stages: one-hue ordinal ramp, validated; dropped and waiting stay neutral */
+  --st-match: #f3ddb0;
+  --st-verify: #ddb66f;
+  --st-llm: #b88a45;
+  --st-new: #8c6531;
+  --st-dropped: #4a4740;
+  --st-pending: #6d685f;
+
+  /* status: reserved for Critical/High/Medium/Low and live/offline, always with a label */
+  --critical: #e5534b;
+  --serious: #ec835a;
+  --warning: #fab219;
+  --good: #3fb950;
+
+  /* number colours: what kind of number it is, the same on every screen (NumberKey shows the key).
+     All four clear 7:1 on --bg and --surface, so they work as text. */
+  --n-volume: #7fb0f0;
+  --n-harm: #f08a64;
+  --n-save: #e6c27f;
+  --n-right: #52c76a;
+
+  /* diverging lift scale (heatmap): cool below 1, warm above, grey at 1 */
+  --div-cool-3: #2f5f9e;
+  --div-cool-2: #3c6aa5;
+  --div-cool-1: #2d3a4d;
+  --div-mid: #2a2a2e;
+  --div-warm-1: #4d3426;
+  --div-warm-2: #a24d2a;
+  --div-warm-3: #d9652e;
+
+  /* type */
+  --font: 'Geist Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono: 'Geist Mono Variable', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  /* radius: one family */
+  --r-1: 6px;
+  --r-2: 10px;
+  --r-3: 14px;
+  --r-4: 20px;
+  --r-pill: 999px;
+
+  /* spacing scale */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+  --s-8: 64px;
+  --s-9: 96px;
+
+  /* motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --t-fast: 160ms;
+  --t-med: 280ms;
+  --t-slow: 520ms;
+
+  /* layout */
+  --side: 248px;
+  --top: 64px;
+}

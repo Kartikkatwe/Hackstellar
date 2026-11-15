@@ -16,7 +16,7 @@
   <!-- gate -->
   <rect x="600" y="245" width="720" height="100" rx="16" fill="#4338CA"/>
   <text x="960" y="288" font-size="32" font-weight="700" fill="#FFFFFF" text-anchor="middle">GATE  ·  Jev decision model</text>
-  <text x="960" y="324" font-size="20" fill="#E0E3FF" text-anchor="middle">1 request  ·  6 typed questions  ·  0.53 s  ·  $0.00003 per complaint</text>
+  <text x="960" y="324" font-size="20" fill="#E0E3FF" text-anchor="middle">1 request  ·  6 typed questions  ·  answers by choosing, never by writing</text>
 
   <!-- branches -->
   <path d="M960 345 V395 M330 395 H1590 M330 395 V438 M960 395 V438 M1590 395 V438" fill="none" stroke="#6B74B8" stroke-width="3"/>
@@ -38,10 +38,9 @@
   <rect x="360" y="700" width="200" height="76" rx="12" fill="#F1F2F4" stroke="#8A94A3" stroke-width="2"/>
   <text x="460" y="732" font-size="19" font-weight="700" fill="#4B5563" text-anchor="middle">Dropped</text>
   <text x="460" y="760" font-size="17" fill="#4B5563" text-anchor="middle">praise, spam, queries</text>
-  <text x="100" y="830" font-size="19" fill="#1B2330"><tspan font-weight="700">151 of 1,500</tspan> dropped (10.1%)</text>
-  <text x="100" y="860" font-size="19" fill="#1B2330"><tspan font-weight="700">99.9%</tspan> of real complaints kept</text>
-  <text x="100" y="890" font-size="19" fill="#1B2330"><tspan font-weight="700">100%</tspan> of non-complaints removed</text>
-
+  <text x="100" y="830" font-size="19" fill="#1B2330"><tspan font-weight="700">Real complaints</tspan> go on to be filed</text>
+  <text x="100" y="860" font-size="19" fill="#1B2330"><tspan font-weight="700">Praise, spam and questions</tspan> stop here</text>
+  
   <!-- B: component -->
   <rect x="720" y="440" width="480" height="90" rx="14" fill="#EEF0FF" stroke="#4338CA" stroke-width="2"/>
   <text x="960" y="478" font-size="26" font-weight="700" fill="#1B2330" text-anchor="middle">Which part of the business?</text>
@@ -56,7 +55,7 @@
     <rect x="970" y="688" width="200" height="44" rx="22" fill="#FFFFFF" stroke="#4338CA" stroke-width="2"/><text x="1070" y="716">Account &amp; app</text>
     <rect x="860" y="744" width="200" height="44" rx="22" fill="#FFFFFF" stroke="#4338CA" stroke-width="2"/><text x="960" y="772">Support</text>
   </g>
-  <text x="960" y="830" font-size="19" fill="#1B2330" text-anchor="middle"><tspan font-weight="700">99.6%</tspan> sent to the right part</text>
+  <text x="960" y="830" font-size="19" fill="#1B2330" text-anchor="middle"><tspan font-weight="700">One part</tspan> of the business per complaint</text>
   <text x="960" y="860" font-size="18" fill="#5B6676" text-anchor="middle">The next steps search only that part's issues.</text>
   <text x="960" y="888" font-size="18" fill="#5B6676" text-anchor="middle">Top two within 0.15 of each other: both are searched.</text>
 

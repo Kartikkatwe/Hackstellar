@@ -1,0 +1,126 @@
+.phone {
+  min-height: 100dvh;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 0 16px calc(32px + env(safe-area-inset-bottom));
+  background:
+    radial-gradient(600px 360px at 50% -10%, rgba(217, 178, 107, 0.12), transparent 70%),
+    var(--bg);
+}
+.phone__top {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  background: rgba(10, 10, 11, 0.8);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+  margin: 0 -16px;
+  padding: 0 16px;
+}
+.phone__biz {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.phone__by {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.phone__form,
+.phone__done {
+  display: grid;
+  gap: 18px;
+  padding-top: 28px;
+}
+.phone h1 {
+  font-size: 32px;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+}
+.phone__lede {
+  color: var(--ink-2);
+  margin-top: -8px;
+}
+.phone__channels {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+.phone__channels button {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  min-height: 60px;
+  padding: 8px 4px;
+  border-radius: var(--r-2);
+  font-size: 13px;
+  color: var(--muted);
+  border: 1px solid var(--line-2);
+  background: var(--bg-raised);
+}
+.phone__channels button[aria-pressed='true'] {
+  color: var(--brass-hi);
+  border-color: var(--brass-line);
+  background: var(--brass-wash);
+}
+.phone__quick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: -6px;
+}
+.phone__quick .chip {
+  height: auto;
+  min-height: 36px;
+  white-space: normal;
+  text-align: left;
+}
+.phone__error {
+  padding: 10px 14px;
+  border-radius: var(--r-2);
+  font-size: 14px;
+  color: #ffd2cc;
+  background: rgba(229, 83, 75, 0.1);
+  box-shadow: inset 0 0 0 1px rgba(229, 83, 75, 0.35);
+}
+.phone__send,
+.phone__again {
+  width: 100%;
+  min-height: 52px;
+}
+.phone__check {
+  color: var(--brass);
+  display: inline-flex;
+}
+.phone__filed {
+  font-size: 17px;
+  color: var(--ink-2);
+}
+.phone__filed strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 20px;
+  color: var(--brass-hi);
+  font-weight: 560;
+  letter-spacing: -0.015em;
+}
+.phone__offline {
+  font-size: 14px;
+  color: var(--warning);
+}
+.phone__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  justify-self: start;
+  min-height: 44px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+}

@@ -1,0 +1,118 @@
+.dial {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 860 / 680;
+  /* the rotated needle layer's box would otherwise widen the page */
+  overflow: hidden;
+}
+.dial__svg,
+.dial__layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.dial__layer svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.dial__needle {
+  pointer-events: none;
+  transform-origin: 50% 50%;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.55));
+}
+.dial__top {
+  pointer-events: none;
+}
+.dial__top .dial__marker {
+  pointer-events: all;
+}
+.dial__comp {
+  font-size: 16px;
+  font-weight: 540;
+  fill: var(--ink-2);
+  letter-spacing: -0.01em;
+  transition: fill var(--t-med);
+}
+.dial__comp-n {
+  font-size: 13.5px;
+  font-family: var(--mono);
+  fill: var(--muted);
+}
+.dial__sector.is-active .dial__comp {
+  fill: var(--brass-hi);
+}
+.dial__sector-fill {
+  transition: stroke-opacity var(--t-slow) var(--ease-out);
+}
+.dial__sector.is-active .dial__sector-fill {
+  stroke-opacity: 1 !important;
+  filter: drop-shadow(0 0 8px rgba(217, 178, 107, 0.55));
+}
+.dial__sweep {
+  transform-origin: 300px 300px;
+  animation: dial-sweep linear infinite;
+  pointer-events: none;
+}
+@keyframes dial-sweep {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.dial__marker {
+  cursor: pointer;
+  outline: none;
+}
+.dial__dot {
+  transition:
+    transform var(--t-med) var(--ease-out),
+    filter var(--t-med);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.dial__marker:hover .dial__dot,
+.dial__marker.is-focus .dial__dot,
+.dial__marker:focus-visible .dial__dot {
+  transform: scale(1.22);
+  filter: drop-shadow(0 0 10px currentColor);
+}
+.dial__marker:focus-visible {
+  outline: none;
+}
+.dial__marker:focus-visible .dial__dot {
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+.dial__rank {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 700;
+  fill: #140c06;
+  pointer-events: none;
+}
+.dial__ping {
+  fill: none;
+  stroke-width: 1.5;
+  opacity: 0;
+  animation-name: dial-ping;
+  animation-timing-function: ease-out;
+  animation-iteration-count: infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+@keyframes dial-ping {
+  0% {
+    opacity: 0.9;
+    transform: scale(0.5);
+  }
+  12% {
+    opacity: 0;
+    transform: scale(1.4);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.4);
+  }
+}

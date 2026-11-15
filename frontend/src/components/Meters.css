@@ -1,0 +1,116 @@
+.mtr {
+  display: grid;
+  gap: 14px;
+  max-width: 640px;
+}
+.mtr__title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+}
+.mtr__row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 6px 12px;
+  align-items: baseline;
+}
+.mtr__name {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--ink-2);
+}
+.mtr__val {
+  font-size: 15px;
+  font-weight: 560;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-2);
+}
+.mtr__row.is-over .mtr__val {
+  color: var(--ink);
+}
+.mtr__track {
+  grid-column: 1 / -1;
+  position: relative;
+  display: block;
+  height: 12px;
+  padding: 2px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.035);
+  box-shadow: inset 0 0 0 1px var(--line-2);
+}
+.mtr__fill {
+  display: block;
+  height: 100%;
+  border-radius: 99px;
+  transform-origin: left center;
+  background: color-mix(in srgb, var(--c) 60%, transparent);
+}
+.mtr__row.is-over .mtr__fill {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--c) 70%, white), var(--c) 55%, color-mix(in srgb, var(--c) 80%, black));
+  box-shadow:
+    0 0 14px color-mix(in srgb, var(--c) 45%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+.mtr__tick,
+.mtr__line {
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  width: 1px;
+  transform: translateX(-0.5px);
+  background: var(--line-3);
+}
+.mtr__line {
+  top: -3px;
+  bottom: -3px;
+  width: 2px;
+  transform: translateX(-1px);
+  border-radius: 2px;
+  background: var(--ink);
+}
+.mtr__note {
+  grid-column: 1 / -1;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+/* compact: three gauges side by side in a list row */
+.mtr--compact {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px 18px;
+  max-width: 560px;
+  margin-top: 8px;
+}
+.mtr--compact .mtr__row {
+  gap: 4px 8px;
+}
+.mtr--compact .mtr__name {
+  font-size: 12px;
+  color: var(--muted);
+}
+.mtr--compact .mtr__val {
+  font-size: 12.5px;
+}
+.mtr--compact .mtr__track {
+  height: 8px;
+  padding: 1.5px;
+}
+.mtr__key {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.mtr__keyline {
+  display: inline-block;
+  width: 2px;
+  height: 14px;
+  border-radius: 2px;
+  background: var(--ink);
+}
+@media (max-width: 560px) {
+  .mtr--compact {
+    grid-template-columns: 1fr;
+  }
+}

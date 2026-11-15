@@ -1,0 +1,64 @@
+.formula {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 8px 6px;
+  font-family: var(--mono);
+}
+.formula__f,
+.formula__eq {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+.formula__stack {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+}
+.formula__x {
+  color: var(--faint);
+  font-size: 0.95em;
+  line-height: 1;
+  padding-top: 0.45em;
+}
+.formula__v {
+  color: var(--ink);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
+  padding: 3px 8px;
+  border-radius: 7px;
+  background: var(--surface-2);
+  box-shadow: inset 0 0 0 1px var(--line-2);
+}
+.formula__v--result {
+  color: var(--brass-ink);
+  background: linear-gradient(180deg, #ecd197, var(--brass));
+  box-shadow: inset 0 1px 0 rgba(255, 248, 230, 0.6);
+  font-weight: 600;
+}
+.formula__n {
+  font-family: var(--font);
+  font-size: 12.5px;
+  line-height: 1.2;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.formula--sm {
+  font-size: 13px;
+}
+.formula--md {
+  font-size: 15px;
+}
+.formula--lg {
+  font-size: 20px;
+  gap: 10px 8px;
+}
+.formula--lg .formula__v {
+  padding: 5px 11px;
+  border-radius: 9px;
+}
+.formula--lg .formula__n {
+  font-size: 13px;
+}

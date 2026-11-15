@@ -1,0 +1,87 @@
+.cc-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink);
+}
+.cc-logo__word {
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  white-space: nowrap;
+}
+.cc-mark {
+  overflow: visible;
+  color: var(--ink);
+}
+.cc-mark__needle {
+  transform-origin: 32px 32px;
+  transform: rotate(var(--needle, 45deg));
+  transition: transform 900ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.cc-logo:hover .cc-mark__needle,
+a:hover .cc-mark__needle {
+  animation: cc-twitch 900ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Load: the ring draws, then the needle swings past north-east and settles like a real compass. */
+.cc-mark--animate .cc-mark__ring {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: cc-draw 900ms var(--ease-out) 80ms forwards;
+}
+.cc-mark--animate .cc-mark__needle {
+  animation: cc-settle 1700ms cubic-bezier(0.22, 1, 0.36, 1) 260ms both;
+}
+
+@keyframes cc-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes cc-settle {
+  0% {
+    transform: rotate(-150deg);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  42% {
+    transform: rotate(72deg);
+  }
+  60% {
+    transform: rotate(32deg);
+  }
+  74% {
+    transform: rotate(52deg);
+  }
+  86% {
+    transform: rotate(42deg);
+  }
+  100% {
+    transform: rotate(45deg);
+  }
+}
+@keyframes cc-twitch {
+  0% {
+    transform: rotate(45deg);
+  }
+  30% {
+    transform: rotate(62deg);
+  }
+  55% {
+    transform: rotate(38deg);
+  }
+  78% {
+    transform: rotate(48deg);
+  }
+  100% {
+    transform: rotate(45deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cc-mark--animate .cc-mark__ring {
+    stroke-dashoffset: 0;
+  }
+}
