@@ -6,6 +6,7 @@ Why one fresh database per run: a run is a self-contained, reproducible artefact
 """
 import datetime as dt
 import json
+import logging
 import os
 from pathlib import Path
 
@@ -67,7 +68,7 @@ def run_batch(pack: dict, mode: str = "mock", embedder_choice: str | None = None
         # Keep what was processed; the report then covers a partial run, and says so.
         con.rollback()
         stopped, merges = str(e), []
-        print(f"\n[run] {stopped}")
+        logging.getLogger("cc.run").warning("run_stopped reason=%r", stopped)
     meta_extra = dict(stopped=stopped)
     meta = dict(pack=pack["id"], mode=mode, merges=merges, **meta_extra, gate=engine.gate.name, llm=engine.llm.name, embedder=engine.embedder.name,
                 n=len(complaints), started=started.isoformat(timespec="seconds"),

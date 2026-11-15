@@ -66,3 +66,9 @@ Settled by the team after the 12 Nov handoff. Newest at the bottom.
 - **Curator:** after each batch, every discovered issue is reviewed by the LLM against the 4 closest issues in its component and merged if it is the same problem. The merged issue is renamed by the LLM unless the target is a seeded issue (the company's own name is kept). Merged issues stay as rows with `origin='merged'` and a `merges` record.
 - **Live demo:** the API uses real Jev and the LLM for typed complaints whenever the OpenRouter key is present, capped by `MAX_SPEND_USD` (default $0.50). If the network or the cap fails, the complaint is processed offline and the response carries `"mode": "offline"` and a warning. `PROVIDERS=mock` forces offline.
 - **No text cleaning at intake (13 Nov):** greetings, signatures, hashtags and mentions are kept; chat keeps every customer line, including the order-ID reply. Kartik does not trust regex not to cut real complaint words; Jev and the LLM read the text as written. Bot chat lines are still left out, by their sender field. Not re-measured yet: the 0.65 / 0.18 / 0.50 cut-offs were tuned on stripped text.
+
+## Settled 15 Nov (logging and tests)
+- **Test suite:** pytest in `backend/tests/`, offline (stand-in models, hash embedder), each test on its own copy of the database. Known open weaknesses are written as tests marked `@finding`, expected to fail until fixed; the fix is done when its test passes and the marker is deleted.
+- **Logging:** `backend/app/log.py`. One line per request with a request ID, errors with their traceback, security and admin events. IDs only: complaint text, emails, phone numbers, bodies and query strings are never logged. Console always; a rotating file where the folder is writable (not on Vercel).
+- **A 500 answers with JSON** `{"detail": "Internal Server Error", "request_id": "..."}` instead of plain text, so the error can be found in the log and the frontend can read it across origins.
+

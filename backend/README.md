@@ -36,6 +36,9 @@ Each run rewrites `runs/<pack>.db` and `runs/<pack>_report.json`. Copy the `.db`
 | `app/analytics/ranker.py` | Top issues, score breakdown, segment heatmap |
 | `app/analytics/metrics.py` | Funnel counts, cost vs baseline, accuracy |
 | `app/api.py` | HTTP endpoints |
+| `app/log.py` | Logging: requests, errors, security and admin events (IDs only, never complaint text) |
+| `tests/` | Automated test suite (pytest), offline, no API key |
+| `loadtest/` | Load-test and probe scripts, run by hand |
 
 ## Endpoints
 
@@ -53,3 +56,40 @@ Each run rewrites `runs/<pack>.db` and `runs/<pack>_report.json`. Copy the `.db`
 | POST | `/webhooks/call` | Voice agent payload (same shape as `calls.jsonl`) |
 | POST | `/complaints/{id}/link` | Staff link a complaint to a customer |
 | POST | `/runs` | Reprocess the dataset in the background |
+
+## Tests
+
+```
+pip install -r requirements-dev.txt
+python -m pytest
+```
+
+About 25 seconds, offline (stand-in models, hash embedder), no API key, no cost. Each test works on its own copy of the database, never on `runs/`.
+
+| File | Covers |
+|---|---|
+| `tests/test_units.py` | Order-ID check digit, identity rules, embedder, cost arithmetic |
+| `tests/test_api_reads.py` | Every read endpoint; scores equal their formula; the live-run figures (96.13%, 560.2) have not moved |
+| `tests/test_intake.py` | Live complaints, the voice webhook, the three-different-people rule, 50 complaints at once |
+| `tests/test_security.py` | Access control, identity, input validation, data integrity |
+| `tests/test_logging.py` | What is logged, and that complaint text and addresses never are |
+
+`xfailed` in the result is expected: those tests describe weaknesses that are known and not fixed yet (`@finding` in `test_security.py`). When a fix lands, its test starts passing, pytest reports that as a failure, and you delete the `@finding` line above it. From then on the test guards the fix. Strategy and the manual checklist: [`docs/testing/`](../docs/testing/TESTING.md).
+
+## Logging
+
+`app/log.py`. Lines go to the console and to `backend/logs/app.log` (rotating, 5 files of 2 MB; not committed).
+
+```
+2026-11-15 12:55:26 INFO    cc.funnel   rid=940ae6b6 event=complaint complaint=L-00001 channel=chat settled=verify issue=pay_debited_no_order urgent=0 mode=offline
+2026-11-15 12:55:26 INFO    cc.request  rid=940ae6b6 event=request method=POST path=/complaints status=200 ms=507.2 client=127.0.0.1
+2026-11-15 12:55:26 ERROR   cc.request  rid=d32eec27 event=unhandled_error method=POST path=/complaints status=500 ms=0.9 client=127.0.0.1   (+ traceback)
+2026-11-15 12:55:26 WARNING cc.security rid=e105b756 event=live_run_refused reason="ALLOW_LIVE_RUNS is not set"
+2026-11-15 12:55:26 INFO    cc.admin    rid=e4733d1f event=manual_link complaint=E-00001 customer=C-0001 channel=email
+```
+
+- `rid` is the request ID. It is also returned in the `X-Request-ID` header and in the body of a 500, so an error someone reports can be found in the log.
+- Never logged: complaint text, emails, phone numbers, request bodies, query strings.
+- Successful `GET`s are logged at `DEBUG` (the dashboard polls every second). Writes, refusals, errors and requests slower than 1 s always show.
+- Settings: `LOG_LEVEL` (default `INFO`), `LOG_FILE`, `LOG_TO_FILE=0` for console only. Where the folder is read-only (Vercel), it logs to the console only.
+- Model calls and filing decisions are not in this log: they are in the database (`events`, `assignments`), as before.

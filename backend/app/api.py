@@ -16,13 +16,16 @@ import datetime as dt
 import json
 import os
 import threading
+import time
+import uuid
 from collections import Counter, defaultdict
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
-from . import db, ingest
+from . import db, ingest, log
 from .analytics import metrics, ranker
 from .config import load_pack
 from .pipeline.engine import BudgetExceeded
@@ -32,6 +35,44 @@ from .providers.mock import MockGate, MockLLM
 
 pack = load_pack()
 app = FastAPI(title=f"Complaint Compass - {pack['name']}")
+log.setup()
+log_request, log_security, log_admin, log_funnel = log.get("request"), log.get("security"), log.get("admin"), log.get("funnel")
+SLOW_MS = 1000   # a request slower than this is logged as a warning, whatever its status
+
+
+@app.middleware("http")
+async def log_requests(request: Request, call_next):
+    """One log line per request (see app/log.py for what is and is not recorded).
+    Why registered before CORS: CORS then wraps this, so an error answer made here still
+         carries the CORS headers and the frontend can read it instead of seeing a network error.
+    Why a JSON 500 with the request ID: the person who hit the error can quote the ID, and the
+         traceback is one search away in the log. Not the error text itself: it can leak internals."""
+    rid = uuid.uuid4().hex[:8]
+    log.request_id.set(rid)
+    client = (request.headers.get("x-forwarded-for") or "").split(",")[0].strip() or (request.client.host if request.client else None)
+    started = time.perf_counter()
+    try:
+        response = await call_next(request)
+    except Exception:
+        ms = round((time.perf_counter() - started) * 1000, 1)
+        log_request.exception(log.kv(event="unhandled_error", method=request.method, path=request.url.path, status=500, ms=ms, client=client))
+        return JSONResponse({"detail": "Internal Server Error", "request_id": rid}, status_code=500, headers={"X-Request-ID": rid})
+    ms = round((time.perf_counter() - started) * 1000, 1)
+    line = log.kv(event="request", method=request.method, path=request.url.path, status=response.status_code, ms=ms, client=client)
+    if response.status_code in (401, 403, 429):
+        log_security.warning(line)
+    elif response.status_code >= 500:
+        log_request.error(line)
+    elif ms >= SLOW_MS:
+        log_request.warning(line + " slow=1")
+    elif request.method == "GET" and response.status_code < 400:
+        log_request.debug(line)
+    else:
+        log_request.info(line)
+    response.headers["X-Request-ID"] = rid
+    return response
+
+
 # Open CORS: the frontend is a separate project on another port. Fine for a local prototype only.
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
@@ -129,13 +170,19 @@ def start_run(req: RunRequest):
     """Reprocess the whole dataset in the background; poll /health for progress."""
     global _engine
     if req.mode == "live" and os.environ.get("ALLOW_LIVE_RUNS") != "1":
+        log_security.warning(log.kv(event="live_run_refused", reason="ALLOW_LIVE_RUNS is not set"))
         raise HTTPException(403, "Live batch runs spend credit. Start the server with ALLOW_LIVE_RUNS=1 to allow them.")
     if _batch["running"]:
         raise HTTPException(409, "A run is already in progress.")
     _batch.update(running=True, done=0, total=0, error=None)
+    # Why logged as an admin action: a batch run deletes the current database and rebuilds it.
+    log_admin.warning(log.kv(event="run_started", mode=req.mode, limit=req.limit))
+    rid = log.request_id.get()
 
     def work():
         global _engine
+        log.request_id.set(rid)   # the worker thread keeps the ID of the request that started it
+        started = time.perf_counter()
         try:
             with _lock:
                 if _engine:
@@ -143,8 +190,11 @@ def start_run(req: RunRequest):
                     _engine = None
                 con, _ = run_batch(pack, req.mode, None, req.limit, progress=lambda n, t: _batch.update(done=n, total=t))
                 con.close()
+            log_admin.info(log.kv(event="run_finished", mode=req.mode, complaints=_batch["total"] or req.limit,
+                                  seconds=round(time.perf_counter() - started, 1)))
         except Exception as e:   # surfaced through /health, not lost in a thread
             _batch["error"] = str(e)
+            log_admin.exception(log.kv(event="run_failed", mode=req.mode))
         finally:
             _batch["running"] = False
 
@@ -283,6 +333,7 @@ def link_customer(cid: str, req: LinkRequest):
         if row["channel"] == "social" and row["sender"]:
             engine.identity.link_handle(row["sender"], req.customer_id)   # later posts from this handle link automatically
         engine.con.commit()
+    log_admin.info(log.kv(event="manual_link", complaint=cid, customer=req.customer_id, channel=row["channel"]))
     return dict(linked=True)
 
 
@@ -316,7 +367,11 @@ def _process_live(c: dict) -> dict:
             finally:
                 engine.gate, engine.llm = live
             mode, warning = "offline", f"Live models unavailable ({str(e)[:120]}); processed offline, results are less reliable."
+            log_funnel.warning(log.kv(event="fallback_offline", complaint=c["id"], cause=type(e).__name__, detail=str(e)[:120]))
         engine.con.commit()
+    # IDs and outcomes only: never the complaint text or the sender's address (see app/log.py).
+    log_funnel.info(log.kv(event="complaint", complaint=c["id"], channel=c.get("channel"), settled=result.get("settled"),
+                           issue=result.get("issue"), urgent=int(bool(result.get("urgent"))), mode=mode))
     return dict(mode=mode, warning=warning, result=result, **complaint_trail(c["id"]))
 
 

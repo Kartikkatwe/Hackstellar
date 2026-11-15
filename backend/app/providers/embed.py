@@ -9,6 +9,7 @@ Not an embedding API: costs credit and adds a network dependency to every compla
 Not silently mixing the two: cut-offs differ per embedder (pack thresholds.st / .hash) and
 the embedder's name is saved with the run, so results are never mislabelled.
 """
+import logging
 import math
 import os
 import re
@@ -147,5 +148,5 @@ def get_embedder(pack: dict, choice: str | None = None):
         except (ImportError, OSError) as e:
             if choice != "auto":
                 raise
-            print(f"[embed] sentence model unavailable ({str(e).splitlines()[0][:90]}); using hash embedder")
+            logging.getLogger("cc.embed").warning("sentence_model_unavailable reason=%r; using the hash embedder", str(e).splitlines()[0][:90])
     return HashEmbedder()

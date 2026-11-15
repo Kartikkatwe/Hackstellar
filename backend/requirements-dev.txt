@@ -1,0 +1,4 @@
+# For running the tests: pip install -r requirements.txt -r requirements-dev.txt
+# (the tests use the offline models and the hash embedder, so torch is not needed)
+pytest
+httpx

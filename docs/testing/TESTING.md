@@ -2,6 +2,25 @@
 
 How we test the backend after every round of fixes and before every demo. The tick-box list is [Release_Test_Checklist.pdf](Release_Test_Checklist.pdf); the scripts are in [`backend/loadtest/`](../../backend/loadtest/).
 
+## Two layers
+
+| Layer | What | When | Time |
+|---|---|---|---|
+| **Automated suite** (`backend/tests/`, pytest) | Units, every endpoint, intake, security, logging. Checklist sections A, B, C, D and G. | On every change | About 25 s |
+| **Manual checklist and load scripts** | Load and performance (section E), the two checks that need a live key (F1, F6), the frontend (G4) | Before every demo or release | About 30 min |
+
+```bash
+cd backend
+pip install -r requirements-dev.txt
+python -m pytest
+```
+
+A healthy result today reads `91 passed, 32 xfailed`. The 32 are the open findings: each is a test that states the behaviour we want and is expected to fail until the fix exists.
+
+**Working through the fixes.** Pick a finding, make the change, run the suite. When the fix works, its test is reported as `XPASS(strict)` and the run fails on purpose: delete the `@finding(...)` line above that test and run again. The test now guards the fix. The work is finished when the result shows `0 xfailed`.
+
+**After adding authentication.** Put the test credentials in `STAFF_HEADERS` in `backend/tests/conftest.py`. Every normal test uses them; the `anon` tests deliberately send none.
+
 ## Principles
 
 1. **Test on a copy.** Always copy `runs/grocery_live_backup.db` to `runs/grocery.db` first. Never run tests against the backup itself.
